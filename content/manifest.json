@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "content_version": "2026.09.11.1",
+  "language": "tt",
+  "assets": [
+    {
+      "path": "content/assessment/diagnostic.json",
+      "bytes": 16081,
+      "sha256": "d468a92f074086b22fb0248549a744cf6cf45dedf7eaf8014aa677d7f6e38043",
+      "required": true
+    },
+    {
+      "path": "content/assessment/final.json",
+      "bytes": 16198,
+      "sha256": "753311994c7675cb9a610d3a614147d4e928b3ae2fd94a61262d3fa49c6d2dfa",
+      "required": true
+    },
+    {
+      "path": "content/curriculum.json",
+      "bytes": 22992,
+      "sha256": "e124d172a0508d5c80e3e981a81563b1a263c1d67f3f1c1edb6e6ad0158fac2b",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M00-foundation.json",
+      "bytes": 63567,
+      "sha256": "3f4810fb7445fb73a1b79aad98382f34e664edaa623a2245395879008be4bef2",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M01-bridge.json",
+      "bytes": 28728,
+      "sha256": "f4dc7c53a58917908ea5269ce96526008b43a054ddbca9616af640b63046bd7b",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M02-vowels.json",
+      "bytes": 74209,
+      "sha256": "0a8cd5d34b0c5c08685bca9f109a82248b4e34cafa66f7fcd7e8ca9e4ec6ad41",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M03-consonants.json",
+      "bytes": 51870,
+      "sha256": "80788fd4834ed2408880babbc7d0634555cbcbcef46ed99733accbbf1ed76fa8",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M04-general.json",
+      "bytes": 55026,
+      "sha256": "273fc3f77f989db17ba0fd3f69ee7522ee3ac20c412d44504651c0374a47eb9c",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M05-affixes.json",
+      "bytes": 92874,
+      "sha256": "603c2d5389d1ecd058fafbc27670e8696995f328ab64a55203b87a163232cee5",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M06-loans.json",
+      "bytes": 99054,
+      "sha256": "c68319215f3de0130a656fde037edaa5f9b2d91be2d61aedb8fd99e5fc278357",
+      "required": true
+    },
+    {
+      "path": "content/exercises/M07-reading.json",
+      "bytes": 29589,
+      "sha256": "dda96d1bb92e024867a0f6e4a86f32b3a48c9661b4dc03f995ce35bb6a8b81bd",
+      "required": true
+    },
+    {
+      "path": "content/interface/tt.json",
+      "bytes": 13813,
+      "sha256": "a0c7afabbd90027eded82b7874fee5f3747a0b4a67365b672f8fc64b40323946",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M00-foundation.json",
+      "bytes": 81656,
+      "sha256": "7d67015d7cee741406488ebe79b54719d06a8c4d71a0823e2bdf8742bd9d585a",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M01-bridge.json",
+      "bytes": 29716,
+      "sha256": "89defc220e6f5304ea0f7b95e9e4a3a4f475f12fa4e62bb519dd18c4c10445dc",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M02-vowels.json",
+      "bytes": 78588,
+      "sha256": "f894b9e1c4e8287b33f4bc43b239a1b1402fc54f019cde31dd974dfa3447cc21",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M03-consonants.json",
+      "bytes": 55388,
+      "sha256": "336c2ddb77700f49b3acf728aef730efcd9358c44dae6284dfb806896a562d32",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M04-general.json",
+      "bytes": 57406,
+      "sha256": "bea739065e2b3b0d675f32c67fd429c5004f9b3368d41278087e05a7723411b0",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M05-affixes.json",
+      "bytes": 84463,
+      "sha256": "c82f49a04f60c20c6ace44a88b7cf5edbdd944b61997f8f91f3b8fe27cbbfb5d",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M06-loans.json",
+      "bytes": 113089,
+      "sha256": "8ad1fd2827b66272e8d9c4c075790cd3ff482e945eb01a9610b6f34854891360",
+      "required": true
+    },
+    {
+      "path": "content/lessons/M07-reading.json",
+      "bytes": 31934,
+      "sha256": "01321390f5f75be04547c76489522c000fac157490da2f011b12d3cc9cfdc6c9",
+      "required": true
+    },
+    {
+      "path": "content/lexicon/course-vocabulary.json",
+      "bytes": 151961,
+      "sha256": "238d274acba25eaa582cccfd73a5ad6dbf0dea84f1100c878580487f1698db56",
+      "required": true
+    },
+    {
+      "path": "content/lexicon/lexicon.json",
+      "bytes": 642467,
+      "sha256": "dff2d9804f5b963ed8172bb29549b023020124ddad1b624e68a896436ff57d76",
+      "required": true
+    },
+    {
+      "path": "content/media/manifest.json",
+      "bytes": 19784,
+      "sha256": "ef2218087e095d0d9aaa18e8bd16ac5caffdf90925645186013136ee7ff5e1d8",
+      "required": true
+    },
+    {
+      "path": "content/readings/questions.json",
+      "bytes": 21400,
+      "sha256": "a94f44def890bbf55ab4ef43c9863557e8f4e06656292996cfad32baa76dccec",
+      "required": true
+    },
+    {
+      "path": "content/readings/texts.json",
+      "bytes": 56633,
+      "sha256": "973c6aad0ecbb2f2317cec275328b9f7388a0c0db23717c5dbfdd02075c1a541",
+      "required": true
+    },
+    {
+      "path": "content/reference/letters.json",
+      "bytes": 29480,
+      "sha256": "30e3c8e731f86844df881bcbbe103941aa195fb8c9d0131a1e4c73e2bded9d35",
+      "required": true
+    },
+    {
+      "path": "content/reference/profiles.json",
+      "bytes": 7461,
+      "sha256": "cf713b906a55f715f9fc16703088e2aee9a1cb2455259580cec8b11432bb0847",
+      "required": true
+    },
+    {
+      "path": "content/reference/rules-index.json",
+      "bytes": 40039,
+      "sha256": "4143d6a6ce2df474ecdc3f41a758cd6341c27d0c6b88a3cff5b90e180586476c",
+      "required": true
+    },
+    {
+      "path": "content/reference/terms.json",
+      "bytes": 5992,
+      "sha256": "e4f261a0ba8ada0a93925168707d356780ba73f31b0736d18c39d22641fe4b14",
+      "required": true
+    },
+    {
+      "path": "content/skills.json",
+      "bytes": 39704,
+      "sha256": "abe392eb4a87e6f341b5e7034f787576a43ee32db1525bf43485e769650373d2",
+      "required": true
+    },
+    {
+      "path": "sources/sections.json",
+      "bytes": 19989,
+      "sha256": "286169fe20c62c989e32cf4dee0a3500057a421e7711a0bce416a47595e82675",
+      "required": true
+    }
+  ],
+  "total_bytes": 2131151,
+  "editorial_only_paths": [
+    "sources/textbook.txt",
+    "sources/audits/",
+    "content/source-coverage.json",
+    "content/lexicon/source-historical.json",
+    "content/lexicon/source-thematic.json",
+    "content/lexicon/editorial-decisions.json",
+    "content/lexicon/search-cases.json"
+  ],
+  "note_tt": "Төп текст материалы тулысынча саклангач кына курс офлайн әзер дип күрсәтелә."
+}
