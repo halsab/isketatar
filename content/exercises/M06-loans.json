@@ -1,0 +1,3352 @@
+{
+  "module_id": "M06",
+  "items": [
+    {
+      "id": "Q-L01-01",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Җиһазны белдергән алынма сүзне татар кириллицасында яз.",
+      "stimulus": "ئۇسته‌ل",
+      "options": [],
+      "accepted_answers": [
+        "өстәл"
+      ],
+      "explanation_tt": "Бу сүз татарча өстәл дип укыла; эчке өзек яңа сүз башламый.",
+      "hints_tt": [
+        "Ашарга яки эшләргә кулланыла торган җиһазны искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L01-01"
+      ],
+      "source_lines": [
+        1607,
+        1607
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L01-02",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ашамлык савытының исемен татар кириллицасында яз.",
+      "stimulus": "ته‌لينكه",
+      "options": [],
+      "accepted_answers": [
+        "тәлинкә"
+      ],
+      "explanation_tt": "Китаптагы яраклашкан форма тәлинкә дип укыла.",
+      "hints_tt": [
+        "Ә авазлары һә рәсмия белән күрсәтелгән."
+      ],
+      "source_example_ids": [
+        "EX-L01-02"
+      ],
+      "source_lines": [
+        1607,
+        1607
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L01-03",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Баш киемен белдергән сүзне татар кириллицасында яз.",
+      "stimulus": "ئشله‌په",
+      "options": [],
+      "accepted_answers": [
+        "эшләпә"
+      ],
+      "explanation_tt": "Эшләпә — татарча яраклашкан алынма; һә рәсмия әне белдерә.",
+      "hints_tt": [
+        "Сүздә ш һәм п хәрефләрен тап."
+      ],
+      "source_example_ids": [
+        "EX-L01-03"
+      ],
+      "source_lines": [
+        1607,
+        1607
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L01-04",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу алынманың укылышын сайла.",
+      "stimulus": "تراكتور",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "тәрәзә"
+        },
+        {
+          "id": "b",
+          "text_tt": "трактор"
+        },
+        {
+          "id": "c",
+          "text_tt": "тәлинкә"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "تراكتور китапта трактор сүзенең язылышы итеп бирелә.",
+      "hints_tt": [
+        "Т–р һәм к–т–р тартыклар эзлеклелеген күзәт."
+      ],
+      "source_example_ids": [
+        "EX-L01-04"
+      ],
+      "source_lines": [
+        1612,
+        1612
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L01-05",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Китапта ц урынында кайсы хәрефләр тезмәсе язылган?",
+      "stimulus": "ریوالوتسیه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "تش"
+        },
+        {
+          "id": "b",
+          "text_tt": "تس"
+        },
+        {
+          "id": "c",
+          "text_tt": "ث"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "ریوالوتسیه мисалында ц урынында تس тора.",
+      "hints_tt": [
+        "Яй алдыннан килгән ике тартыкны кара."
+      ],
+      "source_example_ids": [
+        "EX-L01-07"
+      ],
+      "source_lines": [
+        1614,
+        1614
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L01-06",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ике мисалны чагыштырып, дөрес фикерләрне сайла.",
+      "stimulus": "ریوالوتسیه / سیرک",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Беренче мисалда ц өчен تس бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икенче мисалда ц өчен س бар."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр алынмада ц бары тик تس белән генә языла."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Китап ике аерым бирелешне күрсәтә; алардан бөтен алынмалар өчен бер генә форма чыгармыйбыз.",
+      "hints_tt": [
+        "Беренче мисал уртасын һәм икенчесенең башын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L01-07",
+        "EX-L01-08"
+      ],
+      "source_lines": [
+        1614,
+        1614
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L01-07",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның башындагы а нинди билге белән күрсәтелгән?",
+      "stimulus": "آوارييا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мәдле әлиф: آ"
+        },
+        {
+          "id": "b",
+          "text_tt": "Кәсрәле бә: بِ"
+        },
+        {
+          "id": "c",
+          "text_tt": "Һә рәсмия: ه"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "آوارييا башында мәдле әлиф тора; ул бу алынмадагы баштагы а белән бәйле.",
+      "hints_tt": [
+        "Иң уңдагы хәреф өстендәге билгене кара."
+      ],
+      "source_example_ids": [
+        "EX-L01-05"
+      ],
+      "source_lines": [
+        1612,
+        1612
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L01-08",
+      "lesson_id": "L01",
+      "rule_ids": [
+        "R-L01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Алдан түләнгән акчаны белдергән яңа мисалны укы.",
+      "stimulus": "آۋانس",
+      "options": [],
+      "accepted_answers": [
+        "аванс"
+      ],
+      "explanation_tt": "آۋانس татарча аванс дип укыла; баштагы мәдле әлиф һәм вау сакланган.",
+      "hints_tt": [
+        "Сүзнең мәгънәсе — хезмәт хакының алдан бирелгән өлеше."
+      ],
+      "source_example_ids": [
+        "EX-L01-06"
+      ],
+      "source_lines": [
+        1612,
+        1612
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L02-01",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Каләмнең асыл язылышында ә авазлары ничек күрсәтелгән?",
+      "stimulus": "قَلَم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ике аерым һә рәсмия белән."
+        },
+        {
+          "id": "b",
+          "text_tt": "Тартыклар өстендәге фәтхә хәрәкәләре белән."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ике вау белән."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "قَلَم язылышында һә рәсмия өстәлми; әләр фәтхәле тартыклардан укыла.",
+      "hints_tt": [
+        "ق һәм ل өстендәге кыска сызыкларны күзәт."
+      ],
+      "source_example_ids": [
+        "EX-L02-01"
+      ],
+      "source_lines": [
+        1641,
+        1641
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L02-02",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Каләмнең әйтелешкә якын язылышында ә өчен кайсы хәреф кулланыла?",
+      "stimulus": "قه‌له‌م",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ه"
+        },
+        {
+          "id": "b",
+          "text_tt": "و"
+        },
+        {
+          "id": "c",
+          "text_tt": "ى"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "قه‌له‌م язылышында ә авазлары һә рәсмия белән ачык күрсәтелгән.",
+      "hints_tt": [
+        "Каф һәм ләм артыннан килгән бертөрле билгеләрне тап."
+      ],
+      "source_example_ids": [
+        "EX-L02-02"
+      ],
+      "source_lines": [
+        1642,
+        1642
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L02-03",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Асыл язылыштагы таныш сүзне татар кириллицасында яз.",
+      "stimulus": "كِتاب",
+      "options": [],
+      "accepted_answers": [
+        "китап"
+      ],
+      "explanation_tt": "كِتاب татарча китап дип укыла; кыска и кәсрә белән бирелгән.",
+      "hints_tt": [
+        "Кәф астындагы хәрәкәне һәм аннан соңгы тә–әлиф–бә эзлеклелеген кара."
+      ],
+      "source_example_ids": [
+        "EX-L02-03"
+      ],
+      "source_lines": [
+        1657,
+        1657
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L02-04",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу китап язылышында и өчен кайсы аерым хәреф өстәлгән?",
+      "stimulus": "كيتاب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф."
+        },
+        {
+          "id": "b",
+          "text_tt": "Яй."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һә рәсмия."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "كيتاب язылышында кәфтән соңгы ي татарча и авазын ачык күрсәтә.",
+      "hints_tt": [
+        "Беренче ике хәрефкә игътибар ит."
+      ],
+      "source_example_ids": [
+        "EX-L02-04"
+      ],
+      "source_lines": [
+        1658,
+        1658
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L02-05",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-01",
+        "R-L02-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ике каләм язылышы турында дөрес фикерләрне сайла.",
+      "stimulus": "قَلَم / قه‌له‌م",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесе дә каләм дип укыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Алар ике төрле мәгънә белдерә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сузыкларны күрсәтү ысуллары төрле."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Мәгънә һәм татарча укылыш бер үк, әмма берсендә хәрәкәләр, икенчесендә һә рәсмия кулланыла.",
+      "hints_tt": [
+        "Укылышны түгел, язудагы билгеләрне чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L02-01",
+        "EX-L02-02"
+      ],
+      "source_lines": [
+        1641,
+        1642
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L02-06",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-01",
+        "R-L02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бер үк китап сүзенең ике язылышын нинди нәтиҗә дөрес аңлата?",
+      "stimulus": "كِتاب / كيتاب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кыска и һәрвакыт аерым яй таләп итә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренче форма хаталы, чөнки анда яй юк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Асыл һәм әйтелешкә якын язылышта и төрлечә бирелә."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "كِتاب формасында кәсрә җитә; كيتاب формасында яй бар. Икесенең вазифасы бер үк сүзне күрсәтү.",
+      "hints_tt": [
+        "Кәсрә белән тулы хәрефне аер."
+      ],
+      "source_example_ids": [
+        "EX-L02-03",
+        "EX-L02-04"
+      ],
+      "source_lines": [
+        1657,
+        1658
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L02-07",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисал кайсы язу ысулына туры килә?",
+      "stimulus": "مَكتَب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәр әгә һә рәсмия куйган әйтелешкә якын язылыш."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кыска сузык өчен аерым хәреф өстәмәгән асыл язылыш."
+        },
+        {
+          "id": "c",
+          "text_tt": "Барлык тартыкларны төшереп калдырган язылыш."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "مَكتَب формасында ә авазлары өчен һә рәсмияләр өстәлмәгән; ул асыл язылыш мисалы.",
+      "hints_tt": [
+        "Мим белән тәдән соң аерым ه бармы икәнен тикшер."
+      ],
+      "source_example_ids": [
+        "EX-L02-05"
+      ],
+      "source_lines": [
+        1645,
+        1645
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L02-08",
+      "lesson_id": "L02",
+      "rule_ids": [
+        "R-L02-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Әйтелешкә якын язылган уку йорты исемен укы.",
+      "stimulus": "مه‌كته‌ب",
+      "options": [],
+      "accepted_answers": [
+        "мәктәп"
+      ],
+      "explanation_tt": "مه‌كته‌ب мәктәп дип укыла; ике ә дә һә рәсмия белән күрсәтелгән.",
+      "hints_tt": [
+        "Белем бирә торган уку йортын искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L02-06"
+      ],
+      "source_lines": [
+        1646,
+        1646
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L03-01",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Галим язылышындагы әлиф кайда тора?",
+      "stimulus": "عالِم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Гайннан соң."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ләмнән соң."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз ахырында."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "عالِم сүзендә әлиф беренче тартык عдан соң килә; и өчен кәсрә бар.",
+      "hints_tt": [
+        "Уңнан сулга беренче ике хәрефне тап."
+      ],
+      "source_example_ids": [
+        "EX-L03-01"
+      ],
+      "source_lines": [
+        1683,
+        1683
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L03-02",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу мисалда икенче иҗектәге кыска и нәрсә белән күрсәтелгән?",
+      "stimulus": "صاحِب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Вау белән."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кәсрә белән."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз ахырындагы максура белән."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "صاحِب мисалында ح астындагы кәсрә кыска и белән бәйле; аерым яй юк.",
+      "hints_tt": [
+        "Ха астындагы сызыкка игътибар ит."
+      ],
+      "source_example_ids": [
+        "EX-L03-02"
+      ],
+      "source_lines": [
+        1681,
+        1681
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L03-03",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Икенче модельгә караган бу мисалда нинди тулы сузык хәрефе бар?",
+      "stimulus": "جَمیل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Яй."
+        },
+        {
+          "id": "b",
+          "text_tt": "Вау."
+        },
+        {
+          "id": "c",
+          "text_tt": "Баштагы әлиф."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "جَمیل эчендә ی бар; беренче иҗектә әлиф юк.",
+      "hints_tt": [
+        "Мим белән ләм арасындагы хәрефне кара."
+      ],
+      "source_example_ids": [
+        "EX-L03-03"
+      ],
+      "source_lines": [
+        1687,
+        1687
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L03-04",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Әлиф максура белән тәмамланган исемне татар кириллицасында яз.",
+      "stimulus": "مُوسى",
+      "options": [],
+      "accepted_answers": [
+        "Муса"
+      ],
+      "explanation_tt": "مُوسى Муса дип укыла. Соңгы ىне гади и итеп укымыйбыз.",
+      "hints_tt": [
+        "Бу исемнең соңгы сузыгы — а."
+      ],
+      "source_example_ids": [
+        "EX-L03-04"
+      ],
+      "source_lines": [
+        1693,
+        1693
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L03-05",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ике модель турында дөрес фикерләрне сайла.",
+      "stimulus": "عالِم / جَمیل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Беренче мисалда әлиф бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икенче мисалда яй бар."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әлиф белән яй бер гарәп сүзендә беркайчан да очрамый."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Китаптагы ике модельне аерабыз; моннан бөтен гарәп лексикасы өчен тыю ясамыйбыз.",
+      "hints_tt": [
+        "Соңгы фикер конкрет мисаллардан артыграк гомумиләштерәме, уйла."
+      ],
+      "source_example_ids": [
+        "EX-L03-01",
+        "EX-L03-03"
+      ],
+      "source_lines": [
+        1683,
+        1687
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L03-06",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мәгънә сүзенең ахырындагы ى бу бүлектә ничек аңлатыла?",
+      "stimulus": "مَعنى",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мөстәкыйль кушымча итеп."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әлиф максура итеп."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тәшдид итеп."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "مَعنى китапның әлиф максуралы сүзләр төркеменә керә. Татарча укылышы — мәгънә.",
+      "hints_tt": [
+        "Соңгы билге яйга охшаса да, бүлек аның башка вазифасын күрсәтә."
+      ],
+      "source_example_ids": [
+        "EX-L03-07"
+      ],
+      "source_lines": [
+        1696,
+        1696
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L03-07",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа исемнең язылышы кайсы модельгә туры килә?",
+      "stimulus": "حَکیم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Беренче иҗектә әлифле, соңрак кәсрәле модельгә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Сүз эчендә яйлы, беренче иҗектә әлифсез модельгә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Максура белән тәмамланган модельгә."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "حَکیم эчендә ی бар, ә беренче иҗектә әлиф юк. Тулы исем укылышын фаразлау таләп ителми.",
+      "hints_tt": [
+        "ک белән م арасындагы хәрефне тап."
+      ],
+      "source_example_ids": [
+        "EX-L03-05"
+      ],
+      "source_lines": [
+        1687,
+        1687
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L03-08",
+      "lesson_id": "L03",
+      "rule_ids": [
+        "R-L03-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның соңгы билгесе турында дөрес аңлатманы сайла.",
+      "stimulus": "دَعوى",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бу очракта ул әлиф максура."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ул һәрвакыт и дип укыла."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ул сүзләрне аера торган тыныш билгесе."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "دَعوى ахырындагы ى китапта әлиф максуралы сүз мисалы буларак бирелгән.",
+      "hints_tt": [
+        "Гади тышкы охшашлык белән генә хөкем итмә."
+      ],
+      "source_example_ids": [
+        "EX-L03-06"
+      ],
+      "source_lines": [
+        1696,
+        1696
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L04-01",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ачык тә белән тәмамланган таныш сүзне укы.",
+      "stimulus": "رَحمَت",
+      "options": [],
+      "accepted_answers": [
+        "рәхмәт"
+      ],
+      "explanation_tt": "رَحمَت татарча рәхмәт дип укыла; ахырында ت тора.",
+      "hints_tt": [
+        "Кемгәдер ярдәме өчен әйтелә торган сүзне искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L04-01"
+      ],
+      "source_lines": [
+        1708,
+        1708
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L04-02",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Тәрбия язылышындагы соңгы هне бу сүздә ничек аңлыйбыз?",
+      "stimulus": "تَربِيه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һ авазы булып укыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Татарча ә белән тәмамлануны күрсәтә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Киләсе сүз башын күрсәтә."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "تَربِيه татарча тәрбия дип укыла; бу алынмада соңгы ه ә вазифасында.",
+      "hints_tt": [
+        "Исемнең татарча ахырын искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L04-02"
+      ],
+      "source_lines": [
+        1711,
+        1711
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L04-03",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Һә рәсмия белән тәмамланган таныш исемне укы.",
+      "stimulus": "عَزيزه",
+      "options": [],
+      "accepted_answers": [
+        "Газизә"
+      ],
+      "explanation_tt": "عَزيزه татарча Газизә дип укыла; соңгы ه һ итеп укылмый.",
+      "hints_tt": [
+        "Бу исем ә сузыгы белән тәмамлана."
+      ],
+      "source_example_ids": [
+        "EX-L04-03"
+      ],
+      "source_lines": [
+        1711,
+        1711
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L04-04",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мәчет язылышының ахырында кайсы хәреф сакланган?",
+      "stimulus": "مَسجد",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ت"
+        },
+        {
+          "id": "b",
+          "text_tt": "د"
+        },
+        {
+          "id": "c",
+          "text_tt": "ه"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "مَسجد ахырында чыганак язылышындагы د саклана, татарча т ишетелү аны алыштыруга нигез түгел.",
+      "hints_tt": [
+        "Соңгы хәрефнең рәсемен ت белән чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L04-04"
+      ],
+      "source_lines": [
+        1715,
+        1715
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L04-05",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-01",
+        "R-L04-02",
+        "R-L04-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Өч мисалны чагыштырып, дөрес фикерләрне сайла.",
+      "stimulus": "رَحمَت / تَربِيه / مَسجد",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Рәхмәт ахырында ت бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Тәрбия ахырындагы ه һ булып укыла."
+        },
+        {
+          "id": "c",
+          "text_tt": "Мәчет ахырында د сакланган."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Соңгы билгеләрнең вазифалары сүзгә бәйле: рәхмәттә тә, тәрбиядә әне күрсәткән һә, мәчеттә тарихи дәл.",
+      "hints_tt": [
+        "Һәр сүзнең татарча укылышын аерым кара."
+      ],
+      "source_example_ids": [
+        "EX-L04-01",
+        "EX-L04-02",
+        "EX-L04-04"
+      ],
+      "source_lines": [
+        1708,
+        1715
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L04-06",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мәчет сүзен укыганда د хәрефен ت хәрефенә алыштырып язу дөресме?",
+      "stimulus": "مَسجد",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әйе, ишетелгән т һәрвакыт ت таләп итә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Юк, бу алынманың чыганак язылышындагы د саклана."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әйе, бөтен алынмаларда дәл тыела."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Мәчетнең тарихи язылышы татарча әйтелеш белән хәрефләп тәңгәл түгел; дөрес форма аерым саклана.",
+      "hints_tt": [
+        "Уку белән чыганак хәрефен үзгәртүне аер."
+      ],
+      "source_example_ids": [
+        "EX-L04-04"
+      ],
+      "source_lines": [
+        1715,
+        1715
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L04-07",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа исем ахырындагы هнең вазифасын сайла.",
+      "stimulus": "مَدينه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бу исемнең ә белән тәмамлануына туры килә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Тәшдидне алыштыра."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр очракта һ укылышын таләп итә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "مَدينه — Мәдинә исеменең язылышы; соңгы ه ә белән бәйле.",
+      "hints_tt": [
+        "Газизә мисалындагы соңгы билгене искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L04-05"
+      ],
+      "source_lines": [
+        1711,
+        1711
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L04-08",
+      "lesson_id": "L04",
+      "rule_ids": [
+        "R-L04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның ахырындагы т кайсы хәреф белән язылган?",
+      "stimulus": "عادَت",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "د"
+        },
+        {
+          "id": "b",
+          "text_tt": "ه"
+        },
+        {
+          "id": "c",
+          "text_tt": "ت"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "عادَت ахырында ачык ت тора; бу китаптагы т белән тәмамланган алынма мисалы.",
+      "hints_tt": [
+        "Сүзнең иң сулдагы хәрефен кара."
+      ],
+      "source_example_ids": [
+        "EX-L04-06"
+      ],
+      "source_lines": [
+        1708,
+        1708
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-01",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мәсьәлә язылышында һәмзә нәрсә өстендә тора?",
+      "stimulus": "مَسأَله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф өстендә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Вау өстендә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Яй өстендә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "مَسأَله эчендәге أ — әлиф өстендәге һәмзә.",
+      "hints_tt": [
+        "Син хәрефеннән соңгы билгене җентекләп кара."
+      ],
+      "source_example_ids": [
+        "EX-L05-01"
+      ],
+      "source_lines": [
+        1731,
+        1731
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-02",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу мисалда һәмзәнең таянычы кайсы?",
+      "stimulus": "رَئِيس",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф."
+        },
+        {
+          "id": "b",
+          "text_tt": "Яй рәвеше."
+        },
+        {
+          "id": "c",
+          "text_tt": "Мим."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "رَئِيس эчендәге ئ һәмзәне яй рәвешендәге таянычта күрсәтә.",
+      "hints_tt": [
+        "Рәдән соң килгән билгенең өске өлешен кара."
+      ],
+      "source_example_ids": [
+        "EX-L05-02"
+      ],
+      "source_lines": [
+        1733,
+        1733
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-03",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мәккә язылышындагы тәшдид кайсы тартыкның икеләнүен күрсәтә?",
+      "stimulus": "مكَّه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мимнең."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кәфнең."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәнең."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "مكَّه сүзендә ّ кәф өстендә тора; Мәккәдәге икеләнгән к белән бәйле.",
+      "hints_tt": [
+        "Тәшдид куелган төп хәрефне тап."
+      ],
+      "source_example_ids": [
+        "EX-L05-03"
+      ],
+      "source_lines": [
+        1758,
+        1758
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-04",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ике ләм белән язылган татар сүзен укы.",
+      "stimulus": "باللئ",
+      "options": [],
+      "accepted_answers": [
+        "баллы"
+      ],
+      "explanation_tt": "باللئ баллы дип укыла; икеләнү ике ل хәрефе белән күрсәтелгән.",
+      "hints_tt": [
+        "Бал тәме булган әйберне белдергән сүзне уйла."
+      ],
+      "source_example_ids": [
+        "EX-L05-04"
+      ],
+      "source_lines": [
+        1759,
+        1759
+      ],
+      "profile": "book_unspecified",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L05-05",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Икеләнүне күрсәтү турында дөрес фикерләрне сайла.",
+      "stimulus": "مكَّه / باللئ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мәккәдә тәшдид билгесе бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Баллыда ике аерым ләм язылган."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ике мисалда да тартыклар бер үк ысул белән күрсәтелгән."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Мәккәдә бер кәф һәм тәшдид, баллыда ике ләм бар; икеләнү ике төрле график юл белән бирелгән.",
+      "hints_tt": [
+        "Төп хәрефләр санын һәм алар өстендәге билгене аер."
+      ],
+      "source_example_ids": [
+        "EX-L05-03",
+        "EX-L05-04"
+      ],
+      "source_lines": [
+        1758,
+        1759
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L05-06",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Суык язылышындагы ике вау турында кайсы фикер дөрес?",
+      "stimulus": "صووق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ике вау һәрвакыт в тартыгының икеләнүен күрсәтә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Бу мисалда аларны автоматик рәвештә икеләнгән тартык дип санамыйбыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ике вау һәрвакыт тәшдидкә алыштырыла."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "صووق суык дип укыла. Вау сузык белән дә бәйле була алганга, وو һәрвакыт икеләнгән тартык дигән сүз түгел.",
+      "hints_tt": [
+        "Сүзнең суык дигән татарча укылышына таян."
+      ],
+      "source_example_ids": [
+        "EX-L05-08"
+      ],
+      "source_lines": [
+        1759,
+        1759
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-07",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалда сүз ахырындагы һәмзә ничек урнашкан?",
+      "stimulus": "نِداء",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф өстенә куелган."
+        },
+        {
+          "id": "b",
+          "text_tt": "Яй өстенә куелган."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әлифтән соң аерым язылган."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "نِداء ахырында әлифтән соң мөстәкыйль ء тора; һәмзәне әлифнең үзенә күчермибез.",
+      "hints_tt": [
+        "Иң сулдагы ء белән аның уң ягындагы اны аер."
+      ],
+      "source_example_ids": [
+        "EX-L05-05"
+      ],
+      "source_lines": [
+        1737,
+        1737
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L05-08",
+      "lesson_id": "L05",
+      "rule_ids": [
+        "R-L05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа исемдә тәшдид кайсы хәреф өстендә?",
+      "stimulus": "جدَّه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "د"
+        },
+        {
+          "id": "b",
+          "text_tt": "ج"
+        },
+        {
+          "id": "c",
+          "text_tt": "ه"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "جدَّه язылышында тәшдид дәл өстендә тора; исемдәге икеләнгән тартыкны күрсәтә.",
+      "hints_tt": [
+        "Өстенә ّ куелган төп хәрефне тап."
+      ],
+      "source_example_ids": [
+        "EX-L05-06"
+      ],
+      "source_lines": [
+        1758,
+        1758
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-01",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Исем эчендәге Аллаһ компонентын сайла.",
+      "stimulus": "عبد الله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "عبد"
+        },
+        {
+          "id": "b",
+          "text_tt": "الله"
+        },
+        {
+          "id": "c",
+          "text_tt": "دين"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "عبد الله мисалында икенче компонент — الله. ﷲ лигатурасы күрсәтүдә хәрефләргә ачылган.",
+      "hints_tt": [
+        "Кушма исемнең сулдагы өлешен кара."
+      ],
+      "source_example_ids": [
+        "EX-L06-01"
+      ],
+      "source_lines": [
+        1779,
+        1779
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-02",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу исемнең Аллаһ компонентындагы төп хәрефләр нинди?",
+      "stimulus": "حكيم الله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "әлиф–ләм–ләм–һә"
+        },
+        {
+          "id": "b",
+          "text_tt": "әлиф–вау–ләм–һә"
+        },
+        {
+          "id": "c",
+          "text_tt": "бә–ләм–йә–һә"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "حكيم الله эчендәге الله әлиф, ике ләм һәм һә белән языла; әйтелешкә ияреп вау өстәмибез.",
+      "hints_tt": [
+        "Аллаһ өлешендә ничә ل барлыгын сана."
+      ],
+      "source_example_ids": [
+        "EX-L06-02"
+      ],
+      "source_lines": [
+        1779,
+        1779
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-03",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Камал компоненты артыннан килгән дин өлешенең язылышын сайла.",
+      "stimulus": "كمال الدين",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "دين"
+        },
+        {
+          "id": "b",
+          "text_tt": "الدين"
+        },
+        {
+          "id": "c",
+          "text_tt": "التيـن"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "كمال الدين мисалында дин өлеше ال артикле белән сакланган.",
+      "hints_tt": [
+        "د алдында килгән ا һәм لне тап."
+      ],
+      "source_example_ids": [
+        "EX-L06-03"
+      ],
+      "source_lines": [
+        1792,
+        1792
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-04",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Нур компонентыннан соң калган өлеш кайсы?",
+      "stimulus": "نورالدين",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "الدين"
+        },
+        {
+          "id": "b",
+          "text_tt": "الله"
+        },
+        {
+          "id": "c",
+          "text_tt": "رحمن"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "نورالدين исемендә نور артыннан الدين килә. Тоташ язылу компонент чикләрен юкка чыгармый.",
+      "hints_tt": [
+        "Баштагы نور өлешен аерып кара."
+      ],
+      "source_example_ids": [
+        "EX-L06-04"
+      ],
+      "source_lines": [
+        1792,
+        1792
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-05",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ике Аллаһлы исем язылышы турында дөрес фикерләрне сайла.",
+      "stimulus": "عبد الله / حكيم الله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесендә дә الله компоненты бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "الله эченә татарча әйтелеш буенча вау өстәргә кирәк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Китаптагы исемнәрнең төп хәрефләре саклана."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Аллаһ компоненты ике исемдә дә бер үк төп хәрефләрдән тора; әйтелештә ишетелгән аваз өчен вау өстәмибез.",
+      "hints_tt": [
+        "Компонентның тарихи язылышын үзгәртмичә чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L06-01",
+        "EX-L06-02"
+      ],
+      "source_lines": [
+        1779,
+        1779
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L06-06",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Динле ике исем турында дөрес фикерләрне сайла.",
+      "stimulus": "كمال الدين / نورالدين",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесендә дә الدين өлеше бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әйтелешкә ияреп өстәмә тә хәрефе куймыйбыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Дин алдындагы الне һәрвакыт төшереп калдырабыз."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Китаптагы калыпта الدين төп хәрефләре саклана; өстәмә тә кертү яки артикльне бетерү өйрәтелми.",
+      "hints_tt": [
+        "Кушма исемнең уртак ахырын тап."
+      ],
+      "source_example_ids": [
+        "EX-L06-03",
+        "EX-L06-04"
+      ],
+      "source_lines": [
+        1792,
+        1792
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L06-07",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа исемдә Аллаһ компоненты турында кайсы фикер дөрес?",
+      "stimulus": "عارف الله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "الله төп хәрефләре саклана, өстәмә вау кертелми."
+        },
+        {
+          "id": "b",
+          "text_tt": "الله урынына һәрвакыт الدين язабыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әйтелешне ачыклау өчен الله эченә ике вау өстибез."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "عارف الله мисалында да Аллаһ компоненты саклана; исемнең тулы укылышын фаразлау кирәкми.",
+      "hints_tt": [
+        "Алдагы Аллаһлы исемнәрдәге уртак өлешне чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L06-05"
+      ],
+      "source_lines": [
+        1779,
+        1779
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L06-08",
+      "lesson_id": "L06",
+      "rule_ids": [
+        "R-L06-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа исемнең ахырындагы уртак компонентны сайла.",
+      "stimulus": "فخرالدين",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "الله"
+        },
+        {
+          "id": "b",
+          "text_tt": "الدين"
+        },
+        {
+          "id": "c",
+          "text_tt": "عبد"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "فخرالدين ахырында الدين килә; ул алдагы ике динле исемдәге шул ук язылыш.",
+      "hints_tt": [
+        "Иң сулдагы نнән башлап уртак өлешнең чикләрен тап."
+      ],
+      "source_example_ids": [
+        "EX-L06-06"
+      ],
+      "source_lines": [
+        1792,
+        1792
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-01",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "الдән соң килгән ر кайсы төркемгә керә?",
+      "stimulus": "عبدالرحمن",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кояш хәрефләренә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ай хәрефләренә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сузык хәрәкәләргә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "عبدالرحمن эчендә артикльдән соң ر килә; ул кояш хәрефе.",
+      "hints_tt": [
+        "Артикльнең لеннән соңгы төп хәрефне кара."
+      ],
+      "source_example_ids": [
+        "EX-L07-01"
+      ],
+      "source_lines": [
+        1803,
+        1803
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-02",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу исемдә кояш хәрефе алдында артикльнең ләме әйтелештә ничек тоташа?",
+      "stimulus": "عبد الستار",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мөстәкыйль л булып аерым әйтелә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аннан соңгы с тартыгына охшашлана."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүздәге бөтен ләмнәр юкка чыга."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "عبد الستار мисалында الдән соң س килә; ләмнең әйтелеше шушы кояш хәрефенә охшашлана.",
+      "hints_tt": [
+        "Сүз башын түгел, нәкъ артикльдән соңгы хәрефне тикшер."
+      ],
+      "source_example_ids": [
+        "EX-L07-02"
+      ],
+      "source_lines": [
+        1803,
+        1803
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-03",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Артикльдән соңгы ب булганда кайсы кагыйдә кулланыла?",
+      "stimulus": "عَبدالباري",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ай хәрефе: артикльнең ләме әйтелә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кояш хәрефе: ләм һәрвакыт төшеп кала."
+        },
+        {
+          "id": "c",
+          "text_tt": "Артикль язуда бөтенләй бетерелә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "عَبدالباري эчендәге артикльдән соң ب килә. Бә — ай хәрефе, шуңа ләм әйтелештә саклана.",
+      "hints_tt": [
+        "Бә хәрефенең ай төркеменә керүен искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L07-03"
+      ],
+      "source_lines": [
+        1812,
+        1812
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-04",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу исемдә الдән соң килгән ай хәрефен сайла.",
+      "stimulus": "عَبدالعَليم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "د"
+        },
+        {
+          "id": "b",
+          "text_tt": "ع"
+        },
+        {
+          "id": "c",
+          "text_tt": "ن"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "عَبدالعَليم эчендәге артикльдән соң ع килә; гайн ай хәрефләре төркемендә.",
+      "hints_tt": [
+        "Баштагы عبد өлеше белән артикльдән соңгы өлешне аер."
+      ],
+      "source_example_ids": [
+        "EX-L07-04"
+      ],
+      "source_lines": [
+        1812,
+        1812
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-05",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-01",
+        "R-L07-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Бирелгән исемнәрдән кояш хәрефе белән башланган компонентлыларын сайла.",
+      "stimulus": "عبدالرحمن / عبد الستار / عَبدالباري / عَبدالعَليم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "عبدالرحمن"
+        },
+        {
+          "id": "b",
+          "text_tt": "عبد الستار"
+        },
+        {
+          "id": "c",
+          "text_tt": "عَبدالباري"
+        },
+        {
+          "id": "d",
+          "text_tt": "عَبدالعَليم"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Рә һәм син — кояш хәрефләре; бә белән гайн — ай хәрефләре.",
+      "hints_tt": [
+        "عبد эчендәге беренче хәрефкә карама: الдән соңгы хәреф кирәк."
+      ],
+      "source_example_ids": [
+        "EX-L07-01",
+        "EX-L07-02",
+        "EX-L07-03",
+        "EX-L07-04"
+      ],
+      "source_lines": [
+        1803,
+        1812
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L07-06",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-01",
+        "R-L07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кояш һәм ай хәрефле мисалларны язуда чагыштырганда нәрсә саклана?",
+      "stimulus": "عبدالرحمن / عَبدالباري",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кояш хәрефе алдында ل һәрвакыт язудан бетерелә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесендә дә артикльнең ال язылышы саклана."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ай хәрефе алдында артикль و белән алышына."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Әйтелештәге охшашлану артикльнең төп ال язылышын юкка чыгармый.",
+      "hints_tt": [
+        "Әйтелеш белән хәреф составын аер."
+      ],
+      "source_example_ids": [
+        "EX-L07-01",
+        "EX-L07-03"
+      ],
+      "source_lines": [
+        1803,
+        1812
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-07",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа исемдә الдән соң ف килә. Кайсы аңлатма дөрес?",
+      "stimulus": "عبدالفتاح",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Фә — кояш хәрефе; ләм әйтелми."
+        },
+        {
+          "id": "b",
+          "text_tt": "Фә — ай хәрефе; артикльнең ләме әйтелә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Фә артикльдән соң бөтенләй языла алмый."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "عبدالفتاح сүзендә ف — ай хәрефе. Китапта мисалның кояш исемлеге янында торуы аны кояш хәрефенә әйләндерми.",
+      "hints_tt": [
+        "Төркемне мисалның биттәге урыны буенча түгел, фә хәрефе буенча билгелә."
+      ],
+      "source_example_ids": [
+        "EX-L07-05"
+      ],
+      "source_lines": [
+        1803,
+        1803
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L07-08",
+      "lesson_id": "L07",
+      "rule_ids": [
+        "R-L07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа мисалда артикльдән соңгы ن өчен кайсы төркем кагыйдәсе эшли?",
+      "stimulus": "عبد الناصر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кояш хәрефе; ләм әйтелеше нунга охшашлана."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ай хәрефе; ләм һәрвакыт аерым әйтелә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әлиф максура кагыйдәсе."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "عبد الناصر эчендә الдән соң ن килә. Нун кояш төркеменә керә; язуда ال саклана.",
+      "hints_tt": [
+        "Нунны кояш хәрефләре исемлегеннән тап."
+      ],
+      "source_example_ids": [
+        "EX-L07-06"
+      ],
+      "source_lines": [
+        1805,
+        1805
+      ],
+      "profile": "loan_original",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-01",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Имля-и кадим мисалында һәмзә кайда куелган?",
+      "stimulus": "اِملاءِ قديم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икенче сүзнең соңгы мименнән соң."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренче сүз башында гына."
+        },
+        {
+          "id": "c",
+          "text_tt": "Беренче сүзнең әлифеннән соң."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "اِملاءِ قديم мисалында беренче сүзнең соңгы әлифеннән соң ء килә һәм изафәт бәйләнешен күрсәтә.",
+      "hints_tt": [
+        "Беренче сүз белән икенче сүз арасындагы чиккә кара."
+      ],
+      "source_example_ids": [
+        "EX-L08-01"
+      ],
+      "source_lines": [
+        1832,
+        1832
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-02",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Кеше тормышын тасвирлаган бу сүзтезмәне изафәт укылышы белән яз.",
+      "stimulus": "ترجمهءِ حال",
+      "options": [],
+      "accepted_answers": [
+        "тәрҗемә-и хәл",
+        "тәрҗемәи хәл"
+      ],
+      "explanation_tt": "ترجمهءِ حال дәрестә тәрҗемә-и хәл дип бирелә; и ике өлешне бәйли.",
+      "hints_tt": [
+        "Беренче өлешне, бәйләүче и не, аннары хәл сүзен яз."
+      ],
+      "source_example_ids": [
+        "EX-L08-02"
+      ],
+      "source_lines": [
+        1833,
+        1833
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L08-03",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Беренче өлеше һә белән тәмамланган бу мисалда бәйләүче билге ничек язылган?",
+      "stimulus": "تربيهءِ بدن",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәдән соң ءِ куелган."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һә урынына һәрвакыт و язылган."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бөтен беренче сүз төшерелгән."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "تربيهءِ بدن эчендә беренче сүзнең هсеннән соң һәмзә һәм кәсрә бар.",
+      "hints_tt": [
+        "Һә белән киләсе сүз арасындагы кечкенә билгегә кара."
+      ],
+      "source_example_ids": [
+        "EX-L08-03"
+      ],
+      "source_lines": [
+        1834,
+        1834
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-04",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01",
+        "R-L08-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бәндә-и фәкыйрь мисалындагы бәйләнеш нәрсәне күрсәтә?",
+      "stimulus": "بندهءِ فقير",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Исемнәрнең мәҗбүри ир яки хатын җенесен."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәр сүзнең күплек санын."
+        },
+        {
+          "id": "c",
+          "text_tt": "Фарсы изафәтен: ике сүзнең мәгънә бәйләнешен."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "بندهءِ فقير изафәт бәйләнеше белән төзелгән. Моннан фарсы исемнәренә грамматик җенес чыгармыйбыз.",
+      "hints_tt": [
+        "Бәйләүче и нинди ике өлешне тоташтырганын кара."
+      ],
+      "source_example_ids": [
+        "EX-L08-04"
+      ],
+      "source_lines": [
+        1836,
+        1836
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-05",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01",
+        "R-L08-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Күрсәтелгән изафәт мисаллары турында дөрес фикерләрне сайла.",
+      "stimulus": "اِملاءِ قديم / ترجمهءِ حال / تربيهءِ بدن / بندهءِ فقير",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Беренче өлеш әлиф яки һә белән тәмамлана."
+        },
+        {
+          "id": "b",
+          "text_tt": "Бәйләнештә һәмзә билгесе күрсәтелгән."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бу билге исемнең хатын җенесендә булуын күрсәтә."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Бу дүрт мисалда беренче өлешнең ахырында әлиф яки һә, аннан соң изафәт һәмзәсе бар; грамматик җенес кагыйдәсе чыгарылмый.",
+      "hints_tt": [
+        "Хәрефнең вазифасын сүзнең җенесе белән бутама."
+      ],
+      "source_example_ids": [
+        "EX-L08-01",
+        "EX-L08-02",
+        "EX-L08-03",
+        "EX-L08-04"
+      ],
+      "source_lines": [
+        1832,
+        1836
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L08-06",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-01",
+        "R-L08-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Изафәтле сүзтезмәдә уку чикләрен ничек билгелибез?",
+      "stimulus": "اِملاءِ قديم / بندهءِ فقير",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Беренче өлеш — бәйләүче и — икенче өлеш."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәр хәрефне аерым сүз итеп укыйбыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икенче өлешне укымый калдырабыз."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Имля-и кадим һәм бәндә-и фәкыйрь укылышларында и ике өлешне бәйли.",
+      "hints_tt": [
+        "Бәйләүче билге яңа мөстәкыйль мәгънәле сүзне алыштырмый."
+      ],
+      "source_example_ids": [
+        "EX-L08-01",
+        "EX-L08-04"
+      ],
+      "source_lines": [
+        1832,
+        1836
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-07",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның беренче сүз ахырында изафәт нәрсә белән күрсәтелгән?",
+      "stimulus": "مِلَّتِ تاتار",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ахырдагы өстәмә әлиф белән."
+        },
+        {
+          "id": "b",
+          "text_tt": "Сүз башындагы вау белән."
+        },
+        {
+          "id": "c",
+          "text_tt": "Соңгы тә астындагы кәсрә белән."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "مِلَّتِ تاتار мисалында беренче сүз әлиф яки һә белән тәмамланмый; соңгы ت астында кәсрә тора.",
+      "hints_tt": [
+        "Икенче сүзгә күчәр алдыннан беренче сүзнең соңгы хәрефен кара."
+      ],
+      "source_example_ids": [
+        "EX-L08-05"
+      ],
+      "source_lines": [
+        1840,
+        1840
+      ],
+      "profile": "loan_original",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L08-08",
+      "lesson_id": "L08",
+      "rule_ids": [
+        "R-L08-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа изафәт мисалында ни өчен беренче сүздән соң өстәмә һәмзә эзләмибез?",
+      "stimulus": "بيتِ فقير",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икенче сүз җөмләдә кулланылмый."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренче сүз тә белән тәмамлана, бәйләүче кәсрә шул хәреф астында."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр изафәттә билгеләр бөтенләй булмый."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "بيتِ فقير эчендә беренче сүзнең ахырындагы ت астында кәсрә бар; әлиф яки һә ахырлы мисал калыбын көчләп күчермибез.",
+      "hints_tt": [
+        "Беренче сүзнең соңгы төп хәрефен һәм аның астын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L08-06"
+      ],
+      "source_lines": [
+        1840,
+        1840
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L09-01",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу сүздә күплекне күрсәткән ахыргы компонент кайсы?",
+      "stimulus": "مردان",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ان"
+        },
+        {
+          "id": "b",
+          "text_tt": "ها"
+        },
+        {
+          "id": "c",
+          "text_tt": "دار"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "مردان мисалында مرد нигезенә ان ялганган; китапта мәрдән күплек мисалы итеп бирелә.",
+      "hints_tt": [
+        "Соңгы ике хәрефне аерып кара."
+      ],
+      "source_example_ids": [
+        "EX-L09-01"
+      ],
+      "source_lines": [
+        1847,
+        1847
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L09-02",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Дәрьялар мәгънәсендәге бу мисалда күплек компоненты кайсы?",
+      "stimulus": "دریاها",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ستان"
+        },
+        {
+          "id": "b",
+          "text_tt": "ها"
+        },
+        {
+          "id": "c",
+          "text_tt": "گر"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "دریاها сүзендә دریا артыннан ها килә. ان һәм ها — китапта аерым күрсәтелгән ике күплек компоненты.",
+      "hints_tt": [
+        "Нигездәге әлифтән соң калган өлешне тап."
+      ],
+      "source_example_ids": [
+        "EX-L09-02"
+      ],
+      "source_lines": [
+        1849,
+        1849
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L09-03",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Гөлстан һәм гөлзар мисалларындагы стан белән зарның уртак мәгънә юнәлеше нинди?",
+      "stimulus": "گلستان / گلزار",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Урын, үсемлекләр үскән җир."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икеләнгән тартык."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тик үткән заман."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "گلستان һәм گلزار мисалларында стан белән зар урынга, гөлләр үскән җиргә бәйле. Зарны савытны белдергән дан белән берләштермибез.",
+      "hints_tt": [
+        "Ике сүздә дә گل нигезеннән соңгы өлешне чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L09-03",
+        "EX-L09-08"
+      ],
+      "source_lines": [
+        1856,
+        1859
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L09-04",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Компонентларның бирелгән мисаллардагы мәгънәләрен дөрес бәйләгән юлларны сайла.",
+      "stimulus": "حَیله کار / سوده گر / یار",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "حَیله کار: کار эшләүче яки шөгыль иясе белән бәйле."
+        },
+        {
+          "id": "b",
+          "text_tt": "سوده گر: گر сәүдә белән шөгыльләнүче кешене күрсәтә."
+        },
+        {
+          "id": "c",
+          "text_tt": "یار: һәрвакыт күплек санын белдерә."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Хәйләкәр һәм сәүдәгәрдә кар/гәр эш-хәл иясе белән бәйле. Китаптагы йар өлеше ия булу мәгънәсе белән аңлатыла; ул күплек кушымчасы түгел.",
+      "hints_tt": [
+        "Күплек өчен алдагы ике мисалда нинди компонентлар кулланылганын искә төшер."
+      ],
+      "source_example_ids": [
+        "EX-L09-04",
+        "EX-L09-07",
+        "EX-L09-09"
+      ],
+      "source_lines": [
+        1857,
+        1862
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L09-05",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Өч компонентның мәгънәсен дөрес күрсәткән юлларны сайла.",
+      "stimulus": "مِلَّتپرور / وطنپرست / کله پوش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "پرور: тәрбияләү, үстерү белән бәйле."
+        },
+        {
+          "id": "b",
+          "text_tt": "پرست: ярату, табыну белән бәйле."
+        },
+        {
+          "id": "c",
+          "text_tt": "پوش: кию, каплау белән бәйле."
+        },
+        {
+          "id": "d",
+          "text_tt": "Бу өч компонентның барысы да күплекне генә белдерә."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation_tt": "Милләтпәрвәр, ватанпәрәст һәм кәләпүш мисалларында пәрвәр, пәрәст, пүш өч аерым мәгънә йөртә.",
+      "hints_tt": [
+        "Һәр компонентны аның тулы мисалы белән бергә чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L09-10",
+        "EX-L09-11",
+        "EX-L09-12"
+      ],
+      "source_lines": [
+        1869,
+        1872
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 3,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L09-06",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Дар, гир, әфрүз компонентларының мәгънәләрен дөрес күрсәткән юлларны сайла.",
+      "stimulus": "خبردار / جهانگیر / دل افروز",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "دار: ия булу, тоту белән бәйле."
+        },
+        {
+          "id": "b",
+          "text_tt": "گیر: алу, яулап алу белән бәйле."
+        },
+        {
+          "id": "c",
+          "text_tt": "افروز: яктырту белән бәйле."
+        },
+        {
+          "id": "d",
+          "text_tt": "افروز: тик күплекне белдерә."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation_tt": "Хәбәрдар, җиһангир һәм диләфрүздә әлеге өч компонент аерым мәгънә йөртә; аларны бердәй кушымчага кайтармыйбыз.",
+      "hints_tt": [
+        "Өч мисалның соңгы өлешләрен һәм дәрестәге аңлатмаларын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-L09-13",
+        "EX-L09-14",
+        "EX-L09-15"
+      ],
+      "source_lines": [
+        1873,
+        1875
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 3,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L09-07",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Каләм савытын белдергән яңа мисалда دان нинди мәгънә өсти?",
+      "stimulus": "قَلمدان",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Савыт, нәрсәдер салына торган урын."
+        },
+        {
+          "id": "b",
+          "text_tt": "Гөлләр үсә торган киң җир генә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Кояш хәрефе алдында артикль."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "قَلمدان мисалында دان каләм салына торган савыт белән бәйле. Бу компонентны гөлзардагы зар белән бер мәгънә итеп өйрәтмибез.",
+      "hints_tt": [
+        "Нигездәге каләм нәрсә эченә салына алуын уйла."
+      ],
+      "source_example_ids": [
+        "EX-L09-05"
+      ],
+      "source_lines": [
+        1860,
+        1860
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L09-08",
+      "lesson_id": "L09",
+      "rule_ids": [
+        "R-L09-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Җанвар сүзенең ахырындагы ور компоненты бу мисалда нәрсә белән бәйле?",
+      "stimulus": "جانور",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Күплек сан белән."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ия булу белән."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз башындагы юклык белән."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "جانور мисалында җан + вар төзелеше җан иясе мәгънәсе белән бәйле. Вар күплек яки юклык күрсәткече түгел.",
+      "hints_tt": [
+        "Тулы сүзнең җан иясе мәгънәсенә таян."
+      ],
+      "source_example_ids": [
+        "EX-L09-06"
+      ],
+      "source_lines": [
+        1861,
+        1861
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-01",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Китапта искедән, борынгыдан мәгънәсе белән бирелгән сүзнең баштагы компоненты кайсы?",
+      "stimulus": "ازقدیم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "از"
+        },
+        {
+          "id": "b",
+          "text_tt": "نا"
+        },
+        {
+          "id": "c",
+          "text_tt": "بی"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "ازقدیم мисалының башында از тора. Бу сүздән барлык از формалары өчен гомуми кушып язу кагыйдәсе чыгарылмый.",
+      "hints_tt": [
+        "قدیم өлешеннән алда торган хәрефләрне аер."
+      ],
+      "source_example_ids": [
+        "EX-L10-01"
+      ],
+      "source_lines": [
+        1883,
+        1883
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-02",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Шунда ук мәгънәсендәге бу мисалның баштагы өлешен сайла.",
+      "stimulus": "درحال",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "سر"
+        },
+        {
+          "id": "b",
+          "text_tt": "در"
+        },
+        {
+          "id": "c",
+          "text_tt": "ها"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "درحال мисалында در алда тора; дәрес бу компонентны шушы әзер алынмада танырга өйрәтә.",
+      "hints_tt": [
+        "حال өлешенең уң ягында калган хәрефләрне кара."
+      ],
+      "source_example_ids": [
+        "EX-L10-02"
+      ],
+      "source_lines": [
+        1884,
+        1884
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-03",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "نامعلوم сүзендәге نا нигез мәгънәсен ничек үзгәртә?",
+      "stimulus": "نامعلوم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мәгълүм булуны кире кага."
+        },
+        {
+          "id": "b",
+          "text_tt": "Күплек сан ясый."
+        },
+        {
+          "id": "c",
+          "text_tt": "Савыт мәгънәсе өсти."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "نا мәгълүм булуны кире кага: сүзнең мәгънәсе — билгеле түгел.",
+      "hints_tt": [
+        "Нигездәге мәгълүм сүзенең каршы мәгънәсен уйла."
+      ],
+      "source_example_ids": [
+        "EX-L10-03"
+      ],
+      "source_lines": [
+        1886,
+        1886
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-04",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Язманың исемен белдергән мисалда سر нинди төп мәгънә белән бәйле?",
+      "stimulus": "سرلوحه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Аяк."
+        },
+        {
+          "id": "b",
+          "text_tt": "Су."
+        },
+        {
+          "id": "c",
+          "text_tt": "Баш."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "سرلوحه мисалында سر баш мәгънәсенә бәйле; тулы сүз язманың исемен белдерә.",
+      "hints_tt": [
+        "Исемнең язмада кайда урнашуын күз алдына китер."
+      ],
+      "source_example_ids": [
+        "EX-L10-04"
+      ],
+      "source_lines": [
+        1887,
+        1887
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-05",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Эшсез һәм эш белән мисалларын чагыштырып, дөресләрен сайла.",
+      "stimulus": "بی عمل / بِالعمل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "بی عمل эчендә бә артыннан аерым яй бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "بِالعمل башында бә астында кәсрә бар."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ике форма язылыш һәм мәгънә ягыннан һәрвакыт бер үк."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Фарсыча بی عمل юклыкны, гарәпчә بِالعمل гамәл белән бәйләнешне күрсәтә. Яй һәм кәсрә аермасы саклана.",
+      "hints_tt": [
+        "Кечкенә хәрәкәне тулы хәреф белән бутама."
+      ],
+      "source_example_ids": [
+        "EX-L10-07",
+        "EX-L10-08"
+      ],
+      "source_lines": [
+        1892,
+        1893
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-L10-06",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Китапта укылышы бирелгән юклыклы сүзне татар кириллицасында яз.",
+      "stimulus": "بی معلوم",
+      "options": [],
+      "accepted_answers": [
+        "бимәгълүм"
+      ],
+      "explanation_tt": "بی معلوم китапта бимәгълүм дип укылган; بی юклык мәгънәсе белән бәйле.",
+      "hints_tt": [
+        "Мәгълүм сүзеннән алда би өлешен укы."
+      ],
+      "source_example_ids": [
+        "EX-L10-09"
+      ],
+      "source_lines": [
+        1892,
+        1892
+      ],
+      "profile": "loan_original",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-L10-07",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-02",
+        "R-L10-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалдагы بی турында дөрес аңлатманы сайла.",
+      "stimulus": "بی نماز",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Аерым яйлы фарсы компоненты; намазсыз мәгънәсен бирә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Бары тик кәсрәле гарәп бәсе; һәрвакыт намаз белән мәгънәсендә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Күплек сан компоненты."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "بی نماز башында бә һәм аерым ی тора; тулы мисал намазсыз дигән мәгънә бирә.",
+      "hints_tt": [
+        "Бә астындагы хәрәкәне түгел, аннан соңгы тулы хәрефне эзлә."
+      ],
+      "source_example_ids": [
+        "EX-L10-05"
+      ],
+      "source_lines": [
+        1891,
+        1891
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-L10-08",
+      "lesson_id": "L10",
+      "rule_ids": [
+        "R-L10-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа формула башындагы بِ нәрсә белән аерыла?",
+      "stimulus": "بِالله",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бә артыннан аерым яй бар, ул фарсыча юклыкны күрсәтә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Бә астында кәсрә бар, аерым яй юк; китапта Аллаһ белән дип аңлатылган."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ул ها күплек компоненты."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "بِالله мисалында гарәпчә кәсрәле бә кулланылган. Аны фарсыча بی белән бер нормага китермибез.",
+      "hints_tt": [
+        "Бә белән аннан соңгы әлиф арасында яй бармы икәнен тикшер."
+      ],
+      "source_example_ids": [
+        "EX-L10-06"
+      ],
+      "source_lines": [
+        1892,
+        1892
+      ],
+      "profile": "loan_original",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    }
+  ]
+}

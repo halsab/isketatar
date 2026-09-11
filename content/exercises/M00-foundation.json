@@ -1,0 +1,2469 @@
+{
+  "module_id": "M00",
+  "items": [
+    {
+      "id": "Q-B01-01",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Гарәп хәрефле сүзнең беренче хәрефен кайсы яктан эзлибез?",
+      "stimulus": "ب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Уң яктан."
+        },
+        {
+          "id": "b",
+          "text_tt": "Сул яктан."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәрвакыт уртадан."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Гарәп хәрефле сүз уңнан сулга укыла, беренче хәреф уң якта.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-01"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-02",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу тоташкан үрнәктә ничә бә хәрефе бар?",
+      "stimulus": "بب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Ике бә тоташкан; тоташу аларны бер генә хәрефкә әйләндерми.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-02"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-03",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Үрнәктә уңнан башлап кайсы тәртип күренә?",
+      "stimulus": "با",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф, бә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике әлиф."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бә, әлиф."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Уку юнәлешендә башта бә, аннан соң әлиф килә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-03"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-04",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Монда чын ара белән аерылган ничә тезмә бар?",
+      "stimulus": "با با",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Дүрт."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Ике با тезмәсе арасында ара бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-04"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-05",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Әлиф үзеннән соңгы хәрефкә тоташамы?",
+      "stimulus": "با",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Юк."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәрвакыт тоташа."
+        },
+        {
+          "id": "c",
+          "text_tt": "Әлиф сүздә беркайчан язылмый."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Әлиф киләсе хәрефкә тоташмый; өзеклек бер сүз эчендә була ала.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-03"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-06",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-02",
+        "R-B01-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Дөрес фикерләрне сайла.",
+      "stimulus": "بب / با با",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Тоташкан үрнәктә ике бә бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Тоташкан ике бә бер хәреф кенә була."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ара белән аерылган ике тезмә бар."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Тоташкан хәрефләр аерым билгеләр булып кала; чын ара ике тезмәне аера.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-02",
+        "EX-B01-04"
+      ],
+      "source_lines": [
+        221,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B01-07",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа үрнәктә әлиф соңгы бәгә тоташмаган. Бу ничә тезмә?",
+      "stimulus": "باب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Чын сүз арасы юк; тоташу өзеге булса да, бер тезмә бирелгән.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-05"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B01-08",
+      "lesson_id": "B01",
+      "rule_ids": [
+        "R-B01-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа үрнәктә чын ара белән ничә тезмә аерылган?",
+      "stimulus": "باب باب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Алты."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бер."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Ике باب арасында чын ара бар; эчке өзекләрне аерым сүз дип санамыйбыз.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B01-06"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-01",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бер ноктасы аста булган бә кайсы билге?",
+      "stimulus": "ب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ت"
+        },
+        {
+          "id": "b",
+          "text_tt": "ب"
+        },
+        {
+          "id": "c",
+          "text_tt": "ث"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Бә ب астында бер нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-01"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-02",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Пә астында ничә нокта бар?",
+      "stimulus": "پ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Пә پ астында өч нокта тора.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-02"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-03",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Тә өстендә ничә нокта бар?",
+      "stimulus": "ت",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Тә ت өстендә ике нокта тора.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-03"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-04",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Өстендә өч нокта булган сә кайсы?",
+      "stimulus": "ث",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ث"
+        },
+        {
+          "id": "b",
+          "text_tt": "پ"
+        },
+        {
+          "id": "c",
+          "text_tt": "ت"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Сә ث өстендә өч нокта; пәнең өч ноктасы аста.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-04"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-05",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Күрсәтелгән нун белән яй турында дөресләрен сайла.",
+      "stimulus": "ن / ي",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Нунның ноктасы өстә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Нун белән яй һәрвакыт бер үк хәреф."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бу яйның аста ике ноктасы бар."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Нун өстендә бер нокта; бу төп яй формасында аста ике нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-05",
+        "EX-B02-06"
+      ],
+      "source_lines": [
+        222,
+        2802
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B02-06",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-04"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бә дигән исем һәр сүздә бәдән торган иҗек өстәргә кушамы?",
+      "stimulus": "ب",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әйе, һәрвакыт ә өстибез."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әйе, һәрвакыт а өстибез."
+        },
+        {
+          "id": "c",
+          "text_tt": "Юк, бу хәрефнең исеме."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Бә — хәреф исеме; сүзнең укылышын һәм сузыкларын аерым өйрәнәбез.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-01"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-07",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Тоташкан урта форма кайсы хәрефнеке?",
+      "stimulus": "‍ن‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Нун."
+        },
+        {
+          "id": "b",
+          "text_tt": "Пә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Өстәге бер нокта бу урта форманың нун булуын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-07"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B02-08",
+      "lesson_id": "B02",
+      "rule_ids": [
+        "R-B02-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу урта форма кайсы хәрефкә туры килә?",
+      "stimulus": "‍ي‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Яй."
+        },
+        {
+          "id": "c",
+          "text_tt": "Нун."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Астагы ике нокта һәм төп рәвеш бу яй формасын таныта.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B02-08"
+      ],
+      "source_lines": [
+        2802,
+        2802
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-01",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Җимнең ноктасы кайда?",
+      "stimulus": "ج",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Өстә өч нокта."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аста бер нокта."
+        },
+        {
+          "id": "c",
+          "text_tt": "Нокта юк."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "جнең аскы өлешендә бер нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-01"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-02",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Чә белән җимне төп нинди билге аера?",
+      "stimulus": "چ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Астагы нокталар саны."
+        },
+        {
+          "id": "b",
+          "text_tt": "Берсендә дә нокта булмау."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икесенең дә хәреф булмавы."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Чә астында өч, җим астында бер нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-02"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-03",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ноктасыз хә кайсы билге?",
+      "stimulus": "ح / خ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "خ"
+        },
+        {
+          "id": "b",
+          "text_tt": "ج"
+        },
+        {
+          "id": "c",
+          "text_tt": "ح"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "ح ноктасыз; خ өстендә нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-03",
+        "EX-B03-04"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-04",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Дәл белән зәлнең аермасын сайла.",
+      "stimulus": "د / ذ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Дәл өч нокталы, зәл ноктасыз."
+        },
+        {
+          "id": "b",
+          "text_tt": "Дәл ноктасыз, зәл бер нокталы."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икесе бер үк хәреф."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "د ноктасыз, ذ өстендә бер нокта белән килә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-05",
+        "EX-B03-06"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-05",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Киләсе хәрефкә тоташмый торганнарны сайла.",
+      "stimulus": "د / ذ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "د"
+        },
+        {
+          "id": "b",
+          "text_tt": "ج"
+        },
+        {
+          "id": "c",
+          "text_tt": "ذ"
+        },
+        {
+          "id": "d",
+          "text_tt": "چ"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Дәл د һәм зәл ذ киләсе хәрефкә тоташмый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-05",
+        "EX-B03-06"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B03-06",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Беренче дүрт хәрефнең тоташуы турында дөрес җавапны сайла.",
+      "stimulus": "ج / چ / ح / خ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ике яктан тоташа алалар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беркайчан тоташмыйлар."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәрберсе аерым сүз була."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "ج چ ح خ ике яктан тоташа ала; күрше хәреф тә тоташуны рөхсәт итәргә тиеш.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-01",
+        "EX-B03-02",
+        "EX-B03-03",
+        "EX-B03-04"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-07",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Башлангыч форманы аерым хәреф белән туры китер.",
+      "stimulus": "چ‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ج"
+        },
+        {
+          "id": "b",
+          "text_tt": "چ"
+        },
+        {
+          "id": "c",
+          "text_tt": "خ"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Астагы өч нокта бу форманың چ булуын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-07"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B03-08",
+      "lesson_id": "B03",
+      "rule_ids": [
+        "R-B03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Урта форманың аерым рәвешен сайла.",
+      "stimulus": "‍ج‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ح"
+        },
+        {
+          "id": "b",
+          "text_tt": "چ"
+        },
+        {
+          "id": "c",
+          "text_tt": "ج"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Астагы бер нокта бу форманың ج булуын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B03-08"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-01",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ра нинди нокталар белән языла?",
+      "stimulus": "ر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Өстә бер нокта."
+        },
+        {
+          "id": "b",
+          "text_tt": "Өстә өч нокта."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ноктасыз."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "ر ноктасыз хәреф.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-01"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-02",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Зә белән жаның нокталарын дөрес чагыштыруны сайла.",
+      "stimulus": "ز / ژ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Зәдә бер, жада өч."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесендә дә ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Зәдә өч, жада бер."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "ز өстендә бер, ژ өстендә өч нокта тора.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-02",
+        "EX-B04-03"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-03",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Син кайсы билге?",
+      "stimulus": "س / ش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ش"
+        },
+        {
+          "id": "b",
+          "text_tt": "س"
+        },
+        {
+          "id": "c",
+          "text_tt": "ژ"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Ноктасыз س — син; өч нокталы ش — шин.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-04",
+        "EX-B04-05"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-04",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Садка өстә бер нокта өстәлгәндә бу парда кайсы хәреф була?",
+      "stimulus": "ص / ض",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ра."
+        },
+        {
+          "id": "b",
+          "text_tt": "Син."
+        },
+        {
+          "id": "c",
+          "text_tt": "Дад."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "ص белән ضне өстәге бер нокта аера; нокталысы дад.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-06",
+        "EX-B04-07"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-05",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Киләсе хәрефкә тоташмый торганнарны сайла.",
+      "stimulus": "ر / ز / ژ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ر"
+        },
+        {
+          "id": "b",
+          "text_tt": "ز"
+        },
+        {
+          "id": "c",
+          "text_tt": "س"
+        },
+        {
+          "id": "d",
+          "text_tt": "ژ"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation_tt": "Ра, зә һәм жа киләсе хәрефкә тоташмый; син тоташа ала.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-01",
+        "EX-B04-02",
+        "EX-B04-03"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B04-06",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-04"
+      ],
+      "type": "choice",
+      "prompt_tt": "Жа белән шинда өчәр нокта бар. Аларны ничек аерабыз?",
+      "stimulus": "ژ / ش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Төп рәвешләрен дә чагыштырабыз."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесен бер үк хәреф дип саныйбыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Нокталарын бетерәбез."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Нокталар саны бертөрле, ләкин төп рәвешләре һәм тоташуы аерыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-03",
+        "EX-B04-05"
+      ],
+      "source_lines": [
+        221,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-07",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Урта форманың аерым хәрефен сайла.",
+      "stimulus": "‍ش‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "س"
+        },
+        {
+          "id": "b",
+          "text_tt": "ش"
+        },
+        {
+          "id": "c",
+          "text_tt": "ژ"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Тешле рәвеш һәм өстә өч нокта — шин.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-08"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B04-08",
+      "lesson_id": "B04",
+      "rule_ids": [
+        "R-B04-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Башлангыч форма кайсы хәрефнеке?",
+      "stimulus": "ض‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ص"
+        },
+        {
+          "id": "b",
+          "text_tt": "ز"
+        },
+        {
+          "id": "c",
+          "text_tt": "ض"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Сад рәвешенә өстәге нокта өстәлгән: бу дад.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B04-09"
+      ],
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-01",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Та хәрефенең төп билгесен сайла.",
+      "stimulus": "ط",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ноктасыз."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аста өч нокталы."
+        },
+        {
+          "id": "c",
+          "text_tt": "Аста ике нокталы."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "ط ноктасыз; өстәге нокталы пары — ظ.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-01"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-02",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "За кайсы билге?",
+      "stimulus": "ظ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ط"
+        },
+        {
+          "id": "b",
+          "text_tt": "ض"
+        },
+        {
+          "id": "c",
+          "text_tt": "ظ"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "ظ өстендә бер нокта бар; төп рәвеше طгә якын.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-02"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-03",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ноктасыз гайн кайсы?",
+      "stimulus": "ع",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "غ"
+        },
+        {
+          "id": "b",
+          "text_tt": "ع"
+        },
+        {
+          "id": "c",
+          "text_tt": "ف"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "ع — ноктасыз гайн; غ — нокталы гыйн.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-03"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-04",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Гыйнне гайннан нәрсә аера?",
+      "stimulus": "غ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Өстәге бер нокта."
+        },
+        {
+          "id": "b",
+          "text_tt": "Астагы ике нокта."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз арасы."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Гыйн غ өстендә бер нокта бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-04"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-05",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Фә белән каф турында дөресләрен сайла.",
+      "stimulus": "ف / ق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ف өстендә бер нокта."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесендә дә аста өч нокта."
+        },
+        {
+          "id": "c",
+          "text_tt": "ق өстендә ике нокта."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Бу курста фә бер, каф ике өске нокта белән күрсәтелгән.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-05",
+        "EX-B05-06"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B05-06",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-04"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу алты хәрефнең кайсысы ике яктан тоташа ала?",
+      "stimulus": "ط / ظ / ع / غ / ف / ق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Берсе дә юк."
+        },
+        {
+          "id": "b",
+          "text_tt": "Алтысы да."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бары тик фә генә."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Бу төркемнең алтысы да ике яктан тоташа ала; күршеләре дә тоташырга мөмкин булырга тиеш.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-01",
+        "EX-B05-02",
+        "EX-B05-03",
+        "EX-B05-04",
+        "EX-B05-05",
+        "EX-B05-06"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-07",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Соңгы форманы аерым хәреф белән туры китер.",
+      "stimulus": "‍ع",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "غ"
+        },
+        {
+          "id": "b",
+          "text_tt": "ق"
+        },
+        {
+          "id": "c",
+          "text_tt": "ع"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Ноктасыз соңгы форма гайн عкә карый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-07"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B05-08",
+      "lesson_id": "B05",
+      "rule_ids": [
+        "R-B05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Урта форма кайсы хәрефнеке?",
+      "stimulus": "‍غ‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "غ"
+        },
+        {
+          "id": "b",
+          "text_tt": "ع"
+        },
+        {
+          "id": "c",
+          "text_tt": "ظ"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Өстәге бер нокта һәм төп рәвеш бу форманы гыйн итеп таныта.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B05-08"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-01",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Әлифне сайла.",
+      "stimulus": "ا / ل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ل"
+        },
+        {
+          "id": "b",
+          "text_tt": "ا"
+        },
+        {
+          "id": "c",
+          "text_tt": "م"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "ا — әлиф; ل — ләм.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-01",
+        "EX-B06-05"
+      ],
+      "source_lines": [
+        222,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-02",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Кәф төркеменә караган өч билгене сайла.",
+      "stimulus": "ك / گ / ڭ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ك"
+        },
+        {
+          "id": "b",
+          "text_tt": "گ"
+        },
+        {
+          "id": "c",
+          "text_tt": "ق"
+        },
+        {
+          "id": "d",
+          "text_tt": "ڭ"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation_tt": "Кәф ك, гәф گ һәм ң билгесе ڭ аерым хәрефләр булып карый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-02",
+        "EX-B06-03",
+        "EX-B06-04"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B06-03",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Мимнең төп рәвешен сайла.",
+      "stimulus": "ل / م",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ل"
+        },
+        {
+          "id": "b",
+          "text_tt": "ا"
+        },
+        {
+          "id": "c",
+          "text_tt": "م"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "م — мим; ләм һәм әлифнең рәвешләре башка.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-05",
+        "EX-B06-06"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-04",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-04"
+      ],
+      "type": "choice",
+      "prompt_tt": "Һ тартыгын белдергән ه белән ә билгесенең тоташуы һәрвакыт бер үкме?",
+      "stimulus": "ه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Юк, вазифалары һәм тоташуы аерыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әйе, һәрвакыт бер үк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бу билге татар язылышында беркайчан булмый."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Һ тартыгы ике яктан тоташа ала, һә рәсмия ә вазифасында киләсе хәрефкә тоташмый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-07"
+      ],
+      "source_lines": [
+        871,
+        871
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-05",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Киләсе хәрефкә тоташмый торганнарны сайла.",
+      "stimulus": "ا / و / ۋ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ا"
+        },
+        {
+          "id": "b",
+          "text_tt": "م"
+        },
+        {
+          "id": "c",
+          "text_tt": "و"
+        },
+        {
+          "id": "d",
+          "text_tt": "ۋ"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c",
+        "d"
+      ],
+      "explanation_tt": "Әлиф, гади вау һәм өч нокталы вау киләсе хәрефкә тоташмый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-01",
+        "EX-B06-08",
+        "EX-B06-09"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B06-06",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу бергә күренеш кайсы хәрефләрдән тора?",
+      "stimulus": "لا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф һәм мим."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ләм һәм әлиф."
+        },
+        {
+          "id": "c",
+          "text_tt": "Яңа бер мөстәкыйль хәреф."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "لا — ләм белән әлифнең кушылып күренеше, ике хәреф.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-10"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-07",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "График үрнәктә уңнан башлап кайсы тәртип бар?",
+      "stimulus": "لم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Мим, ләм."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әлиф, ләм."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ләм, мим."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Уңда ләм, аннан соң мим килә; алар тоташкан.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-11"
+      ],
+      "source_lines": [
+        222,
+        222
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B06-08",
+      "lesson_id": "B06",
+      "rule_ids": [
+        "R-B06-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу яңа график үрнәктә сулдагы соңгы хәреф кайсы?",
+      "stimulus": "لما",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф."
+        },
+        {
+          "id": "b",
+          "text_tt": "Мим."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ләм."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Уку тәртибендә ләм, мим, әлиф килә; соңгысы әлиф.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B06-12"
+      ],
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-01",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бирелгән укылыш — кил. Аның беренче хәрефен сайла.",
+      "stimulus": "كيل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ل"
+        },
+        {
+          "id": "b",
+          "text_tt": "ك"
+        },
+        {
+          "id": "c",
+          "text_tt": "ي"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Уңдагы беренче билге ك — кәф.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-01"
+      ],
+      "source_lines": [
+        198,
+        198
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-02",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кил язылышында ничә төп хәреф бар?",
+      "stimulus": "كيل",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "ك، ي، ل — өч хәреф; тоташу аларның санын киметми.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-01"
+      ],
+      "source_lines": [
+        198,
+        198
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-03",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бирелгән укылыш — бара. Монда ничә гади әлиф бар?",
+      "stimulus": "بارا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Дүрт."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "بارا эчендә ике ا бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-02"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-04",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бирелгән укылыш — авыл. Тоташу өзекләре аны ничә сүз итә?",
+      "stimulus": "آول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер сүз булып кала."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике сүзгә әйләнә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Өч сүзгә әйләнә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "آول — бер сүз; эчке өзеклекләр яңа сүзләр ясамый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-03"
+      ],
+      "source_lines": [
+        362,
+        362
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-05",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бирелгән укылыш — ак ат. Чын ара белән ничә сүз аерылган?",
+      "stimulus": "آق آت",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ике."
+        },
+        {
+          "id": "c",
+          "text_tt": "Дүрт."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "آق һәм آت арасында сүз арасы бар: ике сүз.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-04"
+      ],
+      "source_lines": [
+        749,
+        749
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-06",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-02",
+        "R-B07-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Бу дәрестә нәрсә эшлибез?",
+      "stimulus": "كيل / آول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бирелгән сүздә таныш хәрефне табабыз."
+        },
+        {
+          "id": "b",
+          "text_tt": "Әле өйрәнелмәгән бөтен сузыкларны мәҗбүри уйлап чыгарабыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тоташу өзеген сүз арасыннан аерабыз."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Укылыш ярдәме бирелгән; максат хәрефләрне һәм сүз арасын тану.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-01",
+        "EX-B07-03"
+      ],
+      "source_lines": [
+        198,
+        362
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-B07-07",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның укылышы — аралаша. Уңдагы беренче билге кайсы?",
+      "stimulus": "آرالاشا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "آ"
+        },
+        {
+          "id": "b",
+          "text_tt": "ر"
+        },
+        {
+          "id": "c",
+          "text_tt": "ش"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "آرالاشا башында мәдле әлиф آ күренә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-05"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-B07-08",
+      "lesson_id": "B07",
+      "rule_ids": [
+        "R-B07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Яңа мисалның укылышы — саклана. ن кайсы хәрефнең төп рәвеше?",
+      "stimulus": "ساقلانا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ләм."
+        },
+        {
+          "id": "b",
+          "text_tt": "Каф."
+        },
+        {
+          "id": "c",
+          "text_tt": "Нун."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Саклана язылышындагы ن — таныш нун хәрефе.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-B07-06"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "letter",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    }
+  ]
+}

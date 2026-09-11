@@ -1,0 +1,661 @@
+{
+  "version": 1,
+  "title_tt": "Башлангыч тикшерү",
+  "items": [
+    {
+      "id": "D-01",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Гарәп язуы кайсы яктан укыла?",
+      "stimulus": "ب ت ث",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сулдан уңга"
+        },
+        {
+          "id": "b",
+          "text_tt": "Уңнан сулга"
+        },
+        {
+          "id": "c",
+          "text_tt": "Астан өскә"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Гарәп язуының юнәлеше — уңнан сулга.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B01"
+      ],
+      "source_form": "ب",
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-02",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Бу хәрефнең нокталары ничек урнашкан?",
+      "stimulus": "ث",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Астында бер нокта"
+        },
+        {
+          "id": "b",
+          "text_tt": "Өстендә ике нокта"
+        },
+        {
+          "id": "c",
+          "text_tt": "Өстендә өч нокта"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Сә хәрефенең өстендә өч нокта бар.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B02"
+      ],
+      "source_form": "ث",
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-03",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Үзеннән соң килгән хәрефкә тоташмый торганын сайла.",
+      "stimulus": "د ب م",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "د"
+        },
+        {
+          "id": "b",
+          "text_tt": "ب"
+        },
+        {
+          "id": "c",
+          "text_tt": "م"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Дәл киләсе хәрефкә сулдан тоташмый.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B03",
+        "B07"
+      ],
+      "source_form": "د",
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-04",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Уртадагы шушы рәвеш кайсы хәрефнеке?",
+      "stimulus": "‍ب‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ت"
+        },
+        {
+          "id": "b",
+          "text_tt": "ب"
+        },
+        {
+          "id": "c",
+          "text_tt": "ن"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Ноктасы аста булган бә сүз эчендә дә шул хәреф булып кала.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B02",
+        "B07"
+      ],
+      "source_form": "ب",
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-05",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "لا нинди ике хәрефтән тора?",
+      "stimulus": "لا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ل һәм ا"
+        },
+        {
+          "id": "b",
+          "text_tt": "ن һәм ا"
+        },
+        {
+          "id": "c",
+          "text_tt": "ل һәм ي"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Ләм белән әлиф бергә тоташып күренә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B06",
+        "B07"
+      ],
+      "source_form": "ﻻ",
+      "source_lines": [
+        2797,
+        2797
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-06",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Ноктасыз хәрефне сайла.",
+      "stimulus": "ج ح خ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ج"
+        },
+        {
+          "id": "b",
+          "text_tt": "ح"
+        },
+        {
+          "id": "c",
+          "text_tt": "خ"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Хә ح ноктасыз, җимнең ноктасы аста, ха ноктасы өстә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B03"
+      ],
+      "source_form": "ح",
+      "source_lines": [
+        221,
+        221
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-07",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Уау үзеннән соң килгән хәрефкә тоташамы?",
+      "stimulus": "و",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәрвакыт тоташа"
+        },
+        {
+          "id": "b",
+          "text_tt": "Тоташмый"
+        },
+        {
+          "id": "c",
+          "text_tt": "Сузык булганда гына тоташа"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Уау киләсе хәрефкә тоташмый; өзеклек бер сүз эчендә дә була.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B06",
+        "B07"
+      ],
+      "source_form": "و",
+      "source_lines": [
+        225,
+        225
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-08",
+      "group": "script",
+      "type": "choice",
+      "prompt_tt": "Бу башлангыч рәвешне аерым хәреф белән бәйлә.",
+      "stimulus": "ي‍",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ن"
+        },
+        {
+          "id": "b",
+          "text_tt": "ب"
+        },
+        {
+          "id": "c",
+          "text_tt": "ي"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Яйның башлангыч рәвешендә астагы ике ноктасы күренә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "B02",
+        "B07"
+      ],
+      "source_form": "ي",
+      "source_lines": [
+        2802,
+        2802
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-09",
+      "group": "imla",
+      "type": "choice",
+      "prompt_tt": "Татар язуында бу хәреф нинди авазны белдерә?",
+      "stimulus": "ڭ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "г"
+        },
+        {
+          "id": "b",
+          "text_tt": "ң"
+        },
+        {
+          "id": "c",
+          "text_tt": "н"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Саңгырау кәф татар ң авазын белдерә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "C02"
+      ],
+      "source_form": "ڭ",
+      "source_lines": [
+        297,
+        297
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-10",
+      "group": "imla",
+      "type": "choice",
+      "prompt_tt": "Китаптагы рус алынмаларын язу өчен бу хәреф нинди авазга туры килә?",
+      "stimulus": "ۋ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "в"
+        },
+        {
+          "id": "b",
+          "text_tt": "у"
+        },
+        {
+          "id": "c",
+          "text_tt": "ң"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Өч нокталы уау рус алынмаларындагы в өчен кулланыла.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "letter",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "C02"
+      ],
+      "source_form": "ۋ",
+      "source_lines": [
+        292,
+        292
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-11",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Кош атамасын татар кириллицасында яз.",
+      "stimulus": "ئه‌ته‌چ",
+      "options": [],
+      "accepted_answers": [
+        "әтәч"
+      ],
+      "explanation_tt": "Һә рәсмия биредә әне күрсәтә; сүз бербөтен укыла.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V01"
+      ],
+      "source_form": "ئه ته چ",
+      "source_lines": [
+        371,
+        371
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "D-12",
+      "group": "imla",
+      "type": "choice",
+      "prompt_tt": "Ун сузык билгеле язылышта бу башлангыч кайсы сузыкка туры килә?",
+      "stimulus": "ئو",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "а"
+        },
+        {
+          "id": "b",
+          "text_tt": "у"
+        },
+        {
+          "id": "c",
+          "text_tt": "ү"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Сүз башындагы ئو — ү билгесе.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V02"
+      ],
+      "source_form": "ئو",
+      "source_lines": [
+        425,
+        425
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "D-13",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Санны укып яз.",
+      "stimulus": "بر",
+      "options": [],
+      "accepted_answers": [
+        "бер"
+      ],
+      "explanation_tt": "Ябык иҗектәге е аерым хәреф белән күрсәтелмәгән.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V05"
+      ],
+      "source_form": "بر",
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "D-14",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Ел фасылын укып яз.",
+      "stimulus": "قش",
+      "options": [],
+      "accepted_answers": [
+        "кыш"
+      ],
+      "explanation_tt": "Каф калын укылышны күрсәтә; ы язылмаган.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V05",
+        "K01"
+      ],
+      "source_form": "قش",
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "D-15",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Хәзерге татарча укылышын яз.",
+      "stimulus": "كيلوب",
+      "options": [],
+      "accepted_answers": [
+        "килеп"
+      ],
+      "explanation_tt": "Китаптагы وب ахыры татарча -епкә туры килә.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "A07"
+      ],
+      "source_form": "كيلوب",
+      "source_lines": [
+        1516,
+        1516
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "D-16",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Уку әсбабының атамасын яз.",
+      "stimulus": "كتاب",
+      "options": [],
+      "accepted_answers": [
+        "китап"
+      ],
+      "explanation_tt": "Бу алынманың асыл язылышы сакланган; татарча китап дип укыйбыз.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "L02"
+      ],
+      "source_form": "كتاب",
+      "source_lines": [
+        1623,
+        1623
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "D-17",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Аш тәмләткечен укып яз.",
+      "stimulus": "طۈز",
+      "options": [],
+      "accepted_answers": [
+        "тоз"
+      ],
+      "explanation_tt": "Кыска уауның бу билгесе о авазын күрсәтә.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V08"
+      ],
+      "source_form": "طۈز",
+      "source_lines": [
+        618,
+        618
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "D-18",
+      "group": "imla",
+      "type": "reading",
+      "prompt_tt": "Тән әгъзасын белдергән сүзне укып яз.",
+      "stimulus": "قولىٔ",
+      "options": [],
+      "accepted_answers": [
+        "кулы"
+      ],
+      "explanation_tt": "Соңгы яй өстендәге һәмзә ыны күрсәтә.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "diagnostic",
+      "recommend_lessons": [
+        "V06"
+      ],
+      "source_form": "قولىٔ",
+      "source_lines": [
+        534,
+        534
+      ],
+      "profile": "book_jadid_10"
+    }
+  ],
+  "groups": {
+    "script": {
+      "question_ids": [
+        "D-01",
+        "D-02",
+        "D-03",
+        "D-04",
+        "D-05",
+        "D-06",
+        "D-07",
+        "D-08"
+      ],
+      "recommend_arabic_reader_at_least": 7,
+      "critical_questions": [
+        "D-01",
+        "D-03",
+        "D-04",
+        "D-07"
+      ],
+      "must_pass_all_critical": true
+    },
+    "imla": {
+      "question_ids": [
+        "D-09",
+        "D-10",
+        "D-11",
+        "D-12",
+        "D-13",
+        "D-14",
+        "D-15",
+        "D-16",
+        "D-17",
+        "D-18"
+      ],
+      "does_not_skip_common_course": true
+    }
+  },
+  "completion_note_tt": "Бу тикшерү уку юлын тәкъдим итә; төп курс кагыйдәләрен алыштырмый."
+}

@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "title_tt": "Йомгаклау тикшерүе",
+  "items": [
+    {
+      "id": "F-01",
+      "group": "vowels",
+      "type": "reading",
+      "prompt_tt": "Аш тәмләткечен белдергән сүзне укып яз.",
+      "stimulus": "بۈرۈچ",
+      "options": [],
+      "accepted_answers": [
+        "борыч"
+      ],
+      "explanation_tt": "Ике кыска уау язылса да, хәзерге татарча укылышы борыч.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "V08"
+      ],
+      "source_form": "بۈرۈچ",
+      "source_lines": [
+        618,
+        618
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "F-02",
+      "group": "vowels",
+      "type": "reading",
+      "prompt_tt": "Кыйммәтле металл атамасын укып яз.",
+      "stimulus": "كوُموُش",
+      "options": [],
+      "accepted_answers": [
+        "көмеш"
+      ],
+      "explanation_tt": "Китапта ө билгесе ике иҗектә дә язылган; татарча көмеш дип укыйбыз.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "V08"
+      ],
+      "source_form": "كوُموُش",
+      "source_lines": [
+        629,
+        629
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "F-03",
+      "group": "vowels",
+      "type": "reading",
+      "prompt_tt": "«Каләмне минем ... бир» дигәндәге сүзне укып яз.",
+      "stimulus": "قولٮٔما",
+      "options": [],
+      "accepted_answers": [
+        "кулыма"
+      ],
+      "explanation_tt": "Кулыма сүзендә кыска ы билгесе саклана. Сүз төзелеше — кул-ым-а: -ым минем булуын, -а юнәлешне белдерә.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "V06"
+      ],
+      "source_form": "قولٮٔما",
+      "source_lines": [
+        534,
+        534
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "F-04",
+      "group": "vowels",
+      "type": "reading",
+      "prompt_tt": "Фигыльне укып яз.",
+      "stimulus": "كيلدٮُلر",
+      "options": [],
+      "accepted_answers": [
+        "килделәр"
+      ],
+      "explanation_tt": "Дәлдән соңгы өтерле кыска яй ене күрсәтә; соңгы өлеш — -ләр.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "V06",
+        "A02"
+      ],
+      "source_form": "كيلدٮُلر",
+      "source_lines": [
+        533,
+        533
+      ],
+      "profile": "book_jadid_10"
+    },
+    {
+      "id": "F-05",
+      "group": "consonants",
+      "type": "choice",
+      "prompt_tt": "Калын сакал сүзендә ни өчен син язылган?",
+      "stimulus": "ساقال",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүз нечкә булганга"
+        },
+        {
+          "id": "b",
+          "text_tt": "Әлифле иҗек булганга"
+        },
+        {
+          "id": "c",
+          "text_tt": "Син һәрвакыт с түгел, ш булганга"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Бу иҗектә әлиф калынлыкны күрсәтә, шуңа син кулланыла.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "K03"
+      ],
+      "source_form": "ساقال",
+      "source_lines": [
+        798,
+        798
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-06",
+      "group": "consonants",
+      "type": "choice",
+      "prompt_tt": "Алтмыш сүзендә калынлыкка карамастан ни өчен тә саклана?",
+      "stimulus": "آلتمش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүздә калынлыкны күрсәтүче әлиф бар"
+        },
+        {
+          "id": "b",
+          "text_tt": "Бу сүздә тә д булып укыла"
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр калын сүздә тә тыела"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Калынлыкны әлиф күрсәткән сүздә ت языла ала.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "K04"
+      ],
+      "source_form": "آلتمش",
+      "source_lines": [
+        835,
+        835
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-07",
+      "group": "morphology",
+      "type": "choice",
+      "prompt_tt": "Эш исемен белдергән таймак сүзенең ахырындагы кушымчаны сайла.",
+      "stimulus": "تايمق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "-лар"
+        },
+        {
+          "id": "b",
+          "text_tt": "-дан"
+        },
+        {
+          "id": "c",
+          "text_tt": "-мак"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Бу масдарда م белән ق арасына сузык хәреф куелмаган: -мак.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "A05"
+      ],
+      "source_form": "تايمق",
+      "source_lines": [
+        1476,
+        1476
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-08",
+      "group": "morphology",
+      "type": "choice",
+      "prompt_tt": "Аяк киемен белдергән башмак сүзендәге ماق турында дөрес аңлатманы сайла.",
+      "stimulus": "باشماق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүз нигезенең өлеше; әлиф саклана"
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәрвакыт масдар кушымчасы"
+        },
+        {
+          "id": "c",
+          "text_tt": "Күплекне белдерә"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Башмак — предмет атамасы; ماق монда эш исеме кушымчасы түгел.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "A05"
+      ],
+      "source_form": "باشماق",
+      "source_lines": [
+        1480,
+        1480
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-09",
+      "group": "morphology",
+      "type": "choice",
+      "prompt_tt": "Укыган сүзендә үткән эшне белдергән кушымчаны сайла.",
+      "stimulus": "اوقئغان",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "-дан"
+        },
+        {
+          "id": "b",
+          "text_tt": "-ган"
+        },
+        {
+          "id": "c",
+          "text_tt": "-лар"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Сүз ахырындагы غان — -ган; кушымчада әлиф бар.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "A04"
+      ],
+      "source_form": "اوقئغان",
+      "source_lines": [
+        1445,
+        1445
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-10",
+      "group": "morphology",
+      "type": "reading",
+      "prompt_tt": "Хәзерге татарча укылышын яз.",
+      "stimulus": "چغوب",
+      "options": [],
+      "accepted_answers": [
+        "чыгып"
+      ],
+      "explanation_tt": "Тарихи وب ахыры бу сүздә -ып булып укыла: чыгып.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "A07"
+      ],
+      "source_form": "چغوب",
+      "source_lines": [
+        1516,
+        1516
+      ],
+      "profile": "book_unspecified"
+    },
+    {
+      "id": "F-11",
+      "group": "loans",
+      "type": "reading",
+      "prompt_tt": "Үткән вакыйгаларны өйрәнү өлкәсен белдергән сүзне укып яз.",
+      "stimulus": "تاريخ",
+      "options": [],
+      "accepted_answers": [
+        "тарих"
+      ],
+      "explanation_tt": "Тарих сүзенең гарәпчә асыл язылышы сакланган.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L02"
+      ],
+      "source_form": "تاريخ",
+      "source_lines": [
+        1623,
+        1623
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "F-12",
+      "group": "loans",
+      "type": "choice",
+      "prompt_tt": "Бу исемнең соңгы ى билгесе нәрсә?",
+      "stimulus": "مُصطَفى",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Әлиф максура"
+        },
+        {
+          "id": "b",
+          "text_tt": "Ноктасыз нун"
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәрвакыт и сузыгы"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Ул әлиф максура: рәвеше яйга охшаса да, а укылышына туры килә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L03"
+      ],
+      "source_form": "مُصطَفى",
+      "source_lines": [
+        1695,
+        1695
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "F-13",
+      "group": "names",
+      "type": "choice",
+      "prompt_tt": "Ни өчен дин өлеше алдында ال саклана?",
+      "stimulus": "نجم الدين",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Татарча т ишетелсә дә һәрвакыт ت өстәр өчен"
+        },
+        {
+          "id": "b",
+          "text_tt": "Сүзне ике тапкыр озын укыр өчен"
+        },
+        {
+          "id": "c",
+          "text_tt": "Исемнең гарәпчә төзелешен саклар өчен"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Гарәпчә төзелгән исемдә الدين язылышы саклана; ишетелгән т өчен ت өстәмибез.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L06"
+      ],
+      "source_form": "نجم الدين",
+      "source_lines": [
+        1792,
+        1792
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "F-14",
+      "group": "names",
+      "type": "choice",
+      "prompt_tt": "الдән соңгы сүз башындагы һәмзә (чыганакта әлиф белән бирелгән) кайсы төркемгә керә?",
+      "stimulus": "عَبدالاَحَد",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кояш хәрефләренә"
+        },
+        {
+          "id": "b",
+          "text_tt": "Ай хәрефләренә"
+        },
+        {
+          "id": "c",
+          "text_tt": "Татарча өстәмә алты хәрефкә"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Сүз башындагы һәмзә ай хәрефләре төркеменә керә; биредә әл өлешенең ләме сакланып укыла.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L07"
+      ],
+      "source_form": "عَبدالاَحَد",
+      "source_lines": [
+        1812,
+        1812
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "F-15",
+      "group": "persian",
+      "type": "choice",
+      "prompt_tt": "Каләмдан сүзендәге دان кисәге монда нәрсәне белдерә?",
+      "stimulus": "قَلمدان",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәрвакыт күплекне"
+        },
+        {
+          "id": "b",
+          "text_tt": "Ил исемен"
+        },
+        {
+          "id": "c",
+          "text_tt": "Савытны"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Каләмдан — каләм савыты; бу сүздә دان савытны белдерә.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "morphology",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L09"
+      ],
+      "source_form": "قَلمدان",
+      "source_lines": [
+        1860,
+        1860
+      ],
+      "profile": "loan_original"
+    },
+    {
+      "id": "F-16",
+      "group": "persian",
+      "type": "choice",
+      "prompt_tt": "بی گناه сүзтезмәсенең мәгънәсен сайла.",
+      "stimulus": "بی گناه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Гонаһ белән"
+        },
+        {
+          "id": "b",
+          "text_tt": "Гонаһсыз"
+        },
+        {
+          "id": "c",
+          "text_tt": "Күп гонаһ"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Фарсы بی юклыкны белдерә: гонаһсыз.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "final",
+      "recommend_lessons": [
+        "L10"
+      ],
+      "source_form": "بی گناه",
+      "source_lines": [
+        1890,
+        1890
+      ],
+      "profile": "loan_original"
+    }
+  ],
+  "reading_text_ids": [
+    "READ-F01",
+    "READ-F02"
+  ],
+  "reading_question_source": "content/readings/questions.json",
+  "expected_reading_question_count": 4,
+  "rubric": {
+    "total_questions": 20,
+    "pass_total": 16,
+    "min_correct_reading_questions": 3,
+    "min_correct_vowel_questions": 3,
+    "min_correct_morphology_questions": 3,
+    "independent_only": true,
+    "reading_group": "reading_final",
+    "vowel_group": "vowels",
+    "morphology_group": "morphology"
+  },
+  "notes_tt": [
+    "Башта барлык җавапларны бир; аңлатмалар ахырдан ачыла.",
+    "Кайбер кыска сүзләр кабатланырга мөмкин. Текстлар — аерым йомгаклау материалы.",
+    "Кабат эшләгәндә бу мисаллар инде таныш була; беренче омтылыш нәтиҗәсе аерым саклана."
+  ]
+}

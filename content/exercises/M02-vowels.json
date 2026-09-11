@@ -1,0 +1,2656 @@
+{
+  "module_id": "M02",
+  "items": [
+    {
+      "id": "Q-V01-01",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Торак урынны белдергән сүзне татар кириллицасында яз.",
+      "stimulus": "آول",
+      "options": [],
+      "accepted_answers": [
+        "авыл"
+      ],
+      "explanation_tt": "Баштагы мәдле әлиф а булып укыла: авыл.",
+      "hints_tt": [
+        "Баштагы әлиф өстендә мәд билгесе бар."
+      ],
+      "source_example_ids": [
+        "EX-V01-01"
+      ],
+      "source_lines": [
+        362,
+        362
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V01-02",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Хәрәкәт итүне белдергән сүзне укып яз.",
+      "stimulus": "بارا",
+      "options": [],
+      "accepted_answers": [
+        "бара"
+      ],
+      "explanation_tt": "Ике әлиф ике а авазын күрсәтә: бара.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-02"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V01-03",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Бер урында ...» мәгънәсендәге фигыльне яз.",
+      "stimulus": "قالا",
+      "options": [],
+      "accepted_answers": [
+        "кала"
+      ],
+      "explanation_tt": "Бу контекстта قالا — кала; ике а гади әлиф белән язылган.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-03"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V01-04",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кош исеменең дөрес укылышын сайла.",
+      "stimulus": "ئه‌ته‌چ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "һәтәч"
+        },
+        {
+          "id": "b",
+          "text_tt": "әтәч"
+        },
+        {
+          "id": "c",
+          "text_tt": "атач"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Һә рәсмия ә авазын күрсәтә; тоташу өзекләре сүзне бүлми.",
+      "hints_tt": [
+        "Бу сүздә һә рәсмия һ тартыгы түгел."
+      ],
+      "source_example_ids": [
+        "EX-V01-04"
+      ],
+      "source_lines": [
+        371,
+        371
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V01-05",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Авыл башындагы һәм бара эчендәге а ничек аерыла?",
+      "stimulus": "آول / بارا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Башта мәдле, эчтә гади әлиф."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәр урында мәдле әлиф."
+        },
+        {
+          "id": "c",
+          "text_tt": "Башта хәреф язылмаган."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Сүз башында آ, сүз эчендә ا кулланылган.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-01",
+        "EX-V01-02"
+      ],
+      "source_lines": [
+        362,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V01-06",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Әтәч язылышы турында дөрес фикерләрне сайла.",
+      "stimulus": "ئه‌ته‌چ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Бер сүз итеп укыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Һәр өзек урында яңа сүз башлана."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һә рәсмия ә булып укыла."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Бу бер сүз; һә рәсмия әне күрсәтә һәм киләсе хәреф белән тоташуны өзә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-04"
+      ],
+      "source_lines": [
+        371,
+        371
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V01-07",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Башкалар белән сөйләшә» мәгънәсендәге яңа мисалны укы.",
+      "stimulus": "آرالاشا",
+      "options": [],
+      "accepted_answers": [
+        "аралаша"
+      ],
+      "explanation_tt": "Баштагы آ һәм аннан соңгы اлар а сузыкларын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-05"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V01-08",
+      "lesson_id": "V01",
+      "rule_ids": [
+        "R-V01-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "«Үзен саклап тора» мәгънәсендәге сүзнең укылышын сайла.",
+      "stimulus": "ساقلانا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "сәкиләнә"
+        },
+        {
+          "id": "b",
+          "text_tt": "суклана"
+        },
+        {
+          "id": "c",
+          "text_tt": "саклана"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Гади әлифләр а авазын күрсәтә: саклана.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V01-06"
+      ],
+      "source_lines": [
+        366,
+        366
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V02-01",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Йортлар арасындагы юлны белдергән сүзне яз.",
+      "stimulus": "اورام",
+      "options": [],
+      "accepted_answers": [
+        "урам"
+      ],
+      "explanation_tt": "Баштагы او у авазын күрсәтә: урам.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-01"
+      ],
+      "source_lines": [
+        422,
+        422
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V02-02",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Кеше әгъзасын белдергән сүзне яз.",
+      "stimulus": "قول",
+      "options": [],
+      "accepted_answers": [
+        "кул"
+      ],
+      "explanation_tt": "ق белән килгән калын сүздә вау у булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-02"
+      ],
+      "source_lines": [
+        434,
+        434
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V02-03",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Сулык исемен укып яз.",
+      "stimulus": "كول",
+      "options": [],
+      "accepted_answers": [
+        "күл"
+      ],
+      "explanation_tt": "Нечкә ك һәм сүз мәгънәсе вауны ү итеп укырга ярдәм итә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-03"
+      ],
+      "source_lines": [
+        445,
+        445
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V02-04",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кош исеменең башында кайсы сузык укыла?",
+      "stimulus": "ئورده‌ک",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "у"
+        },
+        {
+          "id": "b",
+          "text_tt": "ү"
+        },
+        {
+          "id": "c",
+          "text_tt": "а"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "ئورده‌ک сүзенең башындагы ئو ү булып укыла.",
+      "hints_tt": [
+        "Башта әлиф түгел, һәмзәле башлангыч бар."
+      ],
+      "source_example_ids": [
+        "EX-V02-04"
+      ],
+      "source_lines": [
+        425,
+        425
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V02-05",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кул белән күл язылышларындагы вау турында дөрес җавапны сайла.",
+      "stimulus": "قول / كول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәр сүздә төрле вау бар."
+        },
+        {
+          "id": "b",
+          "text_tt": "Вау икесендә дә у гына."
+        },
+        {
+          "id": "c",
+          "text_tt": "Вау уртак, укылыш сүзгә бәйле."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Икесендә дә вау бертөрле; башка хәрефләр һәм сүз мәгънәсе укуны аера.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-02",
+        "EX-V02-03"
+      ],
+      "source_lines": [
+        434,
+        445
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V02-06",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Бу дәреснең башлангыч сузык язылышлары турында дөресләрен сайла.",
+      "stimulus": "اورام / ئورده‌ک",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "У башта او белән күрсәтелә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ү башта ئو белән күрсәтелә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр баштагы әлиф аерым а булып укыла."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "У өчен او, ү өчен ئو бирелгән; таяныч билге аерым а авазы итеп укылмый.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-01",
+        "EX-V02-04"
+      ],
+      "source_lines": [
+        422,
+        425
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V02-07",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Агачлар куе үскән урынны атаган мисалны укы.",
+      "stimulus": "اورمان",
+      "options": [],
+      "accepted_answers": [
+        "урман"
+      ],
+      "explanation_tt": "Баштагы او бу яңа сүздә дә у булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-05"
+      ],
+      "source_lines": [
+        422,
+        422
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V02-08",
+      "lesson_id": "V02",
+      "rule_ids": [
+        "R-V02-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ягулыкны белдергән сүзнең укылышын сайла.",
+      "stimulus": "کومر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "күмер"
+        },
+        {
+          "id": "b",
+          "text_tt": "кумыр"
+        },
+        {
+          "id": "c",
+          "text_tt": "камыр"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Күмер нечкә сүз; вау ү булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V02-06"
+      ],
+      "source_lines": [
+        425,
+        425
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V03-01",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Бүлмәгә керү урынын атаган сүзне яз.",
+      "stimulus": "ایشک",
+      "options": [],
+      "accepted_answers": [
+        "ишек"
+      ],
+      "explanation_tt": "Баштагы әлиф һәм яй и булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-01"
+      ],
+      "source_lines": [
+        472,
+        472
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V03-02",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Киемгә бәйле сүзнең башлангычын ничек укыйбыз?",
+      "stimulus": "ایتک",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ай"
+        },
+        {
+          "id": "b",
+          "text_tt": "и"
+        },
+        {
+          "id": "c",
+          "text_tt": "ый"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Итәк башындагы اي и авазын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-02"
+      ],
+      "source_lines": [
+        472,
+        472
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V03-03",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Ризык кабул итә» мәгънәсендәге фигыльне яз.",
+      "stimulus": "آشی",
+      "options": [],
+      "accepted_answers": [
+        "ашый"
+      ],
+      "explanation_tt": "Калын сүз ахырындагы тулы яй ый булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-03"
+      ],
+      "source_lines": [
+        484,
+        484
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V03-04",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Ару хәленә килә» мәгънәсендәге фигыльне яз.",
+      "stimulus": "آری",
+      "options": [],
+      "accepted_answers": [
+        "арый"
+      ],
+      "explanation_tt": "Арый сүзенең ахырындагы яй калын ый укылышын бирә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-04"
+      ],
+      "source_lines": [
+        484,
+        484
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V03-05",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ашый һәм арыйда соңгы яй нәрсәне күрсәтә?",
+      "stimulus": "آشی / آری",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүз ахырындагы ене."
+        },
+        {
+          "id": "b",
+          "text_tt": "Язылмаган а авазын."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ый укылышын."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Калын сүзләрдә тулы яй ый булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-03",
+        "EX-V03-04"
+      ],
+      "source_lines": [
+        484,
+        484
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V03-06",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-01",
+        "R-V03-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Тулы яй турында дөрес фикерләрне сайла.",
+      "stimulus": "ایشک / آشی",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Баштагы и өчен әлиф һәм яй кулланыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Ый өчен һәрвакыт ике аерым яй кирәк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тулы яй калын сүздә ый булып укыла ала."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "И башында әлиф белән яй килә; калын сүздә яй ый була ала.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-01",
+        "EX-V03-03"
+      ],
+      "source_lines": [
+        472,
+        484
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V03-07",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ризыкны белдергән кыска сүзне укы.",
+      "stimulus": "ايت",
+      "options": [],
+      "accepted_answers": [
+        "ит"
+      ],
+      "explanation_tt": "Баштагы اي бу мисалда и булып укыла: ит.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-05"
+      ],
+      "source_lines": [
+        478,
+        478
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V03-08",
+      "lesson_id": "V03",
+      "rule_ids": [
+        "R-V03-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "«Миңа ...» дип әйткәндәге боерык сүзне сайла.",
+      "stimulus": "بیر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "бир"
+        },
+        {
+          "id": "b",
+          "text_tt": "бер"
+        },
+        {
+          "id": "c",
+          "text_tt": "бар"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Яй уртада и сузыгын күрсәтә: бир.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V03-06"
+      ],
+      "source_lines": [
+        481,
+        481
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V04-01",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Чыршының энәсыман яфрагын атаган сүзне укы.",
+      "stimulus": "الس",
+      "options": [],
+      "accepted_answers": [
+        "ылыс"
+      ],
+      "explanation_tt": "Бу контекстта баштагы ا ы булып укыла: ылыс.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-01"
+      ],
+      "source_lines": [
+        507,
+        507
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V04-02",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Әйбер эләктерә торган бөгелгән җайланманы ата.",
+      "stimulus": "ارغاق",
+      "options": [],
+      "accepted_answers": [
+        "ыргак"
+      ],
+      "explanation_tt": "Ы белән башланган сүз ا аша бирелгән.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-02"
+      ],
+      "source_lines": [
+        507,
+        507
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V04-03",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Хезмәт, гамәл» мәгънәсендәге сүзне яз.",
+      "stimulus": "ئش",
+      "options": [],
+      "accepted_answers": [
+        "эш"
+      ],
+      "explanation_tt": "Баштагы ئ э авазын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-03"
+      ],
+      "source_lines": [
+        508,
+        508
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V04-04",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Йорт хайваны исеменең башында нәрсә укыла?",
+      "stimulus": "ئت",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ы"
+        },
+        {
+          "id": "b",
+          "text_tt": "э"
+        },
+        {
+          "id": "c",
+          "text_tt": "а"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "ئ билгесе бу сүздә э сузыгын бирә: эт.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-04"
+      ],
+      "source_lines": [
+        508,
+        508
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V04-05",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу дәрестә ы белән энең баштагы язылышы ничек аерыла?",
+      "stimulus": "الس / ئش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесе дә һәрвакыт آ."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесендә дә баштагы билге юк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ы — ا, э — ئ."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Ун билгеле җәдиди рәвештә ы ا, э ئ белән башлана.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-01",
+        "EX-V04-03"
+      ],
+      "source_lines": [
+        507,
+        508
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V04-06",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Икенче сүз башы тоташ әйткәндә йотылса, язуда нишләргә?",
+      "stimulus": "Яшь үлән сүзтезмәсе тиз әйтелә.",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүз башын сакларга."
+        },
+        {
+          "id": "b",
+          "text_tt": "Баштагы билгене һәрвакыт бетерергә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ике сүзне мәҗбүри бер сүз итәргә."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Китап башлангычның әйтелештә йотылса да язуда саклануын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-07"
+      ],
+      "source_lines": [
+        513,
+        513
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V04-07",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Җир кишәрлеге чиген белдергән сүзне яз.",
+      "stimulus": "ازان",
+      "options": [],
+      "accepted_answers": [
+        "ызан"
+      ],
+      "explanation_tt": "Бирелгән мәгънәдә бу ызан; гарәп алынмасы азан мәгънәсе соралмый.",
+      "hints_tt": [
+        "Монда намазга чакыру турында түгел, җир чиге турында сүз бара."
+      ],
+      "source_example_ids": [
+        "EX-V04-05"
+      ],
+      "source_lines": [
+        507,
+        507
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V04-08",
+      "lesson_id": "V04",
+      "rule_ids": [
+        "R-V04-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "«Тыш» сүзенең каршы мәгънәсен сайла.",
+      "stimulus": "ئچ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "ыч"
+        },
+        {
+          "id": "b",
+          "text_tt": "эч"
+        },
+        {
+          "id": "c",
+          "text_tt": "ач"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Баштагы ئ белән бу сүз эч дип укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V04-06"
+      ],
+      "source_lines": [
+        508,
+        508
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V05-01",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ел фасылы исемен яз.",
+      "stimulus": "قش",
+      "options": [],
+      "accepted_answers": [
+        "кыш"
+      ],
+      "explanation_tt": "قش язылышында ы ишетелә, ләкин аерым хәреф белән күрсәтелмәгән.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-01"
+      ],
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V05-02",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Санны укып яз.",
+      "stimulus": "بر",
+      "options": [],
+      "accepted_answers": [
+        "бер"
+      ],
+      "explanation_tt": "ب һәм ر арасында е ишетелә; язуда аның билгесе юк.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-02"
+      ],
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V05-03",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01",
+        "R-V05-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Дүрт дистәгә тигез санны укы.",
+      "stimulus": "قرق",
+      "options": [],
+      "accepted_answers": [
+        "кырык"
+      ],
+      "explanation_tt": "قرق — кырык; ике ы да аерым күрсәтелмәгән.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-03"
+      ],
+      "source_lines": [
+        523,
+        523
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V05-04",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01",
+        "R-V05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "«Өйрәнеп тупланган мәгълүмат» мәгънәсен сайла.",
+      "stimulus": "بلم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "бүлмә"
+        },
+        {
+          "id": "b",
+          "text_tt": "балам"
+        },
+        {
+          "id": "c",
+          "text_tt": "белем"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "بلم таныш татар сүзе буларак белем дип укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-04"
+      ],
+      "source_lines": [
+        523,
+        523
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V05-05",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кыш һәм бердә сузык хәрефе булмавы нәрсә аңлата?",
+      "stimulus": "قش / بر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сузык аерым язылмаган, әмма укыла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Сүзләрдә сузык аваз бөтенләй юк."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр мисал бозык күчерелгән."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Бу язылышта сузык аерым билгеләнми, ләкин татарча укуда саклана.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-01",
+        "EX-V05-02"
+      ],
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V05-06",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01",
+        "R-V05-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ы/е төшеп калуы турында дөрес фикерләрне сайла.",
+      "stimulus": "قش / قرق",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Язылмаган сузык контексттан таныла."
+        },
+        {
+          "id": "b",
+          "text_tt": "Бөтен ы һәм ене һәр урында бетерәбез."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз башындагы ы/энең кагыйдәсе аерым."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Кагыйдә иҗек эчендәге урынга бәйле; баштагы ы/эне яки бөтен сузыкларны алып ташламыйбыз.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-01",
+        "EX-V05-03"
+      ],
+      "source_lines": [
+        522,
+        523
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V05-07",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ат койрыгындагы озын бөртекне атаган сүзне укы.",
+      "stimulus": "قل",
+      "options": [],
+      "accepted_answers": [
+        "кыл"
+      ],
+      "explanation_tt": "Бирелгән мәгънәдә قل — кыл; ы аерым язылмаган.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-05"
+      ],
+      "source_lines": [
+        522,
+        522
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V05-08",
+      "lesson_id": "V05",
+      "rule_ids": [
+        "R-V05-01",
+        "R-V05-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Текстның башлангыч өлешен атаган сүзнең укылышын сайла.",
+      "stimulus": "کرش",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "кырыш"
+        },
+        {
+          "id": "b",
+          "text_tt": "кереш"
+        },
+        {
+          "id": "c",
+          "text_tt": "күреш"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Язылмаган еләр таныш кереш сүзендә укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V05-06"
+      ],
+      "source_lines": [
+        523,
+        523
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V06-01",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Аның ...» мәгънәсендәге тән әгъзасын яз.",
+      "stimulus": "قولىٔ",
+      "options": [],
+      "accepted_answers": [
+        "кулы"
+      ],
+      "explanation_tt": "Ахырдагы һәмзәле яй ыны күрсәтә: кулы.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-01"
+      ],
+      "source_lines": [
+        534,
+        534
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V06-02",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Минем ...» мәгънәсендәге сүзне укы.",
+      "stimulus": "قولم",
+      "options": [],
+      "accepted_answers": [
+        "кулым"
+      ],
+      "explanation_tt": "М алдында ы билгесе юк, әмма укылышта саклана.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-02"
+      ],
+      "source_lines": [
+        534,
+        534
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V06-03",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Килү эшенең үткәнен белдергән сүзне яз.",
+      "stimulus": "كيلدىُ",
+      "options": [],
+      "accepted_answers": [
+        "килде"
+      ],
+      "explanation_tt": "Соңгы өтерле кыска яй е булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-03"
+      ],
+      "source_lines": [
+        533,
+        533
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V06-04",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Мин ...» җөмләсенә туры килгән үткән заман фигылен укы.",
+      "stimulus": "كيلدم",
+      "options": [],
+      "accepted_answers": [
+        "килдем"
+      ],
+      "explanation_tt": "М алдында е аерым язылмый: килдем.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-04"
+      ],
+      "source_lines": [
+        533,
+        533
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V06-05",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01",
+        "R-V06-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кулы һәм кулым язылышында нәрсә үзгәрә?",
+      "stimulus": "قولىٔ / قولم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесендә дә ы авазы юкка чыга."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренче сүздә к хәрефе юкка чыга."
+        },
+        {
+          "id": "c",
+          "text_tt": "Кулымда ының аерым билгесе язылмый."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Кулы ахырында ы билгеләнә, кулымда м алдында аерым билгесе төшеп кала.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-01",
+        "EX-V06-02"
+      ],
+      "source_lines": [
+        534,
+        534
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V06-06",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01",
+        "R-V06-03"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Ун билгеле җәдиди рәвештә дөрес парларны сайла.",
+      "stimulus": "قولىٔ / كيلدىُ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәмзәле кыска яй — ы."
+        },
+        {
+          "id": "b",
+          "text_tt": "Өтерле кыска яй — е."
+        },
+        {
+          "id": "c",
+          "text_tt": "Һәр кыска яй — ый."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Бу профильдә ы белән ене өстәмә билгеләр аера.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-01",
+        "EX-V06-03"
+      ],
+      "source_lines": [
+        533,
+        534
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V06-07",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01",
+        "R-V06-03"
+      ],
+      "type": "reading",
+      "prompt_tt": "Кыек булмаган юнәлешне белдергән сүзне укы.",
+      "stimulus": "طورئ",
+      "options": [],
+      "accepted_answers": [
+        "туры"
+      ],
+      "explanation_tt": "Һәмзәле кыска яй ы булып укыла: туры; турый түгел.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-05"
+      ],
+      "source_lines": [
+        539,
+        539
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V06-08",
+      "lesson_id": "V06",
+      "rule_ids": [
+        "R-V06-01",
+        "R-V06-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Берәр нәрсәне селкетергә кушкан сүзне сайла.",
+      "stimulus": "سلكىُ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "селке"
+        },
+        {
+          "id": "b",
+          "text_tt": "селки"
+        },
+        {
+          "id": "c",
+          "text_tt": "селкет"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Соңгы өтерле кыска яй ене күрсәтә: селке.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V06-06"
+      ],
+      "source_lines": [
+        540,
+        540
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V07-01",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ватырга кушкан сүзне укы.",
+      "stimulus": "وات",
+      "options": [],
+      "accepted_answers": [
+        "ват"
+      ],
+      "explanation_tt": "Баштагы вау тартык в булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-01"
+      ],
+      "source_lines": [
+        588,
+        588
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V07-02",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Барырга мөмкин булган урынны атаган сүзне яз.",
+      "stimulus": "یول",
+      "options": [],
+      "accepted_answers": [
+        "юл"
+      ],
+      "explanation_tt": "Баштагы яй й тартыгын, вау у сузыгын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-02"
+      ],
+      "source_lines": [
+        588,
+        588
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V07-03",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Ай сүзендәге яй нинди вазифада?",
+      "stimulus": "آی",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "И сузыгы."
+        },
+        {
+          "id": "b",
+          "text_tt": "Й тартыгы."
+        },
+        {
+          "id": "c",
+          "text_tt": "У сузыгы."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Әлифтән соң килгән яй бу сүздә й тартыгын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-03"
+      ],
+      "source_lines": [
+        590,
+        590
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V07-04",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Авыл сүзендәге вау нинди вазифада?",
+      "stimulus": "آول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Һәрвакыт ү сузыгы."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аерым о сузыгы."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тартык вазифасында."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Баштагы адан соң килгән вау татарча тартык вазифасында.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-04"
+      ],
+      "source_lines": [
+        590,
+        590
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V07-05",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бу ике сүз башындагы вау һәм яй ни өчен у/и итеп кенә укылмый?",
+      "stimulus": "وات / یول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Алар бу урыннарда тартыкны белдерә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренче хәрефләр бөтенләй укылмый."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сүз башындагы һәр хәреф сузык була."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Китапның бу мисалларында баштагы ялгыз вау һәм яй тартык вазифасында.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-01",
+        "EX-V07-02"
+      ],
+      "source_lines": [
+        588,
+        588
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V07-06",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Әлиф сузыгыннан соңгы билгеләр турында дөресләрен сайла.",
+      "stimulus": "آی / آول",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Айдагы яй — й."
+        },
+        {
+          "id": "b",
+          "text_tt": "Авылдагы вау һәрвакыт у сузыгы."
+        },
+        {
+          "id": "c",
+          "text_tt": "Авылдагы вау тартык булып укыла."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Айда яй, авылда вау тартык вазифасында.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-03",
+        "EX-V07-04"
+      ],
+      "source_lines": [
+        590,
+        590
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V07-07",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-03"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Куып бара» мәгънәсендәге фигыльне хәзерге татар кириллицасында яз.",
+      "stimulus": "قووا",
+      "options": [],
+      "accepted_answers": [
+        "куа"
+      ],
+      "explanation_tt": "Чыганакта ике вау сакланган, әмма бирелгән хәзерге укылыш куа.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-05"
+      ],
+      "source_lines": [
+        593,
+        593
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V07-08",
+      "lesson_id": "V07",
+      "rule_ids": [
+        "R-V07-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Кием сүзендә ике яйның вазифасын сайла.",
+      "stimulus": "کییم",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Икесе дә язудан бетерелә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Беренчесе и, икенчесе й."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икесе дә аерым ы."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Беренче яй и сузыгын, икенчесе й тартыгын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V07-06"
+      ],
+      "source_lines": [
+        595,
+        595
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V08-01",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ис сизү әгъзасының исемен хәзерге кириллицада яз.",
+      "stimulus": "بۈرۈن",
+      "options": [],
+      "accepted_answers": [
+        "борын"
+      ],
+      "explanation_tt": "Тарихи язылышта ике ۈ булса да, хәзерге татарча борын дип укыйбыз.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-01"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V08-02",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "«Тулы, бүленмәгән» мәгънәсендәге сүзне яз.",
+      "stimulus": "بۇتۇن",
+      "options": [],
+      "accepted_answers": [
+        "бөтен"
+      ],
+      "explanation_tt": "Ике кыска ваулы тарихи форманың хәзерге укылышы бөтен.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-02"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V08-03",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Һавада хәрәкәт итәргә кушкан сүзне укы.",
+      "stimulus": "اۈچ",
+      "options": [],
+      "accepted_answers": [
+        "оч"
+      ],
+      "explanation_tt": "Баштагы اۈ бу сүздә о авазын күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-03"
+      ],
+      "source_lines": [
+        615,
+        615
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V08-04",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-01"
+      ],
+      "type": "choice",
+      "prompt_tt": "Санның дөрес укылышын сайла.",
+      "stimulus": "ئۇچ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "оч"
+        },
+        {
+          "id": "b",
+          "text_tt": "өч"
+        },
+        {
+          "id": "c",
+          "text_tt": "үч"
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Һәмзәле башлангыч һәм кыска вау өне бирә: өч.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-04"
+      ],
+      "source_lines": [
+        626,
+        626
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V08-05",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Икенче иҗектәге тарихи кыска вауны күргәч нишлибез?",
+      "stimulus": "بۈرۈن / بۇتۇن",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Хәзерге сүзне мәҗбүри борон/бөтөн дип үзгәртәбез."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икенче иҗекне укымыйбыз."
+        },
+        {
+          "id": "c",
+          "text_tt": "Тарихи язылышны саклап, хәзерге татарча укыйбыз."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Чыганак язылышы саклана, хәзерге кириллицадагы укылыш аерым бирелә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-01",
+        "EX-V08-02"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V08-06",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-01"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Оч һәм өчне аерганда нәрсәгә игътибар итәбез?",
+      "stimulus": "اۈچ / ئۇچ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Сүз башындагы билгеләргә."
+        },
+        {
+          "id": "b",
+          "text_tt": "Вау өстендәге аергычка."
+        },
+        {
+          "id": "c",
+          "text_tt": "Ч хәрефен бөтенләй төшерүгә."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "b"
+      ],
+      "explanation_tt": "Башлангыч һәм вауның тамгасы уку өчен әһәмиятле; ч ике сүздә дә бар.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-03",
+        "EX-V08-04"
+      ],
+      "source_lines": [
+        615,
+        626
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V08-07",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Тиредән тегелгән җылы киемне атаган сүзне укы.",
+      "stimulus": "طۈلۈب",
+      "options": [],
+      "accepted_answers": [
+        "толып"
+      ],
+      "explanation_tt": "Китаптагы ике ۈле форманың татарча укылышы толып.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-05"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V08-08",
+      "lesson_id": "V08",
+      "rule_ids": [
+        "R-V08-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Сәбәп яки максатны белдергән бәйлекне сайла.",
+      "stimulus": "ئوُچوُن",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "өчен"
+        },
+        {
+          "id": "b",
+          "text_tt": "очын"
+        },
+        {
+          "id": "c",
+          "text_tt": "үчән"
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Тарихи ике кыска ваулы язылыш өчен дип укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V08-06"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V09-01",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-03"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ун билгеле рәвештәге сүзне укы: мәгънәсе «кыек түгел».",
+      "stimulus": "طورئ",
+      "options": [],
+      "accepted_answers": [
+        "туры"
+      ],
+      "explanation_tt": "Һәмзәле кыска яй бу профильдә ыны күрсәтә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-01"
+      ],
+      "source_lines": [
+        539,
+        539
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V09-02",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Алты билгеле рәвештәге шул ук мәгънәле сүзне укы.",
+      "stimulus": "طوریُ",
+      "options": [],
+      "accepted_answers": [
+        "туры"
+      ],
+      "explanation_tt": "Бу профильдә өтерле кыска яй калын сүздә ы булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-02"
+      ],
+      "source_lines": [
+        725,
+        725
+      ],
+      "profile": "book_jadid_6",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V09-03",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-01",
+        "R-V09-03"
+      ],
+      "type": "reading",
+      "prompt_tt": "Ун билгеле рәвештәге әгъза исемен яз.",
+      "stimulus": "بۈرۈن",
+      "options": [],
+      "accepted_answers": [
+        "борын"
+      ],
+      "explanation_tt": "Бу мисалның хәзерге татарча укылышы борын.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-03"
+      ],
+      "source_lines": [
+        609,
+        609
+      ],
+      "profile": "book_jadid_10",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V09-04",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-01"
+      ],
+      "type": "reading",
+      "prompt_tt": "Алты билгеле рәвештәге әгъза исемен яз.",
+      "stimulus": "بوُروُن",
+      "options": [],
+      "accepted_answers": [
+        "борын"
+      ],
+      "explanation_tt": "Уртак кыска вау кулланылса да, уку борын булып кала.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-04"
+      ],
+      "source_lines": [
+        698,
+        698
+      ],
+      "profile": "book_jadid_6",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "practice",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V09-05",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-02",
+        "R-V09-03"
+      ],
+      "type": "choice",
+      "prompt_tt": "Бер үк туры укылышының ике формасы ни өчен аерыла?",
+      "stimulus": "طورئ / طوریُ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Берсендә татар теле түгел."
+        },
+        {
+          "id": "b",
+          "text_tt": "Алар ике язылыш рәвешенә карый."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икесенең дә бөтен билгесе хаталы."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Мисаллар китаптагы ике төрле җәдиди язылыш рәвешеннән алынган.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-01",
+        "EX-V09-02"
+      ],
+      "source_lines": [
+        539,
+        725
+      ],
+      "profile": "book_unspecified",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "exact_option"
+    },
+    {
+      "id": "Q-V09-06",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-01",
+        "R-V09-02"
+      ],
+      "type": "select_many",
+      "prompt_tt": "Алты билгеле рәвештә уртак парларны сайла.",
+      "stimulus": "طوریُ / بوُروُن",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кыска вау — о һәм ө."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кыска яй — бары тик е."
+        },
+        {
+          "id": "c",
+          "text_tt": "Кыска яй — ы һәм е."
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Кыска вау о/өне, кыска яй ы/ене берләштерә.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-02",
+        "EX-V09-04"
+      ],
+      "source_lines": [
+        698,
+        725
+      ],
+      "profile": "book_jadid_6",
+      "skill": "rule",
+      "difficulty": 2,
+      "assessment_role": "practice",
+      "grading": "set"
+    },
+    {
+      "id": "Q-V09-07",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-02"
+      ],
+      "type": "reading",
+      "prompt_tt": "Алты билгеле рәвештә «әйбәт» мәгънәсендәге сүзне укы.",
+      "stimulus": "ياخشىُ",
+      "options": [],
+      "accepted_answers": [
+        "яхшы"
+      ],
+      "explanation_tt": "Калын сүздә соңгы өтерле кыска яй ы булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-05"
+      ],
+      "source_lines": [
+        711,
+        711
+      ],
+      "profile": "book_jadid_6",
+      "skill": "reading",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "tt_reading"
+    },
+    {
+      "id": "Q-V09-08",
+      "lesson_id": "V09",
+      "rule_ids": [
+        "R-V09-02"
+      ],
+      "type": "choice",
+      "prompt_tt": "Алты билгеле рәвештә кешене атаган сүзнең укылышын сайла.",
+      "stimulus": "كشىُ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "киши"
+        },
+        {
+          "id": "b",
+          "text_tt": "кышы"
+        },
+        {
+          "id": "c",
+          "text_tt": "кеше"
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Нечкә сүздә уртак кыска яй е булып укыла.",
+      "hints_tt": [
+        "Сүзнең мәгънәсен һәм күрсәтелгән билгенең урынын чагыштыр."
+      ],
+      "source_example_ids": [
+        "EX-V09-06"
+      ],
+      "source_lines": [
+        712,
+        712
+      ],
+      "profile": "book_jadid_6",
+      "skill": "rule",
+      "difficulty": 1,
+      "assessment_role": "transfer",
+      "grading": "exact_option"
+    }
+  ]
+}
