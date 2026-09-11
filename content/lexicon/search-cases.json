@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "language": "tt-Cyrl",
+  "cases": [
+    {"id":"search-01","query":"عالم","mode":"exact","expected_ids":["lex-55-046","lex-55-158"],"requirement_tt":"Ике укылыш та аерым мәгънәсе белән күрсәтелә: галим һәм галәм."},
+    {"id":"search-02","query":"ГАЛИМ","mode":"reading_case_insensitive","expected_ids":["lex-55-046"],"requirement_tt":"Кириллицадагы регистр аермасы эзләүгә комачауламый."},
+    {"id":"search-03","query":"галәм","mode":"reading_exact","expected_ids":["lex-55-158"],"requirement_tt":"Галим белән галәмнең укылышлары берләштерелми."},
+    {"id":"search-04","query":"مهم","mode":"optional_diacritics_search","expected_ids":["lex-55-241","lex-55-250"],"requirement_tt":"Огласовкалы һәм огласовкасыз чыганак язмалары табыла; күрсәтү формалары саклана."},
+    {"id":"search-05","query":"حـرمـت","mode":"typographic_search","expected_ids":["lex-55-151","lex-55-189"],"requirement_tt":"Сузу билгесе яңа лемма тудырмый; ике чыганак та саклана."},
+    {"id":"search-06","query":"قيامت","mode":"exact","expected_ids":["lex-55-025","lex-55-130"],"requirement_tt":"Төзәтелгән форма һәм шул ук форманың икенче чыганак язмасы күрсәтелә."},
+    {"id":"search-07","query":"كاعد","mode":"exact","expected_ids":[],"excluded_ids":["lex-55-045"],"requirement_tt":"Архивтагы шикле язылыш гадәти эзләүдә дөрес җавап буларак тәкъдим ителми."},
+    {"id":"search-08","query":"نوبت","mode":"optional_diacritics_search","expected_ids":["lex-56-252"],"requirement_tt":"Нәүбәт һәм чират мәгънәсе күрсәтелә; чыганактагы «чырай» актив мәгънә итеп бирелми."},
+    {"id":"search-09","query":"ثواب","mode":"exact","expected_ids":["lex-55-024","lex-56-082"],"requirement_tt":"Бер сүзнең тематик һәм аңлатмалы бүлекләрдәге чыганаклары бәйләнештә күрсәтелә."},
+    {"id":"answer-01","kind":"answer_policy","stimulus":"عالم","context_tt":null,"proposed_single_answer":"галим","expected":"invalid_item_without_context","requirement_tt":"Контекстсыз язылышка бер генә укылышны мәҗбүри җавап итеп билгеләү тыела."},
+    {"id":"answer-02","kind":"answer_policy","stimulus":"عالم","context_tt":"Фән белән шөгыльләнүче кешене белдергән сүзне укы.","accepted_answers":["галим"],"rejected_answers":["галәм"],"expected":"context_resolves_reading","requirement_tt":"Мәгънә контексты кешене күрсәткәндә «галим» укылышы тикшерелә."},
+    {"id":"answer-03","kind":"answer_policy","entry_id":"lex-56-122","expected":"not_eligible_for_automatic_answers","requirement_tt":"Бер форманың «зи» укылышын бөтен язылыш төркеменә күчереп булмый."},
+    {"id":"answer-04","kind":"answer_policy","entry_id":"lex-55-045","expected":"archive_excluded","requirement_tt":"Архивтагы язылыш, хәтта укылышы чыганакта булса да, күнегүгә кертелми."},
+    {"id":"answer-05","kind":"answer_policy","entry_id":"lex-56-105","expected":"forms_are_not_global_answer_aliases","requirement_tt":"Хәлне һәм күплек формасын белдергән язылышлар һәр биремдә үзара алыштырыла алмый."}
+  ]
+}

@@ -1,0 +1,3909 @@
+{
+  "schema_version": 1,
+  "source_section": "5.5",
+  "count": 257,
+  "entries": [
+    {
+      "id": "lex-55-001",
+      "section": "5.5.1",
+      "raw": "طهارت тәһарәт",
+      "form_raw": "طهارت",
+      "form_nfkc": "طهارت",
+      "reading_tt_raw": "тәһарәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-002",
+      "section": "5.5.1",
+      "raw": "صراط сират",
+      "form_raw": "صراط",
+      "form_nfkc": "صراط",
+      "reading_tt_raw": "сират",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 15
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-003",
+      "section": "5.5.1",
+      "raw": "مسجد мәчет",
+      "form_raw": "مسجد",
+      "form_nfkc": "مسجد",
+      "reading_tt_raw": "мәчет",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 27
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-004",
+      "section": "5.5.1",
+      "raw": "صوفي суфи",
+      "form_raw": "صوفي",
+      "form_nfkc": "صوفي",
+      "reading_tt_raw": "суфи",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 39
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-005",
+      "section": "5.5.1",
+      "raw": "اوليا әүлия",
+      "form_raw": "اوليا",
+      "form_nfkc": "اوليا",
+      "reading_tt_raw": "әүлия",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 50
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-006",
+      "section": "5.5.1",
+      "raw": "محشر мәхшәр",
+      "form_raw": "محشر",
+      "form_nfkc": "محشر",
+      "reading_tt_raw": "мәхшәр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 63
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-007",
+      "section": "5.5.1",
+      "raw": "فديه фидия",
+      "form_raw": "فديه",
+      "form_nfkc": "فديه",
+      "reading_tt_raw": "фидия",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 76
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-008",
+      "section": "5.5.1",
+      "raw": "غسل гөсел",
+      "form_raw": "غسل",
+      "form_nfkc": "غسل",
+      "reading_tt_raw": "гөсел",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 88
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-009",
+      "section": "5.5.1",
+      "raw": "عبادت гыйбадәт",
+      "form_raw": "عبادت",
+      "form_nfkc": "عبادت",
+      "reading_tt_raw": "гыйбадәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 99
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-010",
+      "section": "5.5.1",
+      "raw": "عيد гает",
+      "form_raw": "عيد",
+      "form_nfkc": "عيد",
+      "reading_tt_raw": "гает",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 115
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-011",
+      "section": "5.5.1",
+      "raw": "اِمام имам",
+      "form_raw": "اِمام",
+      "form_nfkc": "اِمام",
+      "reading_tt_raw": "имам",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 125
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-012",
+      "section": "5.5.1",
+      "raw": "الله تعالى Аллаһы Тәгалә",
+      "form_raw": "الله تعالى",
+      "form_nfkc": "الله تعالى",
+      "reading_tt_raw": "Аллаһы Тәгалә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 137
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-013",
+      "section": "5.5.1",
+      "raw": "آخرت ахирәт",
+      "form_raw": "آخرت",
+      "form_nfkc": "آخرت",
+      "reading_tt_raw": "ахирәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 163
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-014",
+      "section": "5.5.1",
+      "raw": "نماز намаз",
+      "form_raw": "نماز",
+      "form_nfkc": "نماز",
+      "reading_tt_raw": "намаз",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 176
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-015",
+      "section": "5.5.1",
+      "raw": "مفتي мөфти",
+      "form_raw": "مفتي",
+      "form_nfkc": "مفتي",
+      "reading_tt_raw": "мөфти",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 188
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-016",
+      "section": "5.5.1",
+      "raw": "شريعت шәригать",
+      "form_raw": "شريعت",
+      "form_nfkc": "شريعت",
+      "reading_tt_raw": "шәригать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 200
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-017",
+      "section": "5.5.1",
+      "raw": "حاجي хаҗи",
+      "form_raw": "حاجي",
+      "form_nfkc": "حاجي",
+      "reading_tt_raw": "хаҗи",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 216
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-018",
+      "section": "5.5.1",
+      "raw": "حج хаҗ",
+      "form_raw": "حج",
+      "form_nfkc": "حج",
+      "reading_tt_raw": "хаҗ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 227
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-019",
+      "section": "5.5.1",
+      "raw": "افسون әфсен",
+      "form_raw": "افسون",
+      "form_nfkc": "افسون",
+      "reading_tt_raw": "әфсен",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 235
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-020",
+      "section": "5.5.1",
+      "raw": "اِيمان иман",
+      "form_raw": "اِيمان",
+      "form_nfkc": "اِيمان",
+      "reading_tt_raw": "иман",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 248
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-021",
+      "section": "5.5.1",
+      "raw": "مجوسي мәҗүси",
+      "form_raw": "مجوسي",
+      "form_nfkc": "مجوسي",
+      "reading_tt_raw": "мәҗүси",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 261
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-022",
+      "section": "5.5.1",
+      "raw": "صدقه сәдака",
+      "form_raw": "صدقه",
+      "form_nfkc": "صدقه",
+      "reading_tt_raw": "сәдака",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 275
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-023",
+      "section": "5.5.1",
+      "raw": "حافظ хафиз",
+      "form_raw": "حافظ",
+      "form_nfkc": "حافظ",
+      "reading_tt_raw": "хафиз",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 288
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-024",
+      "section": "5.5.1",
+      "raw": "ثواب савап",
+      "form_raw": "ثواب",
+      "form_nfkc": "ثواب",
+      "reading_tt_raw": "савап",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 300
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-025",
+      "section": "5.5.1",
+      "raw": "قایمت кыямәт",
+      "form_raw": "قایمت",
+      "form_nfkc": "قایمت",
+      "reading_tt_raw": "кыямәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 312
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-026",
+      "section": "5.5.1",
+      "raw": "مسلمان мөселман",
+      "form_raw": "مسلمان",
+      "form_nfkc": "مسلمان",
+      "reading_tt_raw": "мөселман",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 326
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-027",
+      "section": "5.5.1",
+      "raw": "محمـد мөхәммәт",
+      "form_raw": "محمـد",
+      "form_nfkc": "محمـد",
+      "reading_tt_raw": "мөхәммәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 343
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-028",
+      "section": "5.5.1",
+      "raw": "حدا ходай",
+      "form_raw": "حدا",
+      "form_nfkc": "حدا",
+      "reading_tt_raw": "ходай",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 359
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-029",
+      "section": "5.5.1",
+      "raw": "فرشته фәрештә",
+      "form_raw": "فرشته",
+      "form_nfkc": "فرشته",
+      "reading_tt_raw": "фәрештә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 371
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-030",
+      "section": "5.5.1",
+      "raw": "پیعمبر пәйгамбәр",
+      "form_raw": "پیعمبر",
+      "form_nfkc": "پیعمبر",
+      "reading_tt_raw": "пәйгамбәр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 386
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-031",
+      "section": "5.5.1",
+      "raw": "روزه руза",
+      "form_raw": "روزه",
+      "form_nfkc": "روزه",
+      "reading_tt_raw": "руза",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 404
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-032",
+      "section": "5.5.1",
+      "raw": "گناه гөнаһ",
+      "form_raw": "گناه",
+      "form_nfkc": "گناه",
+      "reading_tt_raw": "гөнаһ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 415
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-033",
+      "section": "5.5.1",
+      "raw": "درویش дәрвиш",
+      "form_raw": "درویش",
+      "form_nfkc": "درویش",
+      "reading_tt_raw": "дәрвиш",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 427
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-034",
+      "section": "5.5.1",
+      "raw": "چاپان чапан.",
+      "form_raw": "چاپان",
+      "form_nfkc": "چاپان",
+      "reading_tt_raw": "чапан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1909,
+        "character_start_0based": 441
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-035",
+      "section": "5.5.2",
+      "raw": "اِملا имля (1-әйтеп яздыру. 2-орфография)",
+      "form_raw": "اِملا",
+      "form_nfkc": "اِملا",
+      "reading_tt_raw": "имля",
+      "parenthetical_explanations_raw": [
+        "1-әйтеп яздыру. 2-орфография"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-036",
+      "section": "5.5.2",
+      "raw": "الفبا әлифба",
+      "form_raw": "الفبا",
+      "form_nfkc": "الفبا",
+      "reading_tt_raw": "әлифба",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 43
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-037",
+      "section": "5.5.2",
+      "raw": "اِمتحان имтихан",
+      "form_raw": "اِمتحان",
+      "form_nfkc": "اِمتحان",
+      "reading_tt_raw": "имтихан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 57
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-038",
+      "section": "5.5.2",
+      "raw": "جديد җәдид",
+      "form_raw": "جديد",
+      "form_nfkc": "جديد",
+      "reading_tt_raw": "җәдид",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 74
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-039",
+      "section": "5.5.2",
+      "raw": "خطا хата",
+      "form_raw": "خطا",
+      "form_nfkc": "خطا",
+      "reading_tt_raw": "хата",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 86
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-040",
+      "section": "5.5.2",
+      "raw": "خط хат",
+      "form_raw": "خط",
+      "form_nfkc": "خط",
+      "reading_tt_raw": "хат",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 96
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-041",
+      "section": "5.5.2",
+      "raw": "حساب хисап",
+      "form_raw": "حساب",
+      "form_nfkc": "حساب",
+      "reading_tt_raw": "хисап",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 104
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-042",
+      "section": "5.5.2",
+      "raw": "دفتر дәфтәр",
+      "form_raw": "دفتر",
+      "form_nfkc": "دفتر",
+      "reading_tt_raw": "дәфтәр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 116
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-043",
+      "section": "5.5.2",
+      "raw": "اِسم исем",
+      "form_raw": "اِسم",
+      "form_nfkc": "اِسم",
+      "reading_tt_raw": "исем",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 129
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-044",
+      "section": "5.5.2",
+      "raw": "كتاب китап",
+      "form_raw": "كتاب",
+      "form_nfkc": "كتاب",
+      "reading_tt_raw": "китап",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 140
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-045",
+      "section": "5.5.2",
+      "raw": "كاعد кәгазь",
+      "form_raw": "كاعد",
+      "form_nfkc": "كاعد",
+      "reading_tt_raw": "кәгазь",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 152
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-046",
+      "section": "5.5.2",
+      "raw": "عالم галим",
+      "form_raw": "عالم",
+      "form_nfkc": "عالم",
+      "reading_tt_raw": "галим",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 165
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-047",
+      "section": "5.5.2",
+      "raw": "قلم каләм",
+      "form_raw": "قلم",
+      "form_nfkc": "قلم",
+      "reading_tt_raw": "каләм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 177
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-048",
+      "section": "5.5.2",
+      "raw": "علم гыйлем",
+      "form_raw": "علم",
+      "form_nfkc": "علم",
+      "reading_tt_raw": "гыйлем",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 188
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-049",
+      "section": "5.5.2",
+      "raw": "سبق сабак",
+      "form_raw": "سبق",
+      "form_nfkc": "سبق",
+      "reading_tt_raw": "сабак",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 200
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-050",
+      "section": "5.5.2",
+      "raw": "مسئله мәсьәлә",
+      "form_raw": "مسئله",
+      "form_nfkc": "مسئله",
+      "reading_tt_raw": "мәсьәлә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 211
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-051",
+      "section": "5.5.2",
+      "raw": "مدرسه мәдрәсә",
+      "form_raw": "مدرسه",
+      "form_nfkc": "مدرسه",
+      "reading_tt_raw": "мәдрәсә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 226
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-052",
+      "section": "5.5.2",
+      "raw": "كلمه кәлимә",
+      "form_raw": "كلمه",
+      "form_nfkc": "كلمه",
+      "reading_tt_raw": "кәлимә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 241
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-053",
+      "section": "5.5.2",
+      "raw": "كتابخانه китапханә",
+      "form_raw": "كتابخانه",
+      "form_nfkc": "كتابخانه",
+      "reading_tt_raw": "китапханә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 254
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-054",
+      "section": "5.5.2",
+      "raw": "مكتب мәктәп",
+      "form_raw": "مكتب",
+      "form_nfkc": "مكتب",
+      "reading_tt_raw": "мәктәп",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 274
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-055",
+      "section": "5.5.2",
+      "raw": "معلومات мәгълүмат",
+      "form_raw": "معلومات",
+      "form_nfkc": "معلومات",
+      "reading_tt_raw": "мәгълүмат",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 287
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-056",
+      "section": "5.5.2",
+      "raw": "معلم мөгаллим",
+      "form_raw": "معلم",
+      "form_nfkc": "معلم",
+      "reading_tt_raw": "мөгаллим",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 306
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-057",
+      "section": "5.5.2",
+      "raw": "معرفت мәгърифәт",
+      "form_raw": "معرفت",
+      "form_nfkc": "معرفت",
+      "reading_tt_raw": "мәгърифәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 321
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-058",
+      "section": "5.5.2",
+      "raw": "تاريخ тарих",
+      "form_raw": "تاريخ",
+      "form_nfkc": "تاريخ",
+      "reading_tt_raw": "тарих",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 338
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-059",
+      "section": "5.5.2",
+      "raw": "تربيه тәрбия",
+      "form_raw": "تربيه",
+      "form_nfkc": "تربيه",
+      "reading_tt_raw": "тәрбия",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 351
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-060",
+      "section": "5.5.2",
+      "raw": "نسخه нөсхә",
+      "form_raw": "نسخه",
+      "form_nfkc": "نسخه",
+      "reading_tt_raw": "нөсхә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 365
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-061",
+      "section": "5.5.2",
+      "raw": "نادان надан",
+      "form_raw": "نادان",
+      "form_nfkc": "نادان",
+      "reading_tt_raw": "надан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 377
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-062",
+      "section": "5.5.2",
+      "raw": "فعل фигыль",
+      "form_raw": "فعل",
+      "form_nfkc": "فعل",
+      "reading_tt_raw": "фигыль",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 390
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-063",
+      "section": "5.5.2",
+      "raw": "جمله җөмлә",
+      "form_raw": "جمله",
+      "form_nfkc": "جمله",
+      "reading_tt_raw": "җөмлә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 403
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-064",
+      "section": "5.5.2",
+      "raw": "نُقطه нокта",
+      "form_raw": "نُقطه",
+      "form_nfkc": "نُقطه",
+      "reading_tt_raw": "нокта",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 415
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-065",
+      "section": "5.5.2",
+      "raw": "فن фән",
+      "form_raw": "فن",
+      "form_nfkc": "فن",
+      "reading_tt_raw": "фән",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 428
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-066",
+      "section": "5.5.2",
+      "raw": "فلسفه фәлсәфә",
+      "form_raw": "فلسفه",
+      "form_nfkc": "فلسفه",
+      "reading_tt_raw": "фәлсәфә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 436
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-067",
+      "section": "5.5.2",
+      "raw": "لغت лөгать",
+      "form_raw": "لغت",
+      "form_nfkc": "لغت",
+      "reading_tt_raw": "лөгать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 451
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-068",
+      "section": "5.5.2",
+      "raw": "شاکرد шәкерт.",
+      "form_raw": "شاکرد",
+      "form_nfkc": "شاکرد",
+      "reading_tt_raw": "шәкерт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1913,
+        "character_start_0based": 463
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-069",
+      "section": "5.5.3",
+      "raw": "اِيجاد иҗат",
+      "form_raw": "اِيجاد",
+      "form_nfkc": "اِيجاد",
+      "reading_tt_raw": "иҗат",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-070",
+      "section": "5.5.3",
+      "raw": "تَصوير тасвир",
+      "form_raw": "تَصوير",
+      "form_nfkc": "تَصوير",
+      "reading_tt_raw": "тасвир",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 13
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-071",
+      "section": "5.5.3",
+      "raw": "اَديب әдип",
+      "form_raw": "اَديب",
+      "form_nfkc": "اَديب",
+      "reading_tt_raw": "әдип",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 28
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-072",
+      "section": "5.5.3",
+      "raw": "اَدبيات әдәбият",
+      "form_raw": "اَدبيات",
+      "form_nfkc": "اَدبيات",
+      "reading_tt_raw": "әдәбият",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 40
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-073",
+      "section": "5.5.3",
+      "raw": "اَثر әсәр",
+      "form_raw": "اَثر",
+      "form_nfkc": "اَثر",
+      "reading_tt_raw": "әсәр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 57
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-074",
+      "section": "5.5.3",
+      "raw": "شعرِيات шигърият",
+      "form_raw": "شعرِيات",
+      "form_nfkc": "شعرِيات",
+      "reading_tt_raw": "шигърият",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 68
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-075",
+      "section": "5.5.3",
+      "raw": "شاعر шагыйрь",
+      "form_raw": "شاعر",
+      "form_nfkc": "شاعر",
+      "reading_tt_raw": "шагыйрь",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 86
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-076",
+      "section": "5.5.3",
+      "raw": "رباعي робагый",
+      "form_raw": "رباعي",
+      "form_nfkc": "رباعي",
+      "reading_tt_raw": "робагый",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 100
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-077",
+      "section": "5.5.3",
+      "raw": "داستان дастан",
+      "form_raw": "داستان",
+      "form_nfkc": "داستان",
+      "reading_tt_raw": "дастан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 115
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-078",
+      "section": "5.5.3",
+      "raw": "باب баб",
+      "form_raw": "باب",
+      "form_nfkc": "باب",
+      "reading_tt_raw": "баб",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 130
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-079",
+      "section": "5.5.3",
+      "raw": "مثنوي мәснәви (рифма по полустишьям)",
+      "form_raw": "مثنوي",
+      "form_nfkc": "مثنوي",
+      "reading_tt_raw": "мәснәви",
+      "parenthetical_explanations_raw": [
+        "рифма по полустишьям"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 139
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-080",
+      "section": "5.5.3",
+      "raw": "قصيده касидә (ода, поэма)",
+      "form_raw": "قصيده",
+      "form_nfkc": "قصيده",
+      "reading_tt_raw": "касидә",
+      "parenthetical_explanations_raw": [
+        "ода, поэма"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 177
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-081",
+      "section": "5.5.3",
+      "raw": "عزل газәл (мактау бәете)",
+      "form_raw": "عزل",
+      "form_nfkc": "عزل",
+      "reading_tt_raw": "газәл",
+      "parenthetical_explanations_raw": [
+        "мактау бәете"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 204
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-082",
+      "section": "5.5.3",
+      "raw": "صورت сурәт",
+      "form_raw": "صورت",
+      "form_nfkc": "صورت",
+      "reading_tt_raw": "сурәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 230
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-083",
+      "section": "5.5.3",
+      "raw": "صنعت сәнгать",
+      "form_raw": "صنعت",
+      "form_nfkc": "صنعت",
+      "reading_tt_raw": "сәнгать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 242
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-084",
+      "section": "5.5.3",
+      "raw": "مقال мәкаль",
+      "form_raw": "مقال",
+      "form_nfkc": "مقال",
+      "reading_tt_raw": "мәкаль",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 256
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-085",
+      "section": "5.5.3",
+      "raw": "مقاله мәкалә",
+      "form_raw": "مقاله",
+      "form_nfkc": "مقاله",
+      "reading_tt_raw": "мәкалә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 269
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-086",
+      "section": "5.5.3",
+      "raw": "مطبوعات матбугат",
+      "form_raw": "مطبوعات",
+      "form_nfkc": "مطبوعات",
+      "reading_tt_raw": "матбугат",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 283
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-087",
+      "section": "5.5.3",
+      "raw": "مرثيه мәрсия",
+      "form_raw": "مرثيه",
+      "form_nfkc": "مرثيه",
+      "reading_tt_raw": "мәрсия",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 301
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-088",
+      "section": "5.5.3",
+      "raw": "نشريات нәшрият",
+      "form_raw": "نشريات",
+      "form_nfkc": "نشريات",
+      "reading_tt_raw": "нәшрият",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 315
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-089",
+      "section": "5.5.3",
+      "raw": "مُقَدَّمه мөкаддимә",
+      "form_raw": "مُقَدَّمه",
+      "form_nfkc": "مُقَدَّمه",
+      "reading_tt_raw": "мөкаддимә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 331
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-090",
+      "section": "5.5.3",
+      "raw": "نثر нәсер (чәчмә әсәр)",
+      "form_raw": "نثر",
+      "form_nfkc": "نثر",
+      "reading_tt_raw": "нәсер",
+      "parenthetical_explanations_raw": [
+        "чәчмә әсәр"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 352
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-091",
+      "section": "5.5.3",
+      "raw": "مدنیت мәдәният.",
+      "form_raw": "مدنیت",
+      "form_nfkc": "مدنیت",
+      "reading_tt_raw": "мәдәният",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1918,
+        "character_start_0based": 376
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-092",
+      "section": "5.5.4",
+      "raw": "اِنصاف инсаф",
+      "form_raw": "اِنصاف",
+      "form_nfkc": "اِنصاف",
+      "reading_tt_raw": "инсаф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-093",
+      "section": "5.5.4",
+      "raw": "شبهه шөбһә",
+      "form_raw": "شبهه",
+      "form_nfkc": "شبهه",
+      "reading_tt_raw": "шөбһә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 14
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-094",
+      "section": "5.5.4",
+      "raw": "ذهن зиһен",
+      "form_raw": "ذهن",
+      "form_nfkc": "ذهن",
+      "reading_tt_raw": "зиһен",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 26
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-095",
+      "section": "5.5.4",
+      "raw": "ذوق завык",
+      "form_raw": "ذوق",
+      "form_nfkc": "ذوق",
+      "reading_tt_raw": "завык",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 37
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-096",
+      "section": "5.5.4",
+      "raw": "خفا хафа",
+      "form_raw": "خفا",
+      "form_nfkc": "خفا",
+      "reading_tt_raw": "хафа",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 48
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-097",
+      "section": "5.5.4",
+      "raw": "خسرت хәсрәт",
+      "form_raw": "خسرت",
+      "form_nfkc": "خسرت",
+      "reading_tt_raw": "хәсрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 58
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-098",
+      "section": "5.5.4",
+      "raw": "حس хис",
+      "form_raw": "حس",
+      "form_nfkc": "حس",
+      "reading_tt_raw": "хис",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 71
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-099",
+      "section": "5.5.4",
+      "raw": "خير хәер",
+      "form_raw": "خير",
+      "form_nfkc": "خير",
+      "reading_tt_raw": "хәер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 79
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-100",
+      "section": "5.5.4",
+      "raw": "خيال хыял",
+      "form_raw": "خيال",
+      "form_nfkc": "خيال",
+      "reading_tt_raw": "хыял",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 89
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-101",
+      "section": "5.5.4",
+      "raw": "خوف хәвеф",
+      "form_raw": "خوف",
+      "form_nfkc": "خوف",
+      "reading_tt_raw": "хәвеф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 100
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-102",
+      "section": "5.5.4",
+      "raw": "اِحترام ихтирам",
+      "form_raw": "اِحترام",
+      "form_nfkc": "اِحترام",
+      "reading_tt_raw": "ихтирам",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 111
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-103",
+      "section": "5.5.4",
+      "raw": "ظلم золым",
+      "form_raw": "ظلم",
+      "form_nfkc": "ظلم",
+      "reading_tt_raw": "золым",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 128
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-104",
+      "section": "5.5.4",
+      "raw": "زار зар",
+      "form_raw": "زار",
+      "form_nfkc": "زار",
+      "reading_tt_raw": "зар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 139
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-105",
+      "section": "5.5.4",
+      "raw": "حيله хәйлә",
+      "form_raw": "حيله",
+      "form_nfkc": "حيله",
+      "reading_tt_raw": "хәйлә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 148
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-106",
+      "section": "5.5.4",
+      "raw": "خيران хәйран",
+      "form_raw": "خيران",
+      "form_nfkc": "خيران",
+      "reading_tt_raw": "хәйран",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 160
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-107",
+      "section": "5.5.4",
+      "raw": "اِعلان игълан",
+      "form_raw": "اِعلان",
+      "form_nfkc": "اِعلان",
+      "reading_tt_raw": "игълан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 174
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-108",
+      "section": "5.5.4",
+      "raw": "اِعتبار игътибар",
+      "form_raw": "اِعتبار",
+      "form_nfkc": "اِعتبار",
+      "reading_tt_raw": "игътибар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 189
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-109",
+      "section": "5.5.4",
+      "raw": "اِخلاص ихлас",
+      "form_raw": "اِخلاص",
+      "form_nfkc": "اِخلاص",
+      "reading_tt_raw": "ихлас",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 207
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-110",
+      "section": "5.5.4",
+      "raw": "اِختيار ихтияр",
+      "form_raw": "اِختيار",
+      "form_nfkc": "اِختيار",
+      "reading_tt_raw": "ихтияр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 221
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-111",
+      "section": "5.5.4",
+      "raw": "اِحتياج ихтыяҗ",
+      "form_raw": "اِحتياج",
+      "form_nfkc": "اِحتياج",
+      "reading_tt_raw": "ихтыяҗ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 237
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-112",
+      "section": "5.5.4",
+      "raw": "صبر сабыр",
+      "form_raw": "صبر",
+      "form_nfkc": "صبر",
+      "reading_tt_raw": "сабыр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 253
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-113",
+      "section": "5.5.4",
+      "raw": "دقَّت дикъкать",
+      "form_raw": "دقَّت",
+      "form_nfkc": "دقَّت",
+      "reading_tt_raw": "дикъкать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 264
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-114",
+      "section": "5.5.4",
+      "raw": "دعوا дәгъва",
+      "form_raw": "دعوا",
+      "form_nfkc": "دعوا",
+      "reading_tt_raw": "дәгъва",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 280
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-115",
+      "section": "5.5.4",
+      "raw": "تأثير тәэсир",
+      "form_raw": "تأثير",
+      "form_nfkc": "تأثير",
+      "reading_tt_raw": "тәэсир",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 293
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-116",
+      "section": "5.5.4",
+      "raw": "اميد өмет",
+      "form_raw": "اميد",
+      "form_nfkc": "اميد",
+      "reading_tt_raw": "өмет",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 307
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-117",
+      "section": "5.5.4",
+      "raw": "عرف гореф",
+      "form_raw": "عرف",
+      "form_nfkc": "عرف",
+      "reading_tt_raw": "гореф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 318
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-118",
+      "section": "5.5.4",
+      "raw": "عذر гөзер",
+      "form_raw": "عذر",
+      "form_nfkc": "عذر",
+      "reading_tt_raw": "гөзер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 329
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-119",
+      "section": "5.5.4",
+      "raw": "عبرت гыйбрәт",
+      "form_raw": "عبرت",
+      "form_nfkc": "عبرت",
+      "reading_tt_raw": "гыйбрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 340
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-120",
+      "section": "5.5.4",
+      "raw": "عادت гадәт",
+      "form_raw": "عادت",
+      "form_nfkc": "عادت",
+      "reading_tt_raw": "гадәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 354
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-121",
+      "section": "5.5.4",
+      "raw": "عاجز гаҗиз",
+      "form_raw": "عاجز",
+      "form_nfkc": "عاجز",
+      "reading_tt_raw": "гаҗиз",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 366
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-122",
+      "section": "5.5.4",
+      "raw": "كيف кәеф",
+      "form_raw": "كيف",
+      "form_nfkc": "كيف",
+      "reading_tt_raw": "кәеф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 378
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-123",
+      "section": "5.5.4",
+      "raw": "فكر фикер",
+      "form_raw": "فكر",
+      "form_nfkc": "فكر",
+      "reading_tt_raw": "фикер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 388
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-124",
+      "section": "5.5.4",
+      "raw": "قدرت кодрәт",
+      "form_raw": "قدرت",
+      "form_nfkc": "قدرت",
+      "reading_tt_raw": "кодрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 399
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-125",
+      "section": "5.5.4",
+      "raw": "غيبت гайбәт",
+      "form_raw": "غيبت",
+      "form_nfkc": "غيبت",
+      "reading_tt_raw": "гайбәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 412
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-126",
+      "section": "5.5.4",
+      "raw": "عاشق гашыйк",
+      "form_raw": "عاشق",
+      "form_nfkc": "عاشق",
+      "reading_tt_raw": "гашыйк",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 425
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-127",
+      "section": "5.5.4",
+      "raw": "مكر мәкер",
+      "form_raw": "مكر",
+      "form_nfkc": "مكر",
+      "reading_tt_raw": "мәкер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 438
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-128",
+      "section": "5.5.4",
+      "raw": "لذت ләззәт",
+      "form_raw": "لذت",
+      "form_nfkc": "لذت",
+      "reading_tt_raw": "ләззәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 449
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-129",
+      "section": "5.5.4",
+      "raw": "غيرت гайрәт",
+      "form_raw": "غيرت",
+      "form_nfkc": "غيرت",
+      "reading_tt_raw": "гайрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 461
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-130",
+      "section": "5.5.4",
+      "raw": "قيامت кыямәт",
+      "form_raw": "قيامت",
+      "form_nfkc": "قيامت",
+      "reading_tt_raw": "кыямәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 474
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-131",
+      "section": "5.5.4",
+      "raw": "قوت кувәт",
+      "form_raw": "قوت",
+      "form_nfkc": "قوت",
+      "reading_tt_raw": "кувәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 488
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-132",
+      "section": "5.5.4",
+      "raw": "مرحمت мәрхәмәт",
+      "form_raw": "مرحمت",
+      "form_nfkc": "مرحمت",
+      "reading_tt_raw": "мәрхәмәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 499
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-133",
+      "section": "5.5.4",
+      "raw": "مراد морад",
+      "form_raw": "مراد",
+      "form_nfkc": "مراد",
+      "reading_tt_raw": "морад",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 515
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-134",
+      "section": "5.5.4",
+      "raw": "محترم мөхтәрәм",
+      "form_raw": "محترم",
+      "form_nfkc": "محترم",
+      "reading_tt_raw": "мөхтәрәм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 527
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-135",
+      "section": "5.5.4",
+      "raw": "محتاج мохтаҗ",
+      "form_raw": "محتاج",
+      "form_nfkc": "محتاج",
+      "reading_tt_raw": "мохтаҗ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 543
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-136",
+      "section": "5.5.4",
+      "raw": "منفعت мәнфәгать",
+      "form_raw": "منفعت",
+      "form_nfkc": "منفعت",
+      "reading_tt_raw": "мәнфәгать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 557
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-137",
+      "section": "5.5.4",
+      "raw": "معامله мөгамәлә",
+      "form_raw": "معامله",
+      "form_nfkc": "معامله",
+      "reading_tt_raw": "мөгамәлә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 574
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-138",
+      "section": "5.5.4",
+      "raw": "مظلوم мәзлүм",
+      "form_raw": "مظلوم",
+      "form_nfkc": "مظلوم",
+      "reading_tt_raw": "мәзлүм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 591
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-139",
+      "section": "5.5.4",
+      "raw": "مسكين мескен",
+      "form_raw": "مسكين",
+      "form_nfkc": "مسكين",
+      "reading_tt_raw": "мескен",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 605
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-140",
+      "section": "5.5.4",
+      "raw": "هوس һәвәс (теләк)",
+      "form_raw": "هوس",
+      "form_nfkc": "هوس",
+      "reading_tt_raw": "һәвәс",
+      "parenthetical_explanations_raw": [
+        "теләк"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 619
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-141",
+      "section": "5.5.4",
+      "raw": "وسوسه вәсвәсә",
+      "form_raw": "وسوسه",
+      "form_nfkc": "وسوسه",
+      "reading_tt_raw": "вәсвәсә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 638
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-142",
+      "section": "5.5.4",
+      "raw": "نيت ният",
+      "form_raw": "نيت",
+      "form_nfkc": "نيت",
+      "reading_tt_raw": "ният",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 653
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-143",
+      "section": "5.5.4",
+      "raw": "نفس нәфес",
+      "form_raw": "نفس",
+      "form_nfkc": "نفس",
+      "reading_tt_raw": "нәфес",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 663
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-144",
+      "section": "5.5.4",
+      "raw": "ناموس намус",
+      "form_raw": "ناموس",
+      "form_nfkc": "ناموس",
+      "reading_tt_raw": "намус",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 674
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-145",
+      "section": "5.5.4",
+      "raw": "امل әмәл",
+      "form_raw": "امل",
+      "form_nfkc": "امل",
+      "reading_tt_raw": "әмәл",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 687
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-146",
+      "section": "5.5.4",
+      "raw": "ترتـيـب тәртип",
+      "form_raw": "ترتـيـب",
+      "form_nfkc": "ترتـيـب",
+      "reading_tt_raw": "тәртип",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 697
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-147",
+      "section": "5.5.4",
+      "raw": "خـَـلـْـق халык",
+      "form_raw": "خـَـلـْـق",
+      "form_nfkc": "خـَـلـْـق",
+      "reading_tt_raw": "халык",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 713
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-148",
+      "section": "5.5.4",
+      "raw": "ادب әдәп",
+      "form_raw": "ادب",
+      "form_nfkc": "ادب",
+      "reading_tt_raw": "әдәп",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 730
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-149",
+      "section": "5.5.4",
+      "raw": "اخلاق әхлакъ",
+      "form_raw": "اخلاق",
+      "form_nfkc": "اخلاق",
+      "reading_tt_raw": "әхлакъ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 740
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-150",
+      "section": "5.5.4",
+      "raw": "راحـت рәхәт",
+      "form_raw": "راحـت",
+      "form_nfkc": "راحـت",
+      "reading_tt_raw": "рәхәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 754
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-151",
+      "section": "5.5.4",
+      "raw": "حـرمـت хөрмәт",
+      "form_raw": "حـرمـت",
+      "form_nfkc": "حـرمـت",
+      "reading_tt_raw": "хөрмәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 767
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-152",
+      "section": "5.5.4",
+      "raw": "بحـت бәхет",
+      "form_raw": "بحـت",
+      "form_nfkc": "بحـت",
+      "reading_tt_raw": "бәхет",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 782
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-153",
+      "section": "5.5.4",
+      "raw": "دوسـت дус",
+      "form_raw": "دوسـت",
+      "form_nfkc": "دوسـت",
+      "reading_tt_raw": "дус",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 795
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-154",
+      "section": "5.5.4",
+      "raw": "كشى  кеше, әдәм, шәхес.",
+      "form_raw": "كشى",
+      "form_nfkc": "كشى",
+      "reading_tt_raw": "кеше, әдәм, шәхес",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1922,
+        "character_start_0based": 806
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-155",
+      "section": "5.5.5",
+      "raw": "ماده матдә",
+      "form_raw": "ماده",
+      "form_nfkc": "ماده",
+      "reading_tt_raw": "матдә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-156",
+      "section": "5.5.5",
+      "raw": "دريا дарья",
+      "form_raw": "دريا",
+      "form_nfkc": "دريا",
+      "reading_tt_raw": "дарья",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 12
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-157",
+      "section": "5.5.5",
+      "raw": "دور дәвер",
+      "form_raw": "دور",
+      "form_nfkc": "دور",
+      "reading_tt_raw": "дәвер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 24
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-158",
+      "section": "5.5.5",
+      "raw": "عالم галәм",
+      "form_raw": "عالم",
+      "form_nfkc": "عالم",
+      "reading_tt_raw": "галәм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 35
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-159",
+      "section": "5.5.5",
+      "raw": "عصر гасыр",
+      "form_raw": "عصر",
+      "form_nfkc": "عصر",
+      "reading_tt_raw": "гасыр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 47
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-160",
+      "section": "5.5.5",
+      "raw": "افق  офык",
+      "form_raw": "افق",
+      "form_nfkc": "افق",
+      "reading_tt_raw": "офык",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 58
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-161",
+      "section": "5.5.5",
+      "raw": "شفق шәфәкъ",
+      "form_raw": "شفق",
+      "form_nfkc": "شفق",
+      "reading_tt_raw": "шәфәкъ",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 69
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-162",
+      "section": "5.5.5",
+      "raw": "مخلوق махлүк",
+      "form_raw": "مخلوق",
+      "form_nfkc": "مخلوق",
+      "reading_tt_raw": "махлүк",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 81
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-163",
+      "section": "5.5.5",
+      "raw": "محيط мөхит",
+      "form_raw": "محيط",
+      "form_nfkc": "محيط",
+      "reading_tt_raw": "мөхит",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 95
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-164",
+      "section": "5.5.5",
+      "raw": "هوا һава (атмосфера)",
+      "form_raw": "هوا",
+      "form_nfkc": "هوا",
+      "reading_tt_raw": "һава",
+      "parenthetical_explanations_raw": [
+        "атмосфера"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 107
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-165",
+      "section": "5.5.5",
+      "raw": "توفان туфан",
+      "form_raw": "توفان",
+      "form_nfkc": "توفان",
+      "reading_tt_raw": "туфан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 129
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-166",
+      "section": "5.5.5",
+      "raw": "طبيعت табигать",
+      "form_raw": "طبيعت",
+      "form_nfkc": "طبيعت",
+      "reading_tt_raw": "табигать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 142
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-167",
+      "section": "5.5.5",
+      "raw": "طبيعي табигый",
+      "form_raw": "طبيعي",
+      "form_nfkc": "طبيعي",
+      "reading_tt_raw": "табигый",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 158
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-168",
+      "section": "5.5.5",
+      "raw": "بلبل былбыл",
+      "form_raw": "بلبل",
+      "form_nfkc": "بلبل",
+      "reading_tt_raw": "былбыл",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 173
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-169",
+      "section": "5.5.5",
+      "raw": "حيوان хайван",
+      "form_raw": "حيوان",
+      "form_nfkc": "حيوان",
+      "reading_tt_raw": "хайван",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 186
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-170",
+      "section": "5.5.5",
+      "raw": "حشرات хәшәрәт",
+      "form_raw": "حشرات",
+      "form_nfkc": "حشرات",
+      "reading_tt_raw": "хәшәрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 200
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-171",
+      "section": "5.5.5",
+      "raw": "ساعَت сәгать",
+      "form_raw": "ساعَت",
+      "form_nfkc": "ساعَت",
+      "reading_tt_raw": "сәгать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 215
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-172",
+      "section": "5.5.5",
+      "raw": "زلزله зилзилә",
+      "form_raw": "زلزله",
+      "form_nfkc": "زلزله",
+      "reading_tt_raw": "зилзилә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 229
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-173",
+      "section": "5.5.5",
+      "raw": "زمان заман (вакыт)",
+      "form_raw": "زمان",
+      "form_nfkc": "زمان",
+      "reading_tt_raw": "заман",
+      "parenthetical_explanations_raw": [
+        "вакыт"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 244
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-174",
+      "section": "5.5.5",
+      "raw": "دیوار дивар",
+      "form_raw": "دیوار",
+      "form_nfkc": "دیوار",
+      "reading_tt_raw": "дивар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 264
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-175",
+      "section": "5.5.5",
+      "raw": "دوشنبه дүшәмбе",
+      "form_raw": "دوشنبه",
+      "form_nfkc": "دوشنبه",
+      "reading_tt_raw": "дүшәмбе",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 277
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-176",
+      "section": "5.5.5",
+      "raw": "سِهشَنبه сишәмбе",
+      "form_raw": "سِهشَنبه",
+      "form_nfkc": "سِهشَنبه",
+      "reading_tt_raw": "сишәмбе",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 293
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-177",
+      "section": "5.5.5",
+      "raw": "چهارشنبه чәршәмбе",
+      "form_raw": "چهارشنبه",
+      "form_nfkc": "چهارشنبه",
+      "reading_tt_raw": "чәршәмбе",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 311
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-178",
+      "section": "5.5.5",
+      "raw": "پنجشنبه пәнҗешәмбе (атна кич)",
+      "form_raw": "پنجشنبه",
+      "form_nfkc": "پنجشنبه",
+      "reading_tt_raw": "пәнҗешәмбе",
+      "parenthetical_explanations_raw": [
+        "атна кич"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 330
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-179",
+      "section": "5.5.5",
+      "raw": "جمعه җомга",
+      "form_raw": "جمعه",
+      "form_nfkc": "جمعه",
+      "reading_tt_raw": "җомга",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 361
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-180",
+      "section": "5.5.5",
+      "raw": "شنبه шимбә.",
+      "form_raw": "شنبه",
+      "form_nfkc": "شنبه",
+      "reading_tt_raw": "шимбә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1925,
+        "character_start_0based": 373
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-181",
+      "section": "5.5.6",
+      "raw": "خرافات хөрафат (юк-барга ышану, легенда)",
+      "form_raw": "خرافات",
+      "form_nfkc": "خرافات",
+      "reading_tt_raw": "хөрафат",
+      "parenthetical_explanations_raw": [
+        "юк-барга ышану, легенда"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 0
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-182",
+      "section": "5.5.6",
+      "raw": "طنطنه тантана",
+      "form_raw": "طنطنه",
+      "form_nfkc": "طنطنه",
+      "reading_tt_raw": "тантана",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 42
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-183",
+      "section": "5.5.6",
+      "raw": "طلب таләп",
+      "form_raw": "طلب",
+      "form_nfkc": "طلب",
+      "reading_tt_raw": "таләп",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 57
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-184",
+      "section": "5.5.6",
+      "raw": "طرف тараф",
+      "form_raw": "طرف",
+      "form_nfkc": "طرف",
+      "reading_tt_raw": "тараф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 68
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-185",
+      "section": "5.5.6",
+      "raw": "تبريك тәбрик",
+      "form_raw": "تبريك",
+      "form_nfkc": "تبريك",
+      "reading_tt_raw": "тәбрик",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 79
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-186",
+      "section": "5.5.6",
+      "raw": "حكمت хикмәт",
+      "form_raw": "حكمت",
+      "form_nfkc": "حكمت",
+      "reading_tt_raw": "хикмәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 93
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-187",
+      "section": "5.5.6",
+      "raw": "حق хак",
+      "form_raw": "حق",
+      "form_nfkc": "حق",
+      "reading_tt_raw": "хак",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 106
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-188",
+      "section": "5.5.6",
+      "raw": "حال хәл",
+      "form_raw": "حال",
+      "form_nfkc": "حال",
+      "reading_tt_raw": "хәл",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 114
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-189",
+      "section": "5.5.6",
+      "raw": "حرمت хөрмәт",
+      "form_raw": "حرمت",
+      "form_nfkc": "حرمت",
+      "reading_tt_raw": "хөрмәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 123
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-190",
+      "section": "5.5.6",
+      "raw": "حركت хәрәкәт",
+      "form_raw": "حركت",
+      "form_nfkc": "حركت",
+      "reading_tt_raw": "хәрәкәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 136
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-191",
+      "section": "5.5.6",
+      "raw": "سفسطه сафсата (буш сүз)",
+      "form_raw": "سفسطه",
+      "form_nfkc": "سفسطه",
+      "reading_tt_raw": "сафсата",
+      "parenthetical_explanations_raw": [
+        "буш сүз"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 150
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-192",
+      "section": "5.5.6",
+      "raw": "سبب сәбәп",
+      "form_raw": "سبب",
+      "form_nfkc": "سبب",
+      "reading_tt_raw": "сәбәп",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 175
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-193",
+      "section": "5.5.6",
+      "raw": "حرام хәрам",
+      "form_raw": "حرام",
+      "form_nfkc": "حرام",
+      "reading_tt_raw": "хәрам",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 186
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-194",
+      "section": "5.5.6",
+      "raw": "خبر хәбәр",
+      "form_raw": "خبر",
+      "form_nfkc": "خبر",
+      "reading_tt_raw": "хәбәр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 198
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-195",
+      "section": "5.5.6",
+      "raw": "حلال хәләл",
+      "form_raw": "حلال",
+      "form_nfkc": "حلال",
+      "reading_tt_raw": "хәләл",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 209
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-196",
+      "section": "5.5.6",
+      "raw": "شغل шөгыль",
+      "form_raw": "شغل",
+      "form_nfkc": "شغل",
+      "reading_tt_raw": "шөгыль",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 221
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-197",
+      "section": "5.5.6",
+      "raw": "شهرت шөһрәт",
+      "form_raw": "شهرت",
+      "form_nfkc": "شهرت",
+      "reading_tt_raw": "шөһрәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 233
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-198",
+      "section": "5.5.6",
+      "raw": "شرط шарт",
+      "form_raw": "شرط",
+      "form_nfkc": "شرط",
+      "reading_tt_raw": "шарт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 246
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-199",
+      "section": "5.5.6",
+      "raw": "صفات сыйфат",
+      "form_raw": "صفات",
+      "form_nfkc": "صفات",
+      "reading_tt_raw": "сыйфат",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 256
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-200",
+      "section": "5.5.6",
+      "raw": "سلام сәлам",
+      "form_raw": "سلام",
+      "form_nfkc": "سلام",
+      "reading_tt_raw": "сәлам",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 269
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-201",
+      "section": "5.5.6",
+      "raw": "جنس җенес",
+      "form_raw": "جنس",
+      "form_nfkc": "جنس",
+      "reading_tt_raw": "җенес",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 281
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-202",
+      "section": "5.5.6",
+      "raw": "جنجال җәнҗал",
+      "form_raw": "جنجال",
+      "form_nfkc": "جنجال",
+      "reading_tt_raw": "җәнҗал",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 292
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-203",
+      "section": "5.5.6",
+      "raw": "جواب җавап",
+      "form_raw": "جواب",
+      "form_nfkc": "جواب",
+      "reading_tt_raw": "җавап",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 306
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-204",
+      "section": "5.5.6",
+      "raw": "روش рәвеш",
+      "form_raw": "روش",
+      "form_nfkc": "روش",
+      "reading_tt_raw": "рәвеш",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 318
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-205",
+      "section": "5.5.6",
+      "raw": "رخصت рөхсәт",
+      "form_raw": "رخصت",
+      "form_nfkc": "رخصت",
+      "reading_tt_raw": "рөхсәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 329
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-206",
+      "section": "5.5.6",
+      "raw": "آفرين афәрин",
+      "form_raw": "آفرين",
+      "form_nfkc": "آفرين",
+      "reading_tt_raw": "афәрин",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 342
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-207",
+      "section": "5.5.6",
+      "raw": "آفات афәт",
+      "form_raw": "آفات",
+      "form_nfkc": "آفات",
+      "reading_tt_raw": "афәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 356
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-208",
+      "section": "5.5.6",
+      "raw": "اِعلان игълан",
+      "form_raw": "اِعلان",
+      "form_nfkc": "اِعلان",
+      "reading_tt_raw": "игълан",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 367
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-209",
+      "section": "5.5.6",
+      "raw": "اِشاره ишарә",
+      "form_raw": "اِشاره",
+      "form_nfkc": "اِشاره",
+      "reading_tt_raw": "ишарә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 382
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-210",
+      "section": "5.5.6",
+      "raw": "رضا риза",
+      "form_raw": "رضا",
+      "form_nfkc": "رضا",
+      "reading_tt_raw": "риза",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 396
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-211",
+      "section": "5.5.6",
+      "raw": "بركت бәрәкәт",
+      "form_raw": "بركت",
+      "form_nfkc": "بركت",
+      "reading_tt_raw": "бәрәкәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 406
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-212",
+      "section": "5.5.6",
+      "raw": "آخر ахыр",
+      "form_raw": "آخر",
+      "form_nfkc": "آخر",
+      "reading_tt_raw": "ахыр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 420
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-213",
+      "section": "5.5.6",
+      "raw": "دليل дәлил",
+      "form_raw": "دليل",
+      "form_nfkc": "دليل",
+      "reading_tt_raw": "дәлил",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 430
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-214",
+      "section": "5.5.6",
+      "raw": "درجه дәрәҗә",
+      "form_raw": "درجه",
+      "form_nfkc": "درجه",
+      "reading_tt_raw": "дәрәҗә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 442
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-215",
+      "section": "5.5.6",
+      "raw": "دخل дәхел (керү, катнашу)",
+      "form_raw": "دخل",
+      "form_nfkc": "دخل",
+      "reading_tt_raw": "дәхел",
+      "parenthetical_explanations_raw": [
+        "керү, катнашу"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 455
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-216",
+      "section": "5.5.6",
+      "raw": "امر әмер",
+      "form_raw": "امر",
+      "form_nfkc": "امر",
+      "reading_tt_raw": "әмер",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 482
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-217",
+      "section": "5.5.6",
+      "raw": "غفلت гафләт",
+      "form_raw": "غفلت",
+      "form_nfkc": "غفلت",
+      "reading_tt_raw": "гафләт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 492
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-218",
+      "section": "5.5.6",
+      "raw": "عاقل гакыл",
+      "form_raw": "عاقل",
+      "form_nfkc": "عاقل",
+      "reading_tt_raw": "гакыл",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 505
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-219",
+      "section": "5.5.6",
+      "raw": "طرف тараф",
+      "form_raw": "طرف",
+      "form_nfkc": "طرف",
+      "reading_tt_raw": "тараф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 517
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-220",
+      "section": "5.5.6",
+      "raw": "ضرور зарур",
+      "form_raw": "ضرور",
+      "form_nfkc": "ضرور",
+      "reading_tt_raw": "зарур",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 528
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-221",
+      "section": "5.5.6",
+      "raw": "ضرر зарар",
+      "form_raw": "ضرر",
+      "form_nfkc": "ضرر",
+      "reading_tt_raw": "зарар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 540
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-222",
+      "section": "5.5.6",
+      "raw": "زينت зиннәт",
+      "form_raw": "زينت",
+      "form_nfkc": "زينت",
+      "reading_tt_raw": "зиннәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 551
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-223",
+      "section": "5.5.6",
+      "raw": "لازم лазем",
+      "form_raw": "لازم",
+      "form_nfkc": "لازم",
+      "reading_tt_raw": "лазем",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 564
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-224",
+      "section": "5.5.6",
+      "raw": "فدا фида, (корбан итү)",
+      "form_raw": "فدا",
+      "form_nfkc": "فدا",
+      "reading_tt_raw": "фида",
+      "parenthetical_explanations_raw": [
+        "корбан итү"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 576
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-225",
+      "section": "5.5.6",
+      "raw": "فائده файда",
+      "form_raw": "فائده",
+      "form_nfkc": "فائده",
+      "reading_tt_raw": "файда",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 600
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-226",
+      "section": "5.5.6",
+      "raw": "فاجعه фаҗига",
+      "form_raw": "فاجعه",
+      "form_nfkc": "فاجعه",
+      "reading_tt_raw": "фаҗига",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 613
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-227",
+      "section": "5.5.6",
+      "raw": "قهر каһәр (каргын)",
+      "form_raw": "قهر",
+      "form_nfkc": "قهر",
+      "reading_tt_raw": "каһәр",
+      "parenthetical_explanations_raw": [
+        "каргын"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 627
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-228",
+      "section": "5.5.6",
+      "raw": "قرار карар",
+      "form_raw": "قرار",
+      "form_nfkc": "قرار",
+      "reading_tt_raw": "карар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 647
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-229",
+      "section": "5.5.6",
+      "raw": "ماتم матәм (кайгы төшү)",
+      "form_raw": "ماتم",
+      "form_nfkc": "ماتم",
+      "reading_tt_raw": "матәм",
+      "parenthetical_explanations_raw": [
+        "кайгы төшү"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 659
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-230",
+      "section": "5.5.6",
+      "raw": "مرحوم мәрхүм",
+      "form_raw": "مرحوم",
+      "form_nfkc": "مرحوم",
+      "reading_tt_raw": "мәрхүм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 684
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-231",
+      "section": "5.5.6",
+      "raw": "مسخره мәсхәрә",
+      "form_raw": "مسخره",
+      "form_nfkc": "مسخره",
+      "reading_tt_raw": "мәсхәрә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 698
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-232",
+      "section": "5.5.6",
+      "raw": "محروم мәхрүм",
+      "form_raw": "محروم",
+      "form_nfkc": "محروم",
+      "reading_tt_raw": "мәхрүм",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 713
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-233",
+      "section": "5.5.6",
+      "raw": "مجبور мәҗбүр",
+      "form_raw": "مجبور",
+      "form_nfkc": "مجبور",
+      "reading_tt_raw": "мәҗбүр",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 727
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-234",
+      "section": "5.5.6",
+      "raw": "مناسبت мөнәсәбәт",
+      "form_raw": "مناسبت",
+      "form_nfkc": "مناسبت",
+      "reading_tt_raw": "мөнәсәбәт",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 741
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-235",
+      "section": "5.5.6",
+      "raw": "مقدار микъдар",
+      "form_raw": "مقدار",
+      "form_nfkc": "مقدار",
+      "reading_tt_raw": "микъдар",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 759
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-236",
+      "section": "5.5.6",
+      "raw": "مشكل мөшкел",
+      "form_raw": "مشكل",
+      "form_nfkc": "مشكل",
+      "reading_tt_raw": "мөшкел",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 774
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-237",
+      "section": "5.5.6",
+      "raw": "مشقت мәшәкать",
+      "form_raw": "مشقت",
+      "form_nfkc": "مشقت",
+      "reading_tt_raw": "мәшәкать",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 787
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-238",
+      "section": "5.5.6",
+      "raw": "نتيجه нәтиҗә",
+      "form_raw": "نتيجه",
+      "form_nfkc": "نتيجه",
+      "reading_tt_raw": "нәтиҗә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 802
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-239",
+      "section": "5.5.6",
+      "raw": "ناحق нахак",
+      "form_raw": "ناحق",
+      "form_nfkc": "ناحق",
+      "reading_tt_raw": "нахак",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 816
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-240",
+      "section": "5.5.6",
+      "raw": "معنا، معنى мәгънә",
+      "form_raw": "معنا، معنى",
+      "form_nfkc": "معنا، معنى",
+      "reading_tt_raw": "мәгънә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 828
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-241",
+      "section": "5.5.6",
+      "raw": "مهم мөһим",
+      "form_raw": "مهم",
+      "form_nfkc": "مهم",
+      "reading_tt_raw": "мөһим",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 847
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-242",
+      "section": "5.5.6",
+      "raw": "وحشت вәхшәт (дикость)",
+      "form_raw": "وحشت",
+      "form_nfkc": "وحشت",
+      "reading_tt_raw": "вәхшәт",
+      "parenthetical_explanations_raw": [
+        "дикость"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 858
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-243",
+      "section": "5.5.6",
+      "raw": "نصيب насыйп",
+      "form_raw": "نصيب",
+      "form_nfkc": "نصيب",
+      "reading_tt_raw": "насыйп",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 881
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-244",
+      "section": "5.5.6",
+      "raw": "نسبت нисбәт (соотношение)",
+      "form_raw": "نسبت",
+      "form_nfkc": "نسبت",
+      "reading_tt_raw": "нисбәт",
+      "parenthetical_explanations_raw": [
+        "соотношение"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 894
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-245",
+      "section": "5.5.6",
+      "raw": "صنف сыйныф",
+      "form_raw": "صنف",
+      "form_nfkc": "صنف",
+      "reading_tt_raw": "сыйныф",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 921
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-246",
+      "section": "5.5.6",
+      "raw": "عَجَبгаҗәп (удивление)",
+      "form_raw": "عَجَب",
+      "form_nfkc": "عَجَب",
+      "reading_tt_raw": "гаҗәп",
+      "parenthetical_explanations_raw": [
+        "удивление"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 934
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-247",
+      "section": "5.5.6",
+      "raw": "هلاکһәлак",
+      "form_raw": "هلاک",
+      "form_nfkc": "هلاک",
+      "reading_tt_raw": "һәлак",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 959
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-248",
+      "section": "5.5.6",
+      "raw": "عجائبгаҗәиб (удивительно)",
+      "form_raw": "عجائب",
+      "form_nfkc": "عجائب",
+      "reading_tt_raw": "гаҗәиб",
+      "parenthetical_explanations_raw": [
+        "удивительно"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 971
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-249",
+      "section": "5.5.6",
+      "raw": "شایدшаять",
+      "form_raw": "شاید",
+      "form_nfkc": "شاید",
+      "reading_tt_raw": "шаять",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 999
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-250",
+      "section": "5.5.6",
+      "raw": "مُهِمмөһим (важный)",
+      "form_raw": "مُهِم",
+      "form_nfkc": "مُهِم",
+      "reading_tt_raw": "мөһим",
+      "parenthetical_explanations_raw": [
+        "важный"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1011
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-251",
+      "section": "5.5.6",
+      "raw": "اَهَمیَّت әһәмиять (важность)",
+      "form_raw": "اَهَمیَّت",
+      "form_nfkc": "اَهَمیَّت",
+      "reading_tt_raw": "әһәмиять",
+      "parenthetical_explanations_raw": [
+        "важность"
+      ],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1034
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-252",
+      "section": "5.5.6",
+      "raw": "مَثلاً  мәсәлән",
+      "form_raw": "مَثلاً",
+      "form_nfkc": "مَثلاً",
+      "reading_tt_raw": "мәсәлән",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1065
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-253",
+      "section": "5.5.6",
+      "raw": "البته әлбәттә",
+      "form_raw": "البته",
+      "form_nfkc": "البته",
+      "reading_tt_raw": "әлбәттә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1082
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-254",
+      "section": "5.5.6",
+      "raw": "نهایت ниһаять",
+      "form_raw": "نهایت",
+      "form_nfkc": "نهایت",
+      "reading_tt_raw": "ниһаять",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1097
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-255",
+      "section": "5.5.6",
+      "raw": "مال мал",
+      "form_raw": "مال",
+      "form_nfkc": "مال",
+      "reading_tt_raw": "мал",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1113
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-256",
+      "section": "5.5.6",
+      "raw": "سودا сәүдә",
+      "form_raw": "سودا",
+      "form_nfkc": "سودا",
+      "reading_tt_raw": "сәүдә",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1122
+      },
+      "status": "source_extracted_not_editorially_verified"
+    },
+    {
+      "id": "lex-55-257",
+      "section": "5.5.6",
+      "raw": "خواجه хуҗа.",
+      "form_raw": "خواجه",
+      "form_nfkc": "خواجه",
+      "reading_tt_raw": "хуҗа",
+      "parenthetical_explanations_raw": [],
+      "definition_tt": null,
+      "source": {
+        "book_txt_line": 1929,
+        "character_start_0based": 1134
+      },
+      "status": "source_extracted_not_editorially_verified"
+    }
+  ],
+  "source_document": {
+    "file_name": "Иске татар имля 3-20.11.19.doc",
+    "sha256": "9bf75da660303f3158b63ac5eb1f25fa67226480236632ffde61df212c636015",
+    "book_txt_sha256": "a3474bb9f43f2af3db5ee5711a4cb2b20fdd51eead5a0921569f8e847ac19efc"
+  }
+}
