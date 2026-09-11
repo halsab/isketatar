@@ -1,0 +1,694 @@
+{
+  "items": [
+    {
+      "id": "RQ-01-01",
+      "source_reading_id": "READ-01",
+      "line_ids": [
+        "READ-01-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Беренче юлдагы азык атамасын кириллица белән яз.",
+      "stimulus": "بال",
+      "options": [],
+      "accepted_answers": [
+        "бал"
+      ],
+      "explanation_tt": "بال — бал; икенче сүз аның татлы булуын белдерә.",
+      "hints_tt": [
+        "Башта предмет атамасын билгесеннән аер."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-01-02",
+      "source_reading_id": "READ-01",
+      "line_ids": [
+        "READ-01-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Икенче юл балык турында нәрсә әйтә?",
+      "stimulus": "بالق طۈزلئ",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Балык кызыл."
+        },
+        {
+          "id": "b",
+          "text_tt": "Балык тозлы."
+        },
+        {
+          "id": "c",
+          "text_tt": "Балык зур."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Юлда балыкның тозлы булуы әйтелә.",
+      "hints_tt": [
+        "Соңгы сүзнең -лы өлешен таны."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-02-01",
+      "source_reading_id": "READ-02",
+      "line_ids": [
+        "READ-02-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Беренче юлдагы төс атамасын кириллица белән яз.",
+      "stimulus": "آق",
+      "options": [],
+      "accepted_answers": [
+        "ак"
+      ],
+      "explanation_tt": "آق — ак; чалманың төсе әйтелгән.",
+      "hints_tt": [
+        "Кыска сүзнең ике төп хәрефен таны."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-02-02",
+      "source_reading_id": "READ-02",
+      "line_ids": [
+        "READ-02-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Фәс турында юлда нинди мәгълүмат бар?",
+      "stimulus": "فه‌س قزل بولا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Аның төсе кызыл."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аның бәясе югары."
+        },
+        {
+          "id": "c",
+          "text_tt": "Аны бала кигән."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Фәс кызыл була дип әйтелгән; аның бәясе яки хуҗасы турында сүз юк.",
+      "hints_tt": [
+        "قزل сүзенең татарча укылышын искә төшер."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-03-01",
+      "source_reading_id": "READ-03",
+      "line_ids": [
+        "READ-03-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Китапның урынын белдергән сүзне кириллица белән яз.",
+      "stimulus": "مكتبده",
+      "options": [],
+      "accepted_answers": [
+        "мәктәптә"
+      ],
+      "explanation_tt": "مكتبده — мәктәптә. ده урын кушымчасы мәктәп нигезенә ялганган.",
+      "hints_tt": [
+        "Кайда дигән сорауга җавап биргән сүзне укы."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-03-02",
+      "source_reading_id": "READ-03",
+      "line_ids": [
+        "READ-03-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Икенче юл нәрсәне белдерә?",
+      "stimulus": "آش آلده",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Ашны алып киттеләр."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аш мәктәптән килә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Аш алда тора."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Аш алда дип әйтелгән; чыгыш яки бару юнәлеше күрсәтелми.",
+      "hints_tt": [
+        "Соңгы ده урынын белдерә."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-04-01",
+      "source_reading_id": "READ-04",
+      "line_ids": [
+        "READ-04-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Балаларның эшен белдергән сүзне хәзерге татарча яз.",
+      "stimulus": "اوينيلر",
+      "options": [],
+      "accepted_answers": [
+        "уйныйлар"
+      ],
+      "explanation_tt": "اوينيلر — уйныйлар. Җөмлә балаларның уен уйнавын хәбәр итә.",
+      "hints_tt": [
+        "Эшне белдергән соңгы сүзне укы."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-04-02",
+      "source_reading_id": "READ-04",
+      "line_ids": [
+        "READ-04-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Икенче юлда кайсы бәйләнеш бар?",
+      "stimulus": "صوده بالقلر يوُزه",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Балалар суда уйный."
+        },
+        {
+          "id": "b",
+          "text_tt": "Балыклар суда йөзә."
+        },
+        {
+          "id": "c",
+          "text_tt": "Балыклар урамга чыга."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Балыклар суда йөзә: беренче сүз урынны күрсәтә.",
+      "hints_tt": [
+        "Кайда һәм нишли сорауларын биреп кара."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-05-01",
+      "source_reading_id": "READ-05",
+      "line_ids": [
+        "READ-05-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Урман җәнлегенең исемен кириллица белән яз.",
+      "stimulus": "آيو",
+      "options": [],
+      "accepted_answers": [
+        "аю"
+      ],
+      "explanation_tt": "آيو — аю; беренче юл урманда аю очравын әйтә.",
+      "hints_tt": [
+        "Җан иясен атаган сүзне укы."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-05-02",
+      "source_reading_id": "READ-05",
+      "line_ids": [
+        "READ-05-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Бар сүзе бу юлда нәрсә белдерә?",
+      "stimulus": "صندوقده آقچه بار",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Акчаның сандыкта булуын."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кешегә сандыкка барырга боеруны."
+        },
+        {
+          "id": "c",
+          "text_tt": "Акчаның юклыгын."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Бар монда акчаның булуын белдерә; берәүгә барырга кушу түгел.",
+      "hints_tt": [
+        "Хәбәрнең алдагы акча сүзе белән бәйләнешен кара."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-06-01",
+      "source_reading_id": "READ-06",
+      "line_ids": [
+        "READ-06-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Юнәлешне белдергән сүзне хәзерге татарча яз.",
+      "stimulus": "دفترگه",
+      "options": [],
+      "accepted_answers": [
+        "дәфтәргә"
+      ],
+      "explanation_tt": "دفترگه — дәфтәргә; -гә/-кә мәгънәле тарихи кушымча таныла.",
+      "hints_tt": [
+        "Язу кайда төшереләчәген күрсәткән сүзне укы."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-06-02",
+      "source_reading_id": "READ-06",
+      "line_ids": [
+        "READ-06-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Икенче юл каләмнең нинди хезмәтен күрсәтә?",
+      "stimulus": "قَلَم يازو يازارغه ياری",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Аның ашарга яравын."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аның йөрергә ярдәм итүен."
+        },
+        {
+          "id": "c",
+          "text_tt": "Аның язу өчен яравын."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Каләм язу язарга ярый, ягъни ул язу коралы.",
+      "hints_tt": [
+        "Ярый хәбәренең кайсы эш белән бәйләнгәнен кара."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 1
+    },
+    {
+      "id": "RQ-07-01",
+      "source_reading_id": "READ-07",
+      "line_ids": [
+        "READ-07-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Хәрәкәтне икенче эшкә бәйләгән сүзне хәзерге татарча яз.",
+      "stimulus": "آلوب",
+      "options": [],
+      "accepted_answers": [
+        "алып"
+      ],
+      "explanation_tt": "آلوب — алып; алып килдем бәйләнешен төзи.",
+      "hints_tt": [
+        "Тарихи وب ахырын хәзерге -ып/-еп белән бәйлә."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-07-02",
+      "source_reading_id": "READ-07",
+      "line_ids": [
+        "READ-07-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "select_many",
+      "prompt_tt": "Балаларның ике эшен сайла.",
+      "stimulus": "مكتبده بالالر اوقوب، يازوب اوترالر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Уку"
+        },
+        {
+          "id": "b",
+          "text_tt": "Сату"
+        },
+        {
+          "id": "c",
+          "text_tt": "Язу"
+        },
+        {
+          "id": "d",
+          "text_tt": "Йөзү"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Икенче юлда укып һәм язып формалары бар.",
+      "hints_tt": [
+        "Хәбәр алдында килгән ике охшаш ахырлы сүзне кара."
+      ],
+      "grading": "set",
+      "skill": "rule",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-08-01",
+      "source_reading_id": "READ-08",
+      "line_ids": [
+        "READ-08-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Эшнең тәмамланганын белдергән сүзне хәзерге татарча яз.",
+      "stimulus": "بتردك",
+      "options": [],
+      "accepted_answers": [
+        "бетердек"
+      ],
+      "explanation_tt": "بتردك — бетердек. Соңгы دك без белән бәйле форма.",
+      "hints_tt": [
+        "Җөмләнең соңгы фигылен укы."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-08-02",
+      "source_reading_id": "READ-08",
+      "line_ids": [
+        "READ-08-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Бәлеш кем өчен пешерелгән?",
+      "stimulus": "بز قوناقلر ئۇچوُن به‌لش پشردك",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Балалар өчен."
+        },
+        {
+          "id": "b",
+          "text_tt": "Кунаклар өчен."
+        },
+        {
+          "id": "c",
+          "text_tt": "Сатучылар өчен."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "قوناقلر ئۇچوُن — кунаклар өчен.",
+      "hints_tt": [
+        "Өчен бәйлегенең алдындагы сүзне кара."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-09-01",
+      "source_reading_id": "READ-09",
+      "line_ids": [
+        "READ-09-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Яхшы билгесенең иясен — беренче сүзне — кириллица белән яз.",
+      "stimulus": "كتاب",
+      "options": [],
+      "accepted_answers": [
+        "китап"
+      ],
+      "explanation_tt": "كتاب — китап. Ул хәлфәгә тиңләп сурәтләнә.",
+      "hints_tt": [
+        "Алынма сүзнең сузыгын татарча укылыштан тулыландыр."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-09-02",
+      "source_reading_id": "READ-09",
+      "line_ids": [
+        "READ-09-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Икенче юлның фикере кайсы?",
+      "stimulus": "عالِم، جاهِل بر توگلدر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Белемле белән надан бердәй түгел."
+        },
+        {
+          "id": "b",
+          "text_tt": "Икесе дә бер үк кеше."
+        },
+        {
+          "id": "c",
+          "text_tt": "Икесенең дә исеме бирелмәгән."
+        }
+      ],
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation_tt": "Галим белән җаһил бер түгел дип каршы куелган; түгелдер юклыкны белдерә.",
+      "hints_tt": [
+        "Түгелдер сүзен игътибар белән укы."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 2
+    },
+    {
+      "id": "RQ-10-01",
+      "source_reading_id": "READ-10",
+      "line_ids": [
+        "READ-10-L01"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "reading",
+      "prompt_tt": "Беренче юлдагы юклык боерыгын хәзерге татарча яз.",
+      "stimulus": "تاشلاما",
+      "options": [],
+      "accepted_answers": [
+        "ташлама"
+      ],
+      "explanation_tt": "تاشلاما — ташлама; -ма тыйган боеруны белдерә.",
+      "hints_tt": [
+        "Җөмләнең соңгы фигылен кара."
+      ],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 3
+    },
+    {
+      "id": "RQ-10-02",
+      "source_reading_id": "READ-10",
+      "line_ids": [
+        "READ-10-L02"
+      ],
+      "assessment_role": "reading_practice",
+      "type": "choice",
+      "prompt_tt": "Җөмләнең төп хәбәрендә «түгелдер» сүзе кайсы билгене кире кага?",
+      "stimulus": "آقچه ومالىٔ بولماغان كشىُ باي توگلدر",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Кеше булу."
+        },
+        {
+          "id": "b",
+          "text_tt": "Мал булу."
+        },
+        {
+          "id": "c",
+          "text_tt": "Бай булу."
+        }
+      ],
+      "accepted_answers": [
+        "c"
+      ],
+      "explanation_tt": "Бай түгелдер диелә: бай булу билгесе кире кагыла. Бу уку соравы җөмләнең фикерен ачыклауны таләп итә.",
+      "hints_tt": [
+        "Түгелдер сүзенең алдындагы билгене тап."
+      ],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 3
+    },
+    {
+      "id": "RQ-F01-01",
+      "source_reading_id": "READ-F01",
+      "line_ids": [
+        "READ-F01-L01"
+      ],
+      "assessment_role": "final",
+      "type": "select_many",
+      "prompt_tt": "Беренче юлда шикәр нәрсәләрдән алына дип әйтелгән? Ике җавапны сайла.",
+      "stimulus": "شيكر قامشدن، چوُگندردن بولا",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Камыштан"
+        },
+        {
+          "id": "b",
+          "text_tt": "Алмадан"
+        },
+        {
+          "id": "c",
+          "text_tt": "Чөгендердән"
+        },
+        {
+          "id": "d",
+          "text_tt": "Арыштан"
+        }
+      ],
+      "accepted_answers": [
+        "a",
+        "c"
+      ],
+      "explanation_tt": "Юлда камыштан һәм чөгендердән дип язылган.",
+      "hints_tt": [],
+      "grading": "set",
+      "skill": "rule",
+      "difficulty": 2,
+      "group": "reading_final"
+    },
+    {
+      "id": "RQ-F01-02",
+      "source_reading_id": "READ-F01",
+      "line_ids": [
+        "READ-F01-L02"
+      ],
+      "assessment_role": "final",
+      "type": "reading",
+      "prompt_tt": "Чагыштыру билгесен күрсәткән сүзне хәзерге татар кириллицасы белән яз.",
+      "stimulus": "ياقتيراق",
+      "options": [],
+      "accepted_answers": [
+        "яктырак"
+      ],
+      "explanation_tt": "ياقتيراق — яктырак. Бу сүз кояшны Ай белән чагыштыруда кулланылган.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 2,
+      "group": "reading_final"
+    },
+    {
+      "id": "RQ-F02-01",
+      "source_reading_id": "READ-F02",
+      "line_ids": [
+        "READ-F02-L01"
+      ],
+      "assessment_role": "final",
+      "type": "reading",
+      "prompt_tt": "Кая дигән сорауга җавап биргән сүзне хәзерге татар кириллицасы белән яз.",
+      "stimulus": "قولغزغه",
+      "options": [],
+      "accepted_answers": [
+        "кулыгызга"
+      ],
+      "explanation_tt": "قولغزغه — кулыгызга; иялекле формага юнәлеш кушымчасы ялганган.",
+      "hints_tt": [],
+      "grading": "tt_reading",
+      "skill": "reading",
+      "difficulty": 3,
+      "group": "reading_final"
+    },
+    {
+      "id": "RQ-F02-02",
+      "source_reading_id": "READ-F02",
+      "line_ids": [
+        "READ-F02-L02"
+      ],
+      "assessment_role": "final",
+      "type": "choice",
+      "prompt_tt": "Икенче юл укучыдан нинди эшне башкармауны сорый?",
+      "stimulus": "آتالرغزغه هم خلفه‌لرگزگه قارشو سوز قايتارماغز",
+      "options": [
+        {
+          "id": "a",
+          "text_tt": "Китапны кулга алмауны."
+        },
+        {
+          "id": "b",
+          "text_tt": "Аталарга һәм хәлфәләргә каршы сүз кайтармауны."
+        },
+        {
+          "id": "c",
+          "text_tt": "Язуны өйрәнмәүне."
+        }
+      ],
+      "accepted_answers": [
+        "b"
+      ],
+      "explanation_tt": "Җөмләдә аталарга һәм хәлфәләргә каршы сүз кайтармагыз диелгән. Биредә укучыдан бу фикерне хуплау түгел, җөмләне аңлау сорала.",
+      "hints_tt": [],
+      "grading": "exact_option",
+      "skill": "rule",
+      "difficulty": 3,
+      "group": "reading_final"
+    }
+  ]
+}

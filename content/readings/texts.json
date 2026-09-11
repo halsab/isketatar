@@ -1,0 +1,1341 @@
+{
+  "version": 1,
+  "texts": [
+    {
+      "id": "READ-01",
+      "title_tt": "Бал һәм балык",
+      "level": 1,
+      "role": "guided",
+      "lesson_ids": [
+        "G01",
+        "G02"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-052"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-01-L01",
+          "source_form": "بال تاتلئ",
+          "display_form": "بال تاتلئ",
+          "reading_tt": "Бал татлы.",
+          "meaning_tt": "Балның тәме татлы.",
+          "source_lines": [
+            1036,
+            1036
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "بال",
+              "reading_tt": "бал",
+              "meaning_tt": "Умарта кортлары җыйган татлы азык.",
+              "explanation_tt": "Бер иҗекле исем; ахыргы ләм сүзне тәмамлый.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "تاتلئ",
+              "reading_tt": "татлы",
+              "meaning_tt": "Татлылык сыйфаты булган.",
+              "explanation_tt": "Соңгы кыска ы билгесен таны.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-01-L02",
+          "source_form": "بالق طۈزلئ",
+          "display_form": "بالق طۈزلئ",
+          "reading_tt": "Балык тозлы.",
+          "meaning_tt": "Балыкның тозы бар, ул тозлы итеп әзерләнгән.",
+          "source_lines": [
+            1034,
+            1034
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "بالق",
+              "reading_tt": "балык",
+              "meaning_tt": "Суда яшәгән җан иясе; бу юлда азык буларак аталган.",
+              "explanation_tt": "Ләм белән каф арасында укылышта ы тулыландырыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "طۈزلئ",
+              "reading_tt": "тозлы",
+              "meaning_tt": "Тоз кушылган.",
+              "explanation_tt": "Кыска уау о укылышын, ахыргы өлеш -лы билгесен күрсәтә.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-01-01",
+        "RQ-01-02"
+      ]
+    },
+    {
+      "id": "READ-02",
+      "title_tt": "Баш киемнәре",
+      "level": 1,
+      "role": "guided",
+      "lesson_ids": [
+        "G01",
+        "G06"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-052"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-02-L01",
+          "source_form": "چالما آق بولا",
+          "display_form": "چالما آق بولا",
+          "reading_tt": "Чалма ак була.",
+          "meaning_tt": "Чалманың төсе ак дип әйтелә.",
+          "source_lines": [
+            1043,
+            1043
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "چالما",
+              "reading_tt": "чалма",
+              "meaning_tt": "Башка урала торган кием.",
+              "explanation_tt": "Әлифтән соңгы өзеклек сүз арасы түгел.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آق",
+              "reading_tt": "ак",
+              "meaning_tt": "Ак төс.",
+              "explanation_tt": "Әлиф белән каф калын укылышны күрсәтә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولا",
+              "reading_tt": "була",
+              "meaning_tt": "Булуын белдерә.",
+              "explanation_tt": "Бу җөмләдә сыйфатны әйтүче хәбәр.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-02-L02",
+          "source_form": "فه س قزل بولا",
+          "display_form": "فه‌س قزل بولا",
+          "reading_tt": "Фәс кызыл була.",
+          "meaning_tt": "Фәс дигән баш киеменең кызыл төстә булуы әйтелә.",
+          "source_lines": [
+            1043,
+            1043
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "فه‌س",
+              "reading_tt": "фәс",
+              "meaning_tt": "Өсте яссы, гадәттә кызыл төсле баш киеме.",
+              "explanation_tt": "Һә-рәсмиядән соң тоташу өзелә, әмма фәс бер сүз булып кала.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قزل",
+              "reading_tt": "кызыл",
+              "meaning_tt": "Кызыл төс.",
+              "explanation_tt": "Ы сузыклары укылышта тулыландырыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولا",
+              "reading_tt": "була",
+              "meaning_tt": "Булуын белдерә.",
+              "explanation_tt": "Алдагы төс атамасы белән хәбәр төзи.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-02-01",
+        "RQ-02-02"
+      ]
+    },
+    {
+      "id": "READ-03",
+      "title_tt": "Кайда?",
+      "level": 2,
+      "role": "guided",
+      "lesson_ids": [
+        "A02"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-069"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-03-L01",
+          "source_form": "كتاب مكتبده",
+          "display_form": "كتاب مكتبده",
+          "reading_tt": "Китап мәктәптә.",
+          "meaning_tt": "Китапның мәктәптә булуы әйтелә.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "كتاب",
+              "reading_tt": "китап",
+              "meaning_tt": "Уку өчен язылган әсәр яки басма.",
+              "explanation_tt": "Алынма нигезнең кыска сузыгы язылмый.",
+              "lexicon_id": "lex-55-044"
+            },
+            {
+              "surface": "مكتبده",
+              "reading_tt": "мәктәптә",
+              "meaning_tt": "Мәктәп эчендә яки мәктәптә булу.",
+              "explanation_tt": "Мәктәп нигезенә ده урын кушымчасы ялганган.",
+              "lexicon_id": "lex-55-054"
+            }
+          ]
+        },
+        {
+          "id": "READ-03-L02",
+          "source_form": "آش آلده",
+          "display_form": "آش آلده",
+          "reading_tt": "Аш алда.",
+          "meaning_tt": "Аш алда, кеше алдында тора.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "آش",
+              "reading_tt": "аш",
+              "meaning_tt": "Ашый торган ризык; монда әзер аш.",
+              "explanation_tt": "Бер иҗекле калын сүз.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آلده",
+              "reading_tt": "алда",
+              "meaning_tt": "Алгы якта, алдында.",
+              "explanation_tt": "ده калын -да укылышын да күрсәтә ала.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-03-01",
+        "RQ-03-02"
+      ]
+    },
+    {
+      "id": "READ-04",
+      "title_tt": "Урамда һәм суда",
+      "level": 2,
+      "role": "practice",
+      "lesson_ids": [
+        "A02",
+        "G05"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-069"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-04-L01",
+          "source_form": "بالالر اورامده اويون اوينيلر",
+          "display_form": "بالالر اورامده اويون اوينيلر",
+          "reading_tt": "Балалар урамда уен уйныйлар.",
+          "meaning_tt": "Балаларның урамда уйнавы әйтелә.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "بالالر",
+              "reading_tt": "балалар",
+              "meaning_tt": "Берничә бала.",
+              "explanation_tt": "Бала нигезенә кыска لر күплек кушымчасы ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "اورامده",
+              "reading_tt": "урамда",
+              "meaning_tt": "Урам эчендә, ачык урамда.",
+              "explanation_tt": "Урам нигезеннән соң ده урын кушымчасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "اويون",
+              "reading_tt": "уен",
+              "meaning_tt": "Уйнау шөгыле.",
+              "explanation_tt": "Й белән уау кушылмасын сүзнең таныш мәгънәсе аша укы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "اوينيلر",
+              "reading_tt": "уйныйлар",
+              "meaning_tt": "Берничә кешенең уйнавын белдерә.",
+              "explanation_tt": "Хәбәр күплек сандагы балалар белән бәйләнгән.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-04-L02",
+          "source_form": "صوده بالقلر يوُزه",
+          "display_form": "صوده بالقلر يوُزه",
+          "reading_tt": "Суда балыклар йөзә.",
+          "meaning_tt": "Балыкларның суда йөзүе әйтелә.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "صوده",
+              "reading_tt": "суда",
+              "meaning_tt": "Су эчендә.",
+              "explanation_tt": "ده калын -да булып укыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بالقلر",
+              "reading_tt": "балыклар",
+              "meaning_tt": "Берничә балык.",
+              "explanation_tt": "Нигездәге ы укылыштан тулыландырыла; لر күплекне күрсәтә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "يوُزه",
+              "reading_tt": "йөзә",
+              "meaning_tt": "Су эчендә хәрәкәт итә.",
+              "explanation_tt": "Баштагы йа тартык й хезмәтендә, аннан соң ө укылышы килә.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-04-01",
+        "RQ-04-02"
+      ]
+    },
+    {
+      "id": "READ-05",
+      "title_tt": "Урман һәм сандык",
+      "level": 2,
+      "role": "practice",
+      "lesson_ids": [
+        "A02",
+        "A06"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-069"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-05-L01",
+          "source_form": "اورمانده آيو بولغالي",
+          "display_form": "اورمانده آيو بولغالي",
+          "reading_tt": "Урманда аю булгалый.",
+          "meaning_tt": "Урманда аю очрарга мөмкин дип әйтелә.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "اورمانده",
+              "reading_tt": "урманда",
+              "meaning_tt": "Урман эчендә.",
+              "explanation_tt": "Калын нигезгә ده урын кушымчасы ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آيو",
+              "reading_tt": "аю",
+              "meaning_tt": "Зур урман җәнлеге.",
+              "explanation_tt": "Әлиф һәм йа-уау бәйләнешен таныш сүз аша укы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولغالي",
+              "reading_tt": "булгалый",
+              "meaning_tt": "Вакыт-вакыт була, очрап тора.",
+              "explanation_tt": "Бу хәбәр даими мәҗбүрилек түгел, кайчак булуны белдерә.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-05-L02",
+          "source_form": "صندوقده آقچه بار",
+          "display_form": "صندوقده آقچه بار",
+          "reading_tt": "Сандыкта акча бар.",
+          "meaning_tt": "Акчаның сандыкта булуы әйтелә.",
+          "source_lines": [
+            1403,
+            1403
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "صندوقده",
+              "reading_tt": "сандыкта",
+              "meaning_tt": "Сандык эчендә.",
+              "explanation_tt": "Сандык нигезендәге و саклана; ده -та булып укыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آقچه",
+              "reading_tt": "акча",
+              "meaning_tt": "Түләү өчен кулланылган акча.",
+              "explanation_tt": "Бу таныш сүздәге соңгы هне татарча укылыш белән бәйлә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بار",
+              "reading_tt": "бар",
+              "meaning_tt": "Бар булуын белдерә.",
+              "explanation_tt": "Монда бару боерыгы түгел, барлык мәгънәсе.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-05-01",
+        "RQ-05-02"
+      ]
+    },
+    {
+      "id": "READ-06",
+      "title_tt": "Каләм һәм дәфтәр",
+      "level": 2,
+      "role": "practice",
+      "lesson_ids": [
+        "A03",
+        "G06"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-070"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-06-L01",
+          "source_form": "دفترگه يازو يازالر",
+          "display_form": "دفترگه يازو يازالر",
+          "reading_tt": "Дәфтәргә язу язалар.",
+          "meaning_tt": "Язу дәфтәргә төшерелә.",
+          "source_lines": [
+            1415,
+            1415
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "دفترگه",
+              "reading_tt": "дәфтәргә",
+              "meaning_tt": "Дәфтәр эченә.",
+              "explanation_tt": "Юнәлеш кушымчасы گه белән язылган.",
+              "lexicon_id": "lex-55-042"
+            },
+            {
+              "surface": "يازو",
+              "reading_tt": "язу",
+              "meaning_tt": "Хәрефләр белән төшерелгән текст яки язу эше.",
+              "explanation_tt": "Бу юлда язу эшенең нәрсәгә төшерелүе әйтелә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "يازالر",
+              "reading_tt": "язалар",
+              "meaning_tt": "Язу эшен башкаралар.",
+              "explanation_tt": "Хәбәрнең күплек формасы кыска لر белән тәмамлана.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-06-L02",
+          "source_form": "قَلَم يازو يازارغه ياری",
+          "display_form": "قَلَم يازو يازارغه ياری",
+          "reading_tt": "Каләм язу язарга ярый.",
+          "meaning_tt": "Каләм белән язу мөмкин.",
+          "source_lines": [
+            1415,
+            1415
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "قَلَم",
+              "reading_tt": "каләм",
+              "meaning_tt": "Язу коралы.",
+              "explanation_tt": "Гарәптән кергән сүзнең чыганактагы кыска сузыклары хәрәкәләр белән күрсәтелгән.",
+              "lexicon_id": "lex-55-047"
+            },
+            {
+              "surface": "يازو",
+              "reading_tt": "язу",
+              "meaning_tt": "Хәрефләр төшерү эше.",
+              "explanation_tt": "Алдагы исемне эш белән бәйләгән таныш сүз.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "يازارغه",
+              "reading_tt": "язарга",
+              "meaning_tt": "Язу эшен башкарырга.",
+              "explanation_tt": "Юнәлешле эш формасының ахыры غه белән.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ياری",
+              "reading_tt": "ярый",
+              "meaning_tt": "Мөмкин, кулланырга яраклы.",
+              "explanation_tt": "Бу юлда каләмнең язуга яравын белдерә.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-06-01",
+        "RQ-06-02"
+      ]
+    },
+    {
+      "id": "READ-07",
+      "title_tt": "Эшләрнең бәйләнеше",
+      "level": 3,
+      "role": "practice",
+      "lesson_ids": [
+        "A06",
+        "A07"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-076"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-07-L01",
+          "source_form": "مين بازاردن آلما آلوب كيلدم",
+          "display_form": "مين بازاردن آلما آلوب كيلدم",
+          "reading_tt": "Мин базардан алма алып килдем.",
+          "meaning_tt": "Сөйләүче базардан алма алып кайткан.",
+          "source_lines": [
+            1519,
+            1519
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "مين",
+              "reading_tt": "мин",
+              "meaning_tt": "Сөйләүче кеше.",
+              "explanation_tt": "Зат алмашлыгы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بازاردن",
+              "reading_tt": "базардан",
+              "meaning_tt": "Базардан чыгып яки базардан алынган.",
+              "explanation_tt": "دن чыгыш килеше кушымчасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آلما",
+              "reading_tt": "алма",
+              "meaning_tt": "Җимеш атамасы.",
+              "explanation_tt": "Биредә җимеш атамасы, алуны тыйган боерык түгел.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آلوب",
+              "reading_tt": "алып",
+              "meaning_tt": "Алу эшен килүгә бәйли.",
+              "explanation_tt": "وب тарихи ахыры хәзерге -ып формасына туры китерелә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "كيلدم",
+              "reading_tt": "килдем",
+              "meaning_tt": "Мин килдем.",
+              "explanation_tt": "دم нечкә нигездә -дем булып укыла.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-07-L02",
+          "source_form": "مكتبده بالالر اوقوب، يازوب اوترالر",
+          "display_form": "مكتبده بالالر اوقوب، يازوب اوترالر",
+          "reading_tt": "Мәктәптә балалар укып, язып утыралар.",
+          "meaning_tt": "Балалар мәктәптә уку һәм язу белән шөгыльләнә.",
+          "source_lines": [
+            1519,
+            1519
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "مكتبده",
+              "reading_tt": "мәктәптә",
+              "meaning_tt": "Мәктәп эчендә.",
+              "explanation_tt": "ده урын кушымчасы.",
+              "lexicon_id": "lex-55-054"
+            },
+            {
+              "surface": "بالالر",
+              "reading_tt": "балалар",
+              "meaning_tt": "Берничә бала.",
+              "explanation_tt": "لر күплек кушымчасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "اوقوب",
+              "reading_tt": "укып",
+              "meaning_tt": "Уку эшен башка эш белән бәйли.",
+              "explanation_tt": "وب тарихи ахыры хәзерге -ып белән укыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "يازوب",
+              "reading_tt": "язып",
+              "meaning_tt": "Язу эшен икенче эшкә бәйли.",
+              "explanation_tt": "وب ахырындагы ب татарча пга туры килә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "اوترالر",
+              "reading_tt": "утыралар",
+              "meaning_tt": "Утырган хәлдә эш башкаралар.",
+              "explanation_tt": "Ы сузыгы укылышта тулыландырыла; хәбәр балалар белән бәйле.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-07-01",
+        "RQ-07-02"
+      ]
+    },
+    {
+      "id": "READ-08",
+      "title_tt": "Без башкарган эшләр",
+      "level": 3,
+      "role": "practice",
+      "lesson_ids": [
+        "A06",
+        "A07"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-075"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-08-L01",
+          "source_form": "بز ياڭا سوزلرنیُ يازوب بتردك",
+          "display_form": "بز ياڭا سوزلرنیُ يازوب بتردك",
+          "reading_tt": "Без яңа сүзләрне язып бетердек.",
+          "meaning_tt": "Без яңа сүзләрне язу эшен тәмамладык.",
+          "source_lines": [
+            1500,
+            1500
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "بز",
+              "reading_tt": "без",
+              "meaning_tt": "Сөйләүче һәм аның белән булган кешеләр.",
+              "explanation_tt": "Зат алмашлыгының күплек формасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ياڭا",
+              "reading_tt": "яңа",
+              "meaning_tt": "Элек өйрәнелмәгән, яңа.",
+              "explanation_tt": "Ң хәрефе нигезнең үзендә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "سوزلرنیُ",
+              "reading_tt": "сүзләрне",
+              "meaning_tt": "Берничә сүзне.",
+              "explanation_tt": "Күплек لر һәм төшем килеше өлеше таныла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "يازوب",
+              "reading_tt": "язып",
+              "meaning_tt": "Язу эшен тәмамлау белән бәйли.",
+              "explanation_tt": "Хәзерге -ып укылышына туры килгән وب.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بتردك",
+              "reading_tt": "бетердек",
+              "meaning_tt": "Без тәмамладык.",
+              "explanation_tt": "دك нечкә -дек булып укыла.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-08-L02",
+          "source_form": "بز قوناقلر ﺋﯘچوُن به لش پشردك",
+          "display_form": "بز قوناقلر ئۇچوُن به‌لش پشردك",
+          "reading_tt": "Без кунаклар өчен бәлеш пешердек.",
+          "meaning_tt": "Кунакларга дип бәлеш әзерләнүе әйтелә.",
+          "source_lines": [
+            1500,
+            1500
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "بز",
+              "reading_tt": "без",
+              "meaning_tt": "Сөйләүче һәм аның белән булган кешеләр.",
+              "explanation_tt": "Эшне башкаручы зат.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قوناقلر",
+              "reading_tt": "кунаклар",
+              "meaning_tt": "Килгән кешеләр, кунаклар.",
+              "explanation_tt": "Кыска لر күплекне белдерә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ئۇچوُن",
+              "reading_tt": "өчен",
+              "meaning_tt": "Кемгә атап эшләнгәнен күрсәтә.",
+              "explanation_tt": "Укыганда чыганакның өчен бәйлеге таныла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "به‌لش",
+              "reading_tt": "бәлеш",
+              "meaning_tt": "Эчлек салып пешерелгән камыр ризыгы.",
+              "explanation_tt": "Һә-рәсмиядән соңгы ара бер сүз эчендә; е укылышта тулыландырыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "پشردك",
+              "reading_tt": "пешердек",
+              "meaning_tt": "Без пешердек.",
+              "explanation_tt": "Кыска сузыклар укылышта тулыландырыла; دك затлы фигыль ахыры.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-08-01",
+        "RQ-08-02"
+      ]
+    },
+    {
+      "id": "READ-09",
+      "title_tt": "Китап һәм белем",
+      "level": 3,
+      "role": "practice",
+      "lesson_ids": [
+        "G06",
+        "L02"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-052",
+          "S-085"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-09-L01",
+          "source_form": "كتاب ياخشئ خلفه در",
+          "display_form": "كتاب ياخشئ خلفه‌در",
+          "reading_tt": "Китап яхшы хәлфәдер.",
+          "meaning_tt": "Китап яхшы укытучыга тиңләп күрсәтелә.",
+          "source_lines": [
+            1036,
+            1036
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "كتاب",
+              "reading_tt": "китап",
+              "meaning_tt": "Уку өчен язылган әсәр яки басма.",
+              "explanation_tt": "Алынма сүзнең тарихи кыска язылышы.",
+              "lexicon_id": "lex-55-044"
+            },
+            {
+              "surface": "ياخشئ",
+              "reading_tt": "яхшы",
+              "meaning_tt": "Уңай сыйфатлы, файдалы.",
+              "explanation_tt": "Соңгы ы хәрефен һәм хның язылышын таны.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "خلفه‌در",
+              "reading_tt": "хәлфәдер",
+              "meaning_tt": "Укытучыдыр, өйрәтүчедер.",
+              "explanation_tt": "Хәлфә — өйрәтүче кеше; در хәбәрлеккә бәйле кушымча.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-09-L02",
+          "source_form": "عالِم، جاهِل بر  توگلدر",
+          "display_form": "عالِم، جاهِل بر توگلدر",
+          "reading_tt": "Галим, җаһил бер түгелдер.",
+          "meaning_tt": "Белемле кеше белән надан кеше бердәй түгел дип әйтелә.",
+          "source_lines": [
+            1683,
+            1683
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "عالِم",
+              "reading_tt": "галим",
+              "meaning_tt": "Белемле, фән белән шөгыльләнүче кеше.",
+              "explanation_tt": "Татарча галим укылышы гарәпчә авазларны турыдан-туры күчерү түгел.",
+              "lexicon_id": "lex-55-046"
+            },
+            {
+              "surface": "جاهِل",
+              "reading_tt": "җаһил",
+              "meaning_tt": "Надан, белеме җитмәгән кеше.",
+              "explanation_tt": "Бу гарәптән кергән сүздәге мәгънә җөмләдә галимгә каршы куела.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بر",
+              "reading_tt": "бер",
+              "meaning_tt": "Бердәй, бер үк.",
+              "explanation_tt": "Бу җөмләдә сан гына түгел, бердәйлек мәгънәсе.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "توگلدر",
+              "reading_tt": "түгелдер",
+              "meaning_tt": "Бердәй түгеллеген белдерә.",
+              "explanation_tt": "Түгел аерым сүз, аның үзенә در ялганган.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-09-01",
+        "RQ-09-02"
+      ]
+    },
+    {
+      "id": "READ-10",
+      "title_tt": "Иске һәм яңа",
+      "level": 4,
+      "role": "practice",
+      "lesson_ids": [
+        "A07",
+        "A08",
+        "L02"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-076",
+          "S-078"
+        ]
+      },
+      "instructions_tt": "Ике юлны башта ярдәмсез укып кара. Кирәк булса, сүзгә басып хәреф, кагыйдә, укылыш һәм мәгънә ярдәмен чиратлап ач.",
+      "lines": [
+        {
+          "id": "READ-10-L01",
+          "source_form": "ياڭا بولدیٔ ديوب ايسكىُنیُ تاشلاما",
+          "display_form": "ياڭا بولدیٔ ديوب ايسكىُنیُ تاشلاما",
+          "reading_tt": "Яңа булды дип искене ташлама.",
+          "meaning_tt": "Нәрсәдер яңа булганга гына искене ташларга ашыкмау турында киңәш.",
+          "source_lines": [
+            1519,
+            1519
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "ياڭا",
+              "reading_tt": "яңа",
+              "meaning_tt": "Яңадан барлыкка килгән яки яңа саналган.",
+              "explanation_tt": "Ң нигезнең үз хәрефе.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولدیٔ",
+              "reading_tt": "булды",
+              "meaning_tt": "Барлыкка килде, шул рәвешкә керде.",
+              "explanation_tt": "Хәзерге татарча үткән заман формасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ديوب",
+              "reading_tt": "дип",
+              "meaning_tt": "Алдагы фикерне сәбәп яки әйтелгән сүз итеп бәйли.",
+              "explanation_tt": "Тарихи وب ахыры хәзерге дип укылышына туры килә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ايسكىُنیُ",
+              "reading_tt": "искене",
+              "meaning_tt": "Элеккеге әйберне.",
+              "explanation_tt": "Нечкә сүзгә төшем килеше кушымчасы ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "تاشلاما",
+              "reading_tt": "ташлама",
+              "meaning_tt": "Ташлау эшен башкарма.",
+              "explanation_tt": "-Ма юклык кушымчасы бергә язылган.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-10-L02",
+          "source_form": "آقچه ومالىٔ بولماغان كشىُ باي توگلدر",
+          "display_form": "آقچه ومالىٔ بولماغان كشىُ باي توگلدر",
+          "reading_tt": "Акча вә малы булмаган кеше бай түгелдер.",
+          "meaning_tt": "Акчасы һәм малы булмаган кешенең бай саналмавы әйтелә.",
+          "source_lines": [
+            1543,
+            1543
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "آقچه",
+              "reading_tt": "акча",
+              "meaning_tt": "Түләү чарасы.",
+              "explanation_tt": "Татарча таныш лексема.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ومالىٔ",
+              "reading_tt": "вә малы",
+              "meaning_tt": "Һәм аның малы, байлыгы.",
+              "explanation_tt": "Баштагы و бәйләүче вәне, калган өлеш مال һәм иялек формасын күрсәтә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولماغان",
+              "reading_tt": "булмаган",
+              "meaning_tt": "Бар булмау, ия булмау билгесе.",
+              "explanation_tt": "Юклык -ма һәм үткән эш формасы бергә килә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "كشىُ",
+              "reading_tt": "кеше",
+              "meaning_tt": "Кеше, адәм.",
+              "explanation_tt": "Кыска сузыклар нигезнең таныш нечкә укылышыннан аңлашыла.",
+              "lexicon_id": "lex-55-154"
+            },
+            {
+              "surface": "باي",
+              "reading_tt": "бай",
+              "meaning_tt": "Малы, акчасы күп булган.",
+              "explanation_tt": "Монда кешенең хәлле булуы турындагы билге.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "توگلدر",
+              "reading_tt": "түгелдер",
+              "meaning_tt": "Алдагы билгене кире кага.",
+              "explanation_tt": "Түгел аерым, در аңа кушылган.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-10-01",
+        "RQ-10-02"
+      ]
+    },
+    {
+      "id": "READ-F01",
+      "title_tt": "Мөстәкыйль уку: чагыштыру һәм чыганак",
+      "level": 3,
+      "role": "final",
+      "lesson_ids": [
+        "A02",
+        "A04"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-068",
+          "S-066"
+        ]
+      },
+      "instructions_tt": "Бу ике юлны мөстәкыйль укы һәм ике сорауга җавап бир. Укылыш, сүзлек һәм тавыш ярдәме нәтиҗәне тапшырганнан соң гына ачыла.",
+      "lines": [
+        {
+          "id": "READ-F01-L01",
+          "source_form": "شيكر قامشدن، چوُگندردن بولا",
+          "display_form": "شيكر قامشدن، چوُگندردن بولا",
+          "reading_tt": "Шикәр камыштан, чөгендердән була.",
+          "meaning_tt": "Шикәрне камыштан һәм чөгендердән алулары әйтелә.",
+          "source_lines": [
+            1388,
+            1388
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "شيكر",
+              "reading_tt": "шикәр",
+              "meaning_tt": "Татлы азык матдәсе.",
+              "explanation_tt": "Бу таныш сүзнең соңгы сузыгы укылыштан тулыландырыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قامشدن",
+              "reading_tt": "камыштан",
+              "meaning_tt": "Камыштан алынган.",
+              "explanation_tt": "Ш артыннан دن хәзерге -тан булып укыла.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "چوُگندردن",
+              "reading_tt": "чөгендердән",
+              "meaning_tt": "Чөгендердән алынган.",
+              "explanation_tt": "Нечкә нигез һәм кыска دن чыгыш кушымчасы.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولا",
+              "reading_tt": "була",
+              "meaning_tt": "Ясала, алына.",
+              "explanation_tt": "Җөмләдә нәрсәдән алынуын белдергән хәбәр.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-F01-L02",
+          "source_form": "آيدن قۈياش ياقتيراق بولا",
+          "display_form": "آيدن قۈياش ياقتيراق بولا",
+          "reading_tt": "Айдан кояш яктырак була.",
+          "meaning_tt": "Кояш Ай белән чагыштырылып яктырак дип әйтелә.",
+          "source_lines": [
+            1361,
+            1361
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "آيدن",
+              "reading_tt": "айдан",
+              "meaning_tt": "Ай белән чагыштырганда.",
+              "explanation_tt": "دن монда чагыштыруның нигезен күрсәтә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قۈياش",
+              "reading_tt": "кояш",
+              "meaning_tt": "Көндез яктырта торган күк җисеме.",
+              "explanation_tt": "Кыска уау о укылышына туры килә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "ياقتيراق",
+              "reading_tt": "яктырак",
+              "meaning_tt": "Күбрәк яктылык биргән.",
+              "explanation_tt": "-Рак чагыштыру дәрәҗәсен белдерә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "بولا",
+              "reading_tt": "була",
+              "meaning_tt": "Шундый билгесе булуын әйтә.",
+              "explanation_tt": "Җөмлә хәбәрен тәмамлый.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-F01-01",
+        "RQ-F01-02"
+      ]
+    },
+    {
+      "id": "READ-F02",
+      "title_tt": "Мөстәкыйль уку: мөрәҗәгать",
+      "level": 4,
+      "role": "final",
+      "lesson_ids": [
+        "A02",
+        "A03",
+        "A08",
+        "L02"
+      ],
+      "profile": "book_unspecified",
+      "provenance": {
+        "kind": "book_selection",
+        "note_tt": "Дәреслектәге күнегү җөмләләреннән төзелгән уку җыелмасы. Юллар бердәм тарихи документ яки өзлексез автор тексты дип тәкъдим ителми. Язылыш сакланган; татарча укылыш һәм бүгенге мәгънә аерым әзерләнгән.",
+        "source_sections": [
+          "S-070"
+        ]
+      },
+      "instructions_tt": "Бу ике юлны мөстәкыйль укы һәм ике сорауга җавап бир. Укылыш, сүзлек һәм тавыш ярдәме нәтиҗәне тапшырганнан соң гына ачыла.",
+      "lines": [
+        {
+          "id": "READ-F02-L01",
+          "source_form": "كتابلرغزنئ قولغزغه آلغز",
+          "display_form": "كتابلرغزنئ قولغزغه آلغز",
+          "reading_tt": "Китапларыгызны кулыгызга алыгыз.",
+          "meaning_tt": "Укучыларга китапларын кулга алырга кушыла.",
+          "source_lines": [
+            1415,
+            1415
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "كتابلرغزنئ",
+              "reading_tt": "китапларыгызны",
+              "meaning_tt": "Сезнең китапларыгызны.",
+              "explanation_tt": "Китап нигезе, күплек, иялек һәм төшем өлешләре таныла.",
+              "lexicon_id": "lex-55-044"
+            },
+            {
+              "surface": "قولغزغه",
+              "reading_tt": "кулыгызга",
+              "meaning_tt": "Сезнең кулыгызга.",
+              "explanation_tt": "Иялекле нигезгә юнәлеш кушымчасы ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "آلغز",
+              "reading_tt": "алыгыз",
+              "meaning_tt": "Алуны кушкан күплек яки хөрмәтле боеру.",
+              "explanation_tt": "Ы сузыклары укылышта тулыландырыла.",
+              "lexicon_id": null
+            }
+          ]
+        },
+        {
+          "id": "READ-F02-L02",
+          "source_form": "آتالرغزغه هم خلفه لرگزگه  قارشو سوز قايتارماغز",
+          "display_form": "آتالرغزغه هم خلفه‌لرگزگه قارشو سوز قايتارماغز",
+          "reading_tt": "Аталарыгызга һәм хәлфәләрегезгә каршы сүз кайтармагыз.",
+          "meaning_tt": "Аталарга һәм укытучыларга каршы җавап бирмәскә кушылган җөмлә.",
+          "source_lines": [
+            1415,
+            1415
+          ],
+          "reading_status": "editorial_checked",
+          "words": [
+            {
+              "surface": "آتالرغزغه",
+              "reading_tt": "аталарыгызга",
+              "meaning_tt": "Сезнең аталарыгызга.",
+              "explanation_tt": "Күплек һәм иялекле формага غه юнәлеш кушымчасы ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "هم",
+              "reading_tt": "һәм",
+              "meaning_tt": "Ике төркемне бәйли.",
+              "explanation_tt": "Алынма бәйләүче сүзне татарча һәм дип укыйбыз.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "خلفه‌لرگزگه",
+              "reading_tt": "хәлфәләрегезгә",
+              "meaning_tt": "Сезнең укытучыларыгызга.",
+              "explanation_tt": "Хәлфә нигезенә күплек, иялек һәм юнәлеш өлешләре ялганган.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قارشو",
+              "reading_tt": "каршы",
+              "meaning_tt": "Биредә каршы җавап бирү юнәлешен белдерә.",
+              "explanation_tt": "Тарихи ахыргы و хәзерге каршы укылышына бәйләнә.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "سوز",
+              "reading_tt": "сүз",
+              "meaning_tt": "Әйтелгән фикер, җавап.",
+              "explanation_tt": "Татарча таныш нечкә сүз.",
+              "lexicon_id": null
+            },
+            {
+              "surface": "قايتارماغز",
+              "reading_tt": "кайтармагыз",
+              "meaning_tt": "Кайтару эшен башкармагыз.",
+              "explanation_tt": "-Ма юклык кушымчасы һәм күплек боеру ахыры.",
+              "lexicon_id": null
+            }
+          ]
+        }
+      ],
+      "help_order": [
+        "letters",
+        "rule",
+        "reading",
+        "meaning"
+      ],
+      "question_ids": [
+        "RQ-F02-01",
+        "RQ-F02-02"
+      ]
+    }
+  ]
+}
