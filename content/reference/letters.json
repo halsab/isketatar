@@ -1,0 +1,778 @@
+{
+  "version": 1,
+  "title_tt": "Хәрефләр белешмәсе",
+  "direction": "rtl",
+  "order_tt": "Тәртип — уңнан сулга укыла торган әлифба тәртибе.",
+  "letters": [
+    {
+      "id": "LETTER-01",
+      "base": "ا",
+      "name_tt": "Әлиф",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Сузыкларны язу өчен нигез.",
+      "forms": {
+        "isolated": "ا",
+        "initial": "ا",
+        "medial": "‍ا",
+        "final": "‍ا"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-02",
+      "base": "ب",
+      "name_tt": "Бә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Б авазын белдерә.",
+      "forms": {
+        "isolated": "ب",
+        "initial": "ب‍",
+        "medial": "‍ب‍",
+        "final": "‍ب"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-03",
+      "base": "پ",
+      "name_tt": "Пә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "П авазын белдерә.",
+      "forms": {
+        "isolated": "پ",
+        "initial": "پ‍",
+        "medial": "‍پ‍",
+        "final": "‍پ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-04",
+      "base": "ت",
+      "name_tt": "Тә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Т авазын белдерә.",
+      "forms": {
+        "isolated": "ت",
+        "initial": "ت‍",
+        "medial": "‍ت‍",
+        "final": "‍ت"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-05",
+      "base": "ث",
+      "name_tt": "Сә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Гарәп алынмаларында с булып укыла.",
+      "forms": {
+        "isolated": "ث",
+        "initial": "ث‍",
+        "medial": "‍ث‍",
+        "final": "‍ث"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-06",
+      "base": "ج",
+      "name_tt": "Җим",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Җ авазын белдерә.",
+      "forms": {
+        "isolated": "ج",
+        "initial": "ج‍",
+        "medial": "‍ج‍",
+        "final": "‍ج"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-07",
+      "base": "چ",
+      "name_tt": "Чә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Ч авазын белдерә.",
+      "forms": {
+        "isolated": "چ",
+        "initial": "چ‍",
+        "medial": "‍چ‍",
+        "final": "‍چ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-08",
+      "base": "ح",
+      "name_tt": "Хә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Өйрәнелгән гарәп алынмаларында х булып укыла.",
+      "forms": {
+        "isolated": "ح",
+        "initial": "ح‍",
+        "medial": "‍ح‍",
+        "final": "‍ح"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-09",
+      "base": "خ",
+      "name_tt": "Ха",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Х авазын белдерә.",
+      "forms": {
+        "isolated": "خ",
+        "initial": "خ‍",
+        "medial": "‍خ‍",
+        "final": "‍خ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-10",
+      "base": "د",
+      "name_tt": "Дәл",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Д авазын белдерә; кайбер кушымчаларда т яки н ишетелә.",
+      "forms": {
+        "isolated": "د",
+        "initial": "د",
+        "medial": "‍د",
+        "final": "‍د"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-11",
+      "base": "ذ",
+      "name_tt": "Зәл",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Гарәп алынмаларында з булып укыла.",
+      "forms": {
+        "isolated": "ذ",
+        "initial": "ذ",
+        "medial": "‍ذ",
+        "final": "‍ذ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-12",
+      "base": "ر",
+      "name_tt": "Ра",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Р авазын белдерә.",
+      "forms": {
+        "isolated": "ر",
+        "initial": "ر",
+        "medial": "‍ر",
+        "final": "‍ر"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-13",
+      "base": "ز",
+      "name_tt": "Зә",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "З авазын белдерә.",
+      "forms": {
+        "isolated": "ز",
+        "initial": "ز",
+        "medial": "‍ز",
+        "final": "‍ز"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-14",
+      "base": "ژ",
+      "name_tt": "Жа",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Ж авазын белдерә.",
+      "forms": {
+        "isolated": "ژ",
+        "initial": "ژ",
+        "medial": "‍ژ",
+        "final": "‍ژ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-15",
+      "base": "س",
+      "name_tt": "Син",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "С авазын белдерә.",
+      "forms": {
+        "isolated": "س",
+        "initial": "س‍",
+        "medial": "‍س‍",
+        "final": "‍س"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-16",
+      "base": "ش",
+      "name_tt": "Шин",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Ш авазын белдерә.",
+      "forms": {
+        "isolated": "ش",
+        "initial": "ش‍",
+        "medial": "‍ش‍",
+        "final": "‍ش"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-17",
+      "base": "ص",
+      "name_tt": "Сад",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "С авазын белдерә; татар сүзләрендә калынлык белән бәйле.",
+      "forms": {
+        "isolated": "ص",
+        "initial": "ص‍",
+        "medial": "‍ص‍",
+        "final": "‍ص"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-18",
+      "base": "ض",
+      "name_tt": "Дад",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Өйрәнелгән гарәп алынмаларында з булып укыла.",
+      "forms": {
+        "isolated": "ض",
+        "initial": "ض‍",
+        "medial": "‍ض‍",
+        "final": "‍ض"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-19",
+      "base": "ط",
+      "name_tt": "Та",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Т авазын белдерә; татар сүзләрендә калынлык белән бәйле.",
+      "forms": {
+        "isolated": "ط",
+        "initial": "ط‍",
+        "medial": "‍ط‍",
+        "final": "‍ط"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-20",
+      "base": "ظ",
+      "name_tt": "За",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Өйрәнелгән гарәп алынмаларында з булып укыла.",
+      "forms": {
+        "isolated": "ظ",
+        "initial": "ظ‍",
+        "medial": "‍ظ‍",
+        "final": "‍ظ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-21",
+      "base": "ع",
+      "name_tt": "Гайн",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Алынмаларда саклана; татарча укылышы сүзгә бәйле.",
+      "forms": {
+        "isolated": "ع",
+        "initial": "ع‍",
+        "medial": "‍ع‍",
+        "final": "‍ع"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-22",
+      "base": "غ",
+      "name_tt": "Гыйн",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Калын г авазын белдерә; кайбер тарихи сүзләрдә аерым г булып әйтелми.",
+      "forms": {
+        "isolated": "غ",
+        "initial": "غ‍",
+        "medial": "‍غ‍",
+        "final": "‍غ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-23",
+      "base": "ف",
+      "name_tt": "Фә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Ф авазын белдерә.",
+      "forms": {
+        "isolated": "ف",
+        "initial": "ف‍",
+        "medial": "‍ف‍",
+        "final": "‍ف"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-24",
+      "base": "ق",
+      "name_tt": "Каф",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Калын к авазын белдерә.",
+      "forms": {
+        "isolated": "ق",
+        "initial": "ق‍",
+        "medial": "‍ق‍",
+        "final": "‍ق"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-25",
+      "base": "ك",
+      "name_tt": "Кәф",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Нечкә к һәм иске язылышта кайбер башка вазифаларда килә.",
+      "forms": {
+        "isolated": "ك",
+        "initial": "ك‍",
+        "medial": "‍ك‍",
+        "final": "‍ك"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-26",
+      "base": "گ",
+      "name_tt": "Гәф",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Г авазын аерып күрсәтә.",
+      "forms": {
+        "isolated": "گ",
+        "initial": "گ‍",
+        "medial": "‍گ‍",
+        "final": "‍گ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-27",
+      "base": "ڭ",
+      "name_tt": "Саңгырау кәф",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Ң авазын белдерә.",
+      "forms": {
+        "isolated": "ڭ",
+        "initial": "ڭ‍",
+        "medial": "‍ڭ‍",
+        "final": "‍ڭ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-28",
+      "base": "ل",
+      "name_tt": "Ләм",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Л авазын белдерә.",
+      "forms": {
+        "isolated": "ل",
+        "initial": "ل‍",
+        "medial": "‍ل‍",
+        "final": "‍ل"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-29",
+      "base": "م",
+      "name_tt": "Мим",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "М авазын белдерә.",
+      "forms": {
+        "isolated": "م",
+        "initial": "م‍",
+        "medial": "‍م‍",
+        "final": "‍م"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-30",
+      "base": "ن",
+      "name_tt": "Нун",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Н авазын белдерә.",
+      "forms": {
+        "isolated": "ن",
+        "initial": "ن‍",
+        "medial": "‍ن‍",
+        "final": "‍ن"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-31",
+      "base": "ه",
+      "name_tt": "Һә",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Һ тартыгы яки һә рәсмия вазифасында ә билгесе була.",
+      "forms": {
+        "isolated": "ه",
+        "initial": "ه‍",
+        "medial": "‍ه‍",
+        "final": "‍ه"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-32",
+      "base": "و",
+      "name_tt": "Уау",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Сузык яки ирен тартыгы вазифасында килә.",
+      "forms": {
+        "isolated": "و",
+        "initial": "و",
+        "medial": "‍و",
+        "final": "‍و"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-33",
+      "base": "ۋ",
+      "name_tt": "Өч нокталы уау",
+      "joins_previous": true,
+      "joins_following": false,
+      "function_tt": "Рус алынмаларындагы в авазын белдерә.",
+      "forms": {
+        "isolated": "ۋ",
+        "initial": "ۋ",
+        "medial": "‍ۋ",
+        "final": "‍ۋ"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    },
+    {
+      "id": "LETTER-34",
+      "base": "ي",
+      "name_tt": "Яй",
+      "joins_previous": true,
+      "joins_following": true,
+      "function_tt": "Сузык яки й тартыгы вазифасында килә.",
+      "forms": {
+        "isolated": "ي",
+        "initial": "ي‍",
+        "medial": "‍ي‍",
+        "final": "‍ي"
+      },
+      "source_sections": [
+        "S-015",
+        "S-109",
+        "S-110"
+      ],
+      "status": "editorial_checked",
+      "editorial_note": "Позиционные формы заданы основными буквами и ZWJ, без копирования опечаток таблиц приложения. ه здесь как согласная; разрыв у һә рәсмия описывается отдельно."
+    }
+  ],
+  "notes_tt": [
+    "Монда 34 төп хәреф бирелә. Сузык билгеләренең тарихи төрләре аерым карала.",
+    "Һә рәсмия ә авазын белдергәндә киләсе хәрефкә тоташмый. Бу таблицадагы һә тартыгы белән вазифасын бутама.",
+    "لا — ләм белән әлифнең бергә күренеше, мөстәкыйль яңа хәреф түгел.",
+    "Бер сүз эчендәге тоташу өзеге сүз арасы дигән сүз түгел."
+  ],
+  "ligatures": [
+    {
+      "text": "لا",
+      "components": [
+        "ل",
+        "ا"
+      ],
+      "name_tt": "Ләм-әлиф",
+      "source_sections": [
+        "S-109"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "text": "َ",
+      "name_tt": "Өс — фәтхә",
+      "function_tt": "Гарәп алынмасында кыска сузык билгесе."
+    },
+    {
+      "text": "ِ",
+      "name_tt": "Ас — кәсрә",
+      "function_tt": "Гарәп алынмасында кыска сузык билгесе."
+    },
+    {
+      "text": "ُ",
+      "name_tt": "Өтер — даммә",
+      "function_tt": "Гарәп алынмасында сузык билгесе; татар язылышында башка билгенең өлеше дә була."
+    },
+    {
+      "text": "ْ",
+      "name_tt": "Сәкен",
+      "function_tt": "Гарәп сүзендәге тартыктан соң сузык булмавын күрсәтә."
+    },
+    {
+      "text": "ّ",
+      "name_tt": "Тәшдид",
+      "function_tt": "Гарәп сүзендә тартыкның икеләтелүен күрсәтә."
+    },
+    {
+      "text": "ء",
+      "name_tt": "Һәмзә",
+      "function_tt": "Вазифасы язылыш профиленә һәм сүзгә бәйле."
+    },
+    {
+      "text": "آ",
+      "name_tt": "Мәдле әлиф",
+      "function_tt": "Татарча ун сузыклы язылышта сүз башындагы а билгесе."
+    }
+  ]
+}

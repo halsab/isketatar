@@ -45,7 +45,7 @@
     },
     {
       "id": "M03",
-      "title_tt": "Тартыклар һәм сүзнең әйтелеше",
+      "title_tt": "Тартыклар һәм сүзнең килеп чыгышы",
       "route": "common",
       "lesson_ids": [
         "K01",
@@ -87,7 +87,7 @@
     },
     {
       "id": "M06",
-      "title_tt": "Алынмалар һәм исемнәр",
+      "title_tt": "Алынма сүзләр һәм кушма төзелешләр",
       "route": "common",
       "lesson_ids": [
         "L01",
@@ -408,7 +408,7 @@
     {
       "id": "V01",
       "module_id": "M02",
-      "title_tt": "А һәм ә: әлиф һәм һә-рәсмия",
+      "title_tt": "А һәм ә: әлиф белән һә рәсмия",
       "route": "common",
       "prerequisites": [
         "C03"
@@ -426,7 +426,7 @@
     {
       "id": "V02",
       "module_id": "M02",
-      "title_tt": "У һәм ү: тулы уау",
+      "title_tt": "У һәм ү: уртак вауны уку",
       "route": "common",
       "prerequisites": [
         "V01"
@@ -444,7 +444,7 @@
     {
       "id": "V03",
       "module_id": "M02",
-      "title_tt": "И һәм ый: тулы яй",
+      "title_tt": "Тулы яй: и һәм ый",
       "route": "common",
       "prerequisites": [
         "V02"
@@ -477,7 +477,7 @@
     {
       "id": "V05",
       "module_id": "M02",
-      "title_tt": "Язылмаган ы һәм е авазлары",
+      "title_tt": "Язылмаган ы һәм ене уку",
       "route": "common",
       "prerequisites": [
         "V04"
@@ -493,7 +493,7 @@
     {
       "id": "V06",
       "module_id": "M02",
-      "title_tt": "Ачык иҗек һәм сүз ахырындагы ы, е",
+      "title_tt": "Ачык иҗек, сүз ахыры һәм кыска яй",
       "route": "common",
       "prerequisites": [
         "V05"
@@ -510,7 +510,7 @@
     {
       "id": "V07",
       "module_id": "M02",
-      "title_tt": "Яй һәм уау тартык булганда",
+      "title_tt": "Яй һәм вау тартык булганда",
       "route": "common",
       "prerequisites": [
         "V06"
@@ -526,7 +526,7 @@
     {
       "id": "V08",
       "module_id": "M02",
-      "title_tt": "О һәм ө: кыска уау",
+      "title_tt": "О һәм ө: кыска вау",
       "route": "common",
       "prerequisites": [
         "V07"
@@ -544,9 +544,10 @@
     {
       "id": "V09",
       "module_id": "M02",
-      "title_tt": "Алты һәм ун сузыклы язылыш",
+      "title_tt": "Ике җәдиди язылышны чагыштыру",
       "route": "common",
       "prerequisites": [
+        "C03",
         "V08"
       ],
       "source_sections": [
@@ -560,7 +561,7 @@
     {
       "id": "K01",
       "module_id": "M03",
-      "title_tt": "Калынлык-нечкәлек: ق һәм ك",
+      "title_tt": "Калынлык, нечкәлек һәм ق / ك",
       "route": "common",
       "prerequisites": [
         "V09"
@@ -578,7 +579,7 @@
     {
       "id": "K02",
       "module_id": "M03",
-      "title_tt": "Өч кәф һәм к–г чиратлашуы",
+      "title_tt": "Кәф төрләре һәм сүз төрләнгәндәге үзгәреш",
       "route": "common",
       "prerequisites": [
         "K01"
@@ -595,7 +596,7 @@
     {
       "id": "K03",
       "module_id": "M03",
-      "title_tt": "С авазы: س ص ث",
+      "title_tt": "С: син, сад һәм алынмалардагы сә",
       "route": "common",
       "prerequisites": [
         "K02"
@@ -611,7 +612,7 @@
     {
       "id": "K04",
       "module_id": "M03",
-      "title_tt": "Т һәм д авазлары: ت ط د",
+      "title_tt": "Т: тә, та һәм үзгәрми торган дәл",
       "route": "common",
       "prerequisites": [
         "K03"
@@ -628,7 +629,7 @@
     {
       "id": "K05",
       "module_id": "M03",
-      "title_tt": "Х, һ һәм г авазларын аеру",
+      "title_tt": "Х, һ һәм г: аваз белән сүзнең килеп чыгышы",
       "route": "common",
       "prerequisites": [
         "K04"
@@ -645,7 +646,7 @@
     {
       "id": "K06",
       "module_id": "M03",
-      "title_tt": "З авазы һәм алынма хәрефләр",
+      "title_tt": "З һәм алынмалардагы дүрт язылыш",
       "route": "common",
       "prerequisites": [
         "K05"

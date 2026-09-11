@@ -15,10 +15,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B01-01",
+        "Q-B01-02",
+        "Q-B01-03",
+        "Q-B01-04",
+        "Q-B01-05",
+        "Q-B01-06",
+        "Q-B01-07",
+        "Q-B01-08"
+      ],
+      "rule_ids": [
+        "R-B01-01",
+        "R-B01-02",
+        "R-B01-03"
       ]
     },
     {
@@ -38,10 +50,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B02-01",
+        "Q-B02-02",
+        "Q-B02-03",
+        "Q-B02-04",
+        "Q-B02-05",
+        "Q-B02-06",
+        "Q-B02-07",
+        "Q-B02-08"
+      ],
+      "rule_ids": [
+        "R-B02-01",
+        "R-B02-02",
+        "R-B02-03",
+        "R-B02-04"
       ]
     },
     {
@@ -61,10 +86,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B03-01",
+        "Q-B03-02",
+        "Q-B03-03",
+        "Q-B03-04",
+        "Q-B03-05",
+        "Q-B03-06",
+        "Q-B03-07",
+        "Q-B03-08"
+      ],
+      "rule_ids": [
+        "R-B03-01",
+        "R-B03-02",
+        "R-B03-03"
       ]
     },
     {
@@ -84,10 +121,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B04-01",
+        "Q-B04-02",
+        "Q-B04-03",
+        "Q-B04-04",
+        "Q-B04-05",
+        "Q-B04-06",
+        "Q-B04-07",
+        "Q-B04-08"
+      ],
+      "rule_ids": [
+        "R-B04-01",
+        "R-B04-02",
+        "R-B04-03",
+        "R-B04-04"
       ]
     },
     {
@@ -105,10 +155,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B05-01",
+        "Q-B05-02",
+        "Q-B05-03",
+        "Q-B05-04",
+        "Q-B05-05",
+        "Q-B05-06",
+        "Q-B05-07",
+        "Q-B05-08"
+      ],
+      "rule_ids": [
+        "R-B05-01",
+        "R-B05-02",
+        "R-B05-03",
+        "R-B05-04"
       ]
     },
     {
@@ -127,10 +190,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B06-01",
+        "Q-B06-02",
+        "Q-B06-03",
+        "Q-B06-04",
+        "Q-B06-05",
+        "Q-B06-06",
+        "Q-B06-07",
+        "Q-B06-08"
+      ],
+      "rule_ids": [
+        "R-B06-01",
+        "R-B06-02",
+        "R-B06-03",
+        "R-B06-04"
       ]
     },
     {
@@ -149,10 +225,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-B07-01",
+        "Q-B07-02",
+        "Q-B07-03",
+        "Q-B07-04",
+        "Q-B07-05",
+        "Q-B07-06",
+        "Q-B07-07",
+        "Q-B07-08"
+      ],
+      "rule_ids": [
+        "R-B07-01",
+        "R-B07-02",
+        "R-B07-03"
       ]
     },
     {
@@ -172,10 +260,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-C01-01",
+        "Q-C01-02",
+        "Q-C01-03",
+        "Q-C01-04",
+        "Q-C01-05",
+        "Q-C01-06",
+        "Q-C01-07",
+        "Q-C01-08"
+      ],
+      "rule_ids": [
+        "R-C01-01",
+        "R-C01-02",
+        "R-C01-03"
       ]
     },
     {
@@ -194,10 +295,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "letter"
+      ],
+      "question_ids": [
+        "Q-C02-01",
+        "Q-C02-02",
+        "Q-C02-03",
+        "Q-C02-04",
+        "Q-C02-05",
+        "Q-C02-06",
+        "Q-C02-07",
+        "Q-C02-08"
+      ],
+      "rule_ids": [
+        "R-C02-01",
+        "R-C02-02",
+        "R-C02-03"
       ]
     },
     {
@@ -215,10 +328,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-C03-01",
+        "Q-C03-02",
+        "Q-C03-03",
+        "Q-C03-04",
+        "Q-C03-05",
+        "Q-C03-06",
+        "Q-C03-07",
+        "Q-C03-08"
+      ],
+      "rule_ids": [
+        "R-C03-01",
+        "R-C03-02",
+        "R-C03-03",
+        "R-C03-04"
       ]
     },
     {
@@ -236,10 +362,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V01-01",
+        "Q-V01-02",
+        "Q-V01-03",
+        "Q-V01-04",
+        "Q-V01-05",
+        "Q-V01-06",
+        "Q-V01-07",
+        "Q-V01-08"
+      ],
+      "rule_ids": [
+        "R-V01-01",
+        "R-V01-02"
       ]
     },
     {
@@ -257,10 +395,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V02-01",
+        "Q-V02-02",
+        "Q-V02-03",
+        "Q-V02-04",
+        "Q-V02-05",
+        "Q-V02-06",
+        "Q-V02-07",
+        "Q-V02-08"
+      ],
+      "rule_ids": [
+        "R-V02-01",
+        "R-V02-02"
       ]
     },
     {
@@ -276,10 +426,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V03-01",
+        "Q-V03-02",
+        "Q-V03-03",
+        "Q-V03-04",
+        "Q-V03-05",
+        "Q-V03-06",
+        "Q-V03-07",
+        "Q-V03-08"
+      ],
+      "rule_ids": [
+        "R-V03-01",
+        "R-V03-02"
       ]
     },
     {
@@ -296,10 +458,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V04-01",
+        "Q-V04-02",
+        "Q-V04-03",
+        "Q-V04-04",
+        "Q-V04-05",
+        "Q-V04-06",
+        "Q-V04-07",
+        "Q-V04-08"
+      ],
+      "rule_ids": [
+        "R-V04-01",
+        "R-V04-02"
       ]
     },
     {
@@ -315,10 +489,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V05-01",
+        "Q-V05-02",
+        "Q-V05-03",
+        "Q-V05-04",
+        "Q-V05-05",
+        "Q-V05-06",
+        "Q-V05-07",
+        "Q-V05-08"
+      ],
+      "rule_ids": [
+        "R-V05-01",
+        "R-V05-02"
       ]
     },
     {
@@ -335,10 +521,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V06-01",
+        "Q-V06-02",
+        "Q-V06-03",
+        "Q-V06-04",
+        "Q-V06-05",
+        "Q-V06-06",
+        "Q-V06-07",
+        "Q-V06-08"
+      ],
+      "rule_ids": [
+        "R-V06-01",
+        "R-V06-02",
+        "R-V06-03"
       ]
     },
     {
@@ -354,10 +553,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V07-01",
+        "Q-V07-02",
+        "Q-V07-03",
+        "Q-V07-04",
+        "Q-V07-05",
+        "Q-V07-06",
+        "Q-V07-07",
+        "Q-V07-08"
+      ],
+      "rule_ids": [
+        "R-V07-01",
+        "R-V07-02",
+        "R-V07-03"
       ]
     },
     {
@@ -375,10 +587,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V08-01",
+        "Q-V08-02",
+        "Q-V08-03",
+        "Q-V08-04",
+        "Q-V08-05",
+        "Q-V08-06",
+        "Q-V08-07",
+        "Q-V08-08"
+      ],
+      "rule_ids": [
+        "R-V08-01",
+        "R-V08-02"
       ]
     },
     {
@@ -394,10 +618,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-V09-01",
+        "Q-V09-02",
+        "Q-V09-03",
+        "Q-V09-04",
+        "Q-V09-05",
+        "Q-V09-06",
+        "Q-V09-07",
+        "Q-V09-08"
+      ],
+      "rule_ids": [
+        "R-V09-01",
+        "R-V09-02",
+        "R-V09-03"
       ]
     },
     {
@@ -415,10 +652,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K01-01",
+        "Q-K01-02",
+        "Q-K01-03",
+        "Q-K01-04",
+        "Q-K01-05",
+        "Q-K01-06",
+        "Q-K01-07",
+        "Q-K01-08"
+      ],
+      "rule_ids": [
+        "R-K01-01",
+        "R-K01-02",
+        "R-K01-03"
       ]
     },
     {
@@ -435,10 +685,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K02-01",
+        "Q-K02-02",
+        "Q-K02-03",
+        "Q-K02-04",
+        "Q-K02-05",
+        "Q-K02-06",
+        "Q-K02-07",
+        "Q-K02-08"
+      ],
+      "rule_ids": [
+        "R-K02-01",
+        "R-K02-02"
       ]
     },
     {
@@ -454,10 +716,26 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K03-01",
+        "Q-K03-02",
+        "Q-K03-03",
+        "Q-K03-04",
+        "Q-K03-05",
+        "Q-K03-06",
+        "Q-K03-07",
+        "Q-K03-08"
+      ],
+      "rule_ids": [
+        "R-K03-01",
+        "R-K03-02",
+        "R-K03-03",
+        "R-K03-04",
+        "R-K03-05"
       ]
     },
     {
@@ -474,10 +752,26 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K04-01",
+        "Q-K04-02",
+        "Q-K04-03",
+        "Q-K04-04",
+        "Q-K04-05",
+        "Q-K04-06",
+        "Q-K04-07",
+        "Q-K04-08",
+        "Q-K04-09"
+      ],
+      "rule_ids": [
+        "R-K04-01",
+        "R-K04-02",
+        "R-K04-03",
+        "R-K04-04"
       ]
     },
     {
@@ -494,10 +788,24 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K05-01",
+        "Q-K05-02",
+        "Q-K05-03",
+        "Q-K05-04",
+        "Q-K05-05",
+        "Q-K05-06",
+        "Q-K05-07",
+        "Q-K05-08"
+      ],
+      "rule_ids": [
+        "R-K05-01",
+        "R-K05-02",
+        "R-K05-03",
+        "R-K05-04"
       ]
     },
     {
@@ -513,10 +821,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-K06-01",
+        "Q-K06-02",
+        "Q-K06-03",
+        "Q-K06-04",
+        "Q-K06-05",
+        "Q-K06-06",
+        "Q-K06-07",
+        "Q-K06-08"
+      ],
+      "rule_ids": [
+        "R-K06-01",
+        "R-K06-02",
+        "R-K06-03"
       ]
     },
     {
@@ -535,9 +856,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G01-01",
+        "Q-G01-02",
+        "Q-G01-03",
+        "Q-G01-04",
+        "Q-G01-05",
+        "Q-G01-06",
+        "Q-G01-07",
+        "Q-G01-08",
+        "Q-G01-09"
+      ],
+      "rule_ids": [
+        "R-G01-01",
+        "R-G01-02"
       ]
     },
     {
@@ -556,10 +892,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G02-01",
+        "Q-G02-02",
+        "Q-G02-03",
+        "Q-G02-04",
+        "Q-G02-05",
+        "Q-G02-06",
+        "Q-G02-07",
+        "Q-G02-08"
+      ],
+      "rule_ids": [
+        "R-G02-01",
+        "R-G02-02",
+        "R-G02-03"
       ]
     },
     {
@@ -579,8 +928,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G03-01",
+        "Q-G03-02",
+        "Q-G03-03",
+        "Q-G03-04",
+        "Q-G03-05",
+        "Q-G03-06",
+        "Q-G03-07",
+        "Q-G03-08"
+      ],
+      "rule_ids": [
+        "R-G03-01",
+        "R-G03-02"
       ]
     },
     {
@@ -596,10 +958,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G04-01",
+        "Q-G04-02",
+        "Q-G04-03",
+        "Q-G04-04",
+        "Q-G04-05",
+        "Q-G04-06",
+        "Q-G04-07",
+        "Q-G04-08"
+      ],
+      "rule_ids": [
+        "R-G04-01",
+        "R-G04-02"
       ]
     },
     {
@@ -616,9 +991,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G05-01",
+        "Q-G05-02",
+        "Q-G05-03",
+        "Q-G05-04",
+        "Q-G05-05",
+        "Q-G05-06",
+        "Q-G05-07",
+        "Q-G05-08"
+      ],
+      "rule_ids": [
+        "R-G05-01",
+        "R-G05-02",
+        "R-G05-03"
       ]
     },
     {
@@ -634,10 +1024,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-G06-01",
+        "Q-G06-02",
+        "Q-G06-03",
+        "Q-G06-04",
+        "Q-G06-05",
+        "Q-G06-06",
+        "Q-G06-07",
+        "Q-G06-08"
+      ],
+      "rule_ids": [
+        "R-G06-01",
+        "R-G06-02",
+        "R-G06-03"
       ]
     },
     {
@@ -657,10 +1060,24 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A01-01",
+        "Q-A01-02",
+        "Q-A01-03",
+        "Q-A01-04",
+        "Q-A01-05",
+        "Q-A01-06",
+        "Q-A01-07",
+        "Q-A01-08"
+      ],
+      "rule_ids": [
+        "R-A01-01",
+        "R-A01-02",
+        "R-A01-03"
       ]
     },
     {
@@ -678,10 +1095,27 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A02-01",
+        "Q-A02-02",
+        "Q-A02-03",
+        "Q-A02-04",
+        "Q-A02-05",
+        "Q-A02-06",
+        "Q-A02-07",
+        "Q-A02-08",
+        "Q-A02-09",
+        "Q-A02-10",
+        "Q-A02-11"
+      ],
+      "rule_ids": [
+        "R-A02-01",
+        "R-A02-02",
+        "R-A02-03"
       ]
     },
     {
@@ -698,9 +1132,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A03-01",
+        "Q-A03-02",
+        "Q-A03-03",
+        "Q-A03-04",
+        "Q-A03-05",
+        "Q-A03-06",
+        "Q-A03-07",
+        "Q-A03-08",
+        "Q-A03-09"
+      ],
+      "rule_ids": [
+        "R-A03-01",
+        "R-A03-02"
       ]
     },
     {
@@ -717,9 +1166,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A04-01",
+        "Q-A04-02",
+        "Q-A04-03",
+        "Q-A04-04",
+        "Q-A04-05",
+        "Q-A04-06",
+        "Q-A04-07",
+        "Q-A04-08",
+        "Q-A04-09"
+      ],
+      "rule_ids": [
+        "R-A04-01",
+        "R-A04-02"
       ]
     },
     {
@@ -735,10 +1199,24 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A05-01",
+        "Q-A05-02",
+        "Q-A05-03",
+        "Q-A05-04",
+        "Q-A05-05",
+        "Q-A05-06",
+        "Q-A05-07",
+        "Q-A05-08",
+        "Q-A05-09"
+      ],
+      "rule_ids": [
+        "R-A05-01",
+        "R-A05-02"
       ]
     },
     {
@@ -755,10 +1233,25 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A06-01",
+        "Q-A06-02",
+        "Q-A06-03",
+        "Q-A06-04",
+        "Q-A06-05",
+        "Q-A06-06",
+        "Q-A06-07",
+        "Q-A06-08",
+        "Q-A06-09",
+        "Q-A06-10"
+      ],
+      "rule_ids": [
+        "R-A06-01",
+        "R-A06-02"
       ]
     },
     {
@@ -775,9 +1268,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A07-01",
+        "Q-A07-02",
+        "Q-A07-03",
+        "Q-A07-04",
+        "Q-A07-05",
+        "Q-A07-06",
+        "Q-A07-07",
+        "Q-A07-08",
+        "Q-A07-09"
+      ],
+      "rule_ids": [
+        "R-A07-01",
+        "R-A07-02"
       ]
     },
     {
@@ -795,9 +1303,24 @@
       },
       "facets": [
         "letter",
+        "morphology",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A08-01",
+        "Q-A08-02",
+        "Q-A08-03",
+        "Q-A08-04",
+        "Q-A08-05",
+        "Q-A08-06",
+        "Q-A08-07",
+        "Q-A08-08",
+        "Q-A08-09"
+      ],
+      "rule_ids": [
+        "R-A08-01",
+        "R-A08-02"
       ]
     },
     {
@@ -816,8 +1339,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-A09-01",
+        "Q-A09-02",
+        "Q-A09-03",
+        "Q-A09-04",
+        "Q-A09-05",
+        "Q-A09-06",
+        "Q-A09-07",
+        "Q-A09-08"
+      ],
+      "rule_ids": [
+        "R-A09-01",
+        "R-A09-02"
       ]
     },
     {
@@ -836,8 +1372,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L01-01",
+        "Q-L01-02",
+        "Q-L01-03",
+        "Q-L01-04",
+        "Q-L01-05",
+        "Q-L01-06",
+        "Q-L01-07",
+        "Q-L01-08"
+      ],
+      "rule_ids": [
+        "R-L01-01",
+        "R-L01-02"
       ]
     },
     {
@@ -856,8 +1405,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L02-01",
+        "Q-L02-02",
+        "Q-L02-03",
+        "Q-L02-04",
+        "Q-L02-05",
+        "Q-L02-06",
+        "Q-L02-07",
+        "Q-L02-08"
+      ],
+      "rule_ids": [
+        "R-L02-01",
+        "R-L02-02"
       ]
     },
     {
@@ -876,8 +1438,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L03-01",
+        "Q-L03-02",
+        "Q-L03-03",
+        "Q-L03-04",
+        "Q-L03-05",
+        "Q-L03-06",
+        "Q-L03-07",
+        "Q-L03-08"
+      ],
+      "rule_ids": [
+        "R-L03-01",
+        "R-L03-02"
       ]
     },
     {
@@ -895,8 +1470,22 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L04-01",
+        "Q-L04-02",
+        "Q-L04-03",
+        "Q-L04-04",
+        "Q-L04-05",
+        "Q-L04-06",
+        "Q-L04-07",
+        "Q-L04-08"
+      ],
+      "rule_ids": [
+        "R-L04-01",
+        "R-L04-02",
+        "R-L04-03"
       ]
     },
     {
@@ -915,8 +1504,21 @@
       "facets": [
         "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L05-01",
+        "Q-L05-02",
+        "Q-L05-03",
+        "Q-L05-04",
+        "Q-L05-05",
+        "Q-L05-06",
+        "Q-L05-07",
+        "Q-L05-08"
+      ],
+      "rule_ids": [
+        "R-L05-01",
+        "R-L05-02"
       ]
     },
     {
@@ -935,9 +1537,22 @@
       },
       "facets": [
         "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "morphology",
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L06-01",
+        "Q-L06-02",
+        "Q-L06-03",
+        "Q-L06-04",
+        "Q-L06-05",
+        "Q-L06-06",
+        "Q-L06-07",
+        "Q-L06-08"
+      ],
+      "rule_ids": [
+        "R-L06-01",
+        "R-L06-02"
       ]
     },
     {
@@ -955,9 +1570,21 @@
       },
       "facets": [
         "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-L07-01",
+        "Q-L07-02",
+        "Q-L07-03",
+        "Q-L07-04",
+        "Q-L07-05",
+        "Q-L07-06",
+        "Q-L07-07",
+        "Q-L07-08"
+      ],
+      "rule_ids": [
+        "R-L07-01",
+        "R-L07-02"
       ]
     },
     {
@@ -975,9 +1602,23 @@
       },
       "facets": [
         "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "morphology",
+        "reading"
+      ],
+      "question_ids": [
+        "Q-L08-01",
+        "Q-L08-02",
+        "Q-L08-03",
+        "Q-L08-04",
+        "Q-L08-05",
+        "Q-L08-06",
+        "Q-L08-07",
+        "Q-L08-08"
+      ],
+      "rule_ids": [
+        "R-L08-01",
+        "R-L08-02",
+        "R-L08-03"
       ]
     },
     {
@@ -996,10 +1637,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
         "morphology"
+      ],
+      "question_ids": [
+        "Q-L09-01",
+        "Q-L09-02",
+        "Q-L09-03",
+        "Q-L09-04",
+        "Q-L09-05",
+        "Q-L09-06",
+        "Q-L09-07",
+        "Q-L09-08"
+      ],
+      "rule_ids": [
+        "R-L09-01",
+        "R-L09-02",
+        "R-L09-03"
       ]
     },
     {
@@ -1015,10 +1668,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "morphology",
+        "reading"
+      ],
+      "question_ids": [
+        "Q-L10-01",
+        "Q-L10-02",
+        "Q-L10-03",
+        "Q-L10-04",
+        "Q-L10-05",
+        "Q-L10-06",
+        "Q-L10-07",
+        "Q-L10-08"
+      ],
+      "rule_ids": [
+        "R-L10-01",
+        "R-L10-02",
+        "R-L10-03"
       ]
     },
     {
@@ -1047,10 +1713,22 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
-        "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-H01-01",
+        "Q-H01-02",
+        "Q-H01-03",
+        "Q-H01-04",
+        "Q-H01-05",
+        "Q-H01-06",
+        "Q-H01-07",
+        "Q-H01-08"
+      ],
+      "rule_ids": [
+        "R-H01-01",
+        "R-H01-02",
+        "R-H01-03"
       ]
     },
     {
@@ -1073,10 +1751,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-H02-01",
+        "Q-H02-02",
+        "Q-H02-03",
+        "Q-H02-04",
+        "Q-H02-05",
+        "Q-H02-06",
+        "Q-H02-07",
+        "Q-H02-08"
+      ],
+      "rule_ids": [
+        "R-H02-01",
+        "R-H02-02",
+        "R-H02-03"
       ]
     },
     {
@@ -1096,10 +1787,23 @@
         "independent_answer_required": true
       },
       "facets": [
-        "letter",
         "reading",
-        "rule",
-        "morphology"
+        "rule"
+      ],
+      "question_ids": [
+        "Q-H03-01",
+        "Q-H03-02",
+        "Q-H03-03",
+        "Q-H03-04",
+        "Q-H03-05",
+        "Q-H03-06",
+        "Q-H03-07",
+        "Q-H03-08"
+      ],
+      "rule_ids": [
+        "R-H03-01",
+        "R-H03-02",
+        "R-H03-03"
       ]
     }
   ],
