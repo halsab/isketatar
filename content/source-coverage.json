@@ -1,0 +1,835 @@
+{
+  "sections": [
+    {
+      "source_section_id": "S-001",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-002",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-003",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-004",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-005",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-006",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-007",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-008",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-009",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-010",
+      "lesson_ids": [
+        "C01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-011",
+      "lesson_ids": [
+        "B07",
+        "C01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-012",
+      "lesson_ids": [
+        "C01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-013",
+      "lesson_ids": [
+        "C01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-014",
+      "lesson_ids": [
+        "C01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-015",
+      "lesson_ids": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-016",
+      "lesson_ids": [
+        "C02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-017",
+      "lesson_ids": [
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "C02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-018",
+      "lesson_ids": [
+        "B02",
+        "B03",
+        "B04",
+        "B06",
+        "C02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-019",
+      "lesson_ids": [
+        "C02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-020",
+      "lesson_ids": [
+        "C03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-021",
+      "lesson_ids": [
+        "C03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-022",
+      "lesson_ids": [
+        "V01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-023",
+      "lesson_ids": [
+        "B07",
+        "V01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-024",
+      "lesson_ids": [
+        "V01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-025",
+      "lesson_ids": [
+        "V02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-026",
+      "lesson_ids": [
+        "V02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-027",
+      "lesson_ids": [
+        "V02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-028",
+      "lesson_ids": [
+        "V03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-029",
+      "lesson_ids": [
+        "V04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-030",
+      "lesson_ids": [
+        "V04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-031",
+      "lesson_ids": [
+        "V05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-032",
+      "lesson_ids": [
+        "V06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-033",
+      "lesson_ids": [
+        "V06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-034",
+      "lesson_ids": [
+        "V07"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-035",
+      "lesson_ids": [
+        "V08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-036",
+      "lesson_ids": [
+        "V08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-037",
+      "lesson_ids": [
+        "V08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-038",
+      "lesson_ids": [
+        "V09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-039",
+      "lesson_ids": [
+        "K01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-040",
+      "lesson_ids": [
+        "K01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-041",
+      "lesson_ids": [
+        "K02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-042",
+      "lesson_ids": [
+        "K02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-043",
+      "lesson_ids": [
+        "K03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-044",
+      "lesson_ids": [
+        "K04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-045",
+      "lesson_ids": [
+        "K05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-046",
+      "lesson_ids": [
+        "K05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-047",
+      "lesson_ids": [
+        "K04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-048",
+      "lesson_ids": [
+        "K06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-049",
+      "lesson_ids": [
+        "G01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-050",
+      "lesson_ids": [
+        "C03",
+        "K01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-051",
+      "lesson_ids": [
+        "B07",
+        "G01",
+        "H03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-052",
+      "lesson_ids": [
+        "G01",
+        "H03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-053",
+      "lesson_ids": [
+        "G02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-054",
+      "lesson_ids": [
+        "G02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-055",
+      "lesson_ids": [
+        "G02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-056",
+      "lesson_ids": [
+        "G02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-057",
+      "lesson_ids": [
+        "G03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-058",
+      "lesson_ids": [
+        "G03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-059",
+      "lesson_ids": [
+        "G03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-060",
+      "lesson_ids": [
+        "G04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-061",
+      "lesson_ids": [
+        "G05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-062",
+      "lesson_ids": [
+        "G06",
+        "H03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-063",
+      "lesson_ids": [
+        "A01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-064",
+      "lesson_ids": [
+        "A01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-065",
+      "lesson_ids": [
+        "A01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-066",
+      "lesson_ids": [
+        "A01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-067",
+      "lesson_ids": [
+        "A01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-068",
+      "lesson_ids": [
+        "A02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-069",
+      "lesson_ids": [
+        "A02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-070",
+      "lesson_ids": [
+        "A03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-071",
+      "lesson_ids": [
+        "A02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-072",
+      "lesson_ids": [
+        "A04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-073",
+      "lesson_ids": [
+        "A05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-074",
+      "lesson_ids": [
+        "A06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-075",
+      "lesson_ids": [
+        "A06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-076",
+      "lesson_ids": [
+        "A07"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-077",
+      "lesson_ids": [
+        "A08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-078",
+      "lesson_ids": [
+        "A08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-079",
+      "lesson_ids": [
+        "A09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-080",
+      "lesson_ids": [
+        "A09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-081",
+      "lesson_ids": [
+        "L01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-082",
+      "lesson_ids": [
+        "L01"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-083",
+      "lesson_ids": [
+        "L02",
+        "H03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-084",
+      "lesson_ids": [
+        "L02"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-085",
+      "lesson_ids": [
+        "L03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-086",
+      "lesson_ids": [
+        "L03"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-087",
+      "lesson_ids": [
+        "L04"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-088",
+      "lesson_ids": [
+        "L05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-089",
+      "lesson_ids": [
+        "L05"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-090",
+      "lesson_ids": [
+        "L06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-091",
+      "lesson_ids": [
+        "L06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-092",
+      "lesson_ids": [
+        "L06"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-093",
+      "lesson_ids": [
+        "L07"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-094",
+      "lesson_ids": [
+        "L08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-095",
+      "lesson_ids": [
+        "L08"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-096",
+      "lesson_ids": [
+        "L09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-097",
+      "lesson_ids": [
+        "L09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-098",
+      "lesson_ids": [
+        "L09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-099",
+      "lesson_ids": [
+        "L09"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-100",
+      "lesson_ids": [
+        "L10"
+      ],
+      "additional_destination": null
+    },
+    {
+      "source_section_id": "S-101",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-102",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-103",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-104",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-105",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-106",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-107",
+      "lesson_ids": [
+        "H02"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-108",
+      "lesson_ids": [
+        "H02",
+        "H03"
+      ],
+      "additional_destination": "lexicon"
+    },
+    {
+      "source_section_id": "S-109",
+      "lesson_ids": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "H01"
+      ],
+      "additional_destination": "reference"
+    },
+    {
+      "source_section_id": "S-110",
+      "lesson_ids": [
+        "B02",
+        "B03",
+        "B04",
+        "B06",
+        "H01"
+      ],
+      "additional_destination": "reference"
+    },
+    {
+      "source_section_id": "S-111",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": "reference"
+    },
+    {
+      "source_section_id": "S-112",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": "reference"
+    },
+    {
+      "source_section_id": "S-113",
+      "lesson_ids": [
+        "H01"
+      ],
+      "additional_destination": "reference"
+    },
+    {
+      "source_section_id": "S-114",
+      "lesson_ids": [
+        "L07"
+      ],
+      "additional_destination": null
+    }
+  ]
+}

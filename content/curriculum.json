@@ -1,0 +1,1161 @@
+{
+  "version": 1,
+  "language": "tt-Cyrl",
+  "default_profile": "book_jadid_10",
+  "modules": [
+    {
+      "id": "M00",
+      "title_tt": "Гарәп язуы белән танышу",
+      "route": "foundation",
+      "lesson_ids": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07"
+      ]
+    },
+    {
+      "id": "M01",
+      "title_tt": "Гарәп язуыннан иске имляга",
+      "route": "common",
+      "lesson_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ]
+    },
+    {
+      "id": "M02",
+      "title_tt": "Сузыкларны уку",
+      "route": "common",
+      "lesson_ids": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09"
+      ]
+    },
+    {
+      "id": "M03",
+      "title_tt": "Тартыклар һәм сүзнең әйтелеше",
+      "route": "common",
+      "lesson_ids": [
+        "K01",
+        "K02",
+        "K03",
+        "K04",
+        "K05",
+        "K06"
+      ]
+    },
+    {
+      "id": "M04",
+      "title_tt": "Сүз һәм язылыш кагыйдәләре",
+      "route": "common",
+      "lesson_ids": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06"
+      ]
+    },
+    {
+      "id": "M05",
+      "title_tt": "Кушымчаларны уку",
+      "route": "common",
+      "lesson_ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09"
+      ]
+    },
+    {
+      "id": "M06",
+      "title_tt": "Алынмалар һәм исемнәр",
+      "route": "common",
+      "lesson_ids": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "L08",
+        "L09",
+        "L10"
+      ]
+    },
+    {
+      "id": "M07",
+      "title_tt": "Мирасны укуга күчү",
+      "route": "common",
+      "lesson_ids": [
+        "H01",
+        "H02",
+        "H03"
+      ]
+    }
+  ],
+  "routes": {
+    "arabic_reader": [
+      "C01",
+      "C02",
+      "C03",
+      "V01",
+      "V02",
+      "V03",
+      "V04",
+      "V05",
+      "V06",
+      "V07",
+      "V08",
+      "V09",
+      "K01",
+      "K02",
+      "K03",
+      "K04",
+      "K05",
+      "K06",
+      "G01",
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07",
+      "L08",
+      "L09",
+      "L10",
+      "H01",
+      "H02",
+      "H03"
+    ],
+    "new_to_script": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "C01",
+      "C02",
+      "C03",
+      "V01",
+      "V02",
+      "V03",
+      "V04",
+      "V05",
+      "V06",
+      "V07",
+      "V08",
+      "V09",
+      "K01",
+      "K02",
+      "K03",
+      "K04",
+      "K05",
+      "K06",
+      "G01",
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07",
+      "L08",
+      "L09",
+      "L10",
+      "H01",
+      "H02",
+      "H03"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "B01",
+      "module_id": "M00",
+      "title_tt": "Уңнан сулга: хәреф, сүз, юл",
+      "route": "foundation",
+      "prerequisites": [],
+      "source_sections": [
+        "S-015",
+        "S-109"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B01"
+      ]
+    },
+    {
+      "id": "B02",
+      "module_id": "M00",
+      "title_tt": "Нокталар: ب پ ت ث ن ي",
+      "route": "foundation",
+      "prerequisites": [
+        "B01"
+      ],
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B02"
+      ]
+    },
+    {
+      "id": "B03",
+      "module_id": "M00",
+      "title_tt": "Охшаш хәрефләр: ج چ ح خ د ذ",
+      "route": "foundation",
+      "prerequisites": [
+        "B02"
+      ],
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B03"
+      ]
+    },
+    {
+      "id": "B04",
+      "module_id": "M00",
+      "title_tt": "ر ز ژ س ش ص ض хәрефләре",
+      "route": "foundation",
+      "prerequisites": [
+        "B03"
+      ],
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B04"
+      ]
+    },
+    {
+      "id": "B05",
+      "module_id": "M00",
+      "title_tt": "ط ظ ع غ ف ق хәрефләре",
+      "route": "foundation",
+      "prerequisites": [
+        "B04"
+      ],
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-109"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B05"
+      ]
+    },
+    {
+      "id": "B06",
+      "module_id": "M00",
+      "title_tt": "ا ك گ ڭ ل م ه و ۋ хәрефләре",
+      "route": "foundation",
+      "prerequisites": [
+        "B05"
+      ],
+      "source_sections": [
+        "S-015",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B06"
+      ]
+    },
+    {
+      "id": "B07",
+      "module_id": "M00",
+      "title_tt": "Хәрефләрне сүз эчендә тану",
+      "route": "foundation",
+      "prerequisites": [
+        "B06"
+      ],
+      "source_sections": [
+        "S-011",
+        "S-015",
+        "S-023",
+        "S-051"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-B07"
+      ]
+    },
+    {
+      "id": "C01",
+      "module_id": "M01",
+      "title_tt": "Аваз һәм хәреф: татарча уку",
+      "route": "common",
+      "prerequisites": [],
+      "source_sections": [
+        "S-010",
+        "S-011",
+        "S-012",
+        "S-013",
+        "S-014"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-C01"
+      ]
+    },
+    {
+      "id": "C02",
+      "module_id": "M01",
+      "title_tt": "Татар язуындагы өстәмә хәрефләр",
+      "route": "common",
+      "prerequisites": [
+        "C01"
+      ],
+      "source_sections": [
+        "S-016",
+        "S-017",
+        "S-018",
+        "S-019"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-C02"
+      ]
+    },
+    {
+      "id": "C03",
+      "module_id": "M01",
+      "title_tt": "Сузыклар һәм калынлык-нечкәлек",
+      "route": "common",
+      "prerequisites": [
+        "C02"
+      ],
+      "source_sections": [
+        "S-020",
+        "S-021",
+        "S-050"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-C03"
+      ]
+    },
+    {
+      "id": "V01",
+      "module_id": "M02",
+      "title_tt": "А һәм ә: әлиф һәм һә-рәсмия",
+      "route": "common",
+      "prerequisites": [
+        "C03"
+      ],
+      "source_sections": [
+        "S-022",
+        "S-023",
+        "S-024"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V01"
+      ]
+    },
+    {
+      "id": "V02",
+      "module_id": "M02",
+      "title_tt": "У һәм ү: тулы уау",
+      "route": "common",
+      "prerequisites": [
+        "V01"
+      ],
+      "source_sections": [
+        "S-025",
+        "S-026",
+        "S-027"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V02"
+      ]
+    },
+    {
+      "id": "V03",
+      "module_id": "M02",
+      "title_tt": "И һәм ый: тулы яй",
+      "route": "common",
+      "prerequisites": [
+        "V02"
+      ],
+      "source_sections": [
+        "S-028"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V03"
+      ]
+    },
+    {
+      "id": "V04",
+      "module_id": "M02",
+      "title_tt": "Сүз башындагы ы һәм э",
+      "route": "common",
+      "prerequisites": [
+        "V03"
+      ],
+      "source_sections": [
+        "S-029",
+        "S-030"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V04"
+      ]
+    },
+    {
+      "id": "V05",
+      "module_id": "M02",
+      "title_tt": "Язылмаган ы һәм е авазлары",
+      "route": "common",
+      "prerequisites": [
+        "V04"
+      ],
+      "source_sections": [
+        "S-031"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V05"
+      ]
+    },
+    {
+      "id": "V06",
+      "module_id": "M02",
+      "title_tt": "Ачык иҗек һәм сүз ахырындагы ы, е",
+      "route": "common",
+      "prerequisites": [
+        "V05"
+      ],
+      "source_sections": [
+        "S-032",
+        "S-033"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V06"
+      ]
+    },
+    {
+      "id": "V07",
+      "module_id": "M02",
+      "title_tt": "Яй һәм уау тартык булганда",
+      "route": "common",
+      "prerequisites": [
+        "V06"
+      ],
+      "source_sections": [
+        "S-034"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V07"
+      ]
+    },
+    {
+      "id": "V08",
+      "module_id": "M02",
+      "title_tt": "О һәм ө: кыска уау",
+      "route": "common",
+      "prerequisites": [
+        "V07"
+      ],
+      "source_sections": [
+        "S-035",
+        "S-036",
+        "S-037"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V08"
+      ]
+    },
+    {
+      "id": "V09",
+      "module_id": "M02",
+      "title_tt": "Алты һәм ун сузыклы язылыш",
+      "route": "common",
+      "prerequisites": [
+        "V08"
+      ],
+      "source_sections": [
+        "S-038"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-V09"
+      ]
+    },
+    {
+      "id": "K01",
+      "module_id": "M03",
+      "title_tt": "Калынлык-нечкәлек: ق һәм ك",
+      "route": "common",
+      "prerequisites": [
+        "V09"
+      ],
+      "source_sections": [
+        "S-039",
+        "S-040",
+        "S-050"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K01"
+      ]
+    },
+    {
+      "id": "K02",
+      "module_id": "M03",
+      "title_tt": "Өч кәф һәм к–г чиратлашуы",
+      "route": "common",
+      "prerequisites": [
+        "K01"
+      ],
+      "source_sections": [
+        "S-041",
+        "S-042"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K02"
+      ]
+    },
+    {
+      "id": "K03",
+      "module_id": "M03",
+      "title_tt": "С авазы: س ص ث",
+      "route": "common",
+      "prerequisites": [
+        "K02"
+      ],
+      "source_sections": [
+        "S-043"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K03"
+      ]
+    },
+    {
+      "id": "K04",
+      "module_id": "M03",
+      "title_tt": "Т һәм д авазлары: ت ط د",
+      "route": "common",
+      "prerequisites": [
+        "K03"
+      ],
+      "source_sections": [
+        "S-044",
+        "S-047"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K04"
+      ]
+    },
+    {
+      "id": "K05",
+      "module_id": "M03",
+      "title_tt": "Х, һ һәм г авазларын аеру",
+      "route": "common",
+      "prerequisites": [
+        "K04"
+      ],
+      "source_sections": [
+        "S-045",
+        "S-046"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K05"
+      ]
+    },
+    {
+      "id": "K06",
+      "module_id": "M03",
+      "title_tt": "З авазы һәм алынма хәрефләр",
+      "route": "common",
+      "prerequisites": [
+        "K05"
+      ],
+      "source_sections": [
+        "S-048"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-K06"
+      ]
+    },
+    {
+      "id": "G01",
+      "module_id": "M04",
+      "title_tt": "Сүз эчендәге тоташу һәм сүз арасы",
+      "route": "common",
+      "prerequisites": [
+        "K06"
+      ],
+      "source_sections": [
+        "S-049",
+        "S-051",
+        "S-052"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G01"
+      ]
+    },
+    {
+      "id": "G02",
+      "module_id": "M04",
+      "title_tt": "Иҗек, сәкен һәм юлдан юлга күчерү",
+      "route": "common",
+      "prerequisites": [
+        "G01"
+      ],
+      "source_sections": [
+        "S-053",
+        "S-054",
+        "S-055",
+        "S-056"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G02"
+      ]
+    },
+    {
+      "id": "G03",
+      "module_id": "M04",
+      "title_tt": "Әйтелеш һәм язылыш: د искәрмәсе",
+      "route": "common",
+      "prerequisites": [
+        "G02"
+      ],
+      "source_sections": [
+        "S-057",
+        "S-058",
+        "S-059"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G03"
+      ]
+    },
+    {
+      "id": "G04",
+      "module_id": "M04",
+      "title_tt": "М һәм н артыннан -дан/-дән",
+      "route": "common",
+      "prerequisites": [
+        "G03"
+      ],
+      "source_sections": [
+        "S-060"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G04"
+      ]
+    },
+    {
+      "id": "G05",
+      "module_id": "M04",
+      "title_tt": "Н хәрефенең әйтелеше үзгәргәндә",
+      "route": "common",
+      "prerequisites": [
+        "G04"
+      ],
+      "source_sections": [
+        "S-061"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G05"
+      ]
+    },
+    {
+      "id": "G06",
+      "module_id": "M04",
+      "title_tt": "Асыл һәм иярчен сүзләр",
+      "route": "common",
+      "prerequisites": [
+        "G05"
+      ],
+      "source_sections": [
+        "S-062"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-G06"
+      ]
+    },
+    {
+      "id": "A01",
+      "module_id": "M05",
+      "title_tt": "Кушымча һәм ялгызлык исемнәр",
+      "route": "common",
+      "prerequisites": [
+        "G06"
+      ],
+      "source_sections": [
+        "S-063",
+        "S-064",
+        "S-065",
+        "S-066",
+        "S-067"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A01"
+      ]
+    },
+    {
+      "id": "A02",
+      "module_id": "M05",
+      "title_tt": "-дан/-дән, -да/-дә, -лар/-ләр",
+      "route": "common",
+      "prerequisites": [
+        "A01"
+      ],
+      "source_sections": [
+        "S-068",
+        "S-069",
+        "S-071"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A02"
+      ]
+    },
+    {
+      "id": "A03",
+      "module_id": "M05",
+      "title_tt": "Юнәлеш кушымчалары",
+      "route": "common",
+      "prerequisites": [
+        "A02"
+      ],
+      "source_sections": [
+        "S-070"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A03"
+      ]
+    },
+    {
+      "id": "A04",
+      "module_id": "M05",
+      "title_tt": "-ган/-гән һәм -кан/-кән",
+      "route": "common",
+      "prerequisites": [
+        "A03"
+      ],
+      "source_sections": [
+        "S-072"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A04"
+      ]
+    },
+    {
+      "id": "A05",
+      "module_id": "M05",
+      "title_tt": "-мак/-мәк кушымчалары",
+      "route": "common",
+      "prerequisites": [
+        "A04"
+      ],
+      "source_sections": [
+        "S-073"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A05"
+      ]
+    },
+    {
+      "id": "A06",
+      "module_id": "M05",
+      "title_tt": "-дым/-дем, -дык/-дек, -дыр/-дер",
+      "route": "common",
+      "prerequisites": [
+        "A05"
+      ],
+      "source_sections": [
+        "S-074",
+        "S-075"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A06"
+      ]
+    },
+    {
+      "id": "A07",
+      "module_id": "M05",
+      "title_tt": "-ып/-еп кушымчасында уау һәм бә",
+      "route": "common",
+      "prerequisites": [
+        "A06"
+      ],
+      "source_sections": [
+        "S-076"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A07"
+      ]
+    },
+    {
+      "id": "A08",
+      "module_id": "M05",
+      "title_tt": "Р хәрефе һәм юклык кушымчалары",
+      "route": "common",
+      "prerequisites": [
+        "A07"
+      ],
+      "source_sections": [
+        "S-077",
+        "S-078"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A08"
+      ]
+    },
+    {
+      "id": "A09",
+      "module_id": "M05",
+      "title_tt": "Гомумтөрки язылыш һәм әйтелмәгән غ",
+      "route": "common",
+      "prerequisites": [
+        "A08"
+      ],
+      "source_sections": [
+        "S-079",
+        "S-080"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-A09"
+      ]
+    },
+    {
+      "id": "L01",
+      "module_id": "M06",
+      "title_tt": "Рус һәм Европа телләреннән кергән сүзләр",
+      "route": "common",
+      "prerequisites": [
+        "A09"
+      ],
+      "source_sections": [
+        "S-081",
+        "S-082"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L01"
+      ]
+    },
+    {
+      "id": "L02",
+      "module_id": "M06",
+      "title_tt": "Алынмалар: асыл һәм әйтелешкә якын язылыш",
+      "route": "common",
+      "prerequisites": [
+        "L01"
+      ],
+      "source_sections": [
+        "S-083",
+        "S-084"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L02"
+      ]
+    },
+    {
+      "id": "L03",
+      "module_id": "M06",
+      "title_tt": "Озын сузыклар һәм әлиф максура",
+      "route": "common",
+      "prerequisites": [
+        "L02"
+      ],
+      "source_sections": [
+        "S-085",
+        "S-086"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L03"
+      ]
+    },
+    {
+      "id": "L04",
+      "module_id": "M06",
+      "title_tt": "Алынмалар ахырындагы тә",
+      "route": "common",
+      "prerequisites": [
+        "L03"
+      ],
+      "source_sections": [
+        "S-087"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L04"
+      ]
+    },
+    {
+      "id": "L05",
+      "module_id": "M06",
+      "title_tt": "Һәмзә һәм икеләтелгән тартык",
+      "route": "common",
+      "prerequisites": [
+        "L04"
+      ],
+      "source_sections": [
+        "S-088",
+        "S-089"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L05"
+      ]
+    },
+    {
+      "id": "L06",
+      "module_id": "M06",
+      "title_tt": "Аллаһ һәм дин белән ясалган исемнәр",
+      "route": "common",
+      "prerequisites": [
+        "L05"
+      ],
+      "source_sections": [
+        "S-090",
+        "S-091",
+        "S-092"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L06"
+      ]
+    },
+    {
+      "id": "L07",
+      "module_id": "M06",
+      "title_tt": "Исемнәрдә кояш һәм ай хәрефләре",
+      "route": "common",
+      "prerequisites": [
+        "L06"
+      ],
+      "source_sections": [
+        "S-093",
+        "S-114"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L07"
+      ]
+    },
+    {
+      "id": "L08",
+      "module_id": "M06",
+      "title_tt": "Фарсы изафәсе",
+      "route": "common",
+      "prerequisites": [
+        "L07"
+      ],
+      "source_sections": [
+        "S-094",
+        "S-095"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L08"
+      ]
+    },
+    {
+      "id": "L09",
+      "module_id": "M06",
+      "title_tt": "Фарсы күплек һәм сүз ясагыч кушымчалары",
+      "route": "common",
+      "prerequisites": [
+        "L08"
+      ],
+      "source_sections": [
+        "S-096",
+        "S-097",
+        "S-098",
+        "S-099"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L09"
+      ]
+    },
+    {
+      "id": "L10",
+      "module_id": "M06",
+      "title_tt": "Фарсы алкушымчалары",
+      "route": "common",
+      "prerequisites": [
+        "L09"
+      ],
+      "source_sections": [
+        "S-100"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-L10"
+      ]
+    },
+    {
+      "id": "H01",
+      "module_id": "M07",
+      "title_tt": "Язу тарихы һәм төрле имлялар",
+      "route": "common",
+      "prerequisites": [
+        "L10"
+      ],
+      "source_sections": [
+        "S-001",
+        "S-002",
+        "S-003",
+        "S-004",
+        "S-005",
+        "S-006",
+        "S-007",
+        "S-008",
+        "S-009",
+        "S-109",
+        "S-110",
+        "S-111",
+        "S-112",
+        "S-113"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-H01"
+      ]
+    },
+    {
+      "id": "H02",
+      "module_id": "M07",
+      "title_tt": "Сүзлектән файдалану",
+      "route": "common",
+      "prerequisites": [
+        "H01"
+      ],
+      "source_sections": [
+        "S-101",
+        "S-102",
+        "S-103",
+        "S-104",
+        "S-105",
+        "S-106",
+        "S-107",
+        "S-108"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-H02"
+      ]
+    },
+    {
+      "id": "H03",
+      "module_id": "M07",
+      "title_tt": "Текстны мөстәкыйль уку",
+      "route": "common",
+      "prerequisites": [
+        "H02"
+      ],
+      "source_sections": [
+        "S-051",
+        "S-052",
+        "S-062",
+        "S-083",
+        "S-108"
+      ],
+      "required_for_completion": true,
+      "skills": [
+        "SK-H03"
+      ]
+    }
+  ]
+}

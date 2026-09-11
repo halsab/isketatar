@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "id": "SK-B01",
+      "lesson_id": "B01",
+      "target_tt": "Язу юнәлешен, хәреф белән сүзнең аермасын тану.",
+      "source_sections": [
+        "S-015",
+        "S-109"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B02",
+      "lesson_id": "B02",
+      "target_tt": "Бә төркемендәге хәрефләрне нокталары буенча аеру.",
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B03",
+      "lesson_id": "B03",
+      "target_tt": "Җим төркемен һәм дәл белән зәлне аеру.",
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B04",
+      "lesson_id": "B04",
+      "target_tt": "Ра, зә, же һәм син төркемнәрен аеру.",
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B05",
+      "lesson_id": "B05",
+      "target_tt": "Та, за, гайн, гыйн, фә һәм кафны аеру.",
+      "source_sections": [
+        "S-015",
+        "S-017",
+        "S-109"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B06",
+      "lesson_id": "B06",
+      "target_tt": "Әлиф, кәф төрләре, ләм, мим, һә һәм уауны тану.",
+      "source_sections": [
+        "S-015",
+        "S-018",
+        "S-109",
+        "S-110"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-B07",
+      "lesson_id": "B07",
+      "target_tt": "Тоташкан язуда хәрефләрне һәм сүз чикләрен тану.",
+      "source_sections": [
+        "S-011",
+        "S-015",
+        "S-023",
+        "S-051"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-C01",
+      "lesson_id": "C01",
+      "target_tt": "Татарча авазны хәреф исеме һәм гарәпчә укылыштан аеру.",
+      "source_sections": [
+        "S-010",
+        "S-011",
+        "S-012",
+        "S-013",
+        "S-014"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-C02",
+      "lesson_id": "C02",
+      "target_tt": "Татар язуындагы алты өстәмә хәрефне тану.",
+      "source_sections": [
+        "S-016",
+        "S-017",
+        "S-018",
+        "S-019"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-C03",
+      "lesson_id": "C03",
+      "target_tt": "Сузык билгесен калынлык-нечкәлек белән бәйләп уку.",
+      "source_sections": [
+        "S-020",
+        "S-021",
+        "S-050"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V01",
+      "lesson_id": "V01",
+      "target_tt": "Әлиф һәм һә рәсмия аша а белән әне аеру.",
+      "source_sections": [
+        "S-022",
+        "S-023",
+        "S-024"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V02",
+      "lesson_id": "V02",
+      "target_tt": "Тулы уау белән язылган у һәм үне уку.",
+      "source_sections": [
+        "S-025",
+        "S-026",
+        "S-027"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V03",
+      "lesson_id": "V03",
+      "target_tt": "Тулы яйның и һәм ый укылышларын контекстта тану.",
+      "source_sections": [
+        "S-028"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V04",
+      "lesson_id": "V04",
+      "target_tt": "Сүз башындагы ы һәм э билгеләрен аеру.",
+      "source_sections": [
+        "S-029",
+        "S-030"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V05",
+      "lesson_id": "V05",
+      "target_tt": "Язылмаган ы һәм ене таныш сүз һәм иҗек буенча торгызу.",
+      "source_sections": [
+        "S-031"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V06",
+      "lesson_id": "V06",
+      "target_tt": "Ачык иҗек һәм сүз ахырындагы ы, е билгеләрен уку.",
+      "source_sections": [
+        "S-032",
+        "S-033"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V07",
+      "lesson_id": "V07",
+      "target_tt": "Яй белән уауның сузык һәм тартык вазифаларын аеру.",
+      "source_sections": [
+        "S-034"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V08",
+      "lesson_id": "V08",
+      "target_tt": "Кыска уау билгеләреннән о һәм өне уку.",
+      "source_sections": [
+        "S-035",
+        "S-036",
+        "S-037"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-V09",
+      "lesson_id": "V09",
+      "target_tt": "Алты һәм ун сузыклы язылышларны аерып чагыштыру.",
+      "source_sections": [
+        "S-038"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K01",
+      "lesson_id": "K01",
+      "target_tt": "Каф һәм кәфне калынлык-нечкәлек белән бәйләп уку.",
+      "source_sections": [
+        "S-039",
+        "S-040",
+        "S-050"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K02",
+      "lesson_id": "K02",
+      "target_tt": "Кәф төрләрен һәм кушымча алдындагы к–г чиратлашуын тану.",
+      "source_sections": [
+        "S-041",
+        "S-042"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K03",
+      "lesson_id": "K03",
+      "target_tt": "Син, сад һәм сәнең кулланылу өлкәләрен аеру.",
+      "source_sections": [
+        "S-043"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K04",
+      "lesson_id": "K04",
+      "target_tt": "Тә, та һәм дәл язылышларын сүзгә карап аңлату.",
+      "source_sections": [
+        "S-044",
+        "S-047"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K05",
+      "lesson_id": "K05",
+      "target_tt": "Х, һ һәм г авазларына бәйле хәрефләрне сүз эчендә тану.",
+      "source_sections": [
+        "S-045",
+        "S-046"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-K06",
+      "lesson_id": "K06",
+      "target_tt": "З авазын белдергән алынма хәрефләрне аеру.",
+      "source_sections": [
+        "S-048"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G01",
+      "lesson_id": "G01",
+      "target_tt": "Сүз эчендәге тоташу өзеген сүз арасындагы бушлыктан аеру.",
+      "source_sections": [
+        "S-049",
+        "S-051",
+        "S-052"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G02",
+      "lesson_id": "G02",
+      "target_tt": "Иҗек, сәкен һәм юл күчерү билгеләрен уку.",
+      "source_sections": [
+        "S-053",
+        "S-054",
+        "S-055",
+        "S-056"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G03",
+      "lesson_id": "G03",
+      "target_tt": "Дәл сакланган кушымчаның татарча әйтелешен тану.",
+      "source_sections": [
+        "S-057",
+        "S-058",
+        "S-059"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G04",
+      "lesson_id": "G04",
+      "target_tt": "М һәм н артыннан язылган -дан/-дәнне татарча уку.",
+      "source_sections": [
+        "S-060"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G05",
+      "lesson_id": "G05",
+      "target_tt": "Н хәрефенең язылышын әйтелештәге охшашланудан аеру.",
+      "source_sections": [
+        "S-061"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-G06",
+      "lesson_id": "G06",
+      "target_tt": "Мөстәкыйль һәм иярчен сүзләрнең язылыш чикләрен тану.",
+      "source_sections": [
+        "S-062"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A01",
+      "lesson_id": "A01",
+      "target_tt": "Кушымчаны тамырдан аеру, ялгызлык исеменә ялгануын тану.",
+      "source_sections": [
+        "S-063",
+        "S-064",
+        "S-065",
+        "S-066",
+        "S-067"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A02",
+      "lesson_id": "A02",
+      "target_tt": "Чыгыш, урын-вакыт һәм күплек кушымчаларын уку.",
+      "source_sections": [
+        "S-068",
+        "S-069",
+        "S-071"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A03",
+      "lesson_id": "A03",
+      "target_tt": "Юнәлеш килеше кушымчасын язылыштан тану.",
+      "source_sections": [
+        "S-070"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A04",
+      "lesson_id": "A04",
+      "target_tt": "Сыйфат фигыльнең -ган/-гән, -кан/-кән формаларын уку.",
+      "source_sections": [
+        "S-072"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A05",
+      "lesson_id": "A05",
+      "target_tt": "-мак/-мәк кушымчасының тарихи язылышын тану.",
+      "source_sections": [
+        "S-073"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A06",
+      "lesson_id": "A06",
+      "target_tt": "Үткән заман һәм хәбәрлек кушымчаларын аерып уку.",
+      "source_sections": [
+        "S-074",
+        "S-075"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A07",
+      "lesson_id": "A07",
+      "target_tt": "-ып/-еп мәгънәсендәге тарихи уау-бә язылышын тану.",
+      "source_sections": [
+        "S-076"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A08",
+      "lesson_id": "A08",
+      "target_tt": "Р хәрефле һәм юклык кушымчаларын уку.",
+      "source_sections": [
+        "S-077",
+        "S-078"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-A09",
+      "lesson_id": "A09",
+      "target_tt": "Гомумтөрки язылышта татарча әйтелмәгән гыйнны тану.",
+      "source_sections": [
+        "S-079",
+        "S-080"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L01",
+      "lesson_id": "L01",
+      "target_tt": "Рус-Европа алынмаларының китаптагы яраклашкан язылышын уку.",
+      "source_sections": [
+        "S-081",
+        "S-082"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L02",
+      "lesson_id": "L02",
+      "target_tt": "Алынманың асыл һәм әйтелешкә якын язылышын бәйләү.",
+      "source_sections": [
+        "S-083",
+        "S-084"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L03",
+      "lesson_id": "L03",
+      "target_tt": "Гарәп алынмаларындагы озын сузык билгеләрен һәм әлиф максураны тану.",
+      "source_sections": [
+        "S-085",
+        "S-086"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L04",
+      "lesson_id": "L04",
+      "target_tt": "Алынма ахырындагы тә, һә һәм сакланган дәлне аеру.",
+      "source_sections": [
+        "S-087"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L05",
+      "lesson_id": "L05",
+      "target_tt": "Һәмзә урыннарын һәм икеләтүнең ике язылышын тану.",
+      "source_sections": [
+        "S-088",
+        "S-089"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L06",
+      "lesson_id": "L06",
+      "target_tt": "Аллаһ һәм дин белән төзелгән исемнәрнең язылышын тану.",
+      "source_sections": [
+        "S-090",
+        "S-091",
+        "S-092"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L07",
+      "lesson_id": "L07",
+      "target_tt": "Тезмә исемдә кояш һәм ай хәрефләре янында әл билгесен тану.",
+      "source_sections": [
+        "S-093",
+        "S-114"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L08",
+      "lesson_id": "L08",
+      "target_tt": "Фарсы изафәсен укып, сүзләрнең бәйләнешен аңлау.",
+      "source_sections": [
+        "S-094",
+        "S-095"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L09",
+      "lesson_id": "L09",
+      "target_tt": "Фарсы күплек һәм сүз ясагыч кисәкләрен әзер сүзләрдә тану.",
+      "source_sections": [
+        "S-096",
+        "S-097",
+        "S-098",
+        "S-099"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-L10",
+      "lesson_id": "L10",
+      "target_tt": "Фарсы алкушымчаларын һәм гарәпчә бә белән аермасын тану.",
+      "source_sections": [
+        "S-100"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-H01",
+      "lesson_id": "H01",
+      "target_tt": "Тарихи имля профилен һәм чыганакның үз чикләрен тану.",
+      "source_sections": [
+        "S-001",
+        "S-002",
+        "S-003",
+        "S-004",
+        "S-005",
+        "S-006",
+        "S-007",
+        "S-008",
+        "S-009",
+        "S-109",
+        "S-110",
+        "S-111",
+        "S-112",
+        "S-113"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-H02",
+      "lesson_id": "H02",
+      "target_tt": "Язылыш, укылыш һәм мәгънәне сүзлектә аерып куллану.",
+      "source_sections": [
+        "S-101",
+        "S-102",
+        "S-103",
+        "S-104",
+        "S-105",
+        "S-106",
+        "S-107",
+        "S-108"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    },
+    {
+      "id": "SK-H03",
+      "lesson_id": "H03",
+      "target_tt": "Яңа текстны укып, кирәкле ярдәмне сайлау һәм мәгънәсен аңлату.",
+      "source_sections": [
+        "S-051",
+        "S-052",
+        "S-062",
+        "S-083",
+        "S-108"
+      ],
+      "evidence": {
+        "practice_required": true,
+        "transfer_required": true,
+        "independent_answer_required": true
+      },
+      "facets": [
+        "letter",
+        "reading",
+        "rule",
+        "morphology"
+      ]
+    }
+  ],
+  "note_tt": "Күнекмә дәрескә бәйле; җаваплар хәреф, уку, кагыйдә һәм сүз төзелеше буенча аерым исәпләнә."
+}
