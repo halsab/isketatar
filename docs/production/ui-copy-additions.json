@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "status": "editorial_plan_not_runtime_catalog",
+  "locale": "tt-Cyrl",
+  "base_catalog": "content/interface/tt.json",
+  "authority": [
+    "docs/production/02-data-contracts.md",
+    "docs/production/03-learning-mechanics.md",
+    "docs/production/04-design-system.md"
+  ],
+  "additions": {
+    "session.save_exit": "Саклап чыгарга",
+    "session.paused": "Эш сакланды. Соңрак дәвам итә аласың.",
+    "session.resume": "Сакланган эшне дәвам итәргә",
+    "session.restart": "Баштан башларга",
+    "session.restart_confirm": "Бу эшне баштан башларга? Сакланган җаваплар тарихта калачак, яңа үтү аерым башланачак.",
+    "session.existing_draft": "Бу бүлектә тәмамланмаган эшең бар.",
+    "session.incompatible": "Бу эшне дәвам итү өчен кирәкле басма ачылмады. Сакланган җаваплар тарихта калды; яңа эш башларга мөмкин.",
+    "assessment.pending_help_title": "Тәмамланмаган тикшерүләр бар",
+    "assessment.pending_help_body": "Тәмамланмаган тикшерүләр: {count}. Өйрәнү материалын ачсаң, аларның барысы да ярдәм белән эшләнгән дип саналачак. Җавапларың саклана, ләкин мөстәкыйль нәтиҗә исәпләнми.",
+    "assessment.open_learning_material": "Материалны ачарга",
+    "assessment.unanswered_confirm": "Җавапсыз калган сораулар: {count}. Тәмамлаганда алар «Әлегә белмим» дип исәпләнәчәк.",
+    "diagnostic.defer_imla": "Әлегә хәрефләр өлеше белән тәмамларга",
+    "diagnostic.imla_deferred": "Татар имлясы өлеше бәяләнмәде. Теләсәң, соңрак тикшерүне яңадан үтә аласың.",
+    "exercise.first_question_attempt": "Бу үтүдә биремгә беренче тапкыр җавап бирдең.",
+    "exercise.familiar_material": "Бу мисал элек күрсәтелгән.",
+    "exercise.familiar_reading": "Бу мисалның укылышы элек күрсәтелгән.",
+    "lesson.practiced_detail": "Барлык мәҗбүри биремнәр эшләнде. Ярдәм белән эшләнгән биремнәр дә бу нәтиҗәгә керә.",
+    "lesson.mastered_detail": "Соңгы тулы үтүдә төп күнегүләрнең кимендә 80 проценты һәм кагыйдәне куллану биремнәренең барысы ярдәмсез дөрес үтәлде.",
+    "route.completed_detail": "Бу юлдагы дәресләр эшләнде һәм йомгаклау тикшерүе тәмамланды. Мөстәкыйль нәтиҗә аерым күрсәтелә.",
+    "reading.mark_complete": "Текстны укылган дип билгеләргә",
+    "dictionary.no_prepared_question": "Бу сүз өчен әзер уку биреме юк. Аны сакланган сүзләргә өсти аласың.",
+    "dictionary.expanded_help": "Монда якын язылышлы сүзләр күрсәтелә. Алар бер үк укылыш яки дөрес җавап дигән сүз түгел.",
+    "font.loading": "Иске язу шрифты йөкләнә…",
+    "font.failed": "Иске язу шрифтын йөкләп булмады. Йөкләүне кабатла яки кириллицадагы аңлатмаларны укы.",
+    "boot.loading": "Курс ачыла…",
+    "boot.failed": "Курс ачылмады. Йөкләүне кабат сынап кара.",
+    "offline.download_progress": "Сакланган материаллар: {completed} / {total}.",
+    "install.add_to_home": "Баш экранга өстәргә",
+    "install.safari_instructions": "Safari браузерында бүлешү яки төп менюны ачып, баш экранга өстәү гамәлен эзлә. Меню исемнәре браузер теленә бәйле. Бу мөмкинлек күренмәсә, сайтны браузерда куллана аласың.",
+    "install.optional_note": "Баш экранга өстәү мәҗбүри түгел: курс браузерда да эшли. Интернетсыз уку өчен курсны аерым сакларга кирәк.",
+    "update.wait_other_tabs": "Башка ачык кыстыргычлардагы эшне саклап, аларны япкач, яңартуны кабат сынап кара.",
+    "update.wait_current_answer": "Хәзерге җавап сакланганчы яңа басмага күчү көтеп тора.",
+    "update.resume_old": "Сакланган эшне элекке басмада дәвам итәргә",
+    "storage.unsaved": "Соңгы үзгәрешләр бу җайланмада сакланмады.",
+    "storage.history_full": "Сакланган тарих өчен урын җитми",
+    "storage.history_full_detail": "Нәтиҗәләр тарихы өчен билгеләнгән чиккә җиттек. Яңа җаваплар бу җайланмада сакланмый. Хәзерге нәтиҗәләрне файлга саклап куй; аннары теләсәң, аларны бетереп, яңадан башлый аласың.",
+    "storage.memory_mode": "Бу юлы нәтиҗәләр вакытлыча гына саклана. Битне япсаң яки яңадан ачсаң, алар югалырга мөмкин.",
+    "import.unsupported_schema": "Бу файлдагы мәгълүматны кушымтаның әлеге басмасы укый алмый. Хәзерге нәтиҗәләр үзгәрмәде.",
+    "import.too_large": "Файл артык зур. Күләме {max_size_mib} МиБтан артмаган нәтиҗәләр файлын сайла.",
+    "import.too_many_attempts": "Файлда җаваплар артык күп. Бер файлдан күп дигәндә {max_attempts} җавап алына.",
+    "import.legacy_records": "Хәзерге курста исәпләнми торган элекке язмалар: {count}. Алар тарихта сакланачак, әмма хәзерге нәтиҗәгә кушылмаячак.",
+    "import.preview_changed": "Карап торган арада нәтиҗәләр үзгәрде. Алыштыру алдыннан мәгълүматны яңадан кара.",
+    "import.replace_action": "Хәзерге нәтиҗәләрне алыштырырга",
+    "import.failed_unchanged": "Файлдагы нәтиҗәләрне алып булмады. Хәзерге мәгълүмат үзгәртелмәде.",
+    "export.download": "Файлны йөкләп алырга",
+    "export.failed": "Нәтиҗәләр файлын әзерләп булмады. Хәзерге мәгълүмат үзгәртелмәде.",
+    "writer.read_only": "Нәтиҗәләрне хәзер башка кыстыргыч үзгәртә ала. Монда карау гына мөмкин.",
+    "writer.conflict": "Сакланган нәтиҗәләр үзгәрде. Соңгы үзгәртүең сакланмады; хәзерге мәгълүматны яңадан ач.",
+    "writer.takeover_action": "Монда дәвам итәргә",
+    "writer.takeover_confirm": "Дәвам итсәң, нәтиҗәләрне бу кыстыргыч үзгәртә алачак. Башка кыстыргычларда саклау туктатылачак. Андагы сакланмаган җаваплар монда күчми.",
+    "about.local_data": "Уку нәтиҗәләре һәм сакланган урыннар бу браузерда саклана. Алар башка браузерга яки җайланмага үзләре күчми. Күчерү өчен нәтиҗәләр файлын куллан.",
+    "about.analytics": "Кушымтада тышкы аналитика һәм реклама юк. Җавапларың һәм уку нәтиҗәләрең аналитика хезмәтләренә җибәрелми.",
+    "about.hosting": "Сайт GitHub Pages хезмәтендә урнашкан. Тышкы сылтамалар башка сайтларны ача; аларның мәгълүмат эшкәртү кагыйдәләре аерым.",
+    "accessibility.skip_main": "Төп эчтәлеккә күчәргә",
+    "accessibility.tatar_keyboard": "Татар хәрефләре",
+    "accessibility.insert_letter": "{letter} хәрефен куярга",
+    "accessibility.question_progress": "Сорау {current}, барлыгы {total}.",
+    "settings.reduced_motion": "Хәрәкәтле күчешләр",
+    "settings.motion_reduced": "Хәрәкәтне киметергә",
+    "settings.text_scope": "Бу зурлык аңлатмаларга, бирем шартларына, текстларның кириллицадагы укылышына, сүзлеккә һәм белешмәгә кагыла. Браузердагы зурайту бөтен битне зурайта.",
+    "review.next_at": "Киләсе кабатлау: {date}.",
+    "review.early_note": "Вакытыннан алда ярдәмсез дөрес җавап бирү кабатлау көнен үзгәртми.",
+    "date.last_saved": "Соңгы саклау: {date}.",
+    "accessibility.insert_segment_separator": "Өлешләр арасына кушу билгесен куярга",
+    "import.preview_route": "Файлдагы уку юлы: {route}.",
+    "import.no_route": "Уку юлы сайланмаган.",
+    "settings.font_size_value": "Язу зурлыгы: {size_px}.",
+    "about.external_link": "Тышкы сайтта ачыла.",
+    "update.needs_refresh": "Кайбер биремнәр үзгәргән. Элекке нәтиҗәләр тарихта саклана; хәзерге басмада аларны яңадан эшләп кара.",
+    "export.limit_error": "Бу тарихтан кире кайтарып була торган файл әзерләп булмады. Хәзерге мәгълүмат бетерелмәде."
+  },
+  "replacements": {
+    "onboarding.known_detail": "Татар имлясы кагыйдәләреннән башлый аласың. Теләсәң, башта кыска тикшерүне үт.",
+    "lesson.transfer": "Кагыйдәне кулланып кара",
+    "review.due": "Кабатларга: {count}",
+    "review.empty": "Хәзер кабатлау вакыты җиткән биремнәр юк.",
+    "settings.import_preview": "Файлда: {lesson_count} дәрес, {attempt_count} җавап, {bookmark_count} сакланган урын.",
+    "settings.export_done": "Файл әзер. Аны йөкләп ал; аннары сакланган урынын тикшер.",
+    "assessment.assisted_note": "Бу тикшерүдә ярдәм ачылды. Нәтиҗә мөстәкыйль үтү дип саналмый.",
+    "reading.line": "Юл: {number}"
+  },
+  "placeholder_contract": {
+    "types": {
+      "count": {
+        "type": "integer",
+        "minimum": 0,
+        "format": "non_negative_integer"
+      },
+      "completed": {
+        "type": "integer",
+        "minimum": 0,
+        "format": "non_negative_integer"
+      },
+      "total": {
+        "type": "integer",
+        "minimum": 1,
+        "format": "positive_integer"
+      },
+      "current": {
+        "type": "integer",
+        "minimum": 1,
+        "format": "positive_integer"
+      },
+      "number": {
+        "type": "integer",
+        "minimum": 1,
+        "format": "positive_integer"
+      },
+      "lesson_count": {
+        "type": "integer",
+        "minimum": 0,
+        "format": "non_negative_integer"
+      },
+      "attempt_count": {
+        "type": "integer",
+        "minimum": 0,
+        "format": "non_negative_integer"
+      },
+      "bookmark_count": {
+        "type": "integer",
+        "minimum": 0,
+        "format": "non_negative_integer"
+      },
+      "max_size_mib": {
+        "type": "integer",
+        "const": 20,
+        "format": "integer"
+      },
+      "max_attempts": {
+        "type": "integer",
+        "const": 100000,
+        "format": "non_negative_integer"
+      },
+      "letter": {
+        "type": "string",
+        "enum": [
+          "ә",
+          "ө",
+          "ү",
+          "җ",
+          "ң",
+          "һ"
+        ],
+        "format": "text"
+      },
+      "date": {
+        "type": "formatted_local_date_time",
+        "source_type": "TimeMs",
+        "format": "local_numeric_date_time"
+      },
+      "route": {
+        "type": "localized_route_label",
+        "source_enum": [
+          "arabic_reader",
+          "new_to_script"
+        ],
+        "format": "text"
+      },
+      "size_px": {
+        "type": "integer",
+        "enum": [
+          18,
+          20,
+          22,
+          24,
+          28,
+          32,
+          40,
+          48
+        ],
+        "format": "integer"
+      }
+    },
+    "by_key": {
+      "assessment.pending_help_body": {
+        "count": "count"
+      },
+      "assessment.unanswered_confirm": {
+        "count": "count"
+      },
+      "offline.download_progress": {
+        "completed": "completed",
+        "total": "total"
+      },
+      "import.too_large": {
+        "max_size_mib": "max_size_mib"
+      },
+      "import.too_many_attempts": {
+        "max_attempts": "max_attempts"
+      },
+      "import.legacy_records": {
+        "count": "count"
+      },
+      "accessibility.insert_letter": {
+        "letter": "letter"
+      },
+      "accessibility.question_progress": {
+        "current": "current",
+        "total": "total"
+      },
+      "review.next_at": {
+        "date": "date"
+      },
+      "date.last_saved": {
+        "date": "date"
+      },
+      "import.preview_route": {
+        "route": "route"
+      },
+      "settings.font_size_value": {
+        "size_px": "size_px"
+      },
+      "review.due": {
+        "count": "count"
+      },
+      "settings.import_preview": {
+        "lesson_count": "lesson_count",
+        "attempt_count": "attempt_count",
+        "bookmark_count": "bookmark_count"
+      },
+      "reading.line": {
+        "number": "number"
+      }
+    },
+    "rules_ru": [
+      "Подстановка только текстом; нет HTML, разметки или произвольного URL. Имена placeholder точны, неизвестные/пропущенные значения — ошибка сборки или вызова.",
+      "Числа форматируются через locale tt-Cyrl, если Intl.NumberFormat.supportedLocalesOf подтверждает её поддержку: useGrouping=true для счётчиков и false для current/total/number/font-size. Иначе используются цифры 0–9 без группировки, без русского текстового fallback. Счётчики идут перед существительным без попытки русского множественного склонения.",
+      "Для completed/total и current/total проверить 0<=completed<=total и 1<=current<=total. Счётчик вопроса — порядок текущего фиксированного плана.",
+      "TimeMs хранится в UTC; date — только отображение в текущей зоне устройства. Использовать числовой шаблон DD.MM.YYYY, HH:mm и локальные календарные компоненты; пример 12.09.2026, 12:00 для 1789203600000 вEurope/Moscow. Дата в тексте не меняет due_at.",
+      "{max_size_mib}=20 соответствует 20×1024×1024 байт, а не 20 миллионам. Точный жёсткий лимит проверяет импортёр.",
+      "Семантические арабографические строки и готовые ответы не подставляются в доступные имена закрытого задания. Данный комплект не добавляет такие placeholders."
+    ]
+  },
+  "editorial_notes_ru": {
+    "scope": "План дополнений и адресных замен. Базовый каталог не изменён; при реализации требуется явное объединение и проверка ключей. Существующие 194 строки переиспользуются для общих действий, ошибок, офлайн-статусов и увеличения/уменьшения текста.",
+    "review_status": "Формулировки подготовлены и проверены на внутреннюю согласованность; профессиональная татарская вычитка носителем не заявляется.",
+    "per_key": {
+      "session.paused": "Только после commit. При памяти/ошибке сохранения использовать storage.memory_mode/unsaved, а не обещать durable pause.",
+      "session.restart_confirm": "Новый session_id; прежний незавершённый становится abandoned. Не применяется к reset пользовательских данных.",
+      "session.incompatible": "Только когда закреплённый совместимый release недоступен и прежние ответы действительно сохранены в истории.",
+      "assessment.pending_help_body": "count — число всех active/paused diagnostic/final, сейчас 1 или 2. Gate вызывается до раскрытия учебного материала, включая выдачу поиска с чтением/значениями и таблицу букв, а не только после клика на статью. Подтверждение атомарно помечает все такие сеансы; уже установленный первый момент помощи сохраняется. Если все незавершённые проверки уже помечены, повторное подтверждение не спрашивать. Отмена не открывает материал.",
+      "assessment.unanswered_confirm": "count — только ещё не заполненные черновики; явный unknown уже является заполненным ответом. Подтверждение завершения переводит null в unknown.",
+      "diagnostic.defer_imla": "Завершает текущую диагностику после script с diagnostic_imla_deferred=true; не обещает отдельное продолжение прежнего submitted сеанса.",
+      "exercise.first_question_attempt": "Использовать для ordinal=1 данной пары session/question. Не называть первой попыткой за всю жизнь и не делать утверждение о неизвестности слова.",
+      "exercise.familiar_material": "Показывать только при подтверждённом material_seen_before; отсутствие записи не доказывает новизну.",
+      "exercise.familiar_reading": "Только reading_exposed_before для конкретного чтения, не по одному визуальному совпадению омографа.",
+      "lesson.mastered_detail": "Порог берётся из mastery policy, округление вверх. Число 80 допустимо только для lesson-mastery/1; при новой политике пересмотреть текст.",
+      "reading.mark_complete": "Явное действие создаёт reading Exposure.first_completed_at; не равно сдаче двух RQ.",
+      "dictionary.no_prepared_question": "Действие bookmark остаётся. Никогда не создавать reading-Q автоматически из одной dictionary form.",
+      "font.failed": "При ошибке арабского face остановить оценивание арабского стимула; fallback не принимать как доказательство правильной формы.",
+      "offline.download_progress": "completed — количество проверенных обязательных ресурсов данного выпуска; total — полный manifest count, не жёстко 31. Это процесс, а не offline.ready.",
+      "install.add_to_home": "Показывает доступную браузерную установку либо инструкции. Наличие кнопки или передача управления браузеру не доказывает установку.",
+      "install.safari_instructions": "Общее направление в меню, не цитата локализованной кнопки Safari. Проверять на поддерживаемых Safari при реализации; отсутствие beforeinstallprompt не является ошибкой.",
+      "update.wait_other_tabs": "Только при блокировке обновления другими клиентами. Не подменяет writer takeover.",
+      "update.wait_current_answer": "Только пока есть несохранённое изменение ответа/текущая транзакция. Сам по себе paused-сеанс не теряет закреплённый старый выпуск.",
+      "update.resume_old": "Доступно только после проверки наличия точного совместимого старого release; не переходить на новый ключ под старой сессией.",
+      "storage.history_full_detail": "Guard16MiB/90000Attempt; export/check actual20MiB. Reset требует отдельного подтверждения и удаляет весь набор прогресса согласно контракту, не только счётчик.",
+      "import.unsupported_schema": "Валидация до мутации. Для известной схемы с неизвестными ContentIds не использовать эту ошибку: записи уходят в legacy.",
+      "import.legacy_records": "Количество записей, а не людей/слов. Unknown ID/revision/policy остаются структурно проверенной историей, не актуальными баллами.",
+      "import.preview_route": "route — только TT label из существующих onboarding.arabic_known/arabic_new; при null использовать import.no_route.",
+      "settings.import_preview": "Новые placeholders заменяют прежние completed/words. lesson_count — число разных распознанных уроков с проверяемыми фактами прогресса, не обещание mastered; bookmarks включают все разрешённые виды.",
+      "settings.export_done": "Только после готового проверенного Blob/файла. Не утверждает, что браузер записал его в выбранную папку. export.download — следующее действие.",
+      "export.limit_error": "Редкий случай фактического превышения restore cap вопреки guard; не выдавать oversized файл как восстанавливаемую копию и не усекать историю.",
+      "writer.takeover_confirm": "Сначала явное подтверждение, затем fencing writer_epoch в транзакции. Черновики в БД остаются; несохранённые изменения чужого окна не копируются.",
+      "about.analytics": "Продуктовое обязательство первого выпуска, а не доказательство настроек будущего хостинга. Не добавлять внешние trackers вопреки тексту.",
+      "about.hosting": "Ссылку на правила хостинга/внешнего сайта показывать отдельно как ссылку, не подставлять URL через HTML в текст.",
+      "accessibility.insert_letter": "Клавиши вставляют заданную букву в текущую LTR-каретку, не заменяют системную клавиатуру. Доступные increase/decrease_text уже есть в основном каталоге.",
+      "settings.font_size_value": "size_px — номинальная шкала выбранного контрола. Для кириллицы только 18/20/22/24, для арабицы только 28/32/40/48; UI использует rem и уважает browser zoom. Preview настроек — нейтральный текст/отдельные безымянные буквы без пар готового задания и ответа; сам просмотр настроек не является учебной помощью.",
+      "assessment.assisted_note": "Обновлено для session-wide флага помощи diagnostic/final. Для обычного вопроса использовать имеющееся exercise.assisted.",
+      "reading.line": "Нейтральная подпись избегает ошибочного универсального окончания нче при числах 6,9,10 и других."
+    }
+  }
+}
