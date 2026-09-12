@@ -5,9 +5,10 @@ import { pendingAssessments } from '../../domain/learning/attempt';
 import { Button, Status } from '../../ui/controls';
 import { t } from '../../ui/copy';
 
-export function Disclosure({ identity, targets, children }: { identity: string; targets: ObservationTarget[]; children: ReactNode }) {
+export function Disclosure({ identity, targets, children, onDisclosed }: { identity: string; targets: ObservationTarget[]; children: ReactNode; onDisclosed?: () => void }) {
   const { runtime, snapshot, scope, confirm } = useApp();
-  const pending = pendingAssessments(snapshot.sessions).filter(session => session.assessment_help_opened_at === null);
+  const educational = targets.some(target => !['reading', 'reading_line', 'reading_word'].includes(target.kind) || 'level' in target && target.level !== undefined);
+  const pending = educational ? pendingAssessments(snapshot.sessions).filter(session => session.assessment_help_opened_at === null) : [];
   const key = `${identity}:${snapshot.control.data_generation}:${pending.map(item => item.session_id).sort().join(',')}`;
   const [allowed, setAllowed] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null); const [busy, setBusy] = useState(false);
@@ -31,6 +32,7 @@ export function Disclosure({ identity, targets, children }: { identity: string; 
     if (!pending.length) void disclose();
     return () => { activeKey.current = ''; };
   }, [key]);
+  useEffect(() => { if (allowed === key) onDisclosed?.(); }, [allowed, key]);
   if (allowed === key) return children;
   return <Status tone={error ? 'error' : pending.length ? 'warning' : 'neutral'}>
     <p>{t(pending.length || error === 'assessment_help_confirmation_required' ? 'assessment.pending_help_title' : error ? 'storage.unsaved' : 'boot.loading')}</p>

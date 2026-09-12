@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 
-export function SemanticPosition({ kind, id, revision, anchors }: { kind: 'lesson' | 'reading'; id: string; revision: string; anchors: string[] }) {
+export function SemanticPosition({ kind, id, revision, anchors, focusAnchor = true, focusTargetId }: { kind: 'lesson' | 'reading'; id: string; revision: string; anchors: string[]; focusAnchor?: boolean; focusTargetId?: string }) {
   const { snapshot, progress, scope, runtime } = useApp(); const location = useLocation();
   const anchorKey = anchors.join('|');
   useEffect(() => {
@@ -19,7 +19,7 @@ export function SemanticPosition({ kind, id, revision, anchors }: { kind: 'lesso
         restored = true; observer.disconnect(); clearTimeout(deadline);
         frame = requestAnimationFrame(() => {
           window.scrollTo({ top: scrollY + element.getBoundingClientRect().top - 100 + position!.within_block_ratio * element.getBoundingClientRect().height, behavior: 'instant' });
-        if (requested) { element.tabIndex = -1; element.focus({ preventScroll: true }); }
+        if (requested && focusAnchor) { const target = focusTargetId ? document.getElementById(focusTargetId) ?? element : element; if (target === element) target.tabIndex = -1; target.focus({ preventScroll: true }); }
         });
       }
     };
@@ -45,6 +45,6 @@ export function SemanticPosition({ kind, id, revision, anchors }: { kind: 'lesso
     };
     window.addEventListener('scroll', scroll, { passive: true });
     return () => { observer.disconnect(); clearTimeout(deadline); cancelAnimationFrame(frame); window.removeEventListener('scroll', scroll); if (timer) clearTimeout(timer); save(); };
-  }, [kind, id, revision, anchorKey, location.key, location.search, progress, snapshot.control.data_generation, snapshot.control.writer_epoch, snapshot.settings.arabic_size_px, snapshot.settings.text_size_px]);
+  }, [kind, id, revision, anchorKey, location.key, location.search, progress, snapshot.control.data_generation, snapshot.control.writer_epoch, snapshot.settings.arabic_size_px, snapshot.settings.text_size_px, focusAnchor, focusTargetId]);
   return null;
 }

@@ -5,12 +5,12 @@ import { t } from '../../ui/copy';
 
 export function Missing({ parent = '/lessons' }: { parent?: string }) { return <div className="document"><h1>{t('error.not_found')}</h1><Link to={parent}>{t('action.back')}</Link></div>; }
 export function Loading() { return <Status announce>{t('boot.loading')}</Status>; }
-export function ContentState<T>({ identity, load, children }: { identity: string; load: () => Promise<T>; children: (value: T) => ReactNode }) {
+export function ContentState<T>({ identity, load, children, onSettled }: { identity: string; load: () => Promise<T>; children: (value: T) => ReactNode; onSettled?: () => void }) {
   const [result, setResult] = useState<{ identity: string; value: T } | null>(null);
   const [failed, setFailed] = useState(false); const [retry, setRetry] = useState(0);
   useEffect(() => {
     let active = true; setFailed(false);
-    void load().then(value => { if (active) setResult({ identity, value }); }).catch(() => { if (active) setFailed(true); });
+    void load().then(value => { if (active) { setResult({ identity, value }); onSettled?.(); } }).catch(() => { if (active) { setFailed(true); onSettled?.(); } });
     return () => { active = false; };
     // identity определяет ресурс; изменение callback при render не повторяет загрузку.
   }, [identity, retry]);

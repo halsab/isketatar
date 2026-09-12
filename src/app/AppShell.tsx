@@ -23,8 +23,10 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
   })}</nav>;
 }
 export function AppShell({ children, status }: { children: ReactNode; status?: ReactNode }) {
-  const [menu, setMenu] = useState(false);
-  const { pathname } = useLocation();
+  const [menuKey, setMenuKey] = useState<string | null>(null);
+  const { pathname, key } = useLocation();
+  const menu = menuKey === key;
+  useEffect(() => setMenuKey(null), [key]);
   const sessionRoute = /\/practice$|\/questions$|^\/review\/session\//u.test(pathname);
   useEffect(() => {
     const viewport = window.visualViewport;
@@ -52,10 +54,10 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
       <Link className="brand" to="/">{t('app.name')}</Link>
       <div className="header-navigation"><Navigation /></div>
       <Link className="settings-link" to="/settings" aria-label={t('nav.settings')}><Icon name="settings" /></Link>
-      <div className="compact-menu"><IconButton icon="menu" label={t('accessibility.menu')} aria-expanded={menu} onClick={() => setMenu(true)} /></div>
+      <div className="compact-menu"><IconButton icon="menu" label={t('accessibility.menu')} aria-expanded={menu} onClick={() => setMenuKey(key)} /></div>
     </div></header>
     <main className="app-main" id="main" tabIndex={-1}>{status}{children}</main>
     <div className="bottom-navigation"><Navigation /></div>
-    <Dialog open={menu} title={t('accessibility.menu')} onClose={() => setMenu(false)}><Navigation onNavigate={() => setMenu(false)} /></Dialog>
+    <Dialog open={menu} title={t('accessibility.menu')} onClose={() => setMenuKey(null)}><Navigation onNavigate={() => setMenuKey(null)} /></Dialog>
   </div>;
 }
