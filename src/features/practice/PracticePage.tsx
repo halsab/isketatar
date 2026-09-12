@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
@@ -15,11 +16,11 @@ import { SessionPlayer } from './SessionPlayer';
 import { HistoricalResult } from '../shared/HistoricalResult';
 
 function Practice({ lesson }: { lesson: Lesson }) {
-  const { runtime, snapshot, command, progress, confirm } = useApp(); const navigate = useNavigate();
+  const { releaseId, snapshot, command, progress, confirm } = useApp(); const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
   const unfinished = snapshot.sessions.find(session => session.kind === 'lesson_cycle' && session.lesson_id === lesson.id && ['active', 'paused'].includes(session.status));
   const readonly = snapshot.control.writer_id !== progress.tabId;
-  const compatible = !unfinished || unfinished.release_id === runtime.releaseId && unfinished.question_plan.every(item => lesson.question_ids.includes(item.question_id));
+  const compatible = !unfinished || unfinished.release_id === releaseId && unfinished.question_plan.every(item => lesson.question_ids.includes(item.question_id));
   async function start(restart = false) {
     if (restart && !await confirm({ title: t('session.restart'), body: t('session.restart_confirm'), action: t('session.restart') })) return;
     setBusy(true);
@@ -37,13 +38,13 @@ function Practice({ lesson }: { lesson: Lesson }) {
     </>}
   </div>;
 }
-export function PracticePage() {
+function PracticePageContent() {
   const { lesson_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
   return <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <Practice key={lesson.id} lesson={lesson} />}</ContentState>;
 }
 function LessonResult({ lesson, sessionId }: { lesson: Lesson; sessionId: string }) {
-  const { snapshot, content, command, progress } = useApp();
+  const { snapshot, content, command, progress, runtime } = useApp();
   const session = snapshot.sessions.find(item => item.session_id === sessionId && item.kind === 'lesson_cycle' && item.lesson_id === lesson.id);
   if (!session) return <Missing parent={`/lessons/${lesson.id}`} />;
   if (session.status !== 'submitted') return <div className="document"><h1>{t('assessment.result')}</h1><p>{t(['active', 'paused'].includes(session.status) ? 'session.existing_draft' : 'session.incompatible')}</p><Link to={`/lessons/${lesson.id}/practice`}>{t('action.continue')}</Link></div>;
@@ -71,14 +72,18 @@ function LessonResult({ lesson, sessionId }: { lesson: Lesson; sessionId: string
         return <details className="result-question" key={plan.question_id}><summary><MixedText text={question.prompt_tt} /> — {t(first.grade === 'correct' ? 'exercise.correct' : first.grade === 'unknown' ? 'exercise.unsure' : 'exercise.incorrect')}</summary>
           <p>{t('attempt.first')}: <AnswerSummary answer={first.answer_raw} question={question} /></p>{last !== first && <p>{t('attempt.last')}: <AnswerSummary answer={last.answer_raw} question={question} /></p>}
           <p>{t('exercise.answer')}: <AcceptedAnswer question={question} /></p><p><MixedText text={question.explanation_tt} /></p>
-          <Button disabled={snapshot.control.writer_id !== progress.tabId || snapshot.review_cards.some(card => card.question_id === plan.question_id && card.status === 'active')} onClick={() => { void command({ type: 'review_add', question_id: plan.question_id, origin: { kind: 'lesson', id: lesson.id } }).catch(() => {}); }}>{t(snapshot.review_cards.some(card => card.question_id === plan.question_id && card.status === 'active') ? 'review.added' : 'review.add')}</Button>
+          <Button disabled={runtime.content!.catalog.core.questions.find(item => item.id === plan.question_id)?.grading_revision !== plan.grading_revision || snapshot.control.writer_id !== progress.tabId || snapshot.review_cards.some(card => card.question_id === plan.question_id && card.status === 'active')} onClick={() => { void command({ type: 'review_add', question_id: plan.question_id, origin: { kind: 'lesson', id: lesson.id } }).catch(() => {}); }}>{t(snapshot.review_cards.some(card => card.question_id === plan.question_id && card.status === 'active') ? 'review.added' : 'review.add')}</Button>
         </details>;
       })}
     </Disclosure>
   </div>;
 }
-export function ResultPage() {
+function ResultPageContent() {
   const { lesson_id = '', session_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
   return <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonResult lesson={lesson} sessionId={session_id} />}</ContentState>;
 }
+
+export function PracticePage() { return <SessionContent kind="lesson_cycle"><PracticePageContent  /></SessionContent>; }
+
+export function ResultPage() { return <SessionContent kind="lesson_cycle"><ResultPageContent  /></SessionContent>; }

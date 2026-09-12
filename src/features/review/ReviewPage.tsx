@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
@@ -24,7 +25,7 @@ function QuestionLabel({ id }: { id: string }) {
 }
 
 function Review({ sessionId }: { sessionId?: string }) {
-  const { snapshot, content, runtime, progress, command, confirm } = useApp(); const navigate = useNavigate();
+  const { snapshot, content, releaseId, progress, command, confirm } = useApp(); const navigate = useNavigate();
   const [at, setAt] = useState(Date.now); const [busy, setBusy] = useState(false); const [limit, setLimit] = useState(30);
   useEffect(() => {
     const tick = () => setAt(Date.now()); const timer = setInterval(tick, 60_000);
@@ -54,7 +55,7 @@ function Review({ sessionId }: { sessionId?: string }) {
   if (sessionId !== undefined) {
     const session = sessions.find(item => item.session_id === sessionId);
     if (!session) return <Missing parent="/review" />;
-    const compatible = current(session) && session.release_id === runtime.releaseId;
+    const compatible = current(session) && session.release_id === releaseId;
     if (session.status === 'submitted') {
       if (!current(session)) return <HistoricalResult session={session} backTo="/review" />;
       const attempts = session.question_plan.flatMap(plan => snapshot.attempts.filter(item => item.presentation_id === plan.first_presentation_id));
@@ -91,9 +92,11 @@ function Review({ sessionId }: { sessionId?: string }) {
     <SessionHistory sessions={sessions} resultPath="/review/session" />
   </div>;
 }
-export function ReviewPage() {
+function ReviewPageContent() {
   const { session_id } = useParams(); const { content, snapshot } = useApp();
   const known = new Set(content.catalog.core.questions.map(question => question.id));
   const ids = [...new Set([...snapshot.review_cards.map(card => card.question_id), ...snapshot.sessions.filter(session => session.kind === 'review').flatMap(session => session.question_plan.map(plan => plan.question_id))])].filter(id => known.has(id)).sort();
   return <ContentState identity={`review:${ids.join(',')}`} load={() => content.questions(ids)}>{() => <Review key={session_id ?? 'queue'} sessionId={session_id} />}</ContentState>;
 }
+
+export function ReviewPage() { return <SessionContent kind="review" explicitOnly><ReviewPageContent  /></SessionContent>; }

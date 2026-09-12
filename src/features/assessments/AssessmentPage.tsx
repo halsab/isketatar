@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { useRef, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
@@ -19,11 +20,11 @@ import { AssessmentEditor } from './AssessmentEditor';
 type Kind = 'diagnostic' | 'final';
 const titleKey = (kind: Kind) => kind === 'diagnostic' ? 'diagnostic.title' : 'assessment.final';
 function Assessment({ kind }: { kind: Kind }) {
-  const { runtime, content, snapshot, progress, command, confirm } = useApp(); const navigate = useNavigate();
+  const { releaseId, content, snapshot, progress, command, confirm } = useApp(); const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
   const ids = kind === 'diagnostic' ? content.catalog.core.diagnostic_ids : content.catalog.core.final_ids;
   const unfinished = snapshot.sessions.find(session => session.kind === kind && ['active', 'paused'].includes(session.status));
-  const compatible = !unfinished || unfinished.release_id === runtime.releaseId && Object.entries(POLICIES).every(([key, value]) => Reflect.get(unfinished.policy_versions, key) === value) && unfinished.question_plan.length === ids.length && unfinished.question_plan.every((item, index) => item.question_id === ids[index] && item.grading_revision === content.catalog.question(item.question_id).grading_revision);
+  const compatible = !unfinished || unfinished.release_id === releaseId && Object.entries(POLICIES).every(([key, value]) => Reflect.get(unfinished.policy_versions, key) === value) && unfinished.question_plan.length === ids.length && unfinished.question_plan.every((item, index) => item.question_id === ids[index] && item.grading_revision === content.catalog.question(item.question_id).grading_revision);
   const readonly = snapshot.control.writer_id !== progress.tabId;
   const completed = kind === 'final' ? courseProgress(content.catalog.core, snapshot.settings.selected_route ?? 'arabic_reader', snapshot).route : null;
   const result = (id: string) => navigate(`/${kind}/result/${id}`, { replace: true });
@@ -91,11 +92,15 @@ function Result({ kind, sessionId }: { kind: Kind; sessionId: string }) {
     <AssessmentReview session={session} /><div className="actions"><Link className="button" to={`/${kind}`}>{t('assessment.new_attempt')}</Link><Link to="/lessons">{t('course.all_lessons')}</Link></div>
   </div>;
 }
-export function AssessmentPage({ kind }: { kind: Kind }) {
+function AssessmentPageContent({ kind }: { kind: Kind }) {
   const { content } = useApp(); const ids = kind === 'diagnostic' ? content.catalog.core.diagnostic_ids : content.catalog.core.final_ids;
   return <ContentState identity={kind} load={() => content.questions(ids)}>{() => <Assessment key={kind} kind={kind} />}</ContentState>;
 }
-export function AssessmentResultPage({ kind }: { kind: Kind }) {
+function AssessmentResultPageContent({ kind }: { kind: Kind }) {
   const { session_id = '' } = useParams(); const { content } = useApp(); const ids = kind === 'diagnostic' ? content.catalog.core.diagnostic_ids : content.catalog.core.final_ids;
   return <ContentState identity={kind} load={() => content.questions(ids)}>{() => <Result key={`${kind}:${session_id}`} kind={kind} sessionId={session_id} />}</ContentState>;
 }
+
+export function AssessmentPage({ kind }: { kind: Kind }) { return <SessionContent kind={kind}><AssessmentPageContent kind={kind} /></SessionContent>; }
+
+export function AssessmentResultPage({ kind }: { kind: Kind }) { return <SessionContent kind={kind}><AssessmentResultPageContent kind={kind} /></SessionContent>; }

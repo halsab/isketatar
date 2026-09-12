@@ -16,6 +16,7 @@ export class SessionEditor {
   readonly generation: string;
   readonly sessionId: string;
   readonly questionId: string;
+  readonly releaseId: string;
   getState = () => this.state;
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   private update(patch: Partial<typeof this.state>) { this.state = { ...this.state, ...patch }; for (const listener of this.listeners) listener(); }
@@ -23,6 +24,7 @@ export class SessionEditor {
     const presentation = snapshot.presentations.find(item => item.presentation_id === presentationId);
     if (!presentation) throw new Error('unknown_presentation');
     this.sessionId = presentation.session_id;
+    this.releaseId = snapshot.sessions.find(session => session.session_id === presentation.session_id)!.release_id;
     this.questionId = presentation.question_id;
     this.generation = snapshot.control.data_generation;
     this.expected = expectedFrom(snapshot);
@@ -64,7 +66,7 @@ export class SessionEditor {
     await this.suspend();
     const answer = structuredClone(this.state.answer);
     const sessionId = this.sessionId; const presentationId = this.presentationId;
-    const question = this.repository.options.catalog.question(this.questionId);
+    const question = this.repository.catalogForRelease(this.releaseId).question(this.questionId);
     const text = answer === null ? '' : answer.kind === 'option' ? question.options.find(option => option.id === answer.option_id)?.text_tt ?? answer.option_id : answer.kind === 'set' ? answer.option_ids.map(id => question.options.find(option => option.id === id)?.text_tt ?? id).join(' · ') : answer.kind === 'unknown' ? '' : answer.text;
     return { text, restore: async (branch: ProgressRepository) => {
       const snapshot = await branch.snapshot();

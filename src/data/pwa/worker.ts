@@ -39,10 +39,16 @@ self.addEventListener('message', event => {
   const source = event.source; const port = event.ports[0];
   if (!source || !('type' in source) || !ownClient(source as Client) || !port) return;
   const message: unknown = event.data;
-  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify'].includes(Reflect.get(message, 'type'))) return;
+  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release'].includes(Reflect.get(message, 'type'))) return;
   const type: string = Reflect.get(message, 'type'); const id: unknown = Reflect.get(message, 'release_id');
   const reply = async () => {
     try {
+      if (type === 'release') {
+        const value = await registry.read();
+        if (typeof id !== 'string' || ![value.current_release_id, value.previous_release_id].includes(id)) throw new Error('content_unavailable');
+        const entry = value.releases.find(item => item.release_id === id); if (!entry) throw new Error('content_unavailable');
+        port.postMessage({ value: { manifest: await packages.manifest(id), digest: entry.manifest_sha256 } }); return;
+      }
       if (type === 'initialize') { if (typeof id !== 'string') throw new Error('content_corrupt'); await initialize(id); }
       if (type === 'download' || type === 'verify') {
         const current = (await registry.read()).current_release_id;
@@ -62,7 +68,7 @@ self.addEventListener('message', event => {
     } finally { port.close(); }
   };
   if (type === 'cancel') { controller?.abort(); event.waitUntil(reply()); }
-  else if (type === 'status') event.waitUntil(reply());
+  else if (type === 'status' || type === 'release') event.waitUntil(reply());
   else { operation = operation.catch(() => {}).then(reply); event.waitUntil(operation); }
 });
 self.addEventListener('fetch', event => {

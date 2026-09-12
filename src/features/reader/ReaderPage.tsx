@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
@@ -116,8 +117,10 @@ function Reader({ reading }: { reading: Reading }) {
     <SemanticPosition kind="reading" id={reading.id} revision={reading.content_revision} anchors={reading.lines.map(line => line.id)} focusAnchor={!selected} focusTargetId={history.state?.iskeReaderTrigger ?? location.state?.wordReturnTrigger} />
   </div>{selected && <WordPanel key={`${location.key}:${selected.word.word_id}:${snapshot.control.data_generation}`} reading={reading} {...selected} independent={independent} onClose={close} />}</div>;
 }
-export function ReaderPage() {
+function ReaderPageContent() {
   const { reading_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.reading_ids.includes(reading_id)) return <Missing parent="/reading" />;
   return <ContentState identity={reading_id} load={async () => { await content.load('readings.json'); return content.catalog.readings.get(reading_id)!; }}>{reading => <Reader key={reading.id} reading={reading} />}</ContentState>;
 }
+
+export function ReaderPage() { return <SessionContent kind="reading_practice"><ReaderPageContent  /></SessionContent>; }

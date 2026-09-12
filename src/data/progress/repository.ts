@@ -19,7 +19,7 @@ import { MemoryBackend } from './memory-backend';
 import { exportData } from './transfer';
 import { markAssessmentHelp, pendingAssessments } from '../../domain/learning/attempt';
 
-interface Options { catalog: ContentCatalog; currentCore?: CoreData; releaseId: string; availableReleaseIds?: string[]; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
+interface Options { catalog: ContentCatalog; catalogs?: Map<string, ContentCatalog>; currentCore?: CoreData; releaseId: string; availableReleaseIds?: string[]; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
 interface KnownProtection { generation: string }
 interface DurableProtection extends KnownProtection { source: ProgressRepository }
 export function expectedFrom(snapshot: ProgressSnapshot): Expected {
@@ -124,10 +124,12 @@ export class ProgressRepository {
     const snapshot = await this.snapshot();
     return encodeExport(snapshot, packageInfo.version, this.options.catalog.core.content_version, this.clock());
   }
-  async previewImport(file: Blob): Promise<ImportPreview> {
+  async previewImport(file: Blob, prepareContent?: (releaseIds: string[]) => Promise<void>): Promise<ImportPreview> {
     const sequence = ++this.importSequence; this.preparedImport = null;
     const decoded = await decodeImport(file);
-    const data = prepareProgress(decoded, this.options.catalog, this.options.availableReleaseIds ?? [this.options.releaseId], this.clock());
+    await prepareContent?.([...new Set(decoded.data.sessions.map(session => session.release_id))]);
+    if (sequence !== this.importSequence) throw new Error('invalid_preview');
+    const data = prepareProgress(decoded, this.options.catalog, this.options.availableReleaseIds ?? [...new Set([this.options.releaseId, ...(this.options.catalogs?.keys() ?? [])])], this.clock(), this.options.catalogs);
     const snapshot = await this.snapshot();
     if (sequence !== this.importSequence) throw new Error('invalid_preview');
     const legacy_reasons: ImportPreview['legacy_reasons'] = { unknown_content_id: 0, unknown_grading_revision: 0, unknown_policy_version: 0, incompatible_draft: 0 };
@@ -260,7 +262,11 @@ export class ProgressRepository {
       control.writer_id = this.tabId; control.writer_epoch++; control.update_gate.coordinator_id = this.tabId;
     });
   }
-  dispatch(command: Command, expected: Expected): Promise<CommandResult> {
+  catalogForRelease(id: string): ContentCatalog {
+    const catalog = id === this.options.releaseId ? this.options.catalog : this.options.catalogs?.get(id);
+    if (!catalog) throw new Error('content_unavailable'); return catalog;
+  }
+  dispatch(command: Command, expected: Expected, contentReleaseId = this.options.releaseId): Promise<CommandResult> {
     if (this.detached) return Promise.reject(new Error('repository_detached'));
     const captured = structuredClone(command); const token = structuredClone(expected); const at = this.clock();
     return this.enqueue(async () => {
@@ -273,7 +279,12 @@ export class ProgressRepository {
         if (control.data_generation !== token.data_generation || !observation && (control.writer_epoch !== token.writer_epoch || control.writer_id !== this.tabId)) throw new Error('write_conflict');
         if (control.update_gate?.phase === 'commit' || control.update_gate?.phase === 'quiescing' && !(observation && token.update_id === null) && !['draft', 'pause', 'position'].includes(captured.type)) throw new Error('update_in_progress');
         const context = new WriteContext(tx, control, token, observation);
-        const engine = new CommandEngine(context, this.options.catalog, this.options.currentCore ?? this.options.catalog.core, this.options.releaseId, at, this.uuid);
+        const sessionId = 'session_id' in captured ? captured.session_id : 'presentation_id' in captured ? (await tx.get('presentations', captured.presentation_id))?.session_id : undefined;
+        const session = sessionId ? await tx.get('sessions', sessionId) : undefined;
+        const requestedId = session?.release_id ?? (['observe', 'bookmark', 'position', 'read_complete'].includes(captured.type) ? contentReleaseId : this.options.releaseId);
+        const source = requestedId === this.options.releaseId ? this.options.catalog : this.options.catalogs?.get(requestedId);
+        if (!source && !session) throw new Error('content_unavailable');
+        const engine = new CommandEngine(context, source ?? this.options.catalog, this.options.currentCore ?? this.options.catalog.core, source ? requestedId : this.options.releaseId, at, this.uuid, this.options.catalogs);
         const result = await this.execute(engine, captured);
         await context.finish(captured.type !== 'settings', this.mode === 'durable');
         if (this.mode === 'memory' && context.disclosure && this.protection) {
@@ -326,6 +337,15 @@ export class ProgressRepository {
       case 'navigate_question': return engine.navigate(command.session_id, command.question_id);
       case 'help': return engine.help(command);
       case 'observe': return observe(engine, command.target, command.confirm_assessment_help);
+      case 'leave_historical': {
+        if (!command.confirmed) throw new Error('confirmation_required');
+        const session = await engine.tx.get('sessions', command.session_id);
+        if (!session || !['active', 'paused'].includes(session.status)) throw new Error('invalid_session_state');
+        engine.context.check('sessions', session.session_id, session);
+        await engine.context.put('sessions', { ...session, status: 'incompatible', incompatibility_reason: 'release_not_continued', updated_at: engine.at, revision: session.revision + 1 });
+        if (engine.context.control.active_session_id === session.session_id) engine.context.control.active_session_id = null;
+        return {};
+      }
       case 'read_complete': return markReadingComplete(engine, command.reading_id);
       case 'review_add': await validateReviewOrigin(engine, command); return engine.reviewAdd(command);
       case 'settings': return settingsCommand(engine, command);

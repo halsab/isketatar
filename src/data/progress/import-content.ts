@@ -10,18 +10,23 @@ import type { HistoryRecord, Legacy, ProgressData, ProgressExport } from './mode
 import { integrity, originalId, requireImport } from './import-integrity';
 
 type Reason = Legacy['reason'];
-export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalog, availableReleases: readonly string[], at: number): ProgressData {
+export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalog, availableReleases: readonly string[], at: number, catalogs?: Map<string, ContentCatalog>): ProgressData {
   if (catalog.core.questions.some(question => !catalog.questions.has(question.id)) || catalog.core.lessons.some(lesson => !catalog.lessons.has(lesson.id)) || catalog.core.reading_ids.some(id => !catalog.readings.has(id)) || !catalog.references || !catalog.lexicon.size) throw new Error('content_unavailable');
   const data = structuredClone(envelope.data);
   const linked = integrity(data);
+  for (const id of new Set(data.sessions.map(session => session.release_id))) {
+    const retained = catalogs?.get(id);
+    if (retained && (retained.core.questions.some(question => !retained.questions.has(question.id)) || retained.core.lessons.some(lesson => !retained.lessons.has(lesson.id)) || retained.core.reading_ids.some(id => !retained.readings.has(id)))) throw new Error('content_unavailable');
+  }
+  const forSession = (id: string) => catalogs?.get(linked.sessions.get(id)!.release_id) ?? catalog;
   for (const presentation of linked.presentations.values()) {
-    const question = catalog.questions.get(presentation.question_id);
+    const question = forSession(presentation.session_id).questions.get(presentation.question_id);
     if (question?.grading_revision !== presentation.grading_revision) continue;
     requireImport(presentation.draft_answer === null || isAnswerValue(presentation.draft_answer, question));
     requireImport(presentation.assistance.hint_indices.every(index => index < question.hints_tt.length));
   }
   for (const attempt of linked.attempts.values()) {
-    const question = catalog.questions.get(attempt.question_id);
+    const question = forSession(attempt.session_id).questions.get(attempt.question_id);
     if (question?.grading_revision === attempt.grading_revision) requireImport(isAnswerValue(attempt.answer_raw, question));
   }
   const legacyIds = new Set(data.legacy.map(item => item.legacy_id));
@@ -50,6 +55,8 @@ export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalo
     return false;
   }
   function sessionReason(session: Session): Reason | null {
+    const catalog = forSession(session.session_id);
+    const sessionLines = new Map([...catalog.readings.values()].flatMap(reading => reading.lines.map(line => [line.id, { reading, line }] as const)));
     if (session.policy_versions.grading !== POLICIES.grading || session.policy_versions.normalization !== POLICIES.normalization) return 'unknown_policy_version';
     if (session.lesson_id !== null && !catalog.lessons.has(session.lesson_id) || session.reading_ids.some(id => !catalog.readings.has(id)) || session.question_plan.some(item => !catalog.questions.has(item.question_id))) return 'unknown_content_id';
     if (session.question_plan.some(item => catalog.question(item.question_id).grading_revision !== item.grading_revision)) return 'unknown_grading_revision';
@@ -68,7 +75,7 @@ export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalo
       else requireImport(session.question_plan.length <= 10);
     }
     for (const help of session.reading_help) {
-      const line = lines.get(help.line_id);
+      const line = sessionLines.get(help.line_id);
       requireImport(line && session.reading_ids.includes(line.reading.id) && (help.word_id === null || line.line.words.some(word => word.word_id === help.word_id)));
     }
     if (session.status === 'incompatible' || ['active', 'paused'].includes(session.status) && (session.content_schema !== 1 || !availableReleases.includes(session.release_id) || Object.entries(POLICIES).some(([key, version]) => Reflect.get(session.policy_versions, key) !== version))) return 'incompatible_draft';
@@ -80,7 +87,7 @@ export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalo
     const reason = reasons.get(presentation.session_id);
     if (reason) { retain('presentation', presentation, reason); return false; }
     requireImport(reasons.has(presentation.session_id));
-    const question = catalog.question(presentation.question_id);
+    const question = forSession(presentation.session_id).question(presentation.question_id);
     requireImport(presentation.draft_answer === null || isAnswerValue(presentation.draft_answer, question));
     requireImport(presentation.assistance.hint_indices.every(index => index < question.hints_tt.length));
     return true;
@@ -91,7 +98,7 @@ export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalo
     requireImport(reasons.has(attempt.session_id));
     const presentation = linked.presentations.get(attempt.presentation_id)!;
     const session = linked.sessions.get(attempt.session_id)!;
-    const question = catalog.question(attempt.question_id);
+    const question = forSession(attempt.session_id).question(attempt.question_id);
     requireImport(canSubmit(question, attempt.answer_raw) || attempt.answer_raw.kind === 'set' && isAnswerValue(attempt.answer_raw, question));
     // Поздняя помощь retry не относится к старому Attempt: его снимок уже самодостаточен.
     const graded = makeAttempt(question, { ...presentation, status: 'draft', assistance: attempt.assistance_before_submit }, { ...session, reading_help: [] }, attempt.answer_raw, attempt.submitted_at);

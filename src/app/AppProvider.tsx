@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Button, Status } from '../ui/controls';
 import { Dialog } from '../ui/Dialog';
 import { t } from '../ui/copy';
+import { StudyScope } from './StudyScope';
 import { AppRuntime, type AppState } from './runtime';
 import { replacementToken } from '../data/progress/transfer';
 import { expectedFrom } from '../data/progress/repository';
@@ -38,10 +39,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   </Context.Provider>;
 }
 export function useApp() {
-  const context = useContext(Context);
+  const context = useContext(Context); const study = useContext(StudyScope);
   if (!context || !context.state.snapshot || !context.runtime.content || !context.runtime.progress) throw new Error('application_not_ready');
-  const scope = { repository: context.runtime.progress, expected: expectedFrom(context.state.snapshot) };
-  return { ...context, snapshot: context.state.snapshot, content: context.runtime.content, progress: context.runtime.progress, scope, command: (command: Command) => context.runtime.command(command, scope) };
+  const scope = { repository: context.runtime.progress, contentReleaseId: study?.releaseId ?? context.runtime.releaseId, expected: expectedFrom(context.state.snapshot) };
+  return { ...context, snapshot: context.state.snapshot, content: study?.content ?? context.runtime.content, releaseId: study?.releaseId ?? context.runtime.releaseId, progress: context.runtime.progress, scope, command: (command: Command) => context.runtime.command(command, scope) };
 }
 export function RuntimeStatus() {
   const { runtime, state, snapshot, progress, confirm } = useApp();

@@ -9,7 +9,7 @@ import { AcceptedAnswer, AnswerSummary } from '../practice/QuestionView';
 import { Disclosure } from './Disclosure';
 
 export function PracticeReview({ session }: { session: Session }) {
-  const { snapshot, content, progress, command } = useApp(); const [open, setOpen] = useState<string[]>([]);
+  const { snapshot, content, progress, command, runtime } = useApp(); const [open, setOpen] = useState<string[]>([]);
   const attempts = snapshot.attempts.filter(item => item.session_id === session.session_id);
   if (!attempts.length) return null;
   return <section><h2>{t('assessment.practice_after')}</h2>{session.question_plan.map((plan, index) => {
@@ -25,7 +25,7 @@ export function PracticeReview({ session }: { session: Session }) {
         <p>{t('attempt.first')}: <AnswerSummary answer={first.answer_raw} question={question} /> · {t(first.independent_correct ? 'exercise.independent' : 'exercise.not_independent')}</p>
         {last !== first && <p>{t('attempt.last')}: <AnswerSummary answer={last.answer_raw} question={question} /> · {t(last.grade === 'correct' ? 'exercise.correct' : last.grade === 'unknown' ? 'exercise.unsure' : 'exercise.incorrect')}</p>}
         <p>{t('exercise.answer')}: <AcceptedAnswer question={question} /></p><p><MixedText text={question.explanation_tt} /></p>
-        <Button disabled={saved || snapshot.control.writer_id !== progress.tabId} onClick={() => { void command({ type: 'review_add', question_id: question.id, origin: question.source_reading_id ? { kind: 'reading', id: question.source_reading_id } : { kind: 'lesson', id: question.lesson_id! } }).catch(() => {}); }}>{t(saved ? 'review.added' : 'review.add')}</Button>
+        <Button disabled={runtime.content!.catalog.core.questions.find(item => item.id === question.id)?.grading_revision !== question.grading_revision || saved || snapshot.control.writer_id !== progress.tabId} onClick={() => { void command({ type: 'review_add', question_id: question.id, origin: question.source_reading_id ? { kind: 'reading', id: question.source_reading_id } : { kind: 'lesson', id: question.lesson_id! } }).catch(() => {}); }}>{t(saved ? 'review.added' : 'review.add')}</Button>
       </Disclosure></ArabicFontGate>}
     </details>;
   })}</section>;

@@ -12,12 +12,13 @@ import { SessionEditor } from '../features/practice/editor';
 vi.mock('../ui/preferences', () => ({ applyPreferences: vi.fn() }));
 vi.mock('./release', () => ({ currentReleaseId: async () => 'test-release' }));
 vi.mock('./tab-identity', () => ({ tabIdentity: async () => '00000000-0000-4000-8000-000000000001' }));
+vi.mock('../data/pwa/client', () => ({ offline: { start: async () => {}, getState: () => ({ registry: { previous_release_id: 'R1' } }) } }));
 const runtimes: AppRuntime[] = [];
 beforeEach(() => {
   vi.stubGlobal('indexedDB', new IDBFactory());
   vi.spyOn(ContentRepository, 'open').mockResolvedValue({ catalog } as ContentRepository);
 });
-afterEach(() => { for (const runtime of runtimes.splice(0)) runtime.progress?.close(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+afterEach(() => { for (const runtime of runtimes.splice(0)) runtime.progress?.close(); vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 async function open() { const runtime = new AppRuntime(); runtimes.push(runtime); await runtime.start(); return runtime; }
 const command = { type: 'settings' as const, patch: { theme: 'dark' as const } };
 
@@ -25,7 +26,7 @@ it('loads a paused lesson question before disclosing final feedback on a cold ca
   const partial = new ContentCatalog(catalog.core);
   partial.addQuestions({ questions: [...catalog.questions.values()] } as Parameters<ContentCatalog['addQuestions']>[0]);
   const questions = vi.fn(async (ids: string[]) => { const loaded = ids.map(id => catalog.question(id)); partial.addQuestions({ questions: loaded } as Parameters<ContentCatalog['addQuestions']>[0]); return loaded; });
-  vi.mocked(ContentRepository.open).mockResolvedValue({ catalog: partial, questions } as unknown as ContentRepository);
+  vi.mocked(ContentRepository.open).mockResolvedValue({ catalog: partial, questions, load: async (resource: string) => { if (resource === 'readings.json') partial.addReadings({ readings: [...catalog.readings.values()], questions: [] }); } } as unknown as ContentRepository);
   const runtime = await open(); const repository = runtime.progress!;
   const run = async (value: Parameters<AppRuntime['command']>[0]) => runtime.command(value, { repository, expected: expectedFrom(await repository.snapshot()) });
   const final = await run({ type: 'start', kind: 'final' });
@@ -47,6 +48,14 @@ it('does not reauthorize a captured callback after reset', async () => {
   await repository.reset(replacementToken(snapshot), true); await runtime.refresh();
   await expect(runtime.command(command, scope)).rejects.toThrow('write_conflict');
   expect(runtime.getState().snapshot!.settings.theme).toBe('system');
+});
+it('loads only the current import catalog when no previous session is referenced', async () => {
+  const load = vi.fn(async () => {});
+  vi.mocked(ContentRepository.open).mockResolvedValue({ catalog, load } as unknown as ContentRepository);
+  const runtime = await open(); const retained = vi.spyOn(runtime, 'contentForRelease').mockRejectedValue(new Error('content_unavailable'));
+  vi.stubEnv('PROD', true);
+  await runtime.progress!.previewImport(await runtime.progress!.exportProgress(), ids => runtime.loadAllContent(ids));
+  expect(load).toHaveBeenCalledWith('assessments.json'); expect(retained).not.toHaveBeenCalled();
 });
 
 it('does not redirect a durable callback into the memory branch', async () => {

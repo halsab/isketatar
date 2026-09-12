@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
@@ -14,13 +15,13 @@ import { PracticeReview } from '../shared/PracticeReview';
 import { SessionHistory } from '../shared/SessionHistory';
 
 function ReadingQuestions({ reading, sessionId }: { reading: Reading; sessionId?: string }) {
-  const { content, snapshot, runtime, progress, command, confirm } = useApp(); const navigate = useNavigate();
+  const { content, snapshot, releaseId, progress, command, confirm } = useApp(); const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
   const sessions = snapshot.sessions.filter(session => session.kind === 'reading_practice' && session.reading_ids.length === 1 && session.reading_ids[0] === reading.id);
   const unfinished = sessions.find(session => ['active', 'paused'].includes(session.status));
   const backTo = `/reading/${reading.id}/questions`;
   const current = (session: Session) => session.question_plan.length === reading.question_ids.length && session.question_plan.every((item, index) => item.question_id === reading.question_ids[index] && item.grading_revision === content.catalog.question(item.question_id).grading_revision) && Object.entries(POLICIES).every(([key, value]) => Reflect.get(session.policy_versions, key) === value);
-  const compatible = !unfinished || unfinished.release_id === runtime.releaseId && current(unfinished);
+  const compatible = !unfinished || unfinished.release_id === releaseId && current(unfinished);
   const readonly = snapshot.control.writer_id !== progress.tabId;
   async function start(restart = false) {
     if (restart && !await confirm({ title: t('session.restart'), body: t('session.restart_confirm'), action: t('session.restart') })) return;
@@ -56,7 +57,7 @@ function ReadingQuestions({ reading, sessionId }: { reading: Reading; sessionId?
     </>}
   </div>;
 }
-export function ReadingQuestionsPage({ result = false }: { result?: boolean }) {
+function ReadingQuestionsPageContent({ result = false }: { result?: boolean }) {
   const { reading_id = '', session_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.reading_ids.includes(reading_id)) return <Missing parent="/reading" />;
   return <ContentState identity={reading_id} load={async () => {
@@ -65,3 +66,5 @@ export function ReadingQuestionsPage({ result = false }: { result?: boolean }) {
     return reading;
   }}>{reading => <ReadingQuestions key={`${reading.id}:${session_id}`} reading={reading} sessionId={result ? session_id : undefined} />}</ContentState>;
 }
+
+export function ReadingQuestionsPage({ result = false }: { result?: boolean }) { return <SessionContent kind="reading_practice"><ReadingQuestionsPageContent result={result} /></SessionContent>; }

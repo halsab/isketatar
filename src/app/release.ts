@@ -11,7 +11,7 @@ function version(value: unknown): number[] {
   return parts;
 }
 
-function readerSupported(minimum: unknown) {
+export function readerSupported(minimum: unknown) {
   const required = version(minimum); const current = version(packageInfo.version);
   for (let index = 0; index < 3; index++) {
     if (required[index]! !== current[index]!) return required[index]! < current[index]!;

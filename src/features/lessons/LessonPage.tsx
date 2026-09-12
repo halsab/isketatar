@@ -1,3 +1,4 @@
+import { SessionContent } from '../shared/SessionContent';
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useApp } from '../../app/AppProvider';
@@ -49,8 +50,10 @@ function LessonDocument({ lesson }: { lesson: Lesson }) {
     </Disclosure>
   </div>;
 }
-export function LessonPage() {
+function LessonPageContent() {
   const { lesson_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
   return <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonDocument key={lesson.id} lesson={lesson} />}</ContentState>;
 }
+
+export function LessonPage() { return <SessionContent kind="lesson_cycle"><LessonPageContent  /></SessionContent>; }

@@ -14,7 +14,13 @@ import { markRelatedHelp } from './observation';
 
 export type CommandResult = { session_id?: string; presentation_id?: string; attempt?: Attempt; expected?: Expected };
 export class CommandEngine {
-  constructor(readonly context: WriteContext, readonly catalog: ContentCatalog, readonly currentCore: CoreData, readonly releaseId: string, readonly at: number, readonly uuid: () => string) {}
+  constructor(readonly context: WriteContext, readonly catalog: ContentCatalog, readonly currentCore: CoreData, readonly releaseId: string, readonly at: number, readonly uuid: () => string, private readonly catalogs?: Map<string, ContentCatalog>) {}
+  catalogForSession(session: Session): ContentCatalog {
+    const catalog = session.release_id === this.releaseId ? this.catalog : this.catalogs?.get(session.release_id);
+    if (catalog) return catalog;
+    if (session.question_plan.every(item => this.catalog.core.questions.some(question => question.id === item.question_id && question.grading_revision === item.grading_revision))) return this.catalog;
+    throw new Error('content_unavailable');
+  }
   get tx() { return this.context.tx; }
   async session(id: string, check = true, submittedFeedback = false): Promise<Session> {
     const session = await this.tx.get('sessions', id);

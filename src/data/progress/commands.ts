@@ -6,6 +6,7 @@ export type ObservationTarget = { kind: 'lesson' | 'example' | 'dictionary_entry
   | { kind: 'dictionary_results'; ids: string[] };
 export type Command =
   | { type: 'start'; kind: SessionKind; lesson_id?: string; reading_id?: string; early_question_ids?: string[]; restart?: boolean }
+  | { type: 'leave_historical'; session_id: string; confirmed: boolean }
   | { type: 'pause' | 'resume'; session_id: string }
   | { type: 'ack' | 'retry' | 'skip'; presentation_id: string }
   | { type: 'show'; presentation_id: string; confirm_assessment_help?: boolean }

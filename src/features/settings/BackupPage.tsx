@@ -26,9 +26,7 @@ export function BackupPage() {
     const call = ++sequence.current; setFile(selected); setPreview(null); setOperation('preview'); setError(null); setNotice(null);
     try {
       if (selected.size > MAX_EXPORT_BYTES) throw new Error('import_too_large');
-      await runtime.loadAllContent();
-      if (!active.current || call !== sequence.current || runtime.progress !== progress) return;
-      const next = await progress.previewImport(selected);
+      const next = await progress.previewImport(selected, ids => runtime.loadAllContent(ids));
       if (active.current && call === sequence.current && runtime.progress === progress) setPreview(next);
     } catch (reason) { if (active.current && call === sequence.current) setError(importError(reason instanceof Error ? reason.message : 'storage_unavailable')); }
     finally { if (active.current && call === sequence.current) setOperation(null); }

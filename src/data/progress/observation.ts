@@ -84,18 +84,22 @@ export async function markRelatedHelp(engine: CommandEngine, targets: TargetData
   const pending = await engine.tx.unfinishedSessions();
   for (const session of pending.filter(session => !['diagnostic', 'final'].includes(session.kind))) {
     const presentations = await engine.tx.bySession('presentations', session.session_id);
+    const catalog = engine.catalogForSession(session);
     let updatedSession = session;
     for (const targetData of targets.filter(item => item.educational)) {
       if (session.kind === 'reading_practice' && targetData.readingId && targetData.lineId && session.reading_ids.includes(targetData.readingId)) {
-        const unfinished = presentations.some(presentation => presentation.status === 'draft' && engine.catalog.question(presentation.question_id).line_ids.includes(targetData.lineId!));
+        const unfinished = presentations.some(presentation => presentation.status === 'draft' && catalog.question(presentation.question_id).line_ids.includes(targetData.lineId!));
         if (unfinished) {
-          const help = { line_id: targetData.lineId, word_id: targetData.wordId ?? null, kind: level, opened_at: engine.at } as const;
+          const line = catalog.readings.get(targetData.readingId)?.lines.find(line => line.id === targetData.lineId);
+          // Слово новой басмы могло сменить ID; помощь закреплённому сеансу остаётся на уровне его строки.
+          const wordId = line?.words.some(word => word.word_id === targetData.wordId) ? targetData.wordId! : null;
+          const help = { line_id: targetData.lineId, word_id: wordId, kind: level, opened_at: engine.at } as const;
           if (!updatedSession.reading_help.some(item => item.line_id === help.line_id && item.word_id === help.word_id && item.kind === help.kind)) updatedSession = { ...updatedSession, reading_help: [...updatedSession.reading_help, help] };
         }
       }
       const current = presentations.find(presentation => presentation.presentation_id === session.active_presentation_id);
       if (!current || current.status !== 'draft' || current.shown_at === null) continue;
-      const question = engine.catalog.question(current.question_id);
+      const question = catalog.question(current.question_id);
       const related = targetData.lessonId === question.lesson_id || targetData.ruleId !== undefined && question.rule_ids.includes(targetData.ruleId) || targetData.materials.some(material => question.materials.some(item => item.visual === material.visual)) || broad || targetData.questionId === question.id;
       if (related && current.assistance.reference_opened_at === null) {
         const updated = { ...current, assistance: { ...current.assistance, reference_opened_at: Math.max(engine.at, current.shown_at) }, revision: current.revision + 1 };

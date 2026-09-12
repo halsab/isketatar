@@ -37,7 +37,7 @@ class OfflineClient {
       window.addEventListener('focus', refresh); document.addEventListener('visibilitychange', refresh);
     } catch (error) { this.publish({ error: error instanceof Error ? error.message : 'pwa_unavailable', loading: false }); this.starting = null; }
   }
-  private request(type: string, releaseId?: string): Promise<WorkerState> {
+  private request<T = WorkerState>(type: string, releaseId?: string): Promise<T> {
     const worker = this.registration?.active;
     if (!worker || worker.scriptURL !== new URL(PWA_BASE + 'sw.js', location.origin).href || worker.state !== 'activated') return Promise.reject(new Error('pwa_unavailable'));
     return new Promise((resolve, reject) => {
@@ -51,6 +51,7 @@ class OfflineClient {
       worker.postMessage({ type, release_id: releaseId }, [channel.port2]);
     });
   }
+  async retainedManifest(id: string) { return this.request<{ manifest: PackageManifest; digest: string }>('release', id); }
   async perform(type: 'initialize' | 'status' | 'download' | 'cancel' | 'verify', releaseId?: string) {
     if (type !== 'status') this.publish({ loading: true, error: null });
     try { const value = await this.request(type, releaseId); this.publish({ ...value, error: null, ...(type === 'status' ? {} : { progress: null }) }); }
