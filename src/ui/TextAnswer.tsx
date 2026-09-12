@@ -52,7 +52,7 @@ function AnswerField({ value, onChange, segment = false, disabled = false, error
         remember();
       }}
       onCompositionStart={() => { composing.current = true; onCompositionChange?.(true); }}
-      onCompositionEnd={() => { composing.current = false; setCompositionMessage(false); onCompositionChange?.(false); remember(); }}
+      onCompositionEnd={event => { if (event.currentTarget.value !== value) onChange(event.currentTarget.value); composing.current = false; setCompositionMessage(false); onCompositionChange?.(false); remember(); }}
       onKeyDown={event => {
         if (event.key !== 'Enter' || composing.current || event.nativeEvent.isComposing || event.keyCode === 229) return;
         event.preventDefault(); if (!disabled) onEnter?.();

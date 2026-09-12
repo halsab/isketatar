@@ -1,6 +1,7 @@
 import { ContentRepository } from '../data/content/repository';
 import { ProgressRepository } from '../data/progress/repository';
-import type { Expected, ProgressSnapshot, ReplacementToken } from '../data/progress/model';
+import type { Expected, ProgressSnapshot, ReplacementToken, UpdateGate } from '../data/progress/model';
+import { expectedFrom } from '../data/progress/repository';
 import type { Command } from '../data/progress/commands';
 import { applyPreferences } from '../ui/preferences';
 import { POLICIES } from '../domain/content/types';
@@ -8,11 +9,15 @@ import type { ContentCatalog } from '../domain/content/catalog';
 import { currentReleaseId, readerSupported } from './release';
 import { tabIdentity } from './tab-identity';
 
-export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory'; editorRevision: number; recoveryText: string | null }
+export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory'; editorRevision: number; recoveryText: string | null; quiescing: string | null }
+export type UpdatePreparation = UpdateGate & { data_generation: string; writer_epoch: number };
+export interface UpdateReady { tab_id: string; release_id: string; mode: 'durable' | 'memory'; closed: boolean; memory_loss_accepted: boolean }
 export interface CommandScope { repository: ProgressRepository; expected: Expected; contentReleaseId?: string }
 export interface ActiveEditor {
   readonly dirty: boolean; flush(): Promise<void>; leave(): Promise<void>;
+  readonly composingInput: boolean; beginUpdate(): void; cancelUpdate(): void;
   suspend(): Promise<void>;
+  prepareUpdate(): Promise<void>;
   prepareMemory(): Promise<{ text: string; restore: (branch: ProgressRepository) => Promise<boolean> }>;
 }
 export const errorCode = (error: unknown) => error instanceof Error ? error.message : 'storage_unavailable';
@@ -27,14 +32,23 @@ export class AppRuntime {
   private opening: Promise<void> | null = null;
   private stopListening: (() => void) | null = null;
   private switching: Promise<void> | null = null;
+  private readonly pendingCommands = new Set<Promise<unknown>>();
+  private preparedUpdate: UpdatePreparation | null = null;
+  private preparation: { request: UpdatePreparation; promise: Promise<UpdateReady> } | null = null;
+  private preparationReady = false;
+  private closedForUpdate = false;
+  private memorySource: ProgressRepository | null = null;
+  private memoryLossAccepted: string | null = null;
+  private positionCollector: { scope: CommandScope; read: () => Extract<Command, { type: 'position' }> | null } | null = null;
   editor: ActiveEditor | null = null;
-  registerEditor(editor: ActiveEditor) { this.editor = editor; return () => { if (this.editor === editor) this.editor = null; }; }
-  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable', editorRevision: 0, recoveryText: null };
+  registerEditor(editor: ActiveEditor) { this.editor = editor; if (this.state.quiescing) editor.beginUpdate(); return () => { if (this.editor === editor) this.editor = null; }; }
+  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable', editorRevision: 0, recoveryText: null, quiescing: null };
   private readonly listeners = new Set<() => void>();
   getState = () => this.state;
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   private publish(patch: Partial<AppState>) { this.state = { ...this.state, ...patch }; for (const listener of this.listeners) listener(); }
   start(): Promise<void> {
+    if (this.state.quiescing) return Promise.reject(new Error('update_in_progress'));
     if (this.opening) return this.opening;
     this.opening = this.open().finally(() => { this.opening = null; });
     return this.opening;
@@ -60,6 +74,7 @@ export class AppRuntime {
     this.stopListening = progress.subscribe(() => { void this.refresh().catch(() => {}); });
   }
   async refresh(): Promise<void> {
+    if (this.closedForUpdate) return;
     const progress = this.progress;
     if (!progress) throw new Error('storage_unavailable');
     try {
@@ -70,6 +85,11 @@ export class AppRuntime {
     } catch (error) { if (this.progress === progress) this.publish({ error: errorCode(error), phase: this.state.snapshot ? 'ready' : 'storage_error' }); throw error; }
   }
   async command(command: Command, scope: CommandScope) {
+    if (this.state.quiescing) throw new Error('update_in_progress');
+    const pending = this.executeCommand(command, scope); this.pendingCommands.add(pending);
+    try { return await pending; } finally { this.pendingCommands.delete(pending); }
+  }
+  private async executeCommand(command: Command, scope: CommandScope) {
     const progress = scope.repository;
     if (progress !== this.progress) throw new Error('write_conflict');
     try {
@@ -111,6 +131,7 @@ export class AppRuntime {
   }
   clearError() { this.publish({ error: null }); }
   async retry() {
+    if (this.state.quiescing) throw new Error('update_in_progress');
     if (!this.content) return this.start();
     await this.editor?.suspend();
     try {
@@ -119,6 +140,7 @@ export class AppRuntime {
     } catch (error) { this.publish({ error: errorCode(error) }); throw error; }
   }
   async takeover(progress: ProgressRepository, expected: ReplacementToken) {
+    if (this.state.quiescing) throw new Error('update_in_progress');
     if (progress !== this.progress) throw new Error('write_conflict');
     try { await this.editor?.suspend(); await progress.takeover(expected.data_generation, expected.writer_epoch); await this.refresh(); this.publish({ editorRevision: this.state.editorRevision + 1, error: null }); }
     catch (error) { this.publish({ error: errorCode(error) }); throw error; }
@@ -130,6 +152,7 @@ export class AppRuntime {
     this.publish({ error: null, recoveryText: null, editorRevision: this.state.editorRevision + 1 });
   }
   useMemory(): Promise<void> {
+    if (this.state.quiescing) return Promise.reject(new Error('update_in_progress'));
     if (!this.switching) this.switching = this.switchToMemory().finally(() => { this.switching = null; });
     return this.switching;
   }
@@ -139,6 +162,7 @@ export class AppRuntime {
     try {
       const recovery = await this.editor?.prepareMemory();
       const branch = this.progress ? await this.progress.branchToMemory() : await ProgressRepository.memory({ catalog: this.content.catalog, catalogs: this.catalogs, releaseId: this.releaseId });
+      this.memorySource = this.progress;
       let restored = !recovery;
       try { restored = await recovery?.restore(branch) ?? true; } catch { /* Исходный ввод остаётся отдельно от пустой или частично восстановленной ветви. */ }
       this.attach(branch); await this.refresh(); this.publish({ error: null, recoveryText: restored ? this.state.recoveryText : recovery!.text });
@@ -169,5 +193,92 @@ export class AppRuntime {
       }
     }
     await Promise.all([...sources].flatMap(content => [...new Set(content.catalog.core.lessons.map(lesson => lesson.resource)), 'readings.json', 'dictionary.json', 'references.json', 'assessments.json'].map(resource => content.load(resource))));
+  }
+  registerPosition(scope: CommandScope, read: () => Extract<Command, { type: 'position' }> | null) {
+    const collector = { scope, read }; this.positionCollector = collector;
+    return () => { if (this.positionCollector === collector) this.positionCollector = null; };
+  }
+  private checkPreparation(snapshot: ProgressSnapshot, request: UpdatePreparation) {
+    const { control } = snapshot; const gate = control.update_gate;
+    if (control.data_generation !== request.data_generation || control.writer_epoch !== request.writer_epoch || control.writer_id !== request.coordinator_id || gate?.update_id !== request.update_id || gate.target_release_id !== request.target_release_id || gate.coordinator_id !== request.coordinator_id) throw new Error('stale_update');
+  }
+  prepareUpdate(request: UpdatePreparation, discardMemory = false): Promise<UpdateReady> {
+    if (this.preparation) {
+      const previous = this.preparation.request;
+      if (['update_id', 'target_release_id', 'coordinator_id', 'data_generation', 'writer_epoch'].some(key => Reflect.get(previous, key) !== Reflect.get(request, key))) return Promise.reject(new Error('stale_update'));
+      return this.preparation.promise;
+    }
+    const captured = structuredClone(request);
+    const waitingMemory = this.progress?.mode === 'memory' && !discardMemory && this.memoryLossAccepted !== request.update_id;
+    const prior = this.state.quiescing;
+    if (!waitingMemory && (!prior || prior === request.update_id)) { this.publish({ quiescing: request.update_id }); this.editor?.beginUpdate(); }
+    const promise = this.performPreparation(captured, discardMemory).finally(() => {
+      if (this.preparation?.promise === promise) this.preparation = null;
+      if (!prior && this.preparedUpdate?.update_id !== captured.update_id && this.state.quiescing === captured.update_id) { this.publish({ quiescing: null }); this.editor?.cancelUpdate(); }
+    });
+    this.preparation = { request: captured, promise }; return promise;
+  }
+  private async performPreparation(request: UpdatePreparation, discardMemory: boolean): Promise<UpdateReady> {
+    if (!this.progress) throw new Error('storage_unavailable');
+    if (this.progress.mode === 'memory' && !discardMemory && this.memoryLossAccepted !== request.update_id) throw new Error('update_memory_mode');
+    if (this.preparedUpdate && this.preparedUpdate.update_id !== request.update_id) throw new Error('stale_update');
+    if (this.closedForUpdate) {
+      if (!this.preparedUpdate || this.preparedUpdate.data_generation !== request.data_generation || this.preparedUpdate.writer_epoch > request.writer_epoch || this.preparedUpdate.target_release_id !== request.target_release_id) throw new Error('stale_update');
+      const previous = this.progress.mode === 'memory' ? this.memorySource : this.progress;
+      if (!previous) throw new Error('storage_unavailable');
+      const probe = await ProgressRepository.open({ ...previous.options, tabId: previous.tabId });
+      try { this.checkPreparation(await probe.snapshot(), request); } finally { probe.close(); }
+      this.preparedUpdate = structuredClone(request);
+      return { tab_id: this.tabId, release_id: this.releaseId, mode: this.progress.mode, closed: true, memory_loss_accepted: this.memoryLossAccepted === request.update_id };
+    }
+    const progress = this.progress;
+    if (progress.mode === 'memory' && this.memorySource && !this.memorySource.available) this.memorySource = await ProgressRepository.open({ ...this.memorySource.options, tabId: this.memorySource.tabId });
+    const source = progress.mode === 'memory' ? this.memorySource : progress;
+    if (!source) throw new Error('storage_unavailable');
+    this.checkPreparation(await source.snapshot(), request);
+    if (progress.mode === 'memory' && discardMemory) this.memoryLossAccepted = request.update_id;
+    this.preparationReady = false; this.preparedUpdate = structuredClone(request);
+    await Promise.allSettled([...this.pendingCommands]);
+    this.checkPreparation(await source.snapshot(), request);
+    await this.editor?.prepareUpdate();
+    let snapshot = await progress.snapshot();
+    if (progress !== this.progress) throw new Error('write_conflict');
+    this.checkPreparation(await source.snapshot(), request);
+    const collector = this.positionCollector; const position = collector?.read();
+    if (progress.mode === 'durable' && snapshot.control.writer_id === progress.tabId) {
+      const active = snapshot.sessions.find(session => session.status === 'active');
+      if (active) await this.executeCommand({ type: 'pause', session_id: active.session_id }, { repository: progress, expected: expectedFrom(snapshot) });
+      if (position && collector && collector.scope.repository === progress && collector.scope.expected.data_generation === request.data_generation && collector.scope.expected.writer_epoch === request.writer_epoch) {
+        snapshot = await progress.snapshot();
+        // Свежие revisions относятся только к явной операции подготовки, после проверки исходного поколения и epoch.
+        await progress.dispatch(position, expectedFrom(snapshot), collector.scope.contentReleaseId);
+      }
+    }
+    snapshot = await progress.snapshot(); this.checkPreparation(await source.snapshot(), request);
+    this.preparationReady = true; this.publish({ snapshot });
+    const coordinator = progress.mode === 'durable' && request.coordinator_id === progress.tabId;
+    if (!coordinator) { this.closedForUpdate = true; source.close(); }
+    return { tab_id: this.tabId, release_id: this.releaseId, mode: progress.mode, closed: !coordinator, memory_loss_accepted: this.memoryLossAccepted === request.update_id };
+  }
+  async closeForUpdate(updateId: string) {
+    if (!this.progress || this.preparedUpdate?.update_id !== updateId) throw new Error('stale_update');
+    if (!this.preparationReady) throw new Error('update_not_ready');
+    if (this.closedForUpdate) return;
+    const snapshot = await this.progress.snapshot(); this.checkPreparation(snapshot, this.preparedUpdate);
+    if (snapshot.control.update_gate?.phase !== 'commit') throw new Error('update_not_committed');
+    this.closedForUpdate = true; this.progress.close();
+  }
+  async cancelPreparation(updateId: string) {
+    if (!this.progress || this.preparedUpdate?.update_id !== updateId) throw new Error('stale_update');
+    const previous = this.progress;
+    const source = previous.mode === 'memory' ? this.memorySource : previous;
+    if (!source) throw new Error('storage_unavailable');
+    const reopened = source.available ? source : await ProgressRepository.open({ ...source.options, tabId: source.tabId });
+    const snapshot = await reopened.snapshot();
+    if (snapshot.control.update_gate) { if (reopened !== source) reopened.close(); throw new Error('update_in_progress'); }
+    await this.editor?.suspend();
+    if (previous.mode === 'memory') { reopened.close(); this.memorySource = reopened; } else this.attach(reopened);
+    this.closedForUpdate = false; this.preparedUpdate = null; this.memoryLossAccepted = null; this.preparationReady = false;
+    this.publish({ quiescing: null, error: null, editorRevision: this.state.editorRevision + 1 }); await this.refresh();
   }
 }

@@ -12,6 +12,8 @@ export class SessionEditor {
   private readonly listeners = new Set<() => void>();
   private composing = false;
   private disposed = false;
+  private suspended = false;
+  private preparingUpdate = false;
   private running: Promise<CommandResult> | null = null;
   readonly generation: string;
   readonly sessionId: string;
@@ -35,16 +37,21 @@ export class SessionEditor {
     }, status => this.update({ status }));
   }
   input(answer: AnswerValue | null, immediate = false) {
-    if (this.disposed || this.state.busy) return;
+    if (this.disposed || this.suspended || this.state.busy || this.preparingUpdate && !this.composing) return;
     this.update({ answer, error: null }); this.queue.input(answer, this.expected, immediate);
   }
   composition(active: boolean) {
     this.composing = active;
     if (active) this.queue.compositionStart(); else this.queue.compositionEnd(this.state.answer, this.expected);
+    if (!active && this.preparingUpdate) this.update({ busy: true });
   }
-  get dirty() { return this.state.status !== 'saved' || this.composing || this.state.busy; }
+  get composingInput() { return this.composing; }
+  beginUpdate() { this.preparingUpdate = true; this.update({ busy: this.suspended || this.disposed || this.running !== null || !this.composing }); }
+  cancelUpdate() { this.preparingUpdate = false; this.update({ busy: this.suspended || this.disposed || this.running !== null }); }
+  get dirty() { return this.state.status !== 'saved' || this.composing || this.running !== null; }
   flush = () => this.queue.flush();
   async perform(command: Command) {
+    if (this.preparingUpdate) throw new Error('update_in_progress');
     if (this.disposed || this.state.busy) throw new Error('write_in_progress');
     this.update({ busy: true, error: null });
     this.running = (async () => {
@@ -61,6 +68,21 @@ export class SessionEditor {
     if (snapshot.control.writer_id !== this.repository.tabId && !this.dirty) return;
     if (snapshot.sessions.find(session => session.session_id === this.sessionId)?.status === 'submitted') { await this.flush(); return; }
     await this.perform({ type: 'pause', session_id: this.sessionId });
+  }
+  async prepareUpdate() {
+    if (this.suspended || this.disposed) throw new Error('editor_unavailable');
+    this.beginUpdate();
+    if (this.composing) throw new Error('composition_in_progress');
+    await this.running;
+    await this.queue.flush();
+    const snapshot = await this.repository.snapshot();
+    if (snapshot.control.data_generation !== this.expected.data_generation || snapshot.control.writer_epoch !== this.expected.writer_epoch) throw new Error('write_conflict');
+    if (snapshot.control.writer_id === this.repository.tabId && snapshot.sessions.find(session => session.session_id === this.sessionId)?.status === 'active') {
+      // Pause сохраняет уже записанную помощь; полномочия остаются в исходном поколении и epoch.
+      const result = await this.repository.dispatch({ type: 'pause', session_id: this.sessionId }, expectedFrom(snapshot));
+      this.expected = result.expected!; await this.refresh();
+    }
+    this.update({ busy: true });
   }
   async prepareMemory() {
     await this.suspend();
@@ -79,6 +101,6 @@ export class SessionEditor {
       return true;
     } };
   }
-  async suspend() { this.update({ busy: true }); await this.running?.catch(() => {}); this.update({ busy: true }); await this.queue.cancel(); }
+  async suspend() { this.suspended = true; this.update({ busy: true }); await this.running?.catch(() => {}); this.update({ busy: true }); await this.queue.cancel(); }
   async dispose() { this.disposed = true; await this.queue.cancel(); this.listeners.clear(); }
 }

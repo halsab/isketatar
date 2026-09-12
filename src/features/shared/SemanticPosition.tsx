@@ -34,17 +34,25 @@ export function SemanticPosition({ kind, id, revision, anchors, focusAnchor = tr
       const position = { kind, target_id: id, ...pending, content_revision: revision }; pending = null;
       void runtime.command({ type: 'position', position }, scope).catch(() => {});
     };
-    const scroll = () => {
+    const measure = () => {
       const elements = allowed.map(anchor => document.getElementById(anchor)).filter((element): element is HTMLElement => !!element);
       const element = elements.filter(node => node.getBoundingClientRect().top <= 110).at(-1) ?? elements[0];
       if (!element || isReady && !isReady(element)) return;
       const bounds = element.getBoundingClientRect();
       pending = { anchor_id: element.id, within_block_ratio: Math.max(0, Math.min(1, (100 - bounds.top) / Math.max(1, bounds.height))) };
       if ((history.state?.key ?? 'default') === location.key) history.replaceState({ ...history.state, iskePosition: { target_id: id, ...pending } }, '');
+    };
+    const scroll = () => {
+      measure();
       if (timer) clearTimeout(timer); timer = setTimeout(save, 500);
     };
+    const unregister = runtime.registerPosition(scope, () => {
+      measure(); if (timer) clearTimeout(timer);
+      const position = pending ? { kind, target_id: id, ...pending, content_revision: revision } : null; pending = null;
+      return position ? { type: 'position', position } : null;
+    });
     window.addEventListener('scroll', scroll, { passive: true });
-    return () => { observer.disconnect(); clearTimeout(deadline); cancelAnimationFrame(frame); window.removeEventListener('scroll', scroll); if (timer) clearTimeout(timer); save(); };
+    return () => { unregister(); observer.disconnect(); clearTimeout(deadline); cancelAnimationFrame(frame); window.removeEventListener('scroll', scroll); if (timer) clearTimeout(timer); save(); };
   }, [kind, id, revision, anchorKey, location.key, location.search, progress, snapshot.control.data_generation, snapshot.control.writer_epoch, snapshot.settings.arabic_size_px, snapshot.settings.text_size_px, focusAnchor, focusTargetId, isReady]);
   return null;
 }
