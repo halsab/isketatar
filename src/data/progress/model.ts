@@ -16,7 +16,7 @@ export interface ResumePosition {
 }
 export interface UpdateGate { update_id: string; target_release_id: string; phase: 'quiescing' | 'commit'; coordinator_id: string; requested_at: number }
 export interface Control {
-  key: 'control'; progress_schema: number; db_version: number; data_generation: string; writer_id: string | null;
+  key: 'control'; accepted_release_id: string; progress_schema: number; db_version: number; data_generation: string; writer_id: string | null;
   writer_epoch: number; state_revision: number; active_session_id: string | null; update_gate: UpdateGate | null;
   estimated_record_bytes: number; attempt_count: number;
 }

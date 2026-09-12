@@ -88,7 +88,7 @@ export class ProgressRepository {
       const at = this.clock();
       if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
       const settings = defaultSettings(at);
-      const control: Control = { key: 'control', progress_schema: 1, db_version: 1, data_generation: this.uuid(), writer_id: this.tabId, writer_epoch: 1, state_revision: 0, active_session_id: null, update_gate: null, estimated_record_bytes: recordBytes(settings), attempt_count: 0 };
+      const control: Control = { key: 'control', accepted_release_id: this.options.releaseId, progress_schema: 1, db_version: 1, data_generation: this.uuid(), writer_id: this.tabId, writer_epoch: 1, state_revision: 0, active_session_id: null, update_gate: null, estimated_record_bytes: recordBytes(settings), attempt_count: 0 };
       await tx.put('meta', { key: 'settings', value: settings });
       await tx.put('meta', control);
     });
@@ -149,7 +149,7 @@ export class ProgressRepository {
       if (this.detached) throw new Error('repository_detached');
       if (this.preparedImport !== prepared) throw new Error('invalid_preview');
       const control = await this.backend.run('readwrite', async tx => {
-        const current = await readControl(tx);
+        const current = await readControl(tx); this.checkShell(current);
         checkReplacement(current, prepared.preview.expected, this.tabId);
         return replaceProgress(tx, current, prepared.data, generation, this.tabId);
       });
@@ -182,7 +182,7 @@ export class ProgressRepository {
     return this.enqueue(async () => {
       if (this.detached) throw new Error('repository_detached');
       const control = await this.backend.run('readwrite', async tx => {
-        const current = await readControl(tx); checkReplacement(current, token, this.tabId);
+        const current = await readControl(tx); this.checkShell(current); checkReplacement(current, token, this.tabId);
         return replaceProgress(tx, current, data, generation, this.tabId);
       });
       if (this.mode === 'durable') this.successfulResetGeneration = control.data_generation;
@@ -195,7 +195,7 @@ export class ProgressRepository {
     return this.enqueue(async () => {
       if (this.detached) throw new Error('repository_detached');
       const control = await this.backend.run('readwrite', async tx => {
-        const control = await readControl(tx);
+        const control = await readControl(tx); this.checkShell(control);
         if (control.data_generation !== generation || control.writer_epoch !== epoch) throw new Error('write_conflict');
         if (control.update_gate) throw new Error('update_in_progress');
         if (control.writer_id !== this.tabId) { control.writer_id = this.tabId; control.writer_epoch++; control.state_revision++; await tx.put('meta', control); }
@@ -204,7 +204,8 @@ export class ProgressRepository {
       this.changed(control);
     });
   }
-  private changeGate(expected: ReplacementToken, mutate: (control: Control, tx: Transaction) => Promise<void> | void) {
+  private checkShell(control: Control) { if (control.accepted_release_id !== this.options.releaseId) throw new Error('release_not_current'); }
+  private changeGate(expected: ReplacementToken, mutate: (control: Control, tx: Transaction) => Promise<void> | void, targetReader = false) {
     if (this.detached) return Promise.reject(new Error('repository_detached'));
     if (this.mode !== 'durable') return Promise.reject(new Error('update_memory_mode'));
     const token = structuredClone(expected);
@@ -212,6 +213,7 @@ export class ProgressRepository {
       if (this.detached) throw new Error('repository_detached');
       const control = await this.backend.run('readwrite', async tx => {
         const control = await readControl(tx);
+        if (!targetReader) this.checkShell(control);
         if (control.data_generation !== token.data_generation || control.writer_epoch !== token.writer_epoch || control.state_revision !== token.state_revision) throw new Error('write_conflict');
         await mutate(control, tx); control.state_revision++; await tx.put('meta', control); return control;
       });
@@ -252,15 +254,16 @@ export class ProgressRepository {
       const gate = control.update_gate;
       if (!gate || gate.update_id !== updateId || gate.phase !== 'commit') throw new Error('stale_update');
       if (this.options.releaseId !== gate.target_release_id) throw new Error('unsupported_release');
-      control.update_gate = null;
-    });
+      control.accepted_release_id = gate.target_release_id; control.update_gate = null;
+    }, true);
   }
   async recoverUpdate(expected: ReplacementToken, updateId: string, confirmed: boolean) {
     if (!confirmed) throw new Error('confirmation_required');
     await this.changeGate(expected, control => {
       if (control.update_gate?.update_id !== updateId) throw new Error('stale_update');
+      if (![control.accepted_release_id, control.update_gate.target_release_id].includes(this.options.releaseId)) throw new Error('release_not_current');
       control.writer_id = this.tabId; control.writer_epoch++; control.update_gate.coordinator_id = this.tabId;
-    });
+    }, true);
   }
   catalogForRelease(id: string): ContentCatalog {
     const catalog = id === this.options.releaseId ? this.options.catalog : this.options.catalogs?.get(id);
@@ -273,7 +276,7 @@ export class ProgressRepository {
       if (this.detached) throw new Error('repository_detached');
       if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
       const committed = await this.backend.run('readwrite', async tx => {
-        const control = await readControl(tx);
+        const control = await readControl(tx); this.checkShell(control);
         const helpObservation = captured.type === 'help' && (captured.kind !== 'reveal' || (await tx.get('presentations', captured.presentation_id))?.status === 'submitted');
         const observation = captured.type === 'observe' || captured.type === 'show' || helpObservation;
         if (control.data_generation !== token.data_generation || !observation && (control.writer_epoch !== token.writer_epoch || control.writer_id !== this.tabId)) throw new Error('write_conflict');
@@ -309,6 +312,7 @@ export class ProgressRepository {
         const control = await readControl(tx);
         if (control.data_generation !== protection.generation) throw new Error('write_conflict');
         if (control.update_gate) throw new Error('update_in_progress');
+        protection.source.checkShell(control);
         const pending = await tx.unfinishedSessions();
         const needsHelp = pendingAssessments(pending).filter(session => session.assessment_help_opened_at === null);
         if (needsHelp.length && !confirmed) throw new Error('assessment_help_confirmation_required');

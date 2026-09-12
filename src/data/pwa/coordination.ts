@@ -3,7 +3,7 @@ import type { ReleaseLifecycle, ReleasePin } from './lifecycle';
 import { RELEASE_ID } from './manifest';
 
 export interface UpdateState {
-  control: Pick<Control, 'data_generation' | 'writer_epoch' | 'writer_id' | 'active_session_id' | 'update_gate'>;
+  control: Pick<Control, 'accepted_release_id' | 'data_generation' | 'writer_epoch' | 'writer_id' | 'active_session_id' | 'update_gate'>;
   pins: ReleasePin[]; active: boolean;
 }
 export type Preparation = UpdateGate & { data_generation: string; writer_epoch: number };

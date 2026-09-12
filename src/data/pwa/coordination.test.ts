@@ -5,7 +5,7 @@ import type { ReleaseLifecycle } from './lifecycle';
 
 const from = '1.0.0-1111111111111111'; const target = '1.0.0-2222222222222222';
 function fixture() {
-  let state: UpdateState = { control: { data_generation: 'generation', writer_epoch: 4, writer_id: 'writer', active_session_id: null, update_gate: { update_id: 'operation', target_release_id: target, coordinator_id: 'writer', phase: 'quiescing', requested_at: 0 } }, pins: [{ session_id: 'session', release_id: from, content_schema: 1, policy_versions: POLICIES }], active: false };
+  let state: UpdateState = { control: { accepted_release_id: from, data_generation: 'generation', writer_epoch: 4, writer_id: 'writer', active_session_id: null, update_gate: { update_id: 'operation', target_release_id: target, coordinator_id: 'writer', phase: 'quiescing', requested_at: 0 } }, pins: [{ session_id: 'session', release_id: from, content_schema: 1, policy_versions: POLICIES }], active: false };
   const lifecycle = { packages: { registry: { read: vi.fn(async () => ({ current_release_id: from, operation: null })) } }, prepare: vi.fn(async () => {}), commit: vi.fn(async () => {}) };
   const calls: string[] = [];
   const peer = (id: string, tab = id): UpdatePeer => ({ id, url: 'https://course.test/isketatar/', request: vi.fn(async message => {

@@ -8,6 +8,7 @@ import { AppRuntime, type AppState } from './runtime';
 import { replacementToken } from '../data/progress/transfer';
 import { expectedFrom } from '../data/progress/repository';
 import type { Command } from '../data/progress/commands';
+import { RELEASE_ID, releaseRoot } from '../data/pwa/manifest';
 
 interface Confirmation { title: string; body: string; action: string; danger?: boolean }
 interface AppContextValue { runtime: AppRuntime; state: AppState; confirm: (request: Confirmation) => Promise<boolean>; confirming: boolean }
@@ -28,7 +29,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return () => { window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh); };
   }, []);
   useLayoutEffect(() => { resolve(false); }, [location.key, state.snapshot?.control.data_generation, state.phase, resolve]);
-  if (state.phase !== 'ready') return <main id="main"><h1>{t('app.name')}</h1><Status tone={state.phase === 'loading' ? 'neutral' : 'error'} announce>{t(state.phase === 'loading' ? 'boot.loading' : 'boot.failed')}</Status>
+  if (state.phase !== 'ready') return <main id="main" className="boot-main"><h1>{t('app.name')}</h1><Status tone={state.phase === 'loading' ? 'neutral' : 'error'} announce>{t(state.phase === 'loading' ? 'boot.loading' : 'boot.failed')}</Status>
+    {state.acceptedShell && RELEASE_ID.test(state.acceptedShell) && <Status tone="warning"><p>{t('pwa.other_release')}</p><Button onClick={() => { const accepted = state.acceptedShell!; void import('../data/pwa/client').then(async ({ offline }) => { await offline.start(accepted); window.location.replace(releaseRoot(accepted) + 'index.html' + window.location.hash); }); }}>{t('pwa.open_current')}</Button></Status>}
     {state.phase !== 'loading' && <div className="actions"><Button onClick={() => { if (state.error === 'unsupported_release') window.location.reload(); else void application.start(); }}>{t('offline.retry')}</Button>{state.phase === 'storage_error' && <Button onClick={() => { void application.useMemory().catch(() => {}); }}>{t('storage.use_memory')}</Button>}</div>}
   </main>;
   return <Context.Provider value={{ runtime: application, state, confirm, confirming: !!question }}>

@@ -2,6 +2,7 @@ import 'fake-indexeddb/auto';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { catalog, correctAnswer, now } from '../../../tests/learning-fixture';
 import { ProgressRepository, expectedFrom } from './repository';
+import { replacementToken } from './transfer';
 
 const opened: ProgressRepository[] = [];
 let sequence = 0;
@@ -42,6 +43,10 @@ describe('atomic progress commands', () => {
     const active = await previous.dispatch({ type: 'start', kind: 'diagnostic' }, expectedFrom(await previous.snapshot()));
     const next = await ProgressRepository.open({ catalog, releaseId: 'next-release', name, tabId: previous.tabId, clock: () => now });
     opened.push(next);
+    await previous.dispatch({ type: 'pause', session_id: active.session_id! }, expectedFrom(await previous.snapshot()));
+    const gate = await previous.beginUpdate(replacementToken(await previous.snapshot()), next.options.releaseId);
+    await previous.commitUpdate(replacementToken(await previous.snapshot()), gate.update_id);
+    await next.finishUpdate(replacementToken(await next.snapshot()), gate.update_id);
     const before = await next.snapshot();
     await next.dispatch({ type: 'help', kind: 'reveal', presentation_id: before.attempts[0]!.presentation_id, confirm_assessment_help: true }, expectedFrom(before));
     await expect(next.dispatch({ type: 'resume', session_id: active.session_id! }, expectedFrom(await next.snapshot()))).rejects.toThrow('incompatible_session');

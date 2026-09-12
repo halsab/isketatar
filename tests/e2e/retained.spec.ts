@@ -49,8 +49,9 @@ async function pinnedFixture(page: Page, retained: boolean) {
     const presentation = await read<Presentation>(tx.objectStore('presentations'), session.active_presentation_id!); presentation.grading_revision = revision; tx.objectStore('presentations').put(presentation); await done(tx); db.close(); return oldId;
   }, { manifest, retained });
 }
-test('new shell resumes cached previous content offline and grades against its old answer', async ({ page, context }) => {
+for (const loseRegistry of [false, true]) test(`new shell resumes cached previous content offline and grades against its old answer (lost registry=${loseRegistry})`, async ({ page, context }) => {
   const oldId = await pinnedFixture(page, true); await context.setOffline(true);
+  if (loseRegistry) await page.evaluate(() => new Promise<void>(resolve => { const open = indexedDB.open('isketatar-pwa', 1); open.onsuccess = () => { const db = open.result; const tx = db.transaction('registry', 'readwrite'); tx.objectStore('registry').delete('state'); tx.oncomplete = () => { db.close(); resolve(); }; }; }));
   await page.goto('./#/lessons/V04/practice'); await page.reload();
   await expect(page.getByText('Бу дәрес сакланган элекке басма буенча дәвам итә:', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();

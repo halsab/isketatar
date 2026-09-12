@@ -6,6 +6,7 @@ import { ProgressRepository, expectedFrom } from './repository';
 import { ContentCatalog } from '../../domain/content/catalog';
 import { replacementToken } from './transfer';
 const opened:ProgressRepository[]=[];afterEach(()=>{for(const repo of opened.splice(0))repo.close();});
+async function accept(old:ProgressRepository,next:ProgressRepository){const gate=await old.beginUpdate(replacementToken(await old.snapshot()),next.options.releaseId);await old.commitUpdate(replacementToken(await old.snapshot()),gate.update_id);await next.finishUpdate(replacementToken(await next.snapshot()),gate.update_id);}
 function copyCatalog(){const source=getTestCatalog();const result=new ContentCatalog(structuredClone(source.core));result.addModule({lessons:structuredClone([...source.lessons.values()]),questions:structuredClone([...source.questions.values()])});result.addReadings({readings:structuredClone([...source.readings.values()]),questions:[]});result.addDictionary({entries:structuredClone([...source.lexicon.values()]),vocabulary:structuredClone([...source.vocabulary.values()])});result.references=structuredClone(source.references);return result;}
 async function setup(){
   const previous=copyCatalog();const current=copyCatalog();
@@ -17,7 +18,7 @@ async function setup(){
   await old.dispatch({type:'show',presentation_id:session.active_presentation_id!},expectedFrom(await old.snapshot()));
   await old.dispatch({type:'draft',presentation_id:session.active_presentation_id!,answer:correctAnswer('Q-V04-01')},expectedFrom(await old.snapshot()));
   await old.dispatch({type:'pause',session_id:session.session_id},expectedFrom(await old.snapshot()));
-  const next=await ProgressRepository.open({catalog:current,releaseId:'R2',name,tabId,catalogs:new Map([['R1',previous],['R2',current]])});opened.push(next);return{previous,current,old,next,session};
+  const next=await ProgressRepository.open({catalog:current,releaseId:'R2',name,tabId,catalogs:new Map([['R1',previous],['R2',current]])});opened.push(next);await accept(old,next);return{previous,current,old,next,session};
 }
 it('resumes and grades a pinned old plan using its catalog while keeping current SRS unchanged',async()=>{
   const{next,session}=await setup();
@@ -62,7 +63,7 @@ it('records cross-release word help on the retained line without importing a for
   await old.dispatch({ type: 'start', kind: 'reading_practice', reading_id: 'READ-01' }, expectedFrom(await old.snapshot()));
   const session = (await old.snapshot()).sessions[0]!;
   await old.dispatch({ type: 'pause', session_id: session.session_id }, expectedFrom(await old.snapshot()));
-  const next = await ProgressRepository.open({ catalog: current, releaseId: 'R2', name, tabId, catalogs: new Map([['R1', previous], ['R2', current]]) }); opened.push(next);
+  const next = await ProgressRepository.open({ catalog: current, releaseId: 'R2', name, tabId, catalogs: new Map([['R1', previous], ['R2', current]]) }); opened.push(next); await accept(old, next);
   await next.dispatch({ type: 'observe', target: { kind: 'reading_word', id: 'READ-01-L01:2', reading_id: 'READ-01', line_id: 'READ-01-L01', level: 'meaning' }, confirm_assessment_help: false }, expectedFrom(await next.snapshot()));
   expect((await next.snapshot()).sessions[0]!.reading_help).toContainEqual(expect.objectContaining({ line_id: 'READ-01-L01', word_id: null, kind: 'meaning' }));
   const backup = await next.exportProgress(); const preview = await next.previewImport(backup); expect(preview.legacy_records).toBe(0);

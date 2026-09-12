@@ -39,7 +39,7 @@ const defs = {
   position: object({ kind: enumeration('lesson', 'reading', 'reference'), target_id: id, anchor_id: nullable(text(256)), within_block_ratio: { type: 'number', minimum: 0, maximum: 1 }, content_revision: hash, updated_at: time }),
   settings: object({ selected_route: route, onboarding_completed: bool, locale: enumeration('tt-Cyrl'), theme: enumeration('system', 'light', 'dark'), arabic_size_px: enumeration(28, 32, 40, 48), text_size_px: enumeration(18, 20, 22, 24), reduced_motion: enumeration('system', 'reduce'),
     review_batch_size: integer(1, 10), last_location: nullable(object({ kind: enumeration('lesson', 'reading', 'dictionary', 'reference'), id })), revision: integer(), updated_at: time }),
-  control: object({ key: enumeration('control'), progress_schema: integer(1), db_version: integer(1), data_generation: uuid, writer_id: nullable(uuid), writer_epoch: integer(), state_revision: integer(), active_session_id: nullable(uuid),
+  control: object({ key: enumeration('control'), accepted_release_id: text(256), progress_schema: integer(1), db_version: integer(1), data_generation: uuid, writer_id: nullable(uuid), writer_epoch: integer(), state_revision: integer(), active_session_id: nullable(uuid),
     update_gate: nullable(object({ update_id: uuid, target_release_id: text(256), phase: enumeration('quiescing', 'commit'), coordinator_id: uuid, requested_at: time })), estimated_record_bytes: integer(), attempt_count: integer(0, 100000) }),
 };
 const history = { session: 'session', presentation: 'presentation', attempt: 'attempt', exposure: 'exposure', review_card: 'reviewCard', bookmark: 'bookmark', resume_position: 'position' };

@@ -1,6 +1,7 @@
 import { PWA_BASE, type PackageManifest } from './manifest';
 import type { DownloadProgress } from './packages';
 import type { Registry } from './registry';
+import type { UpdateState } from './coordination';
 interface WorkerState { registry: Registry; manifest: PackageManifest | null }
 export interface OfflineState { supported: boolean | null; loading: boolean; registry: Registry | null; manifest: PackageManifest | null; progress: DownloadProgress | null; error: string | null }
 class OfflineClient {
@@ -37,7 +38,7 @@ class OfflineClient {
       window.addEventListener('focus', refresh); document.addEventListener('visibilitychange', refresh);
     } catch (error) { this.publish({ error: error instanceof Error ? error.message : 'pwa_unavailable', loading: false }); this.starting = null; }
   }
-  private request<T = WorkerState>(type: string, releaseId?: string): Promise<T> {
+  private request<T = WorkerState>(type: string, releaseId?: string, updateId?: string): Promise<T> {
     const worker = this.registration?.active;
     if (!worker || worker.scriptURL !== new URL(PWA_BASE + 'sw.js', location.origin).href || worker.state !== 'activated') return Promise.reject(new Error('pwa_unavailable'));
     return new Promise((resolve, reject) => {
@@ -48,10 +49,12 @@ class OfflineClient {
         if (event.data.progress) { this.publish({ progress: event.data.progress }); resetTimeout(); return; }
         end(); if (event.data.error) reject(new Error(event.data.error)); else resolve(event.data.value);
       };
-      worker.postMessage({ type, release_id: releaseId }, [channel.port2]);
+      worker.postMessage({ type, release_id: releaseId, update_id: updateId }, [channel.port2]);
     });
   }
   async retainedManifest(id: string) { return this.request<{ manifest: PackageManifest; digest: string }>('release', id); }
+  async verifyBoot(id: string) { return this.request<{ registry: Registry; progress: UpdateState | null; protocol: number }>('boot', id); }
+  async finishBoot(id: string, updateId: string) { await this.request('finish-update', id, updateId); }
   async perform(type: 'initialize' | 'status' | 'download' | 'cancel' | 'verify', releaseId?: string) {
     if (type !== 'status') this.publish({ loading: true, error: null });
     try { const value = await this.request(type, releaseId); this.publish({ ...value, error: null, ...(type === 'status' ? {} : { progress: null }) }); }

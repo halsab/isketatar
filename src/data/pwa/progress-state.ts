@@ -22,7 +22,7 @@ export async function readUpdateState(name = 'iske-imla-progress'): Promise<Upda
     if (sessions.some(session => session.data_generation !== control.data_generation)) throw new Error('storage_corrupt');
     const pending = sessions.filter(session => session.status === 'active' || session.status === 'paused');
     return {
-      control: { data_generation: control.data_generation, writer_epoch: control.writer_epoch, writer_id: control.writer_id, active_session_id: control.active_session_id, update_gate: control.update_gate },
+      control: { accepted_release_id: control.accepted_release_id, data_generation: control.data_generation, writer_epoch: control.writer_epoch, writer_id: control.writer_id, active_session_id: control.active_session_id, update_gate: control.update_gate },
       pins: pending.map(({ session_id, release_id, content_schema, policy_versions }) => ({ session_id, release_id, content_schema, policy_versions })),
       active: pending.some(session => session.status === 'active'),
     };

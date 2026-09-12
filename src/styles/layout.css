@@ -38,3 +38,8 @@
 @media (max-height: 420px) { .bottom-navigation { position: static; } .app-main { padding-bottom: 1.5rem; } }
 .keyboard-open .bottom-navigation { position: static; }
 .keyboard-open .app-main { padding-bottom: 1.5rem; }
+@media (max-width: 480px) {
+  .boot-main { padding-inline: 16px; }
+  .boot-main .status { display: block; padding: 16px; }
+  .boot-main .button { padding-inline: 16px; }
+}

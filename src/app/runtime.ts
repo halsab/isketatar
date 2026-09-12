@@ -9,7 +9,7 @@ import type { ContentCatalog } from '../domain/content/catalog';
 import { currentReleaseId, readerSupported } from './release';
 import { tabIdentity } from './tab-identity';
 
-export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory'; editorRevision: number; recoveryText: string | null; quiescing: string | null }
+export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory'; editorRevision: number; recoveryText: string | null; quiescing: string | null; acceptedShell: string | null }
 export type UpdatePreparation = UpdateGate & { data_generation: string; writer_epoch: number };
 export interface UpdateReady { tab_id: string; release_id: string; mode: 'durable' | 'memory'; closed: boolean; memory_loss_accepted: boolean }
 export interface CommandScope { repository: ProgressRepository; expected: Expected; contentReleaseId?: string }
@@ -42,7 +42,7 @@ export class AppRuntime {
   private positionCollector: { scope: CommandScope; read: () => Extract<Command, { type: 'position' }> | null } | null = null;
   editor: ActiveEditor | null = null;
   registerEditor(editor: ActiveEditor) { this.editor = editor; if (this.state.quiescing) editor.beginUpdate(); return () => { if (this.editor === editor) this.editor = null; }; }
-  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable', editorRevision: 0, recoveryText: null, quiescing: null };
+  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable', editorRevision: 0, recoveryText: null, quiescing: null, acceptedShell: null };
   private readonly listeners = new Set<() => void>();
   getState = () => this.state;
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
@@ -61,12 +61,16 @@ export class AppRuntime {
         this.content = content; this.releaseId = releaseId; this.tabId = tabId; this.contents.set(releaseId, content); this.catalogs.set(releaseId, content.catalog);
       }
       if (!this.progress || !this.progress.acceptsCommands) {
+        if (import.meta.env.PROD) await (await import('./bootstrap')).prepareBoot(this.releaseId);
         const progress = await ProgressRepository.open({ catalog: this.content.catalog, catalogs: this.catalogs, releaseId: this.releaseId, tabId: this.tabId });
+        if (import.meta.env.PROD) {
+          try { const gate = await (await import('./bootstrap')).finishBoot(this.releaseId, progress); this.publish({ quiescing: gate?.update_id ?? null }); }
+          catch (error) { progress.close(); throw error; }
+        }
         this.attach(progress);
       }
       await this.refresh();
-      if (import.meta.env.PROD) void import('../data/pwa/client').then(({ offline }) => offline.start(this.releaseId)).catch(() => {});
-    } catch (error) { this.publish({ phase: this.content ? 'storage_error' : 'error', error: errorCode(error) }); }
+    } catch (error) { this.publish({ phase: errorCode(error) === 'release_not_current' ? 'error' : this.content ? 'storage_error' : 'error', error: errorCode(error), acceptedShell: error && typeof error === 'object' && typeof Reflect.get(error, 'accepted') === 'string' ? Reflect.get(error, 'accepted') : null }); }
   }
   private attach(progress: ProgressRepository) {
     this.stopListening?.();

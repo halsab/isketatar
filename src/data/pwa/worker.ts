@@ -27,6 +27,7 @@ async function peers(): Promise<UpdatePeer[]> { return (await windows()).map(cli
 const coordinator = new UpdateCoordinator(lifecycle, readUpdateState, peers);
 async function occupied() {
   const ids = new Set<string>(); let unknown = false;
+  for (const pin of (await readUpdateState())?.pins ?? []) ids.add(pin.release_id);
   await Promise.all((await windows()).map(async client => {
     try { const value = await ask(client, { type: 'identify' }); const id = value && typeof value === 'object' ? Reflect.get(value, 'release_id') : null; if (typeof id !== 'string') throw new Error('update_unknown_client'); ids.add(id); }
     catch { unknown = true; }
@@ -40,25 +41,46 @@ async function state() {
   const candidate = value.candidate_release_id ? await packages.manifest(value.candidate_release_id).catch(() => null) : null;
   return { registry: value, manifest, candidate };
 }
+async function registerAvailable(id: string) {
+  const cached = await (await caches.open(`isketatar-shell-${id}`)).match(releaseRoot(id) + 'release-manifest.json');
+  try { const fetched = await fetchManifest(releaseRoot(id) + 'release-manifest.json'); await packages.register(fetched.manifest, fetched.digest, fetched.response); }
+  catch (error) {
+    if (!cached) throw error;
+    const bytes = await readBoundedBytes(cached, 1_000_000); const manifest = parseRelease(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
+    if (manifest.release_id !== id) throw new Error('content_corrupt');
+    await packages.register(manifest, await sha256(bytes), new Response(bytes));
+  }
+  return !!cached;
+}
+async function recoverPrevious(current: string) {
+  const progress = await readUpdateState(); const value = await registry.read();
+  if (progress?.control.accepted_release_id !== current || value.operation || value.previous_release_id) return;
+  const pinned = [...new Set(progress.pins.map(pin => pin.release_id).filter(id => id !== current))];
+  // Восстанавливаем только однозначно закреплённый выпуск, а не угадываем previous по возрасту кэшей.
+  if (pinned.length !== 1 || value.candidate_release_id && value.candidate_release_id !== pinned[0]) return;
+  const id = pinned[0]!;
+  if (!value.releases.some(entry => entry.release_id === id)) await registerAvailable(id);
+  await registry.change(state => {
+    if (state.current_release_id !== current || state.operation || state.previous_release_id || state.candidate_release_id !== id) throw new Error('update_conflict');
+    state.previous_release_id = id; state.candidate_release_id = null;
+  });
+  const complete = await packages.verify(id);
+  await registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = complete ? 'ready' : 'incomplete'; entry.verified_at = complete ? Date.now() : null; });
+}
 async function initialize(id: string) {
   const value = await registry.read();
+  let recovered = false;
   if (value.current_release_id && value.current_release_id !== id) throw new Error('release_not_current');
   if (!value.releases.some(entry => entry.release_id === id)) {
-    try { const fetched = await fetchManifest(releaseRoot(id) + 'release-manifest.json'); await packages.register(fetched.manifest, fetched.digest, fetched.response); }
-    catch (error) {
-      const cached = await (await caches.open(`isketatar-shell-${id}`)).match(releaseRoot(id) + 'release-manifest.json');
-      if (!cached) throw error;
-      const bytes = await readBoundedBytes(cached, 1_000_000); const manifest = parseRelease(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
-      if (manifest.release_id !== id) throw new Error('content_corrupt');
-      await packages.register(manifest, await sha256(bytes), new Response(bytes));
-    }
+    recovered = await registerAvailable(id);
   }
   await packages.saveShell(id);
   const entry = (await registry.read()).releases.find(item => item.release_id === id)!;
-  if (['ready', 'downloading', 'verifying'].includes(entry.completeness)) {
+  if (recovered || ['ready', 'downloading', 'verifying'].includes(entry.completeness)) {
     const complete = await packages.verify(id);
     await registry.change(value => { const current = value.releases.find(item => item.release_id === id)!; current.completeness = complete ? 'ready' : 'incomplete'; current.verified_at = complete ? Date.now() : null; });
   }
+  await recoverPrevious(id).catch(() => { /* Недоступный pinned-пакет остаётся защищён от очистки; текущий курс доступен. */ });
 }
 // Активация транспорта не принимает новый курс и не удаляет сохранённые выпуски.
 self.addEventListener('install', () => {});
@@ -162,7 +184,15 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     let fallback = request.url; let retained: StoredRelease | undefined;
     try {
-      const value = await registry.read(); const id = immutable?.[1] ?? value.current_release_id;
+      let value = await registry.read();
+      if (!value.current_release_id && (navigation || request.mode === 'navigate' && immutable && ['index.html', 'recovery.html'].includes(immutable[2]!))) {
+        const accepted = (await readUpdateState())?.control.accepted_release_id;
+        if (accepted) {
+          operation = operation.catch(() => {}).then(async () => { if (!(await registry.read()).current_release_id) await initialize(accepted); });
+          await operation; value = await registry.read();
+        }
+      }
+      const id = immutable?.[1] ?? value.current_release_id;
       if (!id || !value.releases.some(entry => entry.release_id === id)) return fetch(request);
       const path = immutable ? url.pathname : releaseRoot(id) + (manifest ? 'manifest.webmanifest' : url.pathname.endsWith('recovery.html') ? 'recovery.html' : 'index.html');
       fallback = new URL(path, self.location.origin).href; retained = value.releases.find(entry => entry.release_id === id);

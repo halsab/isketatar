@@ -19,7 +19,7 @@ export async function replaceProgress(tx: Transaction, previous: Control, data: 
   for (const bookmark of data.bookmarks) await tx.put('bookmarks', bookmark);
   for (const legacy of data.legacy) await tx.put('legacy', legacy);
   const values = [data.settings, ...sessions, ...data.presentations, ...data.attempts, ...data.exposures, ...data.review_cards, ...data.bookmarks, ...data.resume_positions, ...data.legacy];
-  const control: Control = { key: 'control', progress_schema: 1, db_version: 1, data_generation: generation, writer_id: tabId, writer_epoch: previous.writer_epoch + 1, state_revision: previous.state_revision + 1,
+  const control: Control = { key: 'control', accepted_release_id: previous.accepted_release_id, progress_schema: 1, db_version: 1, data_generation: generation, writer_id: tabId, writer_epoch: previous.writer_epoch + 1, state_revision: previous.state_revision + 1,
     active_session_id: null, update_gate: null, estimated_record_bytes: values.reduce((total, value) => total + recordBytes(value), 0), attempt_count: data.attempts.length };
   await tx.put('meta', control);
   return control;
