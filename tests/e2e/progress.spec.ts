@@ -7,6 +7,6 @@ test('real browser IndexedDB preserves atomicity, idempotency, help and writer f
   await expect(page.locator('#result')).not.toHaveText('running');
   const text = await page.locator('#result').textContent();
   expect(text).not.toContain('failed:');
-  expect(JSON.parse(text!)).toEqual({ duplicate: true, staleHelp: true, helpSaved: true, finalBulk: true, staleWriter: true, aborted: true, importRoundtrip: true, staleGeneration: true, previewRejected: true, reset: true });
+  expect(JSON.parse(text!)).toEqual({ duplicate: true, staleHelp: true, helpSaved: true, finalBulk: true, staleWriter: true, aborted: true, importRoundtrip: true, staleGeneration: true, previewRejected: true, reset: true, memoryProtection: true, memoryIsolation: true });
   expect(errors).toEqual([]);
 });

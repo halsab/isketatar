@@ -15,8 +15,13 @@ import { prepareProgress } from './import-content';
 import { checkReplacement, replaceProgress } from './replacement';
 import { integrity } from './import-integrity';
 import packageInfo from '../../../package.json';
+import { MemoryBackend } from './memory-backend';
+import { exportData } from './transfer';
+import { markAssessmentHelp, pendingAssessments } from '../../domain/learning/attempt';
 
 interface Options { catalog: ContentCatalog; currentCore?: CoreData; releaseId: string; availableReleaseIds?: string[]; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
+interface KnownProtection { generation: string }
+interface DurableProtection extends KnownProtection { source: ProgressRepository }
 export function expectedFrom(snapshot: ProgressSnapshot): Expected {
   const unfinished = snapshot.sessions.filter(session => ['active', 'paused'].includes(session.status));
   const ids = new Set(unfinished.map(session => session.session_id));
@@ -37,6 +42,10 @@ export class ProgressRepository {
   private closed = false;
   private importSequence = 0;
   private preparedImport: { preview: ImportPreview; data: ProgressData } | null = null;
+  private detached = false;
+  private lastProtection: KnownProtection | null = null;
+  private protection: DurableProtection | null = null;
+  private successfulResetGeneration: string | null = null;
   private constructor(readonly backend: Backend, readonly options: Options) {
     this.uuid = options.uuid ?? (() => crypto.randomUUID()); this.clock = options.clock ?? (() => Date.now()); this.tabId = options.tabId ?? this.uuid();
   }
@@ -54,6 +63,22 @@ export class ProgressRepository {
       };
     }
     return repository;
+  }
+  static async memory(options: Options): Promise<ProgressRepository> {
+    const repository = new ProgressRepository(new MemoryBackend(), options);
+    await repository.initialize(); return repository;
+  }
+  get mode() { return this.backend.mode; }
+  async branchToMemory(): Promise<ProgressRepository> {
+    if (this.mode !== 'durable') throw new Error('already_memory');
+    this.detached = true;
+    await this.serial;
+    let snapshot: ProgressSnapshot | null = null;
+    try { snapshot = await this.snapshot(); } catch { /* При недоступной БД новая ветвь пуста; прежняя БД не удаляется. */ }
+    const branch = await ProgressRepository.memory({ ...this.options, tabId: this.uuid() });
+    if (snapshot) await branch.backend.run('readwrite', async tx => replaceProgress(tx, await readControl(tx), exportData(snapshot), branch.uuid(), branch.tabId));
+    if (this.lastProtection) branch.protection = { ...this.lastProtection, source: this };
+    return branch;
   }
   private async initialize() {
     await this.backend.run('readwrite', async tx => {
@@ -89,6 +114,8 @@ export class ProgressRepository {
       const snapshot = { control, settings: settings.value, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy, resume_positions: meta.flatMap(record => record.key !== 'control' && record.key !== 'settings' ? [record.value] : []) };
       try { integrity(snapshot); } catch { throw new Error('storage_corrupt'); }
       if (attempts.length !== control.attempt_count || (sessions.find(session => session.status === 'active')?.session_id ?? null) !== control.active_session_id || sessions.some(session => session.data_generation !== control.data_generation)) throw new Error('storage_corrupt');
+      const pending = pendingAssessments(sessions).filter(session => session.assessment_help_opened_at === null);
+      this.lastProtection = pending.length ? { generation: control.data_generation } : null;
       return snapshot;
     }));
   }
@@ -108,34 +135,60 @@ export class ProgressRepository {
   }
   cancelImport() { this.importSequence++; this.preparedImport = null; }
   commitImport(id: string, confirmed: boolean): Promise<void> {
+    if (this.detached) return Promise.reject(new Error('repository_detached'));
     const prepared = this.preparedImport;
     if (!confirmed) return Promise.reject(new Error('confirmation_required'));
     if (!prepared || prepared.preview.id !== id) return Promise.reject(new Error('invalid_preview'));
     const generation = this.uuid();
     return this.enqueue(async () => {
+      if (this.detached) throw new Error('repository_detached');
       if (this.preparedImport !== prepared) throw new Error('invalid_preview');
       const control = await this.backend.run('readwrite', async tx => {
         const current = await readControl(tx);
         checkReplacement(current, prepared.preview.expected, this.tabId);
         return replaceProgress(tx, current, prepared.data, generation, this.tabId);
       });
+      this.lastProtection = pendingAssessments(prepared.data.sessions).some(session => session.assessment_help_opened_at === null) ? { generation: control.data_generation } : null;
       this.cancelImport(); this.changed(control);
     });
   }
   reset(expected: ReplacementToken, confirmed: boolean): Promise<void> {
+    if (this.mode === 'memory') return Promise.reject(new Error('durable_reset_required'));
+    return this.clearData(expected, confirmed);
+  }
+  discardMemory(expected: ReplacementToken, confirmed: boolean): Promise<void> {
+    if (this.mode !== 'memory') return Promise.reject(new Error('not_memory'));
+    return this.clearData(expected, confirmed);
+  }
+  async confirmDurableReset(recoveredSource?: ProgressRepository): Promise<void> {
+    const protection = this.protection;
+    if (!protection) return;
+    const source = recoveredSource ?? protection.source;
+    if (source.mode !== 'durable' || (source.options.name ?? 'iske-imla-progress') !== (protection.source.options.name ?? 'iske-imla-progress')) throw new Error('durable_reset_required');
+    const snapshot = await source.snapshot();
+    if (source.successfulResetGeneration !== snapshot.control.data_generation || pendingAssessments(snapshot.sessions).some(session => session.assessment_help_opened_at === null)) throw new Error('durable_reset_required');
+    this.protection = null;
+  }
+  private clearData(expected: ReplacementToken, confirmed: boolean): Promise<void> {
+    if (this.detached) return Promise.reject(new Error('repository_detached'));
     if (!confirmed) return Promise.reject(new Error('confirmation_required'));
     const token = structuredClone(expected); const generation = this.uuid(); const at = this.clock();
     const data: ProgressData = { settings: defaultSettings(at), sessions: [], presentations: [], attempts: [], exposures: [], review_cards: [], bookmarks: [], resume_positions: [], legacy: [] };
     return this.enqueue(async () => {
+      if (this.detached) throw new Error('repository_detached');
       const control = await this.backend.run('readwrite', async tx => {
         const current = await readControl(tx); checkReplacement(current, token, this.tabId);
         return replaceProgress(tx, current, data, generation, this.tabId);
       });
+      if (this.mode === 'durable') this.successfulResetGeneration = control.data_generation;
+      this.lastProtection = null;
       this.cancelImport(); this.changed(control);
     });
   }
   takeover(generation: string, epoch: number): Promise<void> {
+    if (this.detached) return Promise.reject(new Error('repository_detached'));
     return this.enqueue(async () => {
+      if (this.detached) throw new Error('repository_detached');
       const control = await this.backend.run('readwrite', async tx => {
         const control = await readControl(tx);
         if (control.data_generation !== generation || control.writer_epoch !== epoch) throw new Error('write_conflict');
@@ -147,8 +200,10 @@ export class ProgressRepository {
     });
   }
   dispatch(command: Command, expected: Expected): Promise<CommandResult> {
+    if (this.detached) return Promise.reject(new Error('repository_detached'));
     const captured = structuredClone(command); const token = structuredClone(expected); const at = this.clock();
     return this.enqueue(async () => {
+      if (this.detached) throw new Error('repository_detached');
       if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
       const committed = await this.backend.run('readwrite', async tx => {
         const control = await readControl(tx);
@@ -159,12 +214,43 @@ export class ProgressRepository {
         const context = new WriteContext(tx, control, token, observation);
         const engine = new CommandEngine(context, this.options.catalog, this.options.currentCore ?? this.options.catalog.core, this.options.releaseId, at, this.uuid);
         const result = await this.execute(engine, captured);
-        await context.finish(captured.type !== 'settings');
-        return { result: { ...result, expected: context.nextExpected() }, control, dirty: context.dirty };
+        await context.finish(captured.type !== 'settings', this.mode === 'durable');
+        if (this.mode === 'memory' && context.disclosure && this.protection) {
+          // Ожидание допустимо только в транзакции памяти; durable-транзакция здесь ещё не открыта.
+          const confirmed = 'confirm_assessment_help' in captured && captured.confirm_assessment_help === true;
+          await this.protectDurableHelp(this.protection, confirmed, at);
+          this.protection = null;
+        }
+        const pending = pendingAssessments(await tx.unfinishedSessions()).some(session => session.assessment_help_opened_at === null);
+        return { result: { ...result, expected: context.nextExpected() }, control, dirty: context.dirty, pending };
       });
+      this.lastProtection = committed.pending ? { generation: committed.control.data_generation } : null;
       if (committed.dirty) this.changed(committed.control);
       return committed.result;
     });
+  }
+  private async protectDurableHelp(protection: DurableProtection, confirmed: boolean, at: number) {
+    let transient: Backend | null = null;
+    try {
+      const backend = protection.source.available ? protection.source.backend : transient = await IndexedBackend.open(protection.source.options.name ?? 'iske-imla-progress');
+      const committed = await backend.run('readwrite', async tx => {
+        const control = await readControl(tx);
+        if (control.data_generation !== protection.generation) throw new Error('write_conflict');
+        if (control.update_gate?.phase === 'commit') throw new Error('update_in_progress');
+        const pending = await tx.unfinishedSessions();
+        const needsHelp = pendingAssessments(pending).filter(session => session.assessment_help_opened_at === null);
+        if (needsHelp.length && !confirmed) throw new Error('assessment_help_confirmation_required');
+        const context = new WriteContext(tx, control, { data_generation: protection.generation, writer_epoch: control.writer_epoch, revisions: [] }, true);
+        for (const session of markAssessmentHelp(pending, at)) await context.put('sessions', session);
+        await context.finish(true);
+        return { control, dirty: context.dirty };
+      });
+      protection.source.lastProtection = null;
+      if (committed.dirty) protection.source.changed(committed.control);
+    } catch (error) {
+      if (error instanceof Error && ['assessment_help_confirmation_required', 'write_conflict', 'update_in_progress'].includes(error.message)) throw error;
+      throw new Error('durable_help_required');
+    } finally { transient?.close(); }
   }
   private async execute(engine: CommandEngine, command: Command): Promise<CommandResult> {
     switch (command.type) {

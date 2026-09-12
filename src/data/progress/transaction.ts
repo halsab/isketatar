@@ -1,5 +1,5 @@
 import { canonical } from '../../domain/content/canonical';
-import { exportedRecord, KEY_PATHS, recordBytes, SOFT_ATTEMPTS, SOFT_BYTES } from './model';
+import { exportedRecord, KEY_PATHS, recordBytes, SOFT_ATTEMPTS, SOFT_BYTES, STORE_NAMES } from './model';
 import type { Control, Expected, MetaRecord, RecordExpectation, StoreName, StoreRecords } from './model';
 import type { Transaction } from './backend';
 
@@ -11,6 +11,7 @@ export async function readControl(transaction: Transaction): Promise<Control> {
 }
 export class WriteContext {
   dirty = false;
+  disclosure = false;
   private readonly checked = new Set<string>();
   private readonly revisions = new Map<string, RecordExpectation>();
   private readonly historyAlreadyFull: boolean;
@@ -58,9 +59,13 @@ export class WriteContext {
     await this.tx.delete(store, key);
     this.dirty = true;
   }
-  async finish(history: boolean) {
+  async finish(history: boolean, enforceSoftLimit = true) {
     if (!this.dirty) return;
-    if (history && (this.historyAlreadyFull || this.control.estimated_record_bytes > SOFT_BYTES || this.control.attempt_count > SOFT_ATTEMPTS)) throw new Error('history_full');
+    if (history && enforceSoftLimit && (this.historyAlreadyFull || this.control.estimated_record_bytes > SOFT_BYTES || this.control.attempt_count > SOFT_ATTEMPTS)) throw new Error('history_full');
+    if (history && !enforceSoftLimit) {
+      const records = (await Promise.all(STORE_NAMES.map(store => this.tx.count(store)))).reduce((sum, count) => sum + count, 0);
+      if (this.control.estimated_record_bytes + records + 1024 > 20 * 1024 * 1024) throw new Error('history_full');
+    }
     this.control.state_revision++;
     await this.tx.put('meta', this.control);
   }

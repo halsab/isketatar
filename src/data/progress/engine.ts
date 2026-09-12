@@ -51,6 +51,7 @@ export class CommandEngine {
     await this.putExposures(recordExposure(await this.exposures([`${kind}:${id}`]), kind, id, this.at, levels));
   }
   async confirmDisclosure(confirmed: boolean) {
+    this.context.disclosure = true;
     const pending = await this.tx.unfinishedSessions();
     if (pendingAssessments(pending).some(session => session.assessment_help_opened_at === null) && !confirmed) throw new Error('assessment_help_confirmation_required');
     for (const session of markAssessmentHelp(pending, this.at)) await this.context.put('sessions', session);

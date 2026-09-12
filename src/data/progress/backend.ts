@@ -16,6 +16,7 @@ export interface Transaction {
   count(store: StoreName): Promise<number>;
 }
 export interface Backend {
+  readonly mode: 'durable' | 'memory';
   run<T>(mode: 'readonly' | 'readwrite', body: (transaction: Transaction) => Promise<T>): Promise<T>;
   close(): void;
 }
@@ -46,6 +47,7 @@ export function storageError(error: unknown): Error {
   return error instanceof Error ? error : new Error('storage_unavailable');
 }
 export class IndexedBackend implements Backend {
+  readonly mode = 'durable' as const;
   private constructor(private readonly database: IDBPDatabase<ProgressDB>) {}
   static open(name: string, onClosed: () => void = () => {}): Promise<IndexedBackend> {
     return new Promise((resolve, reject) => {

@@ -10,6 +10,7 @@ async function run() {
   const name = `iske-imla-progress-browser-${crypto.randomUUID()}`;
   const first = await ProgressRepository.open({ catalog: content.catalog, releaseId: 'browser-test', name });
   const second = await ProgressRepository.open({ catalog: content.catalog, releaseId: 'browser-test', name });
+  let memory: ProgressRepository | undefined;
   const staleRejected = async (operation: Promise<unknown>) => { try { await operation; return false; } catch (error) { return error instanceof Error && error.message === 'write_conflict'; } };
   try {
     await first.dispatch({ type: 'start', kind: 'lesson_cycle', lesson_id: 'V04' }, expectedFrom(await first.snapshot()));
@@ -50,12 +51,24 @@ async function run() {
     const resetBefore = await second.snapshot();
     await second.reset(replacementToken(resetBefore), true);
     const resetAfter = await second.snapshot();
+    await second.dispatch({ type: 'start', kind: 'final' }, expectedFrom(resetAfter));
+    const durableBeforeMemory = await second.snapshot();
+    memory = await second.branchToMemory();
+    const memoryBefore = await memory.snapshot();
+    await memory.dispatch({ type: 'observe', target: { kind: 'lesson', id: 'V04' }, confirm_assessment_help: true }, expectedFrom(memoryBefore));
+    await memory.dispatch({ type: 'settings', patch: { theme: 'dark' } }, expectedFrom(await memory.snapshot()));
+    const memoryAfter = await memory.snapshot();
+    const durableAfterMemory = await second.snapshot();
+    const memoryExport = await memory.exportProgress();
+    const memoryProtection = durableAfterMemory.sessions[0]!.assessment_help_opened_at !== null && memoryAfter.sessions[0]!.assessment_help_opened_at !== null;
+    const memoryIsolation = memory.mode === 'memory' && memoryAfter.control.data_generation !== durableBeforeMemory.control.data_generation && memoryAfter.settings.theme === 'dark' && durableAfterMemory.settings.theme !== 'dark' && durableAfterMemory.exposures.length === 0 && memoryAfter.exposures.length > 0 && memoryExport.size > 0;
     const comparable = (snapshot: ProgressSnapshot) => JSON.stringify({ control: snapshot.control, settings: snapshot.settings, attempts: snapshot.attempts });
     return { duplicate: submitted.attempts.length === 1 && submitted.review_cards[0]?.attempt_count === 1,
       staleHelp, helpSaved: all.sessions.find(session => session.session_id === final.session_id)!.assessment_help_opened_at !== null,
       finalBulk: all.attempts.filter(attempt => attempt.session_id === final.session_id).length === 20 && all.review_cards.length === 1,
       staleWriter, aborted: comparable(after) === comparable(unchanged), importRoundtrip, staleGeneration, previewRejected,
-      reset: resetAfter.attempts.length === 0 && resetAfter.sessions.length === 0 && resetAfter.control.data_generation !== resetBefore.control.data_generation };
-  } finally { first.close(); second.close(); await deleteDB(name); }
+      reset: resetAfter.attempts.length === 0 && resetAfter.sessions.length === 0 && resetAfter.control.data_generation !== resetBefore.control.data_generation,
+      memoryProtection, memoryIsolation };
+  } finally { memory?.close(); first.close(); second.close(); await deleteDB(name); }
 }
 run().then(result => { document.querySelector('#result')!.textContent = JSON.stringify(result); }, error => { document.querySelector('#result')!.textContent = `failed: ${error instanceof Error ? error.message : 'unknown'}`; });
