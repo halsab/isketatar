@@ -51,7 +51,7 @@ export interface ProgressData {
 export interface ProgressSnapshot extends ProgressData { control: Control }
 export interface ProgressExport { format: 'iske-imla-progress'; schema_version: 1; content_version: string; app_version: string; exported_at: number; data: ProgressData }
 export interface ReplacementToken { data_generation: string; writer_epoch: number; state_revision: number }
-export interface ImportPreview { id: string; recognized_attempts: number; legacy_records: number; bookmarks: number; route: RouteId | null; expected: ReplacementToken }
+export interface ImportPreview { id: string; recognized_lessons: number; recognized_attempts: number; legacy_records: number; legacy_reasons: Record<Legacy['reason'], number>; bookmarks: number; route: RouteId | null; expected: ReplacementToken }
 export interface RecordExpectation { store: 'sessions' | 'presentations' | 'review_cards' | 'meta'; key: string; revision: number | null }
 export interface Expected { data_generation: string; writer_epoch: number; revisions: RecordExpectation[] }
 export const defaultSettings = (at: number): Settings => ({ selected_route: null, onboarding_completed: false, locale: 'tt-Cyrl', theme: 'system', arabic_size_px: 32, text_size_px: 18, reduced_motion: 'system', review_batch_size: 10, last_location: null, revision: 0, updated_at: at });

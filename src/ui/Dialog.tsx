@@ -43,11 +43,12 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
       savedFocus.current = position?.control ? [...node.querySelectorAll<HTMLElement>('[data-panel-control]')].find(item => item.dataset.panelControl === position.control) ?? null : null;
     }
     if (focused) savedFocus.current = focused;
+    const rememberedFocus = savedFocus.current;
     if (node.open) node.close();
     if (open && !suspended) {
       if (modal) node.showModal(); else node.show();
       if (focused) focused.focus({ preventScroll: true });
-      else if (savedFocus.current?.isConnected) savedFocus.current.focus({ preventScroll: true });
+      else if (rememberedFocus?.isConnected) rememberedFocus.focus({ preventScroll: true });
       else if (initialCancel) (node.querySelector<HTMLElement>('[data-cancel]') ?? heading.current)?.focus({ preventScroll: true });
       else heading.current?.focus({ preventScroll: true });
       node.scrollTop = modal ? modalScroll.current : scroll;

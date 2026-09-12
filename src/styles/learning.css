@@ -77,3 +77,12 @@
 .review-cards > li { border-bottom: 1px solid var(--divider-decorative); padding-block: 1rem; }
 
 .review-document { overflow-wrap: anywhere; }
+
+.settings-document { overflow-wrap: anywhere; }
+.settings-document > section, .settings-document > fieldset { margin-block: 2rem; }
+.settings-document fieldset { min-width: 0; border: 1px solid var(--divider-decorative); border-radius: 0.75rem; padding: 1rem; }
+.settings-document legend { font-weight: 600; }
+.settings-document label { display: flex; flex-direction: column; gap: 0.5rem; margin-block: 1rem; }
+.settings-document input, .settings-document select, .settings-document textarea { width: 100%; max-width: 100%; min-width: 0; }
+.settings-document input[type=file] { white-space: normal; overflow-wrap: anywhere; }
+.import-preview { padding: 1rem; border: 1px solid var(--control-border); border-radius: 0.75rem; }

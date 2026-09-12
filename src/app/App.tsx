@@ -38,7 +38,9 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
     return [...(section === 'letters' ? [{ path: '/reference/letters', lazy }] : []), { path: `/reference/${section}/:${parameter}`, lazy }];
   }),
   { path: '/sources/:source_id', lazy: async () => ({ Component: (await import('../features/sources/SourcePage')).SourcePage }) },
-  { path: '/about', element: <div className="document"><h1>Курс турында</h1><p>Аңлатмалар хәзерге татар телендә бирелә.</p><Link to="/">Баш бит</Link></div> },
+  { path: '/settings', lazy: async () => ({ Component: (await import('../features/settings/SettingsPage')).SettingsPage }) },
+  { path: '/settings/backup', lazy: async () => ({ Component: (await import('../features/settings/BackupPage')).BackupPage }) },
+  { path: '/about', lazy: async () => ({ Component: (await import('../features/settings/AboutPage')).AboutPage }) },
   { path: '*', element: <div className="document"><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></div> },
 ] }]);
 export function App() { return <RecoveryBoundary><RouterProvider router={router} /></RecoveryBoundary>; }

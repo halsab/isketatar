@@ -130,7 +130,9 @@ export class ProgressRepository {
     const data = prepareProgress(decoded, this.options.catalog, this.options.availableReleaseIds ?? [this.options.releaseId], this.clock());
     const snapshot = await this.snapshot();
     if (sequence !== this.importSequence) throw new Error('invalid_preview');
-    const preview: ImportPreview = { id: this.uuid(), recognized_attempts: data.attempts.length, legacy_records: data.legacy.length, bookmarks: data.bookmarks.length, route: data.settings.selected_route, expected: replacementToken(snapshot) };
+    const legacy_reasons: ImportPreview['legacy_reasons'] = { unknown_content_id: 0, unknown_grading_revision: 0, unknown_policy_version: 0, incompatible_draft: 0 };
+    for (const record of data.legacy) legacy_reasons[record.reason]++;
+    const preview: ImportPreview = { id: this.uuid(), recognized_lessons: new Set(data.sessions.flatMap(session => session.lesson_id ? [session.lesson_id] : [])).size, recognized_attempts: data.attempts.length, legacy_records: data.legacy.length, legacy_reasons, bookmarks: data.bookmarks.length, route: data.settings.selected_route, expected: replacementToken(snapshot) };
     this.preparedImport = { preview, data };
     return structuredClone(preview);
   }

@@ -28,6 +28,8 @@ describe('bounded and atomic progress transfer', () => {
     const before = await target.snapshot();
     const preview = await target.previewImport(file);
     expect(preview.recognized_attempts).toBe(1);
+    expect(preview.recognized_lessons).toBe(1);
+    expect(Object.values(preview.legacy_reasons).reduce((sum, count) => sum + count, 0)).toBe(preview.legacy_records);
     await target.commitImport(preview.id, true);
     const restored = await target.snapshot();
     expect(restored.attempts).toEqual((await source.snapshot()).attempts);

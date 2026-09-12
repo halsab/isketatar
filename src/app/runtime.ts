@@ -98,6 +98,12 @@ export class AppRuntime {
     try { await this.editor?.suspend(); await progress.takeover(expected.data_generation, expected.writer_epoch); await this.refresh(); this.publish({ editorRevision: this.state.editorRevision + 1, error: null }); }
     catch (error) { this.publish({ error: errorCode(error) }); throw error; }
   }
+  async refreshAfterReplacement(progress: ProgressRepository) {
+    if (progress !== this.progress) throw new Error('write_conflict');
+    await this.refresh();
+    if (progress !== this.progress) throw new Error('write_conflict');
+    this.publish({ error: null, recoveryText: null, editorRevision: this.state.editorRevision + 1 });
+  }
   useMemory(): Promise<void> {
     if (!this.switching) this.switching = this.switchToMemory().finally(() => { this.switching = null; });
     return this.switching;
