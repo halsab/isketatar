@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
+import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button, Status } from '../ui/controls';
 import { Dialog } from '../ui/Dialog';
@@ -14,6 +14,7 @@ interface Confirmation { title: string; body: string; action: string; danger?: b
 interface AppContextValue { runtime: AppRuntime; state: AppState; confirm: (request: Confirmation) => Promise<boolean>; confirming: boolean }
 const Context = createContext<AppContextValue | null>(null);
 const application = new AppRuntime();
+const UpdateStatus = lazy(() => import('../features/settings/UpdateStatus').then(module => ({ default: module.UpdateStatus })));
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const state = useSyncExternalStore(application.subscribe, application.getState);
@@ -55,10 +56,11 @@ export function RuntimeStatus() {
     setBusy(true); try { await runtime.takeover(progress, expected); } catch { /* Ошибка остаётся видимым состоянием репозитория. */ } finally { setBusy(false); }
   }
   return <>
+    <Suspense fallback={null}><UpdateStatus /></Suspense>
     {state.mode === 'memory' && <Status tone="warning">{t('storage.memory_mode')}</Status>}
     {state.recoveryText !== null && <Status tone="warning"><details open><summary>{t('draft.recovery')}</summary><p>{t('draft.recovery_detail')}</p><textarea readOnly aria-label={t('draft.recovery')} value={state.recoveryText} /></details></Status>}
-    {snapshot.control.writer_id !== progress.tabId && <Status tone="warning"><p>{t('writer.read_only')}</p><Button busy={busy} onClick={() => { void takeControl(); }}>{t('writer.takeover_action')}</Button></Status>}
-    {state.error && <Status tone="error" announce><p>{t(state.error === 'write_conflict' ? 'writer.conflict' : state.error === 'history_full' ? 'storage.history_full_detail' : 'storage.unsaved')}</p><div className="actions">
+    {snapshot.control.writer_id !== progress.tabId && !state.quiescing && <Status tone="warning"><p>{t('writer.read_only')}</p><Button busy={busy} onClick={() => { void takeControl(); }}>{t('writer.takeover_action')}</Button></Status>}
+    {state.error && !state.quiescing && <Status tone="error" announce><p>{t(state.error === 'write_conflict' ? 'writer.conflict' : state.error === 'history_full' ? 'storage.history_full_detail' : 'storage.unsaved')}</p><div className="actions">
       <Button onClick={() => { void runtime.retry().catch(() => {}); }}>{t('offline.retry')}</Button>
       {state.mode === 'durable' && <Button onClick={() => { void runtime.useMemory().catch(() => {}); }}>{t('storage.use_memory')}</Button>}
     </div></Status>}

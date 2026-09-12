@@ -2,6 +2,7 @@ import { ContentRepository } from '../data/content/repository';
 import { ProgressRepository } from '../data/progress/repository';
 import type { Expected, ProgressSnapshot, ReplacementToken, UpdateGate } from '../data/progress/model';
 import { expectedFrom } from '../data/progress/repository';
+import { replacementToken } from '../data/progress/transfer';
 import type { Command } from '../data/progress/commands';
 import { applyPreferences } from '../ui/preferences';
 import { POLICIES } from '../domain/content/types';
@@ -61,7 +62,11 @@ export class AppRuntime {
         this.content = content; this.releaseId = releaseId; this.tabId = tabId; this.contents.set(releaseId, content); this.catalogs.set(releaseId, content.catalog);
       }
       if (!this.progress || !this.progress.acceptsCommands) {
-        if (import.meta.env.PROD) await (await import('./bootstrap')).prepareBoot(this.releaseId);
+        if (import.meta.env.PROD) {
+          const { offline } = await import('../data/pwa/client');
+          offline.bind({ identify: () => this.updateIdentity(), prepare: (request, discard) => this.prepareUpdate(request, discard), commit: request => this.commitReleaseUpdate(request), cancel: request => this.cancelReleaseUpdate(request), cancelled: id => this.cancelPreparation(id) });
+          await (await import('./bootstrap')).prepareBoot(this.releaseId);
+        }
         const progress = await ProgressRepository.open({ catalog: this.content.catalog, catalogs: this.catalogs, releaseId: this.releaseId, tabId: this.tabId });
         if (import.meta.env.PROD) {
           try { const gate = await (await import('./bootstrap')).finishBoot(this.releaseId, progress); this.publish({ quiescing: gate?.update_id ?? null }); }
@@ -206,6 +211,50 @@ export class AppRuntime {
     const { control } = snapshot; const gate = control.update_gate;
     if (control.data_generation !== request.data_generation || control.writer_epoch !== request.writer_epoch || control.writer_id !== request.coordinator_id || gate?.update_id !== request.update_id || gate.target_release_id !== request.target_release_id || gate.coordinator_id !== request.coordinator_id) throw new Error('stale_update');
   }
+  updateIdentity() { return { tab_id: this.tabId, release_id: this.releaseId, mode: this.progress?.mode ?? 'durable' }; }
+  async beginReleaseUpdate(target: string, expected: ReplacementToken): Promise<UpdatePreparation> {
+    const repository = this.progress;
+    if (!repository || repository.mode !== 'durable') throw new Error('update_memory_mode');
+    if (this.state.quiescing) throw new Error('update_in_progress');
+    const snapshot = await repository.snapshot();
+    if (snapshot.control.data_generation !== expected.data_generation || snapshot.control.writer_epoch !== expected.writer_epoch || snapshot.control.writer_id !== repository.tabId) throw new Error('write_conflict');
+    const gate = await repository.beginUpdate(replacementToken(snapshot), target);
+    this.publish({ quiescing: gate.update_id }); this.editor?.beginUpdate();
+    await this.refresh(); return { ...gate, data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch };
+  }
+  async commitReleaseUpdate(request: UpdatePreparation) {
+    const repository = this.progress;
+    if (!repository || repository.mode !== 'durable' || request.coordinator_id !== repository.tabId || this.preparedUpdate?.update_id !== request.update_id || !this.preparationReady) throw new Error('update_not_ready');
+    const snapshot = await repository.snapshot(); this.checkPreparation(snapshot, request);
+    if (snapshot.control.update_gate?.phase === 'quiescing') await repository.commitUpdate(replacementToken(snapshot), request.update_id);
+    await this.closeForUpdate(request.update_id); return { closed: true };
+  }
+  async cancelReleaseUpdate(request: UpdatePreparation) {
+    const repository = this.progress;
+    if (!repository || repository.mode !== 'durable') throw new Error('update_not_coordinator');
+    const snapshot = await repository.snapshot(); this.checkPreparation(snapshot, request);
+    await repository.cancelUpdate(replacementToken(snapshot), request.update_id);
+    if (this.preparedUpdate) await this.cancelPreparation(request.update_id);
+    else { this.editor?.cancelUpdate(); this.publish({ quiescing: null }); await this.refresh(); }
+  }
+  async recoverReleaseUpdate(updateId: string, confirmed: boolean): Promise<UpdatePreparation> {
+    if (!confirmed) throw new Error('confirmation_required');
+    const previous = this.progress;
+    if (!previous || previous.mode !== 'durable') throw new Error('update_memory_mode');
+    if (this.editor?.dirty) throw new Error(this.editor.composingInput ? 'composition_in_progress' : 'draft_not_saved');
+    await this.editor?.suspend(); previous.close();
+    const reopened = await ProgressRepository.open({ ...previous.options, tabId: previous.tabId });
+    try {
+      const before = await reopened.snapshot();
+      await reopened.recoverUpdate(replacementToken(before), updateId, true);
+      const snapshot = await reopened.snapshot(); const gate = snapshot.control.update_gate!;
+      this.attach(reopened); this.closedForUpdate = false; this.preparedUpdate = null; this.preparation = null; this.preparationReady = false;
+      // После явной смены epoch старые очереди привязаны к закрытому repository и не входят в новый раунд.
+      this.pendingCommands.clear();
+      this.publish({ quiescing: updateId, editorRevision: this.state.editorRevision + 1 });
+      await this.refresh(); return { ...gate, data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch };
+    } catch (error) { reopened.close(); throw error; }
+  }
   prepareUpdate(request: UpdatePreparation, discardMemory = false): Promise<UpdateReady> {
     if (this.preparation) {
       const previous = this.preparation.request;
@@ -225,13 +274,20 @@ export class AppRuntime {
   private async performPreparation(request: UpdatePreparation, discardMemory: boolean): Promise<UpdateReady> {
     if (!this.progress) throw new Error('storage_unavailable');
     if (this.progress.mode === 'memory' && !discardMemory && this.memoryLossAccepted !== request.update_id) throw new Error('update_memory_mode');
-    if (this.preparedUpdate && this.preparedUpdate.update_id !== request.update_id) throw new Error('stale_update');
+    if (this.preparedUpdate && this.preparedUpdate.update_id !== request.update_id) {
+      const source = this.progress.mode === 'memory' ? this.memorySource : this.progress;
+      if (!source) throw new Error('storage_unavailable');
+      const probe = await ProgressRepository.open({ ...source.options, tabId: source.tabId });
+      try { this.checkPreparation(await probe.snapshot(), request); } finally { probe.close(); }
+      await this.cancelPreparation(this.preparedUpdate.update_id);
+      this.publish({ quiescing: request.update_id }); this.editor?.beginUpdate();
+    }
     if (this.closedForUpdate) {
       if (!this.preparedUpdate || this.preparedUpdate.data_generation !== request.data_generation || this.preparedUpdate.writer_epoch > request.writer_epoch || this.preparedUpdate.target_release_id !== request.target_release_id) throw new Error('stale_update');
       const previous = this.progress.mode === 'memory' ? this.memorySource : this.progress;
       if (!previous) throw new Error('storage_unavailable');
       const probe = await ProgressRepository.open({ ...previous.options, tabId: previous.tabId });
-      try { this.checkPreparation(await probe.snapshot(), request); } finally { probe.close(); }
+      try { const snapshot = await probe.snapshot(); this.checkPreparation(snapshot, request); if (this.progress.mode === 'durable') this.publish({ snapshot }); } finally { probe.close(); }
       this.preparedUpdate = structuredClone(request);
       return { tab_id: this.tabId, release_id: this.releaseId, mode: this.progress.mode, closed: true, memory_loss_accepted: this.memoryLossAccepted === request.update_id };
     }
@@ -249,7 +305,7 @@ export class AppRuntime {
     if (progress !== this.progress) throw new Error('write_conflict');
     this.checkPreparation(await source.snapshot(), request);
     const collector = this.positionCollector; const position = collector?.read();
-    if (progress.mode === 'durable' && snapshot.control.writer_id === progress.tabId) {
+    if (progress.mode === 'durable' && snapshot.control.writer_id === progress.tabId && snapshot.control.update_gate?.phase === 'quiescing') {
       const active = snapshot.sessions.find(session => session.status === 'active');
       if (active) await this.executeCommand({ type: 'pause', session_id: active.session_id }, { repository: progress, expected: expectedFrom(snapshot) });
       if (position && collector && collector.scope.repository === progress && collector.scope.expected.data_generation === request.data_generation && collector.scope.expected.writer_epoch === request.writer_epoch) {
@@ -258,11 +314,12 @@ export class AppRuntime {
         await progress.dispatch(position, expectedFrom(snapshot), collector.scope.contentReleaseId);
       }
     }
-    snapshot = await progress.snapshot(); this.checkPreparation(await source.snapshot(), request);
+    snapshot = await progress.snapshot(); const durable = await source.snapshot(); this.checkPreparation(durable, request);
     this.preparationReady = true; this.publish({ snapshot });
     const coordinator = progress.mode === 'durable' && request.coordinator_id === progress.tabId;
-    if (!coordinator) { this.closedForUpdate = true; source.close(); }
-    return { tab_id: this.tabId, release_id: this.releaseId, mode: progress.mode, closed: !coordinator, memory_loss_accepted: this.memoryLossAccepted === request.update_id };
+    const closed = !coordinator || durable.control.update_gate?.phase === 'commit';
+    if (closed) { this.closedForUpdate = true; source.close(); }
+    return { tab_id: this.tabId, release_id: this.releaseId, mode: progress.mode, closed, memory_loss_accepted: this.memoryLossAccepted === request.update_id };
   }
   async closeForUpdate(updateId: string) {
     if (!this.progress || this.preparedUpdate?.update_id !== updateId) throw new Error('stale_update');
@@ -270,19 +327,26 @@ export class AppRuntime {
     if (this.closedForUpdate) return;
     const snapshot = await this.progress.snapshot(); this.checkPreparation(snapshot, this.preparedUpdate);
     if (snapshot.control.update_gate?.phase !== 'commit') throw new Error('update_not_committed');
+    this.publish({ snapshot });
     this.closedForUpdate = true; this.progress.close();
   }
   async cancelPreparation(updateId: string) {
-    if (!this.progress || this.preparedUpdate?.update_id !== updateId) throw new Error('stale_update');
+    if (!this.progress) throw new Error('storage_unavailable');
+    if (this.preparedUpdate?.update_id !== updateId && this.state.quiescing !== updateId) return;
     const previous = this.progress;
     const source = previous.mode === 'memory' ? this.memorySource : previous;
     if (!source) throw new Error('storage_unavailable');
     const reopened = source.available ? source : await ProgressRepository.open({ ...source.options, tabId: source.tabId });
     const snapshot = await reopened.snapshot();
-    if (snapshot.control.update_gate) { if (reopened !== source) reopened.close(); throw new Error('update_in_progress'); }
-    await this.editor?.suspend();
+    if (snapshot.control.update_gate?.update_id === updateId) { if (reopened !== source) reopened.close(); throw new Error('update_in_progress'); }
+    const keepEditor = previous.mode === 'memory' || reopened === source;
+    const recovery = !keepEditor && this.editor?.dirty ? await this.editor.prepareMemory() : null;
+    if (keepEditor) this.editor?.cancelUpdate(); else await this.editor?.suspend();
     if (previous.mode === 'memory') { reopened.close(); this.memorySource = reopened; } else this.attach(reopened);
     this.closedForUpdate = false; this.preparedUpdate = null; this.memoryLossAccepted = null; this.preparationReady = false;
-    this.publish({ quiescing: null, error: null, editorRevision: this.state.editorRevision + 1 }); await this.refresh();
+    const next = previous.mode === 'durable' ? snapshot.control.update_gate?.update_id ?? null : null;
+    this.publish({ quiescing: next, error: null, editorRevision: this.state.editorRevision + (keepEditor ? 0 : 1), recoveryText: recovery?.text ?? this.state.recoveryText });
+    if (next) this.editor?.beginUpdate();
+    await this.refresh();
   }
 }

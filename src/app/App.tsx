@@ -6,8 +6,14 @@ import { StartPage } from '../features/onboarding/StartPage';
 import { NavigationGuard } from './NavigationGuard';
 import { t } from '../ui/copy';
 import { Button } from '../ui/controls';
+import { useState } from 'react';
+import { useApp } from './AppProvider';
 
-function Layout() { return <AppProvider><NavigationGuard /><AppShell status={<RuntimeStatus />}><Outlet /></AppShell></AppProvider>; }
+function RouteBody() {
+  const { state } = useApp(); const [composing, setComposing] = useState(false);
+  return <div inert={!!state.quiescing && !composing} onCompositionStartCapture={() => setComposing(true)} onCompositionEndCapture={() => setComposing(false)}><Outlet /></div>;
+}
+function Layout() { return <AppProvider><NavigationGuard /><AppShell status={<RuntimeStatus />}><RouteBody /></AppShell></AppProvider>; }
 function RouteFailure() { return <main><h1>{t('error.load')}</h1><Button onClick={() => location.reload()}>{t('offline.retry')}</Button><p><Link to="/settings">{t('nav.settings')}</Link></p></main>; }
 async function assessmentRoute(kind: 'diagnostic' | 'final', result = false) {
   const { AssessmentPage, AssessmentResultPage } = await import('../features/assessments/AssessmentPage');

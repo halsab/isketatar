@@ -24,6 +24,48 @@ afterEach(() => { for (const runtime of runtimes.splice(0)) runtime.progress?.cl
 async function open() { const runtime = new AppRuntime(); runtimes.push(runtime); await runtime.start(); return runtime; }
 const command = { type: 'settings' as const, patch: { theme: 'dark' as const } };
 
+it('cancels a composing preparation without replacing the live editor or losing its unflushed input', async () => {
+  const runtime = await open(); const repository = runtime.progress!;
+  const created = await runtime.command({ type: 'start', kind: 'lesson_cycle', lesson_id: 'V04' }, { repository, expected: expectedFrom(await repository.snapshot()) });
+  await runtime.command({ type: 'show', presentation_id: created.presentation_id! }, { repository, expected: expectedFrom(await repository.snapshot()) });
+  const editor = new SessionEditor(repository, await repository.snapshot(), created.presentation_id!, () => runtime.refresh()); runtime.registerEditor(editor);
+  editor.composition(true); editor.input({ kind: 'text', text: 'яңа' });
+  const request = await runtime.beginReleaseUpdate('next-release', replacementToken(await repository.snapshot()));
+  await expect(runtime.prepareUpdate(request)).rejects.toThrow('composition_in_progress');
+  await expect(runtime.recoverReleaseUpdate(request.update_id, true)).rejects.toThrow('composition_in_progress');
+  expect((await repository.snapshot()).control.writer_epoch).toBe(request.writer_epoch);
+  const revision = runtime.getState().editorRevision;
+  await runtime.cancelReleaseUpdate(request);
+  expect(runtime.getState().editorRevision).toBe(revision); expect(runtime.getState().quiescing).toBeNull();
+  editor.input({ kind: 'text', text: 'яңа сүз' }); editor.composition(false); await editor.flush();
+  expect((await repository.snapshot()).presentations.find(item => item.presentation_id === created.presentation_id)?.draft_answer).toEqual({ kind: 'text', text: 'яңа сүз' });
+});
+it('recovers a closed participant explicitly and fences callbacks from the previous connection', async () => {
+  const writer = await open(); identity.id = crypto.randomUUID(); const viewer = await open();
+  const request = await writer.beginReleaseUpdate('next-release', replacementToken(writer.getState().snapshot!));
+  await viewer.prepareUpdate(request); const old = viewer.progress!;
+  await expect(viewer.recoverReleaseUpdate(request.update_id, false)).rejects.toThrow('confirmation_required');
+  const recovered = await viewer.recoverReleaseUpdate(request.update_id, true);
+  expect(recovered.writer_epoch).toBe(request.writer_epoch + 1); expect(viewer.progress).not.toBe(old);
+  await expect(viewer.command(command, { repository: old, expected: expectedFrom(viewer.getState().snapshot!) })).rejects.toThrow('update_in_progress');
+  await viewer.prepareUpdate(recovered); await viewer.commitReleaseUpdate(recovered); expect(viewer.progress?.available).toBe(false);
+  const committed = await writer.recoverReleaseUpdate(recovered.update_id, true);
+  expect(committed.phase).toBe('commit');
+  writer.registerPosition({ repository: writer.progress!, expected: expectedFrom(await writer.progress!.snapshot()) }, () => ({ type: 'position', position: { kind: 'lesson', target_id: 'V04', anchor_id: 'V04:theory', within_block_ratio: 0.5, content_revision: catalog.lessons.get('V04')!.content_revision } }));
+  expect(await writer.prepareUpdate(committed)).toMatchObject({ closed: true });
+});
+it('joins a new gate when a closed participant missed the cancellation of the previous one', async () => {
+  const writer = await open(); identity.id = crypto.randomUUID(); const viewer = await open();
+  const first = await writer.beginReleaseUpdate('R2', replacementToken(writer.getState().snapshot!));
+  await viewer.prepareUpdate(first);
+  await writer.cancelReleaseUpdate(first);
+  const second = await writer.beginReleaseUpdate('R3', replacementToken(writer.getState().snapshot!));
+  expect(await viewer.prepareUpdate(second)).toMatchObject({ closed: true });
+  expect(viewer.getState().quiescing).toBe(second.update_id);
+  await viewer.cancelPreparation(first.update_id);
+  expect(viewer.getState().quiescing).toBe(second.update_id);
+});
+
 it('loads a paused lesson question before disclosing final feedback on a cold catalog', async () => {
   const partial = new ContentCatalog(catalog.core);
   partial.addQuestions({ questions: [...catalog.questions.values()] } as Parameters<ContentCatalog['addQuestions']>[0]);
@@ -126,6 +168,7 @@ it('requires an explicit memory decision and never treats a different gate as th
   expect(await runtime.prepareUpdate(request, true)).toMatchObject({ closed: true, mode: 'memory', memory_loss_accepted: true });
   await expect(runtime.prepareUpdate({ ...request, update_id: crypto.randomUUID() }, true)).rejects.toThrow('stale_update');
   expect(await runtime.prepareUpdate(request)).toMatchObject({ memory_loss_accepted: true });
+  expect(runtime.getState().snapshot!.settings.theme).toBe('dark');
   await owner.cancelUpdate(replacementToken(await owner.snapshot()), gate.update_id); await runtime.cancelPreparation(gate.update_id);
   expect(runtime.getState().quiescing).toBeNull(); expect(runtime.progress!.available).toBe(true); expect(runtime.getState().mode).toBe('memory');
   expect(runtime.getState().snapshot!.settings.theme).toBe('dark');

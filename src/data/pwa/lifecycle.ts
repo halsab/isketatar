@@ -76,10 +76,10 @@ export class ReleaseLifecycle {
       value.operation = null;
     });
   }
-  async finish(updateId: string, pins: readonly ReleasePin[]) {
+  async finish(updateId: string, pins: readonly ReleasePin[], occupiedReleaseIds: readonly string[] = []) {
     const value = await this.registry.read(); const operation = value.operation;
     if (!operation || operation.update_id !== updateId || operation.phase !== 'committed' || value.current_release_id !== operation.target_release_id || value.previous_release_id !== operation.from_release_id) throw new Error('update_conflict');
-    for (const entry of value.releases) if (![value.current_release_id, value.previous_release_id].includes(entry.release_id)) await this.remove(entry.release_id, pins.map(pin => pin.release_id), updateId);
+    for (const entry of value.releases) if (![value.current_release_id, value.previous_release_id].includes(entry.release_id)) await this.remove(entry.release_id, [...occupiedReleaseIds, ...pins.map(pin => pin.release_id)], updateId);
     return this.registry.change(current => {
       if (current.operation?.update_id !== updateId || current.operation.phase !== 'committed') throw new Error('update_conflict');
       current.operation = null;

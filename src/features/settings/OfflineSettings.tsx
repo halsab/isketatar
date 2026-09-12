@@ -25,5 +25,6 @@ export function OfflineSettings() {
     </>}
     {persistence !== null && <Status>{t(persistence ? 'pwa.persisted' : 'pwa.persist_denied')}</Status>}
     <p>{t('pwa.storage_note')}</p>
+    {state.supported && <Button disabled={state.loading} onClick={() => { void offline.check(); }}>{t('pwa.check_update')}</Button>}
   </section>;
 }

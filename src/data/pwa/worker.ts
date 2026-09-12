@@ -89,7 +89,7 @@ self.addEventListener('message', event => {
   const source = event.source; const port = event.ports[0];
   if (!source || !('type' in source) || !ownClient(source as Client) || !port) return;
   const message: unknown = event.data;
-  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release', 'check', 'check-auto', 'download-update', 'accept', 'cancel-update', 'finish-update', 'accepted', 'boot', 'request-update'].includes(Reflect.get(message, 'type'))) return;
+  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release', 'check', 'check-auto', 'download-update', 'repair-update', 'accept', 'cancel-update', 'finish-update', 'accepted', 'boot', 'request-update'].includes(Reflect.get(message, 'type'))) return;
   const type: string = Reflect.get(message, 'type'); const id: unknown = Reflect.get(message, 'release_id');
   const reply = async () => {
     try {
@@ -116,13 +116,17 @@ self.addEventListener('message', event => {
         await registry.change(value => { if (type === 'check' || value.checked_at === undefined || now - value.checked_at >= 3_600_000) { value.checked_at = now; check = true; } });
         if (check) { const busy = await occupied(); await lifecycle.cleanup(now, busy); await lifecycle.check(busy); }
       }
-      if (type === 'download-update') {
-        const value = await registry.read(); const progress = await readUpdateState();
-        if (progress?.control.update_gate || value.operation) throw new Error('update_in_progress');
-        if (id !== value.candidate_release_id || !value.candidate_release_id) throw new Error('update_conflict');
-        if (progress?.pins.some(pin => pin.release_id !== value.current_release_id)) throw new Error('release_pinned');
+      if (type === 'download-update' || type === 'repair-update') {
+        let value = await registry.read(); const progress = await readUpdateState();
+        if (type === 'repair-update') {
+          const gate = progress?.control.update_gate; const identity = await ask(source as Client, { type: 'identify' });
+          if (!gate || gate.update_id !== updateId || id !== gate.target_release_id || !identity || typeof identity !== 'object' || Reflect.get(identity, 'tab_id') !== gate.coordinator_id || Reflect.get(identity, 'mode') !== 'durable') throw new Error('update_not_coordinator');
+          if (!value.releases.some(entry => entry.release_id === id)) { await registerAvailable(gate.target_release_id); value = await registry.read(); }
+        } else if (progress?.control.update_gate || value.operation) throw new Error('update_in_progress');
+        if (typeof id !== 'string' || id !== (value.operation?.phase === 'committed' ? value.current_release_id : value.candidate_release_id)) throw new Error('update_conflict');
+        if (progress?.pins.some(pin => pin.release_id !== (value.operation?.from_release_id ?? value.current_release_id))) throw new Error('release_pinned');
         controller = new AbortController();
-        try { for (const release of new Set([value.candidate_release_id, ...(progress?.pins.map(pin => pin.release_id) ?? [])])) await packages.download(release, controller.signal, progress => { port.postMessage({ progress }); void broadcast({ type: 'isketatar:pwa-progress', progress }); }, false); }
+        try { for (const release of new Set([id, ...(progress?.pins.map(pin => pin.release_id) ?? [])])) await packages.download(release, controller.signal, progress => { port.postMessage({ progress }); void broadcast({ type: 'isketatar:pwa-progress', progress }); }, false); }
         finally { controller = null; }
       }
       if (type === 'accept') {
@@ -143,7 +147,7 @@ self.addEventListener('message', event => {
       if (type === 'finish-update') {
         const value = await registry.read(); const progress = await readUpdateState();
         if (progress?.control.update_gate || id !== value.current_release_id) throw new Error('stale_update');
-        if (value.operation) { if (value.operation.update_id !== updateId || !await packages.verify(id as string)) throw new Error('retained_incomplete'); await lifecycle.finish(updateId as string, progress?.pins ?? []); }
+        if (value.operation) { if (value.operation.update_id !== updateId || !await packages.verify(id as string)) throw new Error('retained_incomplete'); await lifecycle.finish(updateId as string, progress?.pins ?? [], await occupied()); }
       }
       if (type === 'release') {
         const value = await registry.read();
