@@ -37,6 +37,7 @@ export class AppRuntime {
   private preparedUpdate: UpdatePreparation | null = null;
   private preparation: { request: UpdatePreparation; promise: Promise<UpdateReady> } | null = null;
   private preparationReady = false;
+  private cancellation: Promise<void> | null = null;
   private closedForUpdate = false;
   private memorySource: ProgressRepository | null = null;
   private memoryLossAccepted: string | null = null;
@@ -64,7 +65,7 @@ export class AppRuntime {
       if (!this.progress || !this.progress.acceptsCommands) {
         if (import.meta.env.PROD) {
           const { offline } = await import('../data/pwa/client');
-          offline.bind({ identify: () => this.updateIdentity(), prepare: (request, discard) => this.prepareUpdate(request, discard), commit: request => this.commitReleaseUpdate(request), cancel: request => this.cancelReleaseUpdate(request), cancelled: id => this.cancelPreparation(id) });
+          offline.bind({ identify: () => this.updateIdentity(), prepare: (request, discard) => this.prepareUpdate(request, discard), commit: request => this.commitReleaseUpdate(request), cancel: request => this.cancelReleaseUpdate(request), cancelled: id => this.cancelPreparation(id), reconcile: () => this.reconcileUpdate() });
           await (await import('./bootstrap')).prepareBoot(this.releaseId);
         }
         const progress = await ProgressRepository.open({ catalog: this.content.catalog, catalogs: this.catalogs, releaseId: this.releaseId, tabId: this.tabId });
@@ -209,16 +210,16 @@ export class AppRuntime {
   }
   private checkPreparation(snapshot: ProgressSnapshot, request: UpdatePreparation) {
     const { control } = snapshot; const gate = control.update_gate;
-    if (control.data_generation !== request.data_generation || control.writer_epoch !== request.writer_epoch || control.writer_id !== request.coordinator_id || gate?.update_id !== request.update_id || gate.target_release_id !== request.target_release_id || gate.coordinator_id !== request.coordinator_id) throw new Error('stale_update');
+    if (control.data_generation !== request.data_generation || control.writer_epoch !== request.writer_epoch || control.writer_id !== request.coordinator_id || gate?.update_id !== request.update_id || gate.target_release_id !== request.target_release_id || gate.coordinator_id !== request.coordinator_id || gate.purpose !== request.purpose) throw new Error('stale_update');
   }
   updateIdentity() { return { tab_id: this.tabId, release_id: this.releaseId, mode: this.progress?.mode ?? 'durable' }; }
-  async beginReleaseUpdate(target: string, expected: ReplacementToken): Promise<UpdatePreparation> {
+  async beginReleaseUpdate(target: string, expected: ReplacementToken, purpose?: 'remove_offline'): Promise<UpdatePreparation> {
     const repository = this.progress;
     if (!repository || repository.mode !== 'durable') throw new Error('update_memory_mode');
     if (this.state.quiescing) throw new Error('update_in_progress');
     const snapshot = await repository.snapshot();
     if (snapshot.control.data_generation !== expected.data_generation || snapshot.control.writer_epoch !== expected.writer_epoch || snapshot.control.writer_id !== repository.tabId) throw new Error('write_conflict');
-    const gate = await repository.beginUpdate(replacementToken(snapshot), target);
+    const gate = await repository.beginUpdate(replacementToken(snapshot), target, purpose);
     this.publish({ quiescing: gate.update_id }); this.editor?.beginUpdate();
     await this.refresh(); return { ...gate, data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch };
   }
@@ -258,11 +259,11 @@ export class AppRuntime {
   prepareUpdate(request: UpdatePreparation, discardMemory = false): Promise<UpdateReady> {
     if (this.preparation) {
       const previous = this.preparation.request;
-      if (['update_id', 'target_release_id', 'coordinator_id', 'data_generation', 'writer_epoch'].some(key => Reflect.get(previous, key) !== Reflect.get(request, key))) return Promise.reject(new Error('stale_update'));
+      if (['update_id', 'target_release_id', 'coordinator_id', 'data_generation', 'writer_epoch', 'purpose'].some(key => Reflect.get(previous, key) !== Reflect.get(request, key))) return Promise.reject(new Error('stale_update'));
       return this.preparation.promise;
     }
     const captured = structuredClone(request);
-    const waitingMemory = this.progress?.mode === 'memory' && !discardMemory && this.memoryLossAccepted !== request.update_id;
+    const waitingMemory = this.progress?.mode === 'memory' && !request.purpose && !discardMemory && this.memoryLossAccepted !== request.update_id;
     const prior = this.state.quiescing;
     if (!waitingMemory && (!prior || prior === request.update_id)) { this.publish({ quiescing: request.update_id }); this.editor?.beginUpdate(); }
     const promise = this.performPreparation(captured, discardMemory).finally(() => {
@@ -273,7 +274,7 @@ export class AppRuntime {
   }
   private async performPreparation(request: UpdatePreparation, discardMemory: boolean): Promise<UpdateReady> {
     if (!this.progress) throw new Error('storage_unavailable');
-    if (this.progress.mode === 'memory' && !discardMemory && this.memoryLossAccepted !== request.update_id) throw new Error('update_memory_mode');
+    if (this.progress.mode === 'memory' && !request.purpose && !discardMemory && this.memoryLossAccepted !== request.update_id) throw new Error('update_memory_mode');
     if (this.preparedUpdate && this.preparedUpdate.update_id !== request.update_id) {
       const source = this.progress.mode === 'memory' ? this.memorySource : this.progress;
       if (!source) throw new Error('storage_unavailable');
@@ -299,16 +300,16 @@ export class AppRuntime {
     if (progress.mode === 'memory' && discardMemory) this.memoryLossAccepted = request.update_id;
     this.preparationReady = false; this.preparedUpdate = structuredClone(request);
     await Promise.allSettled([...this.pendingCommands]);
-    this.checkPreparation(await source.snapshot(), request);
+    const admitted = await source.snapshot(); this.checkPreparation(admitted, request);
     await this.editor?.prepareUpdate();
     let snapshot = await progress.snapshot();
     if (progress !== this.progress) throw new Error('write_conflict');
     this.checkPreparation(await source.snapshot(), request);
     const collector = this.positionCollector; const position = collector?.read();
-    if (progress.mode === 'durable' && snapshot.control.writer_id === progress.tabId && snapshot.control.update_gate?.phase === 'quiescing') {
+    if (snapshot.control.writer_id === progress.tabId && admitted.control.update_gate?.phase === 'quiescing') {
       const active = snapshot.sessions.find(session => session.status === 'active');
       if (active) await this.executeCommand({ type: 'pause', session_id: active.session_id }, { repository: progress, expected: expectedFrom(snapshot) });
-      if (position && collector && collector.scope.repository === progress && collector.scope.expected.data_generation === request.data_generation && collector.scope.expected.writer_epoch === request.writer_epoch) {
+      if (position && collector && collector.scope.repository === progress && collector.scope.expected.data_generation === snapshot.control.data_generation && collector.scope.expected.writer_epoch === snapshot.control.writer_epoch) {
         snapshot = await progress.snapshot();
         // Свежие revisions относятся только к явной операции подготовки, после проверки исходного поколения и epoch.
         await progress.dispatch(position, expectedFrom(snapshot), collector.scope.contentReleaseId);
@@ -330,7 +331,18 @@ export class AppRuntime {
     this.publish({ snapshot });
     this.closedForUpdate = true; this.progress.close();
   }
-  async cancelPreparation(updateId: string) {
+  async cancelPreparation(updateId: string): Promise<void> {
+    if (this.cancellation) { await this.cancellation; return this.cancelPreparation(updateId); }
+    const pending = this.performCancellation(updateId); this.cancellation = pending;
+    try { await pending; } finally { if (this.cancellation === pending) this.cancellation = null; }
+  }
+  async reconcileUpdate(): Promise<string | null> {
+    const id = this.state.quiescing;
+    if (!id || this.preparation) return null;
+    try { await this.cancelPreparation(id); return this.state.quiescing !== id ? id : null; }
+    catch (error) { if (['update_in_progress', 'release_not_current'].includes(errorCode(error))) return null; throw error; }
+  }
+  private async performCancellation(updateId: string) {
     if (!this.progress) throw new Error('storage_unavailable');
     if (this.preparedUpdate?.update_id !== updateId && this.state.quiescing !== updateId) return;
     const previous = this.progress;
@@ -338,6 +350,7 @@ export class AppRuntime {
     if (!source) throw new Error('storage_unavailable');
     const reopened = source.available ? source : await ProgressRepository.open({ ...source.options, tabId: source.tabId });
     const snapshot = await reopened.snapshot();
+    if (snapshot.control.accepted_release_id !== this.releaseId) { if (reopened !== source) reopened.close(); throw new Error('release_not_current'); }
     if (snapshot.control.update_gate?.update_id === updateId) { if (reopened !== source) reopened.close(); throw new Error('update_in_progress'); }
     const keepEditor = previous.mode === 'memory' || reopened === source;
     const recovery = !keepEditor && this.editor?.dirty ? await this.editor.prepareMemory() : null;

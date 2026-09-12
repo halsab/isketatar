@@ -220,13 +220,14 @@ export class ProgressRepository {
       this.changed(control); return control;
     });
   }
-  async beginUpdate(expected: ReplacementToken, targetReleaseId: string): Promise<UpdateGate> {
+  async beginUpdate(expected: ReplacementToken, targetReleaseId: string, purpose?: 'remove_offline'): Promise<UpdateGate> {
     const id = this.uuid(); const at = this.clock();
     if (!targetReleaseId || targetReleaseId.length > 256 || !Number.isSafeInteger(at) || at < 0 || at > 8_640_000_000_000_000) throw new Error('invalid_update');
     const control = await this.changeGate(expected, control => {
       if (control.writer_id !== this.tabId) throw new Error('write_conflict');
       if (control.update_gate) throw new Error('update_in_progress');
-      control.update_gate = { update_id: id, target_release_id: targetReleaseId, phase: 'quiescing', coordinator_id: this.tabId, requested_at: at };
+      if (purpose && (purpose !== 'remove_offline' || targetReleaseId !== control.accepted_release_id)) throw new Error('invalid_update');
+      control.update_gate = { update_id: id, target_release_id: targetReleaseId, phase: 'quiescing', coordinator_id: this.tabId, requested_at: at, ...(purpose ? { purpose } : {}) };
     });
     return control.update_gate!;
   }
@@ -238,6 +239,7 @@ export class ProgressRepository {
   async commitUpdate(expected: ReplacementToken, updateId: string) {
     await this.changeGate(expected, async (control, tx) => {
       const gate = this.ownGate(control, updateId);
+      if (gate.purpose) throw new Error('invalid_update');
       if (gate.phase !== 'quiescing') throw new Error('update_already_committed');
       if (control.active_session_id !== null || (await tx.unfinishedSessions()).some(session => session.status === 'active')) throw new Error('update_not_quiet');
       gate.phase = 'commit';

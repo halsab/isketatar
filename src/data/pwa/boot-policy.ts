@@ -10,6 +10,7 @@ export function bootPolicy(own: string, registry: Registry | null, control: Upda
   const current = registry?.current_release_id ?? control?.accepted_release_id ?? own;
   if (current !== own) throw new ShellMismatch(current);
   const gate = control?.update_gate; const operation = registry?.operation;
+  if (gate?.purpose === 'remove_offline' && (gate.target_release_id !== own || gate.phase !== 'quiescing' || operation)) throw new Error('update_conflict');
   if (operation?.phase === 'committed') {
     if (operation.target_release_id !== own || registry?.previous_release_id !== operation.from_release_id) throw new Error('update_conflict');
     if (gate ? gate.phase !== 'commit' || gate.update_id !== operation.update_id || gate.target_release_id !== own || control?.accepted_release_id !== operation.from_release_id : control && control.accepted_release_id !== own) throw new Error('update_conflict');

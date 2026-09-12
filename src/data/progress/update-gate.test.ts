@@ -44,3 +44,12 @@ it('recovery changes the coordinator epoch without cancelling the operation and 
   await expect(repo.cancelUpdate(stale,gate.update_id)).rejects.toThrow('write_conflict');
   await other.cancelUpdate(replacementToken(recovered),gate.update_id);expect((await other.snapshot()).control.update_gate).toBeNull();
 });
+it('uses an explicit current-release removal gate that cannot commit a release change', async () => {
+  const repo = await open(); const before = await repo.snapshot();
+  await expect(repo.beginUpdate(replacementToken(before), target, 'remove_offline')).rejects.toThrow('invalid_update');
+  const gate = await repo.beginUpdate(replacementToken(await repo.snapshot()), 'old-release', 'remove_offline');
+  expect(gate.purpose).toBe('remove_offline');
+  await expect(repo.commitUpdate(replacementToken(await repo.snapshot()), gate.update_id)).rejects.toThrow('invalid_update');
+  await repo.cancelUpdate(replacementToken(await repo.snapshot()), gate.update_id);
+  expect((await repo.snapshot()).control).toMatchObject({ accepted_release_id: 'old-release', data_generation: before.control.data_generation, update_gate: null });
+});

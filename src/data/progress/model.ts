@@ -14,7 +14,7 @@ export interface Bookmark {
 export interface ResumePosition {
   kind: 'lesson' | 'reading' | 'reference'; target_id: string; anchor_id: string | null; within_block_ratio: number; content_revision: string; updated_at: number;
 }
-export interface UpdateGate { update_id: string; target_release_id: string; phase: 'quiescing' | 'commit'; coordinator_id: string; requested_at: number }
+export interface UpdateGate { purpose?: 'remove_offline'; update_id: string; target_release_id: string; phase: 'quiescing' | 'commit'; coordinator_id: string; requested_at: number }
 export interface Control {
   key: 'control'; accepted_release_id: string; progress_schema: number; db_version: number; data_generation: string; writer_id: string | null;
   writer_epoch: number; state_revision: number; active_session_id: string | null; update_gate: UpdateGate | null;

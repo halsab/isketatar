@@ -4,7 +4,7 @@ import { PackageStore, type DownloadProgress } from './packages';
 import { checkedResponse, fetchManifest, parseRelease, PWA_BASE, releaseRoot, sha256 } from './manifest';
 import { readBoundedBytes } from '../http';
 import { ReleaseLifecycle } from './lifecycle';
-import { BlockedUpdate, UpdateCoordinator, type UpdatePeer } from './coordination';
+import { BlockedUpdate, sameOperation, UpdateCoordinator, type UpdatePeer } from './coordination';
 import { readUpdateState } from './progress-state';
 declare const self: ServiceWorkerGlobalScope;
 const registry = new IndexedRegistry(); const packages = new PackageStore(registry, caches);
@@ -89,12 +89,13 @@ self.addEventListener('message', event => {
   const source = event.source; const port = event.ports[0];
   if (!source || !('type' in source) || !ownClient(source as Client) || !port) return;
   const message: unknown = event.data;
-  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release', 'check', 'check-auto', 'download-update', 'repair-update', 'accept', 'cancel-update', 'finish-update', 'accepted', 'boot', 'request-update'].includes(Reflect.get(message, 'type'))) return;
+  if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release', 'check', 'check-auto', 'download-update', 'repair-update', 'accept', 'cancel-update', 'finish-update', 'accepted', 'boot', 'request-update', 'remove-offline'].includes(Reflect.get(message, 'type'))) return;
   const type: string = Reflect.get(message, 'type'); const id: unknown = Reflect.get(message, 'release_id');
   const reply = async () => {
     try {
       const updateId: unknown = Reflect.get(message, 'update_id');
-      if (['accept', 'cancel-update', 'finish-update'].includes(type) && (typeof updateId !== 'string' || !updateId || updateId.length > 256)) throw new Error('stale_update');
+      if (['accept', 'cancel-update', 'finish-update', 'remove-offline'].includes(type) && (typeof updateId !== 'string' || !updateId || updateId.length > 256)) throw new Error('stale_update');
+      if (['download', 'download-update'].includes(type) && Reflect.get(message, 'offline_epoch') !== ((await registry.read()).offline_epoch ?? 0)) throw new Error('offline_changed');
       if (type === 'boot' || type === 'accepted') {
         const value = await registry.read(); const progress = await readUpdateState();
         if (typeof id !== 'string' || value.current_release_id !== id) throw new Error('release_not_current');
@@ -130,9 +131,21 @@ self.addEventListener('message', event => {
         finally { controller = null; }
       }
       if (type === 'accept') {
+        if ((await readUpdateState())?.control.update_gate?.purpose) throw new Error('invalid_update');
         const result = await coordinator.run(updateId as string, (source as Client).id);
         // Transport v1 совместим с этим протоколом; естественная активация waiting worker не меняет роли.
         for (const client of await windows()) if (result.clients.includes(client.id)) client.postMessage({ type: 'isketatar:pwa-reload', operation: result.operation });
+      }
+      if (type === 'remove-offline') {
+        const gate = (await readUpdateState())?.control.update_gate;
+        if (gate?.purpose !== 'remove_offline') throw new Error('invalid_update');
+        const result = await coordinator.run(updateId as string, (source as Client).id);
+        sameOperation(await readUpdateState(), result.operation);
+        await packages.removeOffline();
+        sameOperation(await readUpdateState(), result.operation);
+        await ask(source as Client, { type: 'cancel', operation: result.operation });
+        if ((await readUpdateState())?.control.update_gate) throw new Error('update_in_progress');
+        await broadcast({ type: 'isketatar:pwa-cancelled', update_id: updateId });
       }
       if (type === 'cancel-update') {
         const progress = await readUpdateState(); const gate = progress?.control.update_gate; const value = await registry.read();

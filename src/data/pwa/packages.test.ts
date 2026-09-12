@@ -150,3 +150,24 @@ it('retains the committed marker across a cleanup failure so the same operation 
   expect(await storage.read()).toMatchObject({ current_release_id: r3, operation: { phase: 'committed' } });
   remove.mockRestore(); await lifecycle.finish('update-2', []); expect((await storage.read()).operation).toBeNull();
 });
+it('removes course and candidate caches after revoking readiness while preserving current/previous shells and foreign caches', async () => {
+  const { store, lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  await lifecycle.prepare('update', id, r2, []); await lifecycle.commit('update', []); await lifecycle.finish('update', []);
+  await candidate(r3); await download(r3); await caches.open('another-course');
+  const remove = caches.delete.bind(caches); vi.spyOn(caches, 'delete').mockImplementation(async name => {
+    const state = await storage.read(); expect(state.offline_requested).toBe(false); expect(state.releases.every(entry => entry.completeness !== 'ready')).toBe(true);
+    return remove(name);
+  });
+  await store.removeOffline();
+  const state = await storage.read(); expect(state).toMatchObject({ current_release_id: r2, previous_release_id: id, candidate_release_id: null, offline_requested: false, offline_epoch: 1 });
+  expect(state.releases.every(entry => entry.completeness === 'not_saved')).toBe(true);
+  expect(await caches.keys()).toEqual(expect.arrayContaining([`isketatar-shell-${id}`, `isketatar-shell-${r2}`, 'another-course']));
+  expect((await caches.keys()).some(name => name.startsWith('isketatar-course-') || name.endsWith(r3))).toBe(false);
+});
+it('keeps incomplete removal retryable after a cache failure and never restores full offline intent', async () => {
+  const store = await packageStore(); await store.download(id, new AbortController().signal, () => {});
+  const remove = vi.spyOn(caches, 'delete').mockRejectedValueOnce(new DOMException('denied', 'SecurityError'));
+  await expect(store.removeOffline()).rejects.toThrow('denied');
+  expect(await storage.read()).toMatchObject({ offline_requested: false, releases: [expect.objectContaining({ completeness: 'incomplete', verified_at: null })] });
+  remove.mockRestore(); await store.removeOffline(); expect((await storage.read()).releases[0]?.completeness).toBe('not_saved');
+});

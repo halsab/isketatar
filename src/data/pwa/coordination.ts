@@ -19,7 +19,7 @@ function ready(value: unknown): value is Ready {
 }
 export function sameOperation(state: UpdateState | null, operation: Preparation): asserts state is UpdateState {
   const control = state?.control; const gate = control?.update_gate;
-  if (!control || !gate || control.data_generation !== operation.data_generation || control.writer_epoch !== operation.writer_epoch || control.writer_id !== operation.coordinator_id || gate.coordinator_id !== operation.coordinator_id || gate.update_id !== operation.update_id || gate.target_release_id !== operation.target_release_id) throw new Error('stale_update');
+  if (!control || !gate || control.data_generation !== operation.data_generation || control.writer_epoch !== operation.writer_epoch || control.writer_id !== operation.coordinator_id || gate.coordinator_id !== operation.coordinator_id || gate.update_id !== operation.update_id || gate.target_release_id !== operation.target_release_id || gate.purpose !== operation.purpose) throw new Error('stale_update');
 }
 
 // ACK живут только в одном раунде и принадлежат конкретному client ID, а не BroadcastChannel или tab ID.
@@ -50,7 +50,7 @@ export class UpdateCoordinator {
           try {
             const result = await request(peer, 'prepare');
             if (!ready(result)) throw new Error('update_unknown_client');
-            if (result.mode === 'memory' && !result.memory_loss_accepted) throw new Error('update_memory_mode');
+            if (result.mode === 'memory' && !operation.purpose && !result.memory_loss_accepted) throw new Error('update_memory_mode');
             const owner = result.tab_id === operation.coordinator_id;
             if (owner && (peer.id !== sourceId || result.mode !== 'durable') || !owner && !result.closed) throw new Error('update_not_ready');
             if (peer.id === sourceId && !owner) throw new Error('update_not_coordinator');
@@ -71,6 +71,10 @@ export class UpdateCoordinator {
     const windows = await settle();
     if (!coordinator || !windows.some(peer => peer.id === sourceId)) throw new Error('update_not_coordinator');
     let state = await this.read(); sameOperation(state, operation);
+    if (operation.purpose === 'remove_offline') {
+      if (operation.target_release_id !== state.control.accepted_release_id || operation.target_release_id !== from || state.control.update_gate!.phase !== 'quiescing' || state.active || state.control.active_session_id !== null || registry.operation) throw new Error('update_not_quiet');
+      return { operation, clients: [...acknowledged.keys()] };
+    }
     await this.lifecycle.prepare(updateId, from, operation.target_release_id, state.pins);
     await settle(); state = await this.read(); sameOperation(state, operation);
     if (state.control.update_gate!.phase === 'quiescing') {

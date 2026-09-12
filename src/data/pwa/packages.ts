@@ -1,4 +1,4 @@
-import { checkedResponse, fetchManifest, parseRelease, releaseRoot, sha256, type PackageManifest } from './manifest';
+import { checkedResponse, fetchManifest, parseRelease, releaseRoot, RELEASE_ID, sha256, type PackageManifest } from './manifest';
 import { readBoundedBytes } from '../http';
 import type { RegistryStore, StoredRelease } from './registry';
 export interface DownloadProgress { phase: 'downloading' | 'verifying'; count: number; total: number; bytes: number; total_bytes: number }
@@ -66,6 +66,27 @@ export class PackageStore {
   }
   private async incomplete(id: string) { await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id); if (entry?.completeness === 'ready') { entry.completeness = 'incomplete'; entry.verified_at = null; } }); }
   async saveShell(id: string) { const manifest = await this.manifest(id); for (const url of manifest.shell_assets) await this.resource(id, url); }
+  async removeOffline() {
+    const value = await this.registry.change(state => {
+      if (state.operation) throw new Error('update_in_progress');
+      const epoch = (state.offline_epoch ?? 0) + 1; if (!Number.isSafeInteger(epoch)) throw new Error('pwa_storage_unavailable');
+      state.offline_epoch = epoch; state.offline_requested = false;
+      for (const entry of state.releases) { entry.completeness = 'incomplete'; entry.verified_at = null; }
+    });
+    // Метка снимается до удаления байтов; оборванное удаление остаётся incomplete и допускает повтор.
+    const keep = [value.current_release_id, value.previous_release_id];
+    const names = new Set([...value.releases.map(entry => entry.course_cache), ...await this.cacheStorage.keys()]);
+    for (const name of names) {
+      const match = /^isketatar-(shell|course)-(.+)$/u.exec(name); const id = match?.[2];
+      if (id && RELEASE_ID.test(id) && (match![1] === 'course' || !keep.includes(id))) await this.cacheStorage.delete(name);
+    }
+    await this.registry.change(state => {
+      if (state.offline_epoch !== value.offline_epoch || state.operation) throw new Error('update_conflict');
+      state.releases = state.releases.filter(entry => keep.includes(entry.release_id)); state.candidate_release_id = null;
+      for (const entry of state.releases) entry.completeness = 'not_saved';
+    });
+    for (const entry of value.releases) if (!keep.includes(entry.release_id)) this.forget(entry.release_id);
+  }
   async verify(id: string): Promise<boolean> {
     try {
       await this.manifestResponse(id);

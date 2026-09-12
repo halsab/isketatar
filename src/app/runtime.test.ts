@@ -225,3 +225,15 @@ it('pauses a clean assessment editor after admitted help advances the session re
   expect((await repository.snapshot()).sessions[0]).toMatchObject({ status: 'paused', assessment_help_opened_at: expect.any(Number) });
   await editor.dispose();
 });
+it('pauses memory work for offline removal without granting consent to discard or reloading its branch', async () => {
+  const memory = await open(); await memory.useMemory();
+  await memory.command(command, { repository: memory.progress!, expected: expectedFrom(await memory.progress!.snapshot()) });
+  await memory.command({ type: 'start', kind: 'lesson_cycle', lesson_id: 'V04' }, { repository: memory.progress!, expected: expectedFrom(await memory.progress!.snapshot()) });
+  identity.id = crypto.randomUUID(); const writer = await open(); const repo = writer.progress!;
+  const before = await repo.snapshot(); await repo.takeover(before.control.data_generation, before.control.writer_epoch); await writer.refresh();
+  const request = await writer.beginReleaseUpdate(writer.releaseId, replacementToken(await repo.snapshot()), 'remove_offline');
+  expect(await memory.prepareUpdate(request)).toMatchObject({ closed: true, memory_loss_accepted: false });
+  expect((await memory.progress!.snapshot()).sessions[0]?.status).toBe('paused');
+  await writer.cancelReleaseUpdate(request); expect(await memory.reconcileUpdate()).toBe(request.update_id);
+  expect(memory.getState()).toMatchObject({ mode: 'memory', quiescing: null, snapshot: { settings: { theme: 'dark' } } });
+});

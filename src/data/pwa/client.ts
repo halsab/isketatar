@@ -8,6 +8,7 @@ interface UpdateHost {
   identify(): { tab_id: string; release_id: string; mode: 'durable' | 'memory' };
   prepare(request: Preparation, discardMemory?: boolean): Promise<unknown>;
   commit(request: Preparation): Promise<unknown>; cancel(request: Preparation): Promise<void>; cancelled(id: string): Promise<void>;
+  reconcile(): Promise<string | null>;
 }
 export interface OfflineState { supported: boolean | null; loading: boolean; registry: Registry | null; manifest: PackageManifest | null; candidate: PackageManifest | null; progress: DownloadProgress | null; error: string | null; update: { operation: Preparation | null; memoryRequest: Preparation | null; requested: boolean; blockers: UpdateBlocker[]; error: string | null } }
 class OfflineClient {
@@ -49,7 +50,7 @@ class OfflineClient {
     } catch (error) { this.publish({ error: error instanceof Error ? error.message : 'pwa_unavailable', loading: false }); this.starting = null; }
   }
   private async message(event: MessageEvent) {
-    if (event.data?.type === 'isketatar:pwa-state') { this.publish({ ...event.data.value, progress: null }); await this.reloadIfAccepted(); }
+    if (event.data?.type === 'isketatar:pwa-state') { this.publish({ ...event.data.value, progress: null }); await this.reconcile(); await this.reloadIfAccepted(); }
     if (event.data?.type === 'isketatar:pwa-progress') this.publish({ progress: event.data.progress });
     if (event.data?.type === 'isketatar:pwa-update-requested') this.update({ requested: true });
     if (event.data?.type === 'isketatar:pwa-reload') await this.reloadIfAccepted(event.data.operation);
@@ -67,9 +68,12 @@ class OfflineClient {
       if (request.type === 'identify') value = this.host.identify();
       else if (request.type === 'prepare') {
         this.update({ operation: request.operation, error: null });
-        value = await this.host.prepare(request.operation); this.readyFor = request.operation.update_id;
+        value = await this.host.prepare(request.operation); this.readyFor = request.operation.purpose ? null : request.operation.update_id;
       } else if (request.type === 'commit') value = await this.host.commit(request.operation);
-      else if (request.type === 'cancel') value = await this.host.cancel(request.operation);
+      else if (request.type === 'cancel') {
+        value = await this.host.cancel(request.operation);
+        if (this.value.update.operation?.update_id === request.operation.update_id) { this.readyFor = null; this.update({ operation: null, memoryRequest: null, blockers: [], error: null }); }
+      }
       else throw new Error('update_unknown_client');
       port.postMessage({ value });
     } catch (error) {
@@ -78,8 +82,14 @@ class OfflineClient {
       this.update({ error: code }); port.postMessage({ error: code });
     } finally { port.close(); }
   }
+  private async reconcile() {
+    try {
+      const id = await this.host?.reconcile();
+      if (id && this.value.update.operation?.update_id === id) { this.readyFor = null; this.update({ operation: null, memoryRequest: null, blockers: [], error: null }); }
+    } catch (error) { this.update({ error: error instanceof Error ? error.message : 'pwa_unavailable' }); }
+  }
   private async reloadIfAccepted(operation = this.value.update.operation) {
-    if (!operation || this.readyFor !== operation.update_id || this.reloading) return;
+    if (!operation || operation.purpose || this.readyFor !== operation.update_id || this.reloading) return;
     if (this.value.registry?.current_release_id !== operation.target_release_id) return;
     try {
       const proof = await this.verifyBoot(operation.target_release_id);
@@ -112,7 +122,7 @@ class OfflineClient {
         if (event.data.progress) { this.publish({ progress: event.data.progress }); resetTimeout(); return; }
         end(); if (event.data.error) reject(Object.assign(new Error(event.data.error), { blockers: event.data.blockers })); else resolve(event.data.value);
       };
-      worker.postMessage({ type, release_id: releaseId, update_id: updateId }, [channel.port2]);
+      worker.postMessage({ type, release_id: releaseId, update_id: updateId, offline_epoch: this.value.registry?.offline_epoch ?? 0 }, [channel.port2]);
     });
   }
   async retainedManifest(id: string) { return this.request<{ manifest: PackageManifest; digest: string }>('release', id); }
@@ -120,7 +130,7 @@ class OfflineClient {
   async finishBoot(id: string, updateId: string) { await this.request('finish-update', id, updateId); }
   async accept(request: Preparation) {
     this.update({ operation: request, blockers: [], error: null, requested: false }); this.publish({ loading: true });
-    try { const value = await this.request('accept', undefined, request.update_id); this.publish(value); await this.reloadIfAccepted(); }
+    try { const value = await this.request(request.purpose === 'remove_offline' ? 'remove-offline' : 'accept', undefined, request.update_id); this.publish(value); await this.reloadIfAccepted(); }
     catch (error) { this.update({ error: error instanceof Error ? error.message : 'pwa_unavailable', blockers: error && typeof error === 'object' && Array.isArray(Reflect.get(error, 'blockers')) ? Reflect.get(error, 'blockers') : [] }); throw error; }
     finally { this.publish({ loading: false }); }
   }
@@ -128,7 +138,7 @@ class OfflineClient {
   async repairUpdate(request: Preparation) { const value = await this.request('repair-update', request.target_release_id, request.update_id); this.publish(value); }
   async perform(type: 'initialize' | 'status' | 'download' | 'cancel' | 'verify' | 'download-update' | 'request-update', releaseId?: string) {
     if (type !== 'status') this.publish({ loading: true, error: null });
-    try { const value = await this.request(type, releaseId); this.publish({ ...value, error: null, ...(type === 'status' ? {} : { progress: null }) }); }
+    try { const value = await this.request(type, releaseId); this.publish({ ...value, error: null, ...(type === 'status' ? {} : { progress: null }) }); if (type === 'status') await this.reconcile(); }
     catch (error) { if (!(error instanceof Error && error.message === 'cancelled')) this.publish({ error: error instanceof Error ? error.message : 'pwa_unavailable' }); throw error; }
     finally { if (type !== 'status') this.publish({ loading: false }); }
   }

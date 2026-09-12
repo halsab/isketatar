@@ -15,6 +15,8 @@ const grade = enumeration('correct', 'incorrect', 'unknown');
 const kind = enumeration('lesson_cycle', 'review', 'diagnostic', 'final', 'reading_practice');
 const policy = object(Object.fromEntries(['grading', 'normalization', 'mastery', 'diagnostic', 'final', 'review', 'exposure', 'release_access', 'search', 'import'].map(key => [key, text()])));
 const answerText = { type: 'string', maxLength: 4096, pattern: '^[^\\u0000-\\u001f\\u007f-\\u009f]*$' };
+const updateGate = object({ update_id: uuid, target_release_id: text(256), phase: enumeration('quiescing', 'commit'), coordinator_id: uuid, requested_at: time, purpose: enumeration('remove_offline') });
+updateGate.required = updateGate.required.filter(key => key !== 'purpose');
 const defs = {
   answer: { oneOf: [object({ kind: enumeration('unknown') }), object({ kind: enumeration('option'), option_id: id }), object({ kind: enumeration('set'), option_ids: array(id, 256, true) }), object({ kind: enumeration('text', 'segments'), text: answerText })] },
   assistance: object({ hint_indices: array(integer(0, 255), 256, true), first_hint_at: nullable(time), rule_opened_at: nullable(time), reading_opened_at: nullable(time), meaning_opened_at: nullable(time), answer_revealed_at: nullable(time), reference_opened_at: nullable(time) }),
@@ -40,7 +42,7 @@ const defs = {
   settings: object({ selected_route: route, onboarding_completed: bool, locale: enumeration('tt-Cyrl'), theme: enumeration('system', 'light', 'dark'), arabic_size_px: enumeration(28, 32, 40, 48), text_size_px: enumeration(18, 20, 22, 24), reduced_motion: enumeration('system', 'reduce'),
     review_batch_size: integer(1, 10), last_location: nullable(object({ kind: enumeration('lesson', 'reading', 'dictionary', 'reference'), id })), revision: integer(), updated_at: time }),
   control: object({ key: enumeration('control'), accepted_release_id: text(256), progress_schema: integer(1), db_version: integer(1), data_generation: uuid, writer_id: nullable(uuid), writer_epoch: integer(), state_revision: integer(), active_session_id: nullable(uuid),
-    update_gate: nullable(object({ update_id: uuid, target_release_id: text(256), phase: enumeration('quiescing', 'commit'), coordinator_id: uuid, requested_at: time })), estimated_record_bytes: integer(), attempt_count: integer(0, 100000) }),
+    update_gate: nullable(updateGate), estimated_record_bytes: integer(), attempt_count: integer(0, 100000) }),
 };
 const history = { session: 'session', presentation: 'presentation', attempt: 'attempt', exposure: 'exposure', review_card: 'reviewCard', bookmark: 'bookmark', resume_position: 'position' };
 defs.legacy = { oneOf: Object.entries(history).map(([origin, name]) => object({ legacy_id: text(512), origin_kind: enumeration(origin), original_id: text(256), source_content_version: text(), reason: enumeration('unknown_content_id', 'unknown_grading_revision', 'unknown_policy_version', 'incompatible_draft'), record: ref(name), imported_at: time })) };

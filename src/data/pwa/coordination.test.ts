@@ -71,3 +71,9 @@ it('ends a silent round after fifteen seconds without clearing its durable gate'
     expect(f.state.control.update_gate?.phase).toBe('quiescing'); expect(f.lifecycle.commit).not.toHaveBeenCalled();
   } finally { vi.useRealTimers(); }
 });
+it('quiesces removal without a release commit or memory-loss consent and still waits for every window', async () => {
+  const f = fixture(); f.state.control.update_gate = { ...f.state.control.update_gate!, target_release_id: from, purpose: 'remove_offline' };
+  f.clients = [f.owner, f.peer('memory')]; vi.mocked(f.clients[1]!.request).mockResolvedValue({ tab_id: 'memory', release_id: from, mode: 'memory', closed: true, memory_loss_accepted: false });
+  const result = await f.coordinator.run('operation', 'window-a');
+  expect(result.clients).toEqual(['window-a', 'memory']); expect(f.lifecycle.prepare).not.toHaveBeenCalled(); expect(f.lifecycle.commit).not.toHaveBeenCalled(); expect(f.calls).not.toContain('window-a:commit');
+});
