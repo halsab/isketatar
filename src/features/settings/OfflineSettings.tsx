@@ -24,7 +24,7 @@ export function OfflineSettings() {
     catch { setRemoveFailed(true); }
     finally { setRemoving(false); }
   }
-  return <section id="offline"><h2>{t('settings.offline')}</h2><p>{t('pwa.separate')}</p>
+  return <section id="offline"><h2 id="offline-heading" tabIndex={-1}>{t('settings.offline')}</h2><p>{t('pwa.separate')}</p>
     {state.supported === false ? <Status>{t('pwa.unavailable')}</Status> : <>
       <Status announce>{t(`pwa.${entry?.completeness ?? 'not_saved'}`)}</Status>
       {state.progress && <p role="status">{t('pwa.progress', { count: state.progress.count, total: state.progress.total, size: (state.progress.bytes / 1024 / 1024).toFixed(2) })}</p>}
