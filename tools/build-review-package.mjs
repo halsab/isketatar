@@ -1,9 +1,14 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { loadSources, projectCorpus } from './content-build.mjs';
 import { productScope, sha256 } from './product-scope.mjs';
+import assert from 'node:assert/strict';
+import { verifyBuiltArtifact } from './release-artifact.mjs';
 
 const output = 'quality-results/review-package';
 const raw = await loadSources(); const corpus = projectCorpus(raw); const scope = await productScope();
+const provenance = JSON.parse(await readFile('quality-results/build-provenance.json', 'utf8'));
+assert.equal(provenance.product_scope_sha256, scope.sha256, 'Build final candidate before preparing review package');
+await verifyBuiltArtifact('dist', provenance);
 const copy = JSON.parse(await readFile('src/ui/tt.json', 'utf8'));
 const supplementalUi = await Promise.all(['index.html', 'public/recovery.html', 'src/app/RecoveryBoundary.tsx', 'tools/build-release.mjs'].map(async path => ({
   path, context_review_required: true, source: await readFile(path, 'utf8'),
@@ -50,7 +55,7 @@ for (const [path, value] of Object.entries(documents)) {
 const textbook = await readFile('sources/textbook.txt');
 await writeFile(`${output}/textbook.txt`, textbook);
 files.push({ path: 'textbook.txt', bytes: textbook.length, sha256: sha256(textbook) });
-const summary = { schema_version: 1, product_scope_sha256: scope.sha256, content_version: raw.manifest.content_version, counts, files,
+const summary = { schema_version: 1, product_scope_sha256: scope.sha256, product_artifact_sha256: provenance.product_artifact_sha256, release_id: provenance.release_id, manifest_sha256: provenance.manifest_sha256, content_version: raw.manifest.content_version, counts, files,
   status: 'awaiting_external_review', limitations: ['Literal source references are navigation aids; dynamic keys and all UI states require contextual review.', 'Validated author keys are not independent subject approval.', 'No participants or physical-device results have been recorded.'] };
 await writeFile(`${output}/manifest.json`, JSON.stringify(summary, null, 2) + '\n');
 console.log(JSON.stringify({ output, product_scope_sha256: scope.sha256, counts }, null, 2));

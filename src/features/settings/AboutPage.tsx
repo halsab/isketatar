@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 import { assetUrl } from '../../app/paths';
-import packageInfo from '../../../package.json';
+import { version as appVersion } from '../../../package.json';
 import { Button, Status } from '../../ui/controls';
 import { t } from '../../ui/copy';
 
 export function AboutPage() {
   const { runtime, content, state } = useApp(); const [copied, setCopied] = useState(false); const [failed, setFailed] = useState(false);
-  const technical = `${t('about.app_version')}: ${packageInfo.version}\n${t('about.content_version')}: ${content.catalog.core.content_version}\n${t('about.release')}: ${runtime.releaseId}\n${t('about.browser')}: ${navigator.userAgent}\n${t('about.error_code')}: ${state.error ?? '—'}`;
+  const technical = `${t('about.app_version')}: ${appVersion}\n${t('about.content_version')}: ${content.catalog.core.content_version}\n${t('about.release')}: ${runtime.releaseId}\n${t('about.browser')}: ${navigator.userAgent}\n${t('about.error_code')}: ${state.error ?? '—'}`;
   return <div className="document settings-document"><h1>{t('about.title')}</h1>
     <p>{t('onboarding.intro')}</p><p>{t('onboarding.language_note')}</p><p>{t('about.limits')}</p>
     <section><h2>{t('about.help')}</h2><ol><li>{t('about.help_path')} <Link to="/start">{t('onboarding.choose_route')}</Link></li><li>{t('about.help_lessons')} <Link to="/lessons">{t('nav.lessons')}</Link></li><li>{t('about.help_reader')} <Link to="/reading">{t('nav.reading')}</Link></li><li>{t('about.help_backup')} <Link to="/settings/backup">{t('settings.backup')}</Link></li></ol><p>{t('about.help_keys')}</p><p>{t('about.help_independence')}</p></section>

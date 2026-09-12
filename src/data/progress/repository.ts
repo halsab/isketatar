@@ -10,7 +10,7 @@ import type { Command } from './commands';
 import { exportData, replacementToken } from './model';
 import { checkReplacement, replaceProgress } from './replacement';
 import { integrity } from './import-integrity';
-import packageInfo from '../../../package.json';
+import { version as appVersion } from '../../../package.json';
 import { MemoryBackend } from './memory-backend';
 import { markAssessmentHelp, pendingAssessments } from '../../domain/learning/attempt';
 
@@ -118,7 +118,7 @@ export class ProgressRepository {
   async exportProgress(): Promise<Blob> {
     const snapshot = await this.snapshot();
     const { encodeExport } = await import('./transfer');
-    return encodeExport(snapshot, packageInfo.version, this.options.catalog.core.content_version, this.clock());
+    return encodeExport(snapshot, appVersion, this.options.catalog.core.content_version, this.clock());
   }
   async previewImport(file: Blob, prepareContent?: (releaseIds: string[]) => Promise<void>): Promise<ImportPreview> {
     const sequence = ++this.importSequence; this.preparedImport = null;

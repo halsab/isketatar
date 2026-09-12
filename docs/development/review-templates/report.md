@@ -4,7 +4,7 @@
 
 - Роль: language / subject / pilot / platforms:
 - Исполнитель и дата:
-- Product scope SHA-256 из пакета и проверенный release:
+- Product scope SHA-256, product artifact SHA-256 из пакета и проверенный release:
 - Метод, полный просмотренный объём и ссылки на IDs/матрицу:
 - Устройства, браузеры/ОС, режимы browser/installed, AT и версии:
 - Свидетельства и обезличенные результаты:

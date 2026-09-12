@@ -1,5 +1,5 @@
 import type { Asset, ReleaseManifest } from '../../domain/content/types';
-import { readBoundedBytes } from '../http';
+import { readBoundedBytes } from '../http.ts';
 
 export const PWA_BASE = '/isketatar/';
 export const MAX_PACKAGE_BYTES = 8 * 1024 * 1024;

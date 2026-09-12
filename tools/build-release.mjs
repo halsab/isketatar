@@ -3,6 +3,8 @@ import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
+import { productScope } from './product-scope.mjs';
+import { verifyArtifact } from './release-artifact.mjs';
 
 const sourceRoot = resolve(import.meta.dirname, '..');
 const sourceGit = args => execFileSync('git', ['-C', sourceRoot, ...args], { encoding: 'utf8' }).trim();
@@ -58,7 +60,11 @@ const header = { app_version: app.version, content_version: content.content_vers
   content_schema: 1, progress_schema: 1, min_reader_version: '1.0.0', base_path: base, built_at: builtAt,
   question_revisions: content.question_revisions, policy_versions: content.policy_versions };
 // ID определяется шаблонными байтами: подстановка собственного пути не создаёт цикл хеширования.
-const fingerprint = hash(JSON.stringify({ transport: hash(transport), files: [...input].map(([path, bytes]) => [path, hash(bytes)]), header, shell_paths: sortedShellPaths }));
+const fingerprintInput = { transport: hash(transport), files: [...input].map(([path, bytes]) => [path, hash(bytes)]), header, shell_paths: sortedShellPaths };
+const fingerprint = hash(JSON.stringify(fingerprintInput));
+const { built_at: _builtAt, ...productHeader } = header;
+// Запись заключения меняет commit timestamp, но не проверенные исполняемые байты и продуктовые версии.
+const productArtifact = hash(JSON.stringify({ ...fingerprintInput, header: productHeader }));
 const id = `${app.version}-${fingerprint.slice(0, 16)}`; const root = `${base}releases/${id}/`;
 await rm('dist', { recursive: true }); await mkdir(`dist/releases/${id}`, { recursive: true });
 const assets = [];
@@ -80,6 +86,9 @@ await writeFile('dist/manifest.webmanifest', await readFile(`dist/releases/${id}
 await mkdir('quality-results', { recursive: true });
 await writeFile('quality-results/build-provenance.json', JSON.stringify({
   release_id: id, manifest_sha256: hash(serialized), build_inputs_sha256: fingerprint,
+  artifact_sha256: (await verifyArtifact('dist')).sha256,
+  product_artifact_sha256: productArtifact, product_scope_sha256: (await productScope(sourceRoot)).sha256,
+  node_version: process.version,
   base_commit: sourceGit(['rev-parse', 'HEAD']),
   working_tree_dirty: resolve(process.cwd()) !== sourceRoot || sourceGit(['status', '--porcelain', '--untracked-files=normal']).length > 0,
 }, null, 2) + '\n');

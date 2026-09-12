@@ -6,8 +6,40 @@
     "confirmed_at": "2026-09-12",
     "evidence": "Владелец подтвердил: права на материалы есть."
   },
-  "language": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
-  "subject": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
-  "pilot": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
-  "platforms": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null }
+  "language": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "product_scope_sha256": null,
+    "report": null,
+    "product_artifact_sha256": null,
+    "report_sha256": null
+  },
+  "subject": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "product_scope_sha256": null,
+    "report": null,
+    "product_artifact_sha256": null,
+    "report_sha256": null
+  },
+  "pilot": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "product_scope_sha256": null,
+    "report": null,
+    "product_artifact_sha256": null,
+    "report_sha256": null
+  },
+  "platforms": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "product_scope_sha256": null,
+    "report": null,
+    "product_artifact_sha256": null,
+    "report_sha256": null
+  }
 }

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { platform, arch, cpus } from 'node:os';
 import { navigation } from 'lighthouse';
 import { launch } from 'chrome-launcher';
-import { chromium } from 'playwright';
+import { chromium } from '@playwright/test';
 import puppeteer from 'puppeteer-core';
 import { serveDist } from './serve-dist.mjs';
 
