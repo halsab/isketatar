@@ -22,6 +22,8 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
   { path: '/reading', lazy: async () => ({ Component: (await import('../features/reader/ReadingCatalog')).ReadingCatalog }) },
   { path: '/reading/:reading_id', lazy: async () => ({ Component: (await import('../features/reader/ReaderPage')).ReaderPage }) },
+  { path: '/reading/:reading_id/questions', lazy: async () => ({ Component: (await import('../features/reader/ReadingQuestionsPage')).ReadingQuestionsPage }) },
+  { path: '/reading/:reading_id/result/:session_id', lazy: async () => { const { ReadingQuestionsPage } = await import('../features/reader/ReadingQuestionsPage'); return { Component: () => <ReadingQuestionsPage result /> }; } },
   { path: '/dictionary', lazy: async () => ({ Component: (await import('../features/dictionary/DictionaryPage')).DictionaryPage }) },
   { path: '/dictionary/:entry_id', lazy: async () => ({ Component: (await import('../features/dictionary/EntryPage')).EntryPage }) },
   { path: '/diagnostic', lazy: () => assessmentRoute('diagnostic') },

@@ -353,5 +353,9 @@
   "review.skill_letter": "Хәрефләрне тану",
   "review.skill_reading": "Укылыш",
   "review.skill_rule": "Кагыйдә",
-  "review.skill_morphology": "Сүз төзелеше"
+  "review.skill_morphology": "Сүз төзелеше",
+  "exercise.not_independent": "Беренче җавап мөстәкыйль дөрес җавап буларак саналмады.",
+  "reading.final_questions": "Бу текстның сораулары йомгаклау тикшерүенә керә.",
+  "reading.independent_score": "Мөстәкыйль дөрес җаваплар: {correct} / {total}.",
+  "reading.questions_separate": "Сорауларның нәтиҗәсе текстның укылу билгесеннән аерым саклана."
 }

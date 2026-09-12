@@ -11,6 +11,7 @@ import { t } from '../../ui/copy';
 import { ContentState, Missing } from '../shared/ContentState';
 import { Disclosure } from '../shared/Disclosure';
 import { SourceLinks } from '../shared/SourceLinks';
+import { SessionHistory } from '../shared/SessionHistory';
 import { SemanticPosition } from '../shared/SemanticPosition';
 import { findPanelWord, wordSegments } from './words';
 import { rememberReaderPanel } from './history';
@@ -109,6 +110,7 @@ function Reader({ reading }: { reading: Reading }) {
       <label>{t('settings.arabic_size')}<select disabled={readonly} value={snapshot.settings.arabic_size_px} onChange={event => { void command({ type: 'settings', patch: { arabic_size_px: Number(event.target.value) as 28 | 32 | 40 | 48 } }).catch(() => {}); }}>{[28, 32, 40, 48].map(size => <option key={size} value={size}>{size}</option>)}</select></label></div>
     <ArabicFontGate><Disclosure identity={`reading:${reading.id}`} targets={[{ kind: 'reading', id: reading.id }, ...reading.lines.map(line => ({ kind: 'reading_line' as const, id: line.id, line_id: line.id, reading_id: reading.id }))]}>{reading.lines.map(line => <Line key={line.id} line={line} openWord={openWord} chooseInitially={!!selected && selected.line.id === line.id && (panelState(selected.word.word_id).trigger ?? location.state?.wordTrigger)?.startsWith('choose:') === true} />)}</Disclosure></ArabicFontGate>
     <div className="actions"><Button disabled={readonly || complete} busy={busy} onClick={() => { setBusy(true); void command({ type: 'read_complete', reading_id: reading.id }).catch(() => {}).finally(() => setBusy(false)); }}>{t(complete ? 'reading.complete' : 'reading.mark_complete')}</Button><Link to={`/reading/${reading.id}/questions`}>{t('reading.questions')}</Link></div>
+    {reading.role !== 'final' && <SessionHistory sessions={snapshot.sessions.filter(session => session.kind === 'reading_practice' && session.reading_ids.length === 1 && session.reading_ids[0] === reading.id)} resultPath={`/reading/${reading.id}/result`} />}
     <SourceLinks ids={reading.provenance.source_sections} />
     <p><Link to="/reading">{t('reading.title')}</Link></p>
     <SemanticPosition kind="reading" id={reading.id} revision={reading.content_revision} anchors={reading.lines.map(line => line.id)} focusAnchor={!selected} focusTargetId={history.state?.iskeReaderTrigger ?? location.state?.wordReturnTrigger} />
