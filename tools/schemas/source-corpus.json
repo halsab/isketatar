@@ -1,0 +1,6517 @@
+{
+  "type": "object",
+  "properties": {
+    "content/assessment/diagnostic.json": {
+      "type": "object",
+      "properties": {
+        "completion_note_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "groups": {
+          "type": "object",
+          "properties": {
+            "imla": {
+              "type": "object",
+              "properties": {
+                "does_not_skip_common_course": {
+                  "type": "boolean"
+                },
+                "question_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "does_not_skip_common_course",
+                "question_ids"
+              ],
+              "additionalProperties": true
+            },
+            "script": {
+              "type": "object",
+              "properties": {
+                "critical_questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 20000
+                  }
+                },
+                "must_pass_all_critical": {
+                  "type": "boolean"
+                },
+                "question_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "uniqueItems": true
+                },
+                "recommend_arabic_reader_at_least": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "critical_questions",
+                "must_pass_all_critical",
+                "question_ids",
+                "recommend_arabic_reader_at_least"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "imla",
+            "script"
+          ],
+          "additionalProperties": true
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "diagnostic"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "tt_reading"
+                ]
+              },
+              "group": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "recommend_lessons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_form": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "group",
+              "hints_tt",
+              "id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "recommend_lessons",
+              "skill",
+              "source_form",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "completion_note_tt",
+        "groups",
+        "items",
+        "title_tt",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/assessment/final.json": {
+      "type": "object",
+      "properties": {
+        "expected_reading_question_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "final"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "tt_reading"
+                ]
+              },
+              "group": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "recommend_lessons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "morphology",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_form": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "group",
+              "hints_tt",
+              "id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "recommend_lessons",
+              "skill",
+              "source_form",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "notes_tt": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 20000
+          }
+        },
+        "reading_question_source": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "reading_text_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 20000
+          },
+          "uniqueItems": true
+        },
+        "rubric": {
+          "type": "object",
+          "properties": {
+            "independent_only": {
+              "type": "boolean"
+            },
+            "min_correct_morphology_questions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "min_correct_reading_questions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "min_correct_vowel_questions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "morphology_group": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "pass_total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "reading_group": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "total_questions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "vowel_group": {
+              "type": "string",
+              "maxLength": 20000
+            }
+          },
+          "required": [
+            "independent_only",
+            "min_correct_morphology_questions",
+            "min_correct_reading_questions",
+            "min_correct_vowel_questions",
+            "morphology_group",
+            "pass_total",
+            "reading_group",
+            "total_questions",
+            "vowel_group"
+          ],
+          "additionalProperties": true
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "expected_reading_question_count",
+        "items",
+        "notes_tt",
+        "reading_question_source",
+        "reading_text_ids",
+        "rubric",
+        "title_tt",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/curriculum.json": {
+      "type": "object",
+      "properties": {
+        "default_profile": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "language": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "module_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "required_for_completion": {
+                "type": "boolean"
+              },
+              "route": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "skills": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "id",
+              "module_id",
+              "prerequisites",
+              "required_for_completion",
+              "route",
+              "skills",
+              "source_sections",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "route": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "id",
+              "lesson_ids",
+              "route",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "routes": {
+          "type": "object",
+          "properties": {
+            "arabic_reader": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "new_to_script": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            }
+          },
+          "required": [
+            "arabic_reader",
+            "new_to_script"
+          ],
+          "additionalProperties": true
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "default_profile",
+        "language",
+        "lessons",
+        "modules",
+        "routes",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M00-foundation.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_unspecified"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M01-bridge.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M02-vowels.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_jadid_6",
+                  "book_unspecified"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M03-consonants.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "morphology",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M04-general.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "segments",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_kadimi",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter",
+                  "morphology",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "segment",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M05-affixes.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "segments",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_kadimi",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter",
+                  "morphology",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "segment",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M06-loans.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "letter",
+                  "morphology",
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/exercises/M07-reading.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "practice",
+                  "transfer"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_example_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "lesson_id",
+              "options",
+              "profile",
+              "prompt_tt",
+              "rule_ids",
+              "skill",
+              "source_example_ids",
+              "source_lines",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "items",
+        "module_id"
+      ],
+      "additionalProperties": true
+    },
+    "content/interface/tt.json": {
+      "type": "object",
+      "properties": {
+        "locale": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "strings": {
+          "type": "object",
+          "properties": {
+            "accessibility.answer_status": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.arabic_sample": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.close_dialog": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.decrease_text": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.increase_text": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.menu": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.next_question": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.not_selected": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "accessibility.selected": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.back": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.cancel": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.check": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.clear": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.close": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.continue": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.delete": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.expand": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.finish": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.hide": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.next": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.retry": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.save": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.search": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.show": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.skip": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "action.start": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "app.name": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "app.tagline": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.assisted_note": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.final": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.new_attempt": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.passed": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.practice_after": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.recommendations": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.result": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.review_needed": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "assessment.score": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.bridge": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.foundation": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.imla": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.intro": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.keep_learning": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.result": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.script": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "diagnostic.title": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.bookmark": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.bookmarked": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.empty": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.expanded_matches": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.multiple_readings": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.no_reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.placeholder": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.reference_only": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.related": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.results": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.return_to_text": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.source_note": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "dictionary.unsave": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "error.audio": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "error.load": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "error.not_found": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.authored": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.breakdown": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.edited": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.meaning": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.original": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.profile": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "example.writing": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.accepted_variants": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.answer": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.answer_placeholder": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.assisted": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.choice": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.correct": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.end": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.explanation": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.hint": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.hint_next": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.incorrect": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.independent": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.no_answer": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.question_count": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.reveal": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.review_error": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.segment": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.select_at_least_one": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.select_many": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.select_option": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.try_again": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.unsure": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "exercise.untimed": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.estimated_time": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.examples": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.goal": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.in_progress": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.mastered": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.next_title": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.not_started": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.open_anyway": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.optional": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.outcome": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.practice": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.practiced": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.prerequisites": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.progress": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.recommended_first": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.rule": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.scope": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.source": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.theory": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "lesson.transfer": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.dictionary": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.home": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.lessons": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.reference": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.review": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "nav.settings": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.download": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.download_failed": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.downloading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.partial": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.ready": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.retry": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.unavailable": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.update": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.update_available": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.update_later": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "offline.updated": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.arabic_known": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.arabic_new": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.change_route": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.choose_route": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.diagnostic": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.intro": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.known_detail": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.language_note": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.new_detail": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.route_saved": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "onboarding.title": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.book_jadid_10": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.book_jadid_6": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.book_kadimi": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.book_unspecified": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.book_yanga": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile.loan_original": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.authored": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.book_excerpt": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.complete": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.guided": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.hide_help": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.independent": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.line": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.not_manuscript": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.questions": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.self_check": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.show_letters": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.show_meaning": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.show_reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.title": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reading.word_help": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.add": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.added": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.due": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.empty": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.free": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.later": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.meaning": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.no_penalty": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.reading": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.remove": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.rules": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "review.title": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.arabic_size": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.export": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.export_done": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.import": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.import_confirm": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.import_done": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.import_invalid": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.import_preview": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.local_progress": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.progress": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.reset": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.reset_confirm": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.reset_done": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.storage_unavailable": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.text_size": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.theme": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.theme_dark": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.theme_light": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "settings.theme_system": {
+              "type": "string",
+              "maxLength": 20000
+            }
+          },
+          "required": [
+            "accessibility.answer_status",
+            "accessibility.arabic_sample",
+            "accessibility.close_dialog",
+            "accessibility.decrease_text",
+            "accessibility.increase_text",
+            "accessibility.menu",
+            "accessibility.next_question",
+            "accessibility.not_selected",
+            "accessibility.selected",
+            "action.back",
+            "action.cancel",
+            "action.check",
+            "action.clear",
+            "action.close",
+            "action.continue",
+            "action.delete",
+            "action.expand",
+            "action.finish",
+            "action.hide",
+            "action.next",
+            "action.retry",
+            "action.save",
+            "action.search",
+            "action.show",
+            "action.skip",
+            "action.start",
+            "app.name",
+            "app.tagline",
+            "assessment.assisted_note",
+            "assessment.final",
+            "assessment.new_attempt",
+            "assessment.passed",
+            "assessment.practice_after",
+            "assessment.recommendations",
+            "assessment.result",
+            "assessment.review_needed",
+            "assessment.score",
+            "diagnostic.bridge",
+            "diagnostic.foundation",
+            "diagnostic.imla",
+            "diagnostic.intro",
+            "diagnostic.keep_learning",
+            "diagnostic.result",
+            "diagnostic.script",
+            "diagnostic.title",
+            "dictionary.bookmark",
+            "dictionary.bookmarked",
+            "dictionary.empty",
+            "dictionary.expanded_matches",
+            "dictionary.multiple_readings",
+            "dictionary.no_reading",
+            "dictionary.placeholder",
+            "dictionary.reference_only",
+            "dictionary.related",
+            "dictionary.results",
+            "dictionary.return_to_text",
+            "dictionary.source_note",
+            "dictionary.unsave",
+            "error.audio",
+            "error.load",
+            "error.not_found",
+            "example.authored",
+            "example.breakdown",
+            "example.edited",
+            "example.meaning",
+            "example.original",
+            "example.profile",
+            "example.reading",
+            "example.writing",
+            "exercise.accepted_variants",
+            "exercise.answer",
+            "exercise.answer_placeholder",
+            "exercise.assisted",
+            "exercise.choice",
+            "exercise.correct",
+            "exercise.end",
+            "exercise.explanation",
+            "exercise.hint",
+            "exercise.hint_next",
+            "exercise.incorrect",
+            "exercise.independent",
+            "exercise.no_answer",
+            "exercise.question_count",
+            "exercise.reading",
+            "exercise.reveal",
+            "exercise.review_error",
+            "exercise.segment",
+            "exercise.select_at_least_one",
+            "exercise.select_many",
+            "exercise.select_option",
+            "exercise.try_again",
+            "exercise.unsure",
+            "exercise.untimed",
+            "lesson.estimated_time",
+            "lesson.examples",
+            "lesson.goal",
+            "lesson.in_progress",
+            "lesson.mastered",
+            "lesson.next_title",
+            "lesson.not_started",
+            "lesson.open_anyway",
+            "lesson.optional",
+            "lesson.outcome",
+            "lesson.practice",
+            "lesson.practiced",
+            "lesson.prerequisites",
+            "lesson.progress",
+            "lesson.recommended_first",
+            "lesson.rule",
+            "lesson.scope",
+            "lesson.source",
+            "lesson.theory",
+            "lesson.transfer",
+            "nav.dictionary",
+            "nav.home",
+            "nav.lessons",
+            "nav.reading",
+            "nav.reference",
+            "nav.review",
+            "nav.settings",
+            "offline.download",
+            "offline.download_failed",
+            "offline.downloading",
+            "offline.partial",
+            "offline.ready",
+            "offline.retry",
+            "offline.unavailable",
+            "offline.update",
+            "offline.update_available",
+            "offline.update_later",
+            "offline.updated",
+            "onboarding.arabic_known",
+            "onboarding.arabic_new",
+            "onboarding.change_route",
+            "onboarding.choose_route",
+            "onboarding.diagnostic",
+            "onboarding.intro",
+            "onboarding.known_detail",
+            "onboarding.language_note",
+            "onboarding.new_detail",
+            "onboarding.route_saved",
+            "onboarding.title",
+            "profile.book_jadid_10",
+            "profile.book_jadid_6",
+            "profile.book_kadimi",
+            "profile.book_unspecified",
+            "profile.book_yanga",
+            "profile.loan_original",
+            "reading.authored",
+            "reading.book_excerpt",
+            "reading.complete",
+            "reading.guided",
+            "reading.hide_help",
+            "reading.independent",
+            "reading.line",
+            "reading.not_manuscript",
+            "reading.questions",
+            "reading.self_check",
+            "reading.show_letters",
+            "reading.show_meaning",
+            "reading.show_reading",
+            "reading.title",
+            "reading.word_help",
+            "review.add",
+            "review.added",
+            "review.due",
+            "review.empty",
+            "review.free",
+            "review.later",
+            "review.meaning",
+            "review.no_penalty",
+            "review.reading",
+            "review.remove",
+            "review.rules",
+            "review.title",
+            "settings.arabic_size",
+            "settings.export",
+            "settings.export_done",
+            "settings.import",
+            "settings.import_confirm",
+            "settings.import_done",
+            "settings.import_invalid",
+            "settings.import_preview",
+            "settings.local_progress",
+            "settings.progress",
+            "settings.reset",
+            "settings.reset_confirm",
+            "settings.reset_done",
+            "settings.storage_unavailable",
+            "settings.text_size",
+            "settings.theme",
+            "settings.theme_dark",
+            "settings.theme_light",
+            "settings.theme_system"
+          ],
+          "additionalProperties": true
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "locale",
+        "strings",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M00-foundation.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_jadid_10",
+                        "book_unspecified"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M01-bridge.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_jadid_10",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M02-vowels.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_jadid_10",
+                        "book_jadid_6"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M03-consonants.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_jadid_10",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M04-general.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_kadimi",
+                        "book_unspecified",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M05-affixes.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_kadimi",
+                        "book_unspecified",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M06-loans.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component_inventory": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "function_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "form",
+                    "function_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_jadid_10",
+                        "book_unspecified",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_note_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "reading_tt": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "maxLength": 20000
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration",
+                        "reference"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "external_sources": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "supports_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "url": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "supports_tt",
+                    "url"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "letter_groups": {
+                "type": "object",
+                "properties": {
+                  "moon": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "sun": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  }
+                },
+                "required": [
+                  "moon",
+                  "sun"
+                ],
+                "additionalProperties": true
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lessons/M07-reading.json": {
+      "type": "object",
+      "properties": {
+        "lessons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "explanation_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "normalization_note": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "profile": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "book_unspecified",
+                        "loan_original"
+                      ]
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "usage": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "assessment_source",
+                        "demonstration"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "explanation_tt",
+                    "id",
+                    "meaning_tt",
+                    "normalization_note",
+                    "profile",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "status",
+                    "usage"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "goals_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "outcomes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "pitfalls_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "scope_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      "uniqueItems": true
+                    },
+                    "statement_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "scope_tt",
+                    "source_sections",
+                    "statement_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "theory_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "examples",
+              "goals_tt",
+              "id",
+              "outcomes_tt",
+              "pitfalls_tt",
+              "prerequisites",
+              "rules",
+              "source_sections",
+              "theory_tt",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "module_id": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "lessons",
+        "module_id",
+        "title_tt"
+      ],
+      "additionalProperties": true
+    },
+    "content/lexicon/course-vocabulary.json": {
+      "type": "object",
+      "properties": {
+        "description_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "display_form": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "meaning_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_jadid_10",
+                  "book_jadid_6",
+                  "book_kadimi",
+                  "book_unspecified",
+                  "loan_original"
+                ]
+              },
+              "question_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "reading_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "release": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "after_linked_question",
+                  "with_lesson"
+                ]
+              },
+              "source_dictionary_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_example_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "source_lines": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "display_form",
+              "id",
+              "kind",
+              "lesson_id",
+              "meaning_tt",
+              "profile",
+              "question_ids",
+              "reading_tt",
+              "release",
+              "source_dictionary_ids",
+              "source_example_id",
+              "source_lines",
+              "status"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "description_tt",
+        "entries",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/lexicon/lexicon.json": {
+      "type": "object",
+      "properties": {
+        "eligibility_tiers": {
+          "type": "object",
+          "properties": {
+            "active": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "archive": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "reference": {
+              "type": "string",
+              "maxLength": 20000
+            }
+          },
+          "required": [
+            "active",
+            "archive",
+            "reference"
+          ],
+          "additionalProperties": true
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "constraints": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "corroboration": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "evidence": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "kind": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "line": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "locator": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "reason_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "section": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "url": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "display_form": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "editorial_notes_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "eligibility": {
+                "type": "object",
+                "properties": {
+                  "dictionary_visible": {
+                    "type": "boolean"
+                  },
+                  "practice_allowed": {
+                    "type": "boolean"
+                  },
+                  "reason_tt": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "tier": {
+                    "type": "string",
+                    "maxLength": 20000,
+                    "enum": [
+                      "active",
+                      "archive",
+                      "reference"
+                    ]
+                  }
+                },
+                "required": [
+                  "dictionary_visible",
+                  "practice_allowed",
+                  "reason_tt",
+                  "tier"
+                ],
+                "additionalProperties": true
+              },
+              "forms": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "reading_tt": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "maxLength": 20000
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "relationship": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "form",
+                    "reading_tt",
+                    "relationship"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "type": {
+                      "type": "string",
+                      "maxLength": 20000,
+                      "enum": [
+                        "contains_form_and_plural_in_source",
+                        "repeated_source_entry",
+                        "same_form_compare_senses",
+                        "same_spelling_different_reading"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "meaning_origin": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "meaning_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "profile": {
+                    "type": "string",
+                    "maxLength": 20000,
+                    "enum": [
+                      "book_unspecified",
+                      "loan_original"
+                    ]
+                  },
+                  "source_record": {
+                    "type": "string",
+                    "maxLength": 20000
+                  }
+                },
+                "required": [
+                  "kind",
+                  "profile",
+                  "source_record"
+                ],
+                "additionalProperties": true
+              },
+              "reading_tt": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "section": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "source": {
+                "type": "object",
+                "properties": {
+                  "character_start_0based": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "entry_in_row_1based": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "file": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "line": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "table_row_1based": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "file",
+                  "line"
+                ],
+                "additionalProperties": true
+              },
+              "source_form": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "constraints",
+              "corroboration",
+              "display_form",
+              "editorial_notes_tt",
+              "eligibility",
+              "id",
+              "links",
+              "meaning_origin",
+              "meaning_tt",
+              "origin",
+              "reading_tt",
+              "section",
+              "source",
+              "source_form",
+              "status"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "language": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "schema_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scope": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "by_status": {
+              "type": "object",
+              "properties": {
+                "disputed": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "editorial_checked": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "source_checked": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "source_only": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "disputed",
+                "editorial_checked",
+                "source_checked",
+                "source_only"
+              ],
+              "additionalProperties": true
+            },
+            "by_tier": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "archive": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reference": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "active",
+                "archive",
+                "reference"
+              ],
+              "additionalProperties": true
+            },
+            "historical": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "archive": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reference": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "active",
+                "archive",
+                "reference"
+              ],
+              "additionalProperties": true
+            },
+            "thematic": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "archive": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "active",
+                "archive"
+              ],
+              "additionalProperties": true
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "with_reading_tt": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "without_reading_tt": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "by_status",
+            "by_tier",
+            "historical",
+            "thematic",
+            "total",
+            "with_reading_tt",
+            "without_reading_tt"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "eligibility_tiers",
+        "entries",
+        "language",
+        "schema_version",
+        "scope",
+        "summary"
+      ],
+      "additionalProperties": true
+    },
+    "content/media/manifest.json": {
+      "type": "object",
+      "properties": {
+        "optional_audio": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "assessment_visibility": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "asset_path": {
+                "type": "null"
+              },
+              "availability_rule_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "direction_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "final_note_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "pause_between_lines_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "pause_sentence_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "source_reading_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "spoken_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "target_words_per_minute": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ui_available": {
+                "type": "boolean"
+              },
+              "verification_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "assessment_visibility",
+              "asset_path",
+              "availability_rule_tt",
+              "direction_tt",
+              "final_note_tt",
+              "id",
+              "pause_between_lines_ms",
+              "pause_sentence_ms",
+              "required",
+              "source_reading_id",
+              "spoken_tt",
+              "status",
+              "target_words_per_minute",
+              "ui_available",
+              "verification_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "policy_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "required_text_assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "path": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "purpose_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "path",
+              "purpose_tt",
+              "required"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "optional_audio",
+        "policy_tt",
+        "required_text_assets",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/readings/questions.json": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accepted_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "assessment_role": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "final",
+                  "reading_practice"
+                ]
+              },
+              "difficulty": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "explanation_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "grading": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "exact_option",
+                  "set",
+                  "tt_reading"
+                ]
+              },
+              "group": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "hints_tt": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "line_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "text_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text_tt"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "prompt_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "skill": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "reading",
+                  "rule"
+                ]
+              },
+              "source_reading_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "stimulus": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "type": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "choice",
+                  "reading",
+                  "select_many"
+                ]
+              }
+            },
+            "required": [
+              "accepted_answers",
+              "assessment_role",
+              "difficulty",
+              "explanation_tt",
+              "grading",
+              "hints_tt",
+              "id",
+              "line_ids",
+              "options",
+              "prompt_tt",
+              "skill",
+              "source_reading_id",
+              "stimulus",
+              "type"
+            ],
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "additionalProperties": true
+    },
+    "content/readings/texts.json": {
+      "type": "object",
+      "properties": {
+        "texts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "help_order": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "instructions_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "lesson_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "id": {
+                      "type": "string",
+                      "maxLength": 128,
+                      "minLength": 1
+                    },
+                    "meaning_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "reading_status": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "reading_tt": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_form": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "source_lines": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "words": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "explanation_tt": {
+                            "type": "string",
+                            "maxLength": 20000
+                          },
+                          "lexicon_id": {
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "maxLength": 128,
+                                "minLength": 1
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "meaning_tt": {
+                            "type": "string",
+                            "maxLength": 20000
+                          },
+                          "reading_tt": {
+                            "type": "string",
+                            "maxLength": 20000
+                          },
+                          "surface": {
+                            "type": "string",
+                            "maxLength": 20000
+                          }
+                        },
+                        "required": [
+                          "explanation_tt",
+                          "lexicon_id",
+                          "meaning_tt",
+                          "reading_tt",
+                          "surface"
+                        ],
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "required": [
+                    "display_form",
+                    "id",
+                    "meaning_tt",
+                    "reading_status",
+                    "reading_tt",
+                    "source_form",
+                    "source_lines",
+                    "words"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "profile": {
+                "type": "string",
+                "maxLength": 20000,
+                "enum": [
+                  "book_unspecified"
+                ]
+              },
+              "provenance": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "note_tt": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "source_sections": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "kind",
+                  "note_tt",
+                  "source_sections"
+                ],
+                "additionalProperties": true
+              },
+              "question_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "role": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "help_order",
+              "id",
+              "instructions_tt",
+              "lesson_ids",
+              "level",
+              "lines",
+              "profile",
+              "provenance",
+              "question_ids",
+              "role",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "texts",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/reference/letters.json": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "letters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "editorial_note": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "forms": {
+                "type": "object",
+                "properties": {
+                  "final": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "initial": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "isolated": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "medial": {
+                    "type": "string",
+                    "maxLength": 20000
+                  }
+                },
+                "required": [
+                  "final",
+                  "initial",
+                  "isolated",
+                  "medial"
+                ],
+                "additionalProperties": true
+              },
+              "function_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "joins_following": {
+                "type": "boolean"
+              },
+              "joins_previous": {
+                "type": "boolean"
+              },
+              "name_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "status": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "base",
+              "editorial_note",
+              "forms",
+              "function_tt",
+              "id",
+              "joins_following",
+              "joins_previous",
+              "name_tt",
+              "source_sections",
+              "status"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "ligatures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "name_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "components",
+              "name_tt",
+              "source_sections",
+              "text"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "function_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "name_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "function_tt",
+              "name_tt",
+              "text"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "notes_tt": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 20000
+          }
+        },
+        "order_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "direction",
+        "letters",
+        "ligatures",
+        "marks",
+        "notes_tt",
+        "order_tt",
+        "title_tt",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/reference/profiles.json": {
+      "type": "object",
+      "properties": {
+        "comparison_note_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "base_vowel_signs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "description_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "initial_vowel_examples": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "is_default": {
+                "type": "boolean"
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "title_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "description_tt",
+              "id",
+              "is_default",
+              "source_sections",
+              "title_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "vowel_table": {
+          "type": "object",
+          "properties": {
+            "note_tt": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "profile": {
+              "type": "string",
+              "maxLength": 20000,
+              "enum": [
+                "book_jadid_10"
+              ]
+            },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "final": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 20000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "initial": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "lesson_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 20000
+                    },
+                    "uniqueItems": true
+                  },
+                  "medial": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "note_tt": {
+                    "type": "string",
+                    "maxLength": 20000
+                  },
+                  "sound_tt": {
+                    "type": "string",
+                    "maxLength": 20000
+                  }
+                },
+                "required": [
+                  "final",
+                  "initial",
+                  "lesson_ids",
+                  "medial",
+                  "note_tt",
+                  "sound_tt"
+                ],
+                "additionalProperties": true
+              }
+            },
+            "title_tt": {
+              "type": "string",
+              "maxLength": 20000
+            }
+          },
+          "required": [
+            "note_tt",
+            "profile",
+            "rows",
+            "title_tt"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "comparison_note_tt",
+        "profiles",
+        "title_tt",
+        "version",
+        "vowel_table"
+      ],
+      "additionalProperties": true
+    },
+    "content/reference/rules-index.json": {
+      "type": "object",
+      "properties": {
+        "description_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "module_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "question_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "id",
+              "lesson_id",
+              "module_id",
+              "question_ids",
+              "source_sections"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "description_tt",
+        "rules",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/reference/terms.json": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "definition_tt": {
+                "type": "string",
+                "maxLength": 20000
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "term_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "definition_tt",
+              "id",
+              "lesson_id",
+              "term_tt"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "entries",
+        "title_tt",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "content/skills.json": {
+      "type": "object",
+      "properties": {
+        "note_tt": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "evidence": {
+                "type": "object",
+                "properties": {
+                  "independent_answer_required": {
+                    "type": "boolean"
+                  },
+                  "practice_required": {
+                    "type": "boolean"
+                  },
+                  "transfer_required": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "independent_answer_required",
+                  "practice_required",
+                  "transfer_required"
+                ],
+                "additionalProperties": true
+              },
+              "facets": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                }
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "lesson_id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "question_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "rule_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "source_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                "uniqueItems": true
+              },
+              "target_tt": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "evidence",
+              "facets",
+              "id",
+              "lesson_id",
+              "question_ids",
+              "rule_ids",
+              "source_sections",
+              "target_tt"
+            ],
+            "additionalProperties": true
+          },
+          "uniqueItems": true
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "note_tt",
+        "skills",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "sources/sections.json": {
+      "type": "object",
+      "properties": {
+        "line_separator": {
+          "type": "string",
+          "maxLength": 20000
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              "line_end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "line_start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "title": {
+                "type": "string",
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "id",
+              "line_end",
+              "line_start",
+              "title"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "line_separator",
+        "sections",
+        "source"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "content/assessment/diagnostic.json",
+    "content/assessment/final.json",
+    "content/curriculum.json",
+    "content/exercises/M00-foundation.json",
+    "content/exercises/M01-bridge.json",
+    "content/exercises/M02-vowels.json",
+    "content/exercises/M03-consonants.json",
+    "content/exercises/M04-general.json",
+    "content/exercises/M05-affixes.json",
+    "content/exercises/M06-loans.json",
+    "content/exercises/M07-reading.json",
+    "content/interface/tt.json",
+    "content/lessons/M00-foundation.json",
+    "content/lessons/M01-bridge.json",
+    "content/lessons/M02-vowels.json",
+    "content/lessons/M03-consonants.json",
+    "content/lessons/M04-general.json",
+    "content/lessons/M05-affixes.json",
+    "content/lessons/M06-loans.json",
+    "content/lessons/M07-reading.json",
+    "content/lexicon/course-vocabulary.json",
+    "content/lexicon/lexicon.json",
+    "content/media/manifest.json",
+    "content/readings/questions.json",
+    "content/readings/texts.json",
+    "content/reference/letters.json",
+    "content/reference/profiles.json",
+    "content/reference/rules-index.json",
+    "content/reference/terms.json",
+    "content/skills.json",
+    "sources/sections.json"
+  ],
+  "additionalProperties": true
+}

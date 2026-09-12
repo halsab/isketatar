@@ -71,7 +71,7 @@ explanation_tt, hints_tt, source_lines и редакционная заметк�
 
 ### Маршруты и уроки
 
-Источник — curriculum.json и lessons/M*.json. Runtime-урок содержит id, module_id, title_tt, prerequisites[], source_sections[], required_for_completion, skills[], goals_tt[], theory_tt[], rules[], examples[], pitfalls_tt[], outcomes_tt[]. Карта программы — источник module_id, route и required_for_completion; совпадающие поля полного урока сверяются с ней.
+Источник — curriculum.json и lessons/M*.json. Runtime-урок содержит id, module_id, title_tt, prerequisites[], source_sections[], required_for_completion, skills[], goals_tt[], theory_tt[], rules[], examples[], pitfalls_tt[], outcomes_tt[]. Карта программы — источник module_id, route и required_for_completion; title_tt и prerequisites полного урока сверяются с ней. Уточнение D2 по фактическому корпусу: source_sections программы содержит также обзорные разделы, а полный урок добавляет точные источники примеров. Runtime сохраняет упорядоченное объединение обоих списков (сначала программа), проверяя существование каждого ID; исходные файлы не переписываются. В замороженной редакции это затрагивает B06, C01, C03, V01, V02, V08, V09, K01, K02, K05, K06.
 
 Дополнительные известные поля урока сохраняются явно: letter_groups={sun:string[],moon:string[]}, component_inventory=[{form,function_tt}], external_sources=[{url,supports_tt}]. Это существующие данные L07/L09, а не повод для универсального CMS.
 

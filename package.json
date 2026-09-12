@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": "24.21.0", "npm": "11.9.0" },
+  "engines": {
+    "node": "24.21.0",
+    "npm": "11.9.0"
+  },
   "packageManager": "npm@11.9.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -12,9 +15,15 @@
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test": "vitest run",
     "check": "npm run check:content && npm run check:boundaries && npm run typecheck && npm test",
-    "build": "npm run typecheck && vite build && node tools/check-dist.mjs",
+    "build": "npm run typecheck && vite build && node tools/build-release.mjs && node tools/check-dist.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "generate": "node tools/build-content.mjs",
+    "schema:snapshot": "node tools/snapshot-content-schemas.mjs",
+    "predev": "npm run generate",
+    "pretest": "npm run generate",
+    "pretypecheck": "npm run generate",
+    "prebuild": "npm run check:content && npm run generate"
   },
   "dependencies": {
     "react": "19.3.0",
@@ -27,6 +36,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
+    "ajv": "8.20.0",
     "typescript": "7.0.2",
     "vite": "8.3.0",
     "vitest": "5.0.0"
