@@ -7,7 +7,7 @@ export type ObservationTarget = { kind: 'lesson' | 'example' | 'dictionary_entry
 export type Command =
   | { type: 'start'; kind: SessionKind; lesson_id?: string; reading_id?: string; early_question_ids?: string[]; restart?: boolean }
   | { type: 'pause' | 'resume'; session_id: string }
-  | { type: 'ack' | 'retry'; presentation_id: string }
+  | { type: 'ack' | 'retry' | 'skip'; presentation_id: string }
   | { type: 'show'; presentation_id: string; confirm_assessment_help?: boolean }
   | { type: 'draft'; presentation_id: string; answer: AnswerValue | null }
   | { type: 'submit'; presentation_id: string; answer: AnswerValue; confirm_assessment_help?: boolean }

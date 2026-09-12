@@ -11,6 +11,7 @@ import { Disclosure } from './Disclosure';
 export function PracticeReview({ session }: { session: Session }) {
   const { snapshot, content, progress, command } = useApp(); const [open, setOpen] = useState<string[]>([]);
   const attempts = snapshot.attempts.filter(item => item.session_id === session.session_id);
+  if (!attempts.length) return null;
   return <section><h2>{t('assessment.practice_after')}</h2>{session.question_plan.map((plan, index) => {
     const first = attempts.find(item => item.presentation_id === plan.first_presentation_id);
     if (!first) return null;

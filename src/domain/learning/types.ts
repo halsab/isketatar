@@ -26,7 +26,7 @@ export interface Assistance {
 export interface Familiarity { question_seen_before: boolean; material_seen_before: boolean; reading_exposed_before: boolean }
 export interface Presentation {
   presentation_id: string; session_id: string; question_id: string; grading_revision: string;
-  ordinal: number; revision: number; status: 'draft' | 'submitted'; created_at: number; shown_at: number | null;
+  ordinal: number; revision: number; status: 'draft' | 'submitted' | 'skipped'; created_at: number; shown_at: number | null;
   draft_answer: AnswerValue | null; draft_updated_at: number | null; assistance: Assistance;
   familiarity_at_show: Familiarity; feedback_opened_at: number | null; feedback_acknowledged_at: number | null;
 }

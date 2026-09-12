@@ -55,11 +55,11 @@ export function integrity(data: ProgressData) {
     requireImport((session.status === 'incompatible') === (session.incompatibility_reason !== null));
     if (session.status === 'submitted') requireImport(session.active_presentation_id === null);
     if (['active', 'paused'].includes(session.status)) requireImport(session.active_presentation_id !== null);
-    if (session.active_presentation_id !== null) requireImport(presentations.get(session.active_presentation_id)?.session_id === session.session_id);
+    if (session.active_presentation_id !== null) requireImport(presentations.get(session.active_presentation_id)?.session_id === session.session_id && presentations.get(session.active_presentation_id)?.status !== 'skipped');
     for (const item of plan.values()) {
       const first = presentations.get(item.first_presentation_id);
       requireImport(first?.session_id === session.session_id && first.question_id === item.question_id && first.grading_revision === item.grading_revision && first.ordinal === 1);
-      if (session.status === 'submitted') requireImport(attempts.has(item.first_presentation_id));
+      if (session.status === 'submitted') requireImport(attempts.has(item.first_presentation_id) || session.kind === 'review' && first.status === 'skipped');
     }
   }
   for (const presentation of presentations.values()) {
@@ -68,6 +68,7 @@ export function integrity(data: ProgressData) {
     if (['diagnostic', 'final'].includes(session.kind)) requireImport(presentation.ordinal === 1);
     const attempt = attempts.get(presentation.presentation_id);
     requireImport((presentation.status === 'submitted') === !!attempt);
+    if (presentation.status === 'skipped') requireImport(session.kind === 'review' && presentation.shown_at !== null && presentation.draft_answer === null && presentation.draft_updated_at !== null);
     requireImport(presentation.feedback_acknowledged_at === null || presentation.status === 'submitted' && presentation.feedback_opened_at !== null);
     requireImport(presentation.feedback_opened_at === null || presentation.status === 'submitted');
     const assistance = presentation.assistance;

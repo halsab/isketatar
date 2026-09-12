@@ -262,6 +262,7 @@ export class ProgressRepository {
       case 'submit': return engine.submit(command.presentation_id, command.answer, false, command.confirm_assessment_help);
       case 'finish_assessment': return engine.finishAssessment(command);
       case 'ack': case 'retry': return engine.ack(command.presentation_id, command.type === 'retry');
+      case 'skip': return engine.skip(command.presentation_id);
       case 'navigate_question': return engine.navigate(command.session_id, command.question_id);
       case 'help': return engine.help(command);
       case 'observe': return observe(engine, command.target, command.confirm_assessment_help);

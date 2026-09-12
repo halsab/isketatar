@@ -180,7 +180,7 @@ PlanItem={question_id,grading_revision,first_presentation_id,option_order,assess
 | session_id, question_id, grading_revision | Ссылки на Session и её PlanItem |
 | ordinal | Целое >=1 внутри пары session/question;1 — первая попытка цикла |
 | revision | Revision записи черновика |
-| status | draft или submitted |
+| status | draft, submitted или skipped; skipped допустим только в review |
 | created_at | TimeMs |
 | shown_at | TimeMs|null; создание плана ещё не означает показ вопроса |
 | draft_answer | AnswerValue|null |
@@ -191,6 +191,8 @@ PlanItem={question_id,grading_revision,first_presentation_id,option_order,assess
 | feedback_acknowledged_at | TimeMs|null |
 
 При повторе после обратной связи создаётся новое Presentation с ordinal+1. Первая предъявленная попытка остаётся неизменной для расчёта самостоятельности. Для диагностики/итога редактирование ответов до окончательной отправки — черновик первоначального Presentation, а не цепочка оценённых угадываний.
+
+Пропуск в review переводит показанное draft-предъявление в skipped, очищает draft_answer и фиксирует draft_updated_at. Attempt и feedback не создаются, ReviewCard не меняется. План остаётся прежним; после обработки остальных карточек Session получает submitted, даже если некоторые первые предъявления skipped. Активный указатель никогда не указывает на skipped; импорт проверяет эти связи. Это уточнение формата первого выпуска, до публичного распространения прогресса приложения.
 
 `Assistance`={hint_indices:number[],rule_opened_at:TimeMs|null,reading_opened_at:TimeMs|null,meaning_opened_at:TimeMs|null,answer_revealed_at:TimeMs|null,reference_opened_at:TimeMs|null}. hint_indices уникальны и входят в hints_tt данного вопроса. Для подсказок также сохраняется first_hint_at:TimeMs|null. Каждый ненулевой момент относится к текущему предъявлению и не может быть раньше shown_at.
 

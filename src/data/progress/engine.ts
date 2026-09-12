@@ -117,7 +117,7 @@ export class CommandEngine {
   }
   async show(id: string, confirmation = false) {
     const { presentation, session, question } = await this.presentation(id);
-    if (session.status !== 'active' || session.active_presentation_id !== id) throw new Error('invalid_session_state');
+    if (session.status !== 'active' || session.active_presentation_id !== id || presentation.status === 'skipped') throw new Error('invalid_session_state');
     if (!['diagnostic', 'final'].includes(session.kind)) await this.confirmDisclosure(confirmation);
     if (presentation.shown_at !== null) return {};
     const keys = [`question:${question.id}`, ...question.materials.flatMap(material => [`material:${material.visual}`, ...(material.reading === null ? [] : [`material:${material.reading}`])])];
@@ -195,14 +195,25 @@ export class CommandEngine {
     const { presentation, session, question } = await this.presentation(id);
     if (session.status !== 'active' || session.active_presentation_id !== id || presentation.status !== 'submitted' || ['diagnostic', 'final'].includes(session.kind)) throw new Error('invalid_session_state');
     if (presentation.feedback_acknowledged_at === null) await this.context.put('presentations', { ...presentation, feedback_acknowledged_at: this.at, revision: presentation.revision + 1 });
-    const all = await this.tx.bySession('presentations', session.session_id);
     if (retry) {
+      const all = await this.tx.bySession('presentations', session.session_id);
       const next = this.newPresentation(session.session_id, question, Math.max(...all.filter(item => item.question_id === question.id).map(item => item.ordinal)) + 1);
       await this.context.put('presentations', next);
       await this.context.put('sessions', { ...session, active_presentation_id: next.presentation_id, revision: session.revision + 1, updated_at: this.at });
       return { presentation_id: next.presentation_id, session_id: session.session_id };
     }
-    const next = session.question_plan.find(item => !all.some(presentation => presentation.question_id === item.question_id && presentation.status === 'submitted' && presentation.feedback_acknowledged_at !== null));
+    return this.advance(session);
+  }
+  async skip(id: string): Promise<CommandResult> {
+    const { presentation, session } = await this.presentation(id);
+    if (session.kind !== 'review' || session.status !== 'active' || session.active_presentation_id !== id || presentation.status !== 'draft' || presentation.shown_at === null) throw new Error('invalid_session_state');
+    // Пропуск не создаёт Attempt и не вызывает планировщик повторения.
+    await this.context.put('presentations', { ...presentation, status: 'skipped', draft_answer: null, draft_updated_at: this.at, revision: presentation.revision + 1 });
+    return this.advance(session);
+  }
+  private async advance(session: Session): Promise<CommandResult> {
+    const all = await this.tx.bySession('presentations', session.session_id);
+    const next = session.question_plan.find(item => !all.some(presentation => presentation.question_id === item.question_id && (presentation.status === 'submitted' && presentation.feedback_acknowledged_at !== null || session.kind === 'review' && presentation.status === 'skipped')));
     await this.context.put('sessions', { ...session, active_presentation_id: next?.first_presentation_id ?? null, status: next ? 'active' : 'submitted', submitted_at: next ? null : this.at, revision: session.revision + 1, updated_at: this.at });
     if (!next) this.context.control.active_session_id = null;
     return { session_id: session.session_id, presentation_id: next?.first_presentation_id };
@@ -214,12 +225,14 @@ export class CommandEngine {
     if (!item) throw new Error('unknown_question');
     const presentations = await this.tx.bySession('presentations', sessionId);
     const target = presentations.filter(presentation => presentation.question_id === questionId).sort((a, b) => b.ordinal - a.ordinal)[0]!;
+    if (target.status === 'skipped') throw new Error('invalid_session_state');
     if (!['diagnostic', 'final'].includes(session.kind) && target.shown_at === null && target.presentation_id !== session.active_presentation_id) throw new Error('question_not_reached');
     await this.context.put('sessions', { ...session, active_presentation_id: target.presentation_id, revision: session.revision + 1, updated_at: this.at });
     return { presentation_id: target.presentation_id, session_id: sessionId };
   }
   async help(command: Extract<Command, { type: 'help' }>) {
     const { presentation, session, question } = await this.presentation(command.presentation_id, false, true);
+    if (presentation.status === 'skipped') throw new Error('invalid_session_state');
     if (['diagnostic', 'final'].includes(session.kind) && session.status !== 'submitted') throw new Error('assessment_help_disabled');
     if (presentation.status === 'draft' && presentation.shown_at === null) throw new Error('invalid_presentation');
     if (command.kind === 'hint' && (!Number.isInteger(command.hint_index) || command.hint_index! < 0 || command.hint_index! >= question.hints_tt.length)) throw new Error('invalid_hint');

@@ -72,3 +72,8 @@
 .dictionary-group h3 .arabic { font-weight: 400; }
 .dictionary-group .entry-reading { font-size: var(--text-size); font-weight: 500; }
 .dictionary-group > p { margin-block: 0.75rem; }
+
+.review-cards { list-style: none; padding: 0; }
+.review-cards > li { border-bottom: 1px solid var(--divider-decorative); padding-block: 1rem; }
+
+.review-document { overflow-wrap: anywhere; }

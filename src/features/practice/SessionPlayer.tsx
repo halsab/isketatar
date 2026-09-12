@@ -35,20 +35,21 @@ function EditorView({ editor, session, onResult }: { editor: SessionEditor; sess
     if (pending.length && !confirmed) return;
     try { await editor.perform({ type: 'help', presentation_id: editor.presentationId, kind, hint_index: kind === 'hint' ? presentation.assistance.hint_indices.length : undefined, confirm_assessment_help: confirmed }); } catch { /* Помощь не раскрывается до commit. */ }
   }
-  async function advance(retry: boolean) {
+  async function advance(action: 'ack' | 'retry' | 'skip') {
     try {
-      const receipt = await editor.perform({ type: retry ? 'retry' : 'ack', presentation_id: editor.presentationId });
+      const receipt = await editor.perform({ type: action, presentation_id: editor.presentationId });
       if (!receipt.presentation_id) onResult(session.session_id);
     } catch { /* Сохраняется прежний вопрос и доступная причина ошибки. */ }
   }
   return <div ref={root} className="session-document">
-    <div className="session-heading"><p>{t(question.assessment_role === 'transfer' ? 'lesson.transfer' : session.kind === 'reading_practice' ? 'reading.questions' : 'lesson.practice')} · {t('exercise.question_count', { current: session.question_plan.indexOf(plan) + 1, total: session.question_plan.length })}</p><Button onClick={() => navigate(session.lesson_id ? `/lessons/${session.lesson_id}` : session.kind === 'reading_practice' ? `/reading/${session.reading_ids[0]}` : '/')} busy={state.busy}>{t('session.save_exit')}</Button></div>
+    <div className="session-heading"><p>{t(session.kind === 'review' ? 'nav.review' : question.assessment_role === 'transfer' ? 'lesson.transfer' : session.kind === 'reading_practice' ? 'reading.questions' : 'lesson.practice')} · {t('exercise.question_count', { current: session.question_plan.indexOf(plan) + 1, total: session.question_plan.length })}</p><Button onClick={() => navigate(session.lesson_id ? `/lessons/${session.lesson_id}` : session.kind === 'reading_practice' ? `/reading/${session.reading_ids[0]}` : session.kind === 'review' ? '/review' : '/')} busy={state.busy}>{t('session.save_exit')}</Button></div>
     {question.assessment_role === 'transfer' && <p className="muted">{t('lesson.transfer_intro')}</p>}
     <QuestionView question={question} identity={editor.presentationId} optionOrder={plan.option_order} answer={state.answer} disabled={state.busy || !!attempt || readonly} onChange={(answer, immediate) => { setValidation(undefined); editor.input(answer, immediate); }} onEnter={() => { if (!attempt) void submit(); }} composition={active => editor.composition(active)} error={validation} />
     {presentation.familiarity_at_show.reading_exposed_before ? <p className="meta">{t('exercise.familiar_reading')}</p> : presentation.familiarity_at_show.material_seen_before && <p className="meta">{t('exercise.familiar_material')}</p>}
     {(state.status !== 'saved' || state.error) && <Status tone={state.status === 'unsaved' || state.error ? 'error' : 'neutral'} announce><p>{t(state.status === 'saving' ? 'draft.saving' : 'storage.unsaved')}</p>{(state.status === 'unsaved' || state.error) && <div className="actions"><Button onClick={() => { void runtime.retry().catch(() => {}); }}>{t('draft.retry')}</Button><Button onClick={() => { void runtime.useMemory().catch(() => {}); }}>{t('storage.use_memory')}</Button></div>}</Status>}
     {!attempt && <>
       <div className="actions"><Button variant="primary" busy={state.busy} disabled={readonly} onClick={() => { void submit(); }}>{t('action.check')}</Button><Button busy={state.busy} disabled={readonly} onClick={() => { void submit(true); }}>{t('exercise.unsure')}</Button></div>
+      {session.kind === 'review' && <p><Button busy={state.busy} disabled={readonly} onClick={() => { void advance('skip'); }}>{t('review.skip')}</Button></p>}
       <div className="exercise-help">{presentation.assistance.hint_indices.map(index => <p key={index}><MixedText text={question.hints_tt[index]!} /></p>)}
         {presentation.assistance.hint_indices.length < question.hints_tt.length && <Button busy={state.busy} onClick={() => { void help('hint'); }}>{t(presentation.assistance.hint_indices.length ? 'exercise.hint_next' : 'exercise.hint')}</Button>}
         {!!question.rule_ids.length && <Button busy={state.busy} onClick={() => { void help('rule'); }}>{t('lesson.rule')}</Button>}
@@ -62,7 +63,7 @@ function EditorView({ editor, session, onResult }: { editor: SessionEditor; sess
       <p>{t('exercise.answer_placeholder')}: <AnswerSummary answer={attempt.answer_raw} question={question} /></p><p><strong>{t('exercise.answer')}:</strong> <AcceptedAnswer question={question} /></p>
       <p><MixedText text={question.explanation_tt} /></p>{hasAssistance(attempt.assistance_before_submit) ? <p>{t('exercise.assisted')}</p> : attempt.independent_correct && <p>{t('exercise.independent')}</p>}
       {question.rule_ids.map(id => <p key={id}><MixedText text={content.catalog.rules.get(id)?.statement_tt ?? ''} /></p>)}
-      <div className="actions"><Button variant="primary" busy={state.busy} disabled={readonly} onClick={() => { void advance(false); }}>{t('action.next')}</Button>{attempt.grade !== 'correct' && <Button busy={state.busy} disabled={readonly} onClick={() => { void advance(true); }}>{t('action.retry')}</Button>}</div>
+      <div className="actions"><Button variant="primary" busy={state.busy} disabled={readonly} onClick={() => { void advance('ack'); }}>{t('action.next')}</Button>{attempt.grade !== 'correct' && <Button busy={state.busy} disabled={readonly} onClick={() => { void advance('retry'); }}>{t('action.retry')}</Button>}</div>
     </section>}
   </div>;
 }
