@@ -27,6 +27,7 @@ export class PackageStore {
     const existing = this.manifests.get(id); if (existing) return existing;
     const { manifest } = await this.readManifest(id); this.manifests.set(id, manifest); return manifest;
   }
+  forget(id: string) { this.manifests.delete(id); }
   private async readManifest(id: string): Promise<{ manifest: PackageManifest; response: Response }> {
     const entry = await this.entry(id);
     const cache = await this.cacheStorage.open(entry.shell_cache); const cached = await cache.match(entry.manifest_url);
@@ -83,10 +84,10 @@ export class PackageStore {
       return true;
     } catch { await this.incomplete(id); return false; }
   }
-  async download(id: string, signal: AbortSignal, notify: (progress: DownloadProgress) => void) {
+  async download(id: string, signal: AbortSignal, notify: (progress: DownloadProgress) => void, requestOffline = true) {
     const manifest = await this.manifest(id); const before = await this.entry(id);
     if (before.completeness === 'ready' && await this.verify(id)) return;
-    await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = 'downloading'; entry.verified_at = null; state.offline_requested = true; });
+    await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = 'downloading'; entry.verified_at = null; if (requestOffline) state.offline_requested = true; });
     let count = 0; let bytes = 0; const totalBytes = manifest.assets.reduce((sum, asset) => sum + asset.bytes, 0);
     try {
       for (const asset of manifest.assets) {
@@ -104,7 +105,7 @@ export class PackageStore {
       await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = 'ready'; entry.verified_at = Date.now(); });
     } catch (error) {
       await this.cacheStorage.delete(before.course_cache).catch(() => {});
-      await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = signal.aborted ? 'not_saved' : 'failed'; entry.verified_at = null; if (signal.aborted) state.offline_requested = false; }).catch(() => {});
+      await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id)!; entry.completeness = signal.aborted ? 'not_saved' : 'failed'; entry.verified_at = null; if (signal.aborted && requestOffline) state.offline_requested = false; }).catch(() => {});
       throw error;
     }
   }

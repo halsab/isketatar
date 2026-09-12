@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { PackageStore } from './packages';
+import { ReleaseLifecycle } from './lifecycle';
 import { emptyRegistry, type RegistryStore } from './registry';
 import { POLICIES } from '../../domain/content/types';
 import { sha256, type PackageManifest } from './manifest';
@@ -57,4 +58,95 @@ it('cleans failed staging even if writing the failure marker is denied',async()=
 it('invokes the default browser fetch without binding it to the package object',async()=>{
   vi.stubGlobal('fetch',function(this:unknown,...args:Parameters<typeof fetch>){expect(this).toBeUndefined();return request(...args);});
   const store=new PackageStore(storage,caches);const body=JSON.stringify(manifest);await store.register(manifest,await sha256(new TextEncoder().encode(body)),new Response(body));await store.saveShell(id);
+});
+
+async function lifecycleFixture() {
+  const store = await packageStore(); await store.download(id, new AbortController().signal, () => {});
+  const lifecycle = new ReleaseLifecycle(store, request);
+  const candidate = async (next: string) => {
+    const previous = manifest.release_id;
+    manifest = { ...manifest, release_id: next, assets: manifest.assets.map(asset => ({ ...asset, url: asset.url.replace(previous, next) })), shell_assets: manifest.shell_assets.map(url => url.replace(previous, next)) };
+    await lifecycle.check([]); return next;
+  };
+  const download = (target: string) => store.download(target, new AbortController().signal, () => {}, false);
+  return { store, lifecycle, candidate, download };
+}
+const r2 = '1.0.0-2222222222222222'; const r3 = '1.0.0-3333333333333333';
+const pin = { session_id: 'saved-session', release_id: id, content_schema: 1, policy_versions: POLICIES };
+it('stages explicitly, keeps current until commit, and blocks R3 while an R1 session is pinned', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2);
+  expect((await storage.read()).current_release_id).toBe(id);
+  await expect(lifecycle.prepare('update-1', id, r2, [pin])).rejects.toThrow('retained_incomplete');
+  await download(r2); await lifecycle.prepare('update-1', id, r2, [pin]);
+  expect((await storage.read()).current_release_id).toBe(id);
+  await lifecycle.commit('update-1', [pin]); await lifecycle.finish('update-1', [pin]);
+  expect(await storage.read()).toMatchObject({ current_release_id: r2, previous_release_id: id, candidate_release_id: null, operation: null });
+  await candidate(r3); await download(r3);
+  await expect(lifecycle.prepare('update-2', r2, r3, [pin])).rejects.toThrow('release_pinned');
+  expect((await storage.read()).current_release_id).toBe(r2);
+  await lifecycle.prepare('update-2', r2, r3, []); await lifecycle.commit('update-2', []);
+  expect(await caches.keys()).toContain(`isketatar-course-${id}`);
+  await lifecycle.finish('update-2', []);
+  expect(await caches.keys()).not.toContain(`isketatar-course-${id}`);
+  expect((await storage.read()).releases.map(entry => entry.release_id)).toEqual([r2, r3]);
+});
+it('recovers prepared and committed operations idempotently without rollback or premature cleanup', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  await lifecycle.prepare('update-1', id, r2, []); await lifecycle.prepare('update-1', id, r2, []);
+  await expect(lifecycle.commit('different', [])).rejects.toThrow('update_conflict');
+  await lifecycle.commit('update-1', []); await lifecycle.commit('update-1', []);
+  await expect(lifecycle.cancel('update-1')).rejects.toThrow('update_committed');
+  await lifecycle.finish('update-1', []); expect((await storage.read()).current_release_id).toBe(r2);
+});
+it('rechecks pins at commit and never deletes an old cache before the role transaction succeeds', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  await lifecycle.prepare('update-1', id, r2, []); await lifecycle.commit('update-1', []); await lifecycle.finish('update-1', []);
+  await candidate(r3); await download(r3); await lifecycle.prepare('update-2', r2, r3, []);
+  await expect(lifecycle.commit('update-2', [pin])).rejects.toThrow('release_pinned');
+  expect(await storage.read()).toMatchObject({ current_release_id: r2, previous_release_id: id, operation: { phase: 'prepared' } });
+  expect(await caches.keys()).toContain(`isketatar-course-${id}`); await lifecycle.cancel('update-2');
+});
+it('candidate cancellation preserves current offline intent and expiry never touches retained or foreign caches', async () => {
+  const { store, lifecycle, candidate } = await lifecycleFixture(); await caches.open('another-project'); await candidate(r2);
+  const controller = new AbortController();
+  await expect(store.download(r2, controller.signal, () => controller.abort(), false)).rejects.toThrow();
+  expect((await storage.read()).offline_requested).toBe(true);
+  await storage.change(value => { value.releases.find(entry => entry.release_id === r2)!.created_at = 1; });
+  await lifecycle.cleanup(86_400_002, []);
+  expect((await storage.read()).candidate_release_id).toBeNull();
+  expect(await caches.keys()).toContain('another-project'); expect(await store.verify(id)).toBe(true);
+});
+it('rejects a candidate reader that cannot preserve the pinned policy and requires the retained package in full', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  await expect(lifecycle.prepare('update-1', id, r2, [{ ...pin, policy_versions: { ...POLICIES, grading: 'grading/2' } as unknown as typeof POLICIES }])).rejects.toThrow('unsupported_release');
+  await (await caches.open(`isketatar-course-${id}`)).delete(root + 'runtime/module-M01.json');
+  await expect(lifecycle.prepare('update-1', id, r2, [pin])).rejects.toThrow('retained_incomplete');
+  expect((await storage.read()).operation).toBeNull();
+});
+it('detects eviction between prepare and commit while preserving the accepted release', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  await lifecycle.prepare('update-1', id, r2, []);
+  await (await caches.open(`isketatar-course-${r2}`)).delete(`/isketatar/releases/${r2}/runtime/module-M01.json`);
+  await expect(lifecycle.commit('update-1', [])).rejects.toThrow('retained_incomplete');
+  expect((await storage.read()).current_release_id).toBe(id);
+});
+it('keeps a ready candidate for seven days and cleans only unoccupied owned orphan caches', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture(); await candidate(r2); await download(r2);
+  const orphan = '1.0.0-4444444444444444'; await caches.open(`isketatar-course-${orphan}`);
+  await caches.open(orphan);
+  await storage.change(value => { value.releases.find(entry => entry.release_id === r2)!.verified_at = 1; });
+  await lifecycle.cleanup(2 * 86_400_000, [orphan]);
+  expect((await storage.read()).candidate_release_id).toBe(r2); expect(await caches.keys()).toContain(`isketatar-course-${orphan}`);
+  await lifecycle.cleanup(8 * 86_400_000, []);
+  expect((await storage.read()).candidate_release_id).toBeNull(); expect(await caches.keys()).not.toContain(`isketatar-course-${orphan}`);
+  expect(await caches.keys()).toContain(orphan);
+});
+it('retains the committed marker across a cleanup failure so the same operation can finish safely', async () => {
+  const { lifecycle, candidate, download } = await lifecycleFixture();
+  await candidate(r2); await download(r2); await lifecycle.prepare('update-1', id, r2, []); await lifecycle.commit('update-1', []); await lifecycle.finish('update-1', []);
+  await candidate(r3); await download(r3); await lifecycle.prepare('update-2', r2, r3, []); await lifecycle.commit('update-2', []);
+  const remove = vi.spyOn(caches, 'delete').mockRejectedValueOnce(new DOMException('denied', 'SecurityError'));
+  await expect(lifecycle.finish('update-2', [])).rejects.toThrow('denied');
+  expect(await storage.read()).toMatchObject({ current_release_id: r3, operation: { phase: 'committed' } });
+  remove.mockRestore(); await lifecycle.finish('update-2', []); expect((await storage.read()).operation).toBeNull();
 });
