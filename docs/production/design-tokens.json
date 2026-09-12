@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "status": "design_specification_not_implemented",
+  "date": "2026-09-12",
+  "units": {
+    "sizes": "nominal CSS px at 16px browser root; use rem for typography and scalable control dimensions",
+    "durations": "milliseconds",
+    "breakpoints": "CSS pixels of available viewport, never OS identity"
+  },
+  "colors": {
+    "light": {
+      "canvas": "#F7F4ED",
+      "surface": "#FFFDF8",
+      "surface_alt": "#EEE9DF",
+      "ink": "#242B29",
+      "text_muted": "#59645F",
+      "control_border": "#798578",
+      "divider_decorative": "#D6DCD2",
+      "primary": "#17594F",
+      "primary_hover": "#124A42",
+      "primary_pressed": "#0D3D36",
+      "on_primary": "#FFFFFF",
+      "primary_subtle": "#E3EFE9",
+      "focus": "#0B6B5A",
+      "success_bg": "#EAF3E9",
+      "success_text": "#285B32",
+      "success_border": "#43804B",
+      "error_bg": "#F9ECE8",
+      "error_text": "#983D30",
+      "error_border": "#A65242",
+      "warning_bg": "#F8F0D9",
+      "warning_text": "#75561B",
+      "warning_border": "#906B21",
+      "selection": "#D8EAE3"
+    },
+    "dark": {
+      "canvas": "#141D19",
+      "surface": "#1C2923",
+      "surface_alt": "#25352D",
+      "ink": "#EDF2EB",
+      "text_muted": "#B6C3B8",
+      "control_border": "#7A8F80",
+      "divider_decorative": "#3D5144",
+      "primary": "#8DD6BC",
+      "primary_hover": "#A2E2CA",
+      "primary_pressed": "#75C2A7",
+      "on_primary": "#132C23",
+      "primary_subtle": "#223F33",
+      "focus": "#B6EAD5",
+      "success_bg": "#203728",
+      "success_text": "#A7D7A8",
+      "success_border": "#77B37B",
+      "error_bg": "#3D2724",
+      "error_text": "#F0B3A8",
+      "error_border": "#D38578",
+      "warning_bg": "#3A3020",
+      "warning_text": "#E5C57C",
+      "warning_border": "#C49D4C",
+      "selection": "#2E5342"
+    }
+  },
+  "font_families": {
+    "ui": [
+      "Inter",
+      "system-ui",
+      "sans-serif"
+    ],
+    "arabic": [
+      "Noto Naskh Arabic",
+      "serif"
+    ]
+  },
+  "typography": {
+    "body": {
+      "family": "ui",
+      "size": 18,
+      "line_height": 1.6,
+      "weight": 400
+    },
+    "ui": {
+      "family": "ui",
+      "size": 16,
+      "line_height": 1.5,
+      "weight": 400
+    },
+    "meta": {
+      "family": "ui",
+      "size": 14,
+      "line_height": 1.5,
+      "weight": 400
+    },
+    "title_compact": {
+      "family": "ui",
+      "size": 28,
+      "line_height": 1.2,
+      "weight": 600
+    },
+    "title_wide": {
+      "family": "ui",
+      "size": 36,
+      "line_height": 1.2,
+      "weight": 600
+    },
+    "section": {
+      "family": "ui",
+      "size": 22,
+      "line_height": 1.3,
+      "weight": 600
+    },
+    "arabic": {
+      "family": "arabic",
+      "size": 32,
+      "line_height": 2,
+      "weight": 400
+    },
+    "letter_compact": {
+      "family": "arabic",
+      "size": 56,
+      "line_height": 2,
+      "weight": 400
+    },
+    "letter_wide": {
+      "family": "arabic",
+      "size": 72,
+      "line_height": 2,
+      "weight": 400
+    }
+  },
+  "preferences": {
+    "text_size_px": [
+      18,
+      20,
+      22,
+      24
+    ],
+    "text_size_default": 18,
+    "arabic_size_px": [
+      28,
+      32,
+      40,
+      48
+    ],
+    "arabic_size_default": 32,
+    "theme": [
+      "system",
+      "light",
+      "dark"
+    ],
+    "theme_default": "system",
+    "reduced_motion": [
+      "system",
+      "reduce"
+    ]
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radii": {
+    "badge": 6,
+    "control": 10,
+    "panel": 14
+  },
+  "layout": {
+    "menu_below": 360,
+    "medium_from": 640,
+    "wide_from": 1120,
+    "gutter_compact": 16,
+    "gutter_medium": 24,
+    "gutter_wide": 32,
+    "container_max": 1280,
+    "reading_max": 680,
+    "answers_max": 640,
+    "dictionary_panel": 320,
+    "column_gap": 24,
+    "header_compact_min": 56,
+    "header_wide_min": 64,
+    "bottom_nav_min": 64,
+    "medium_nav_min": 48,
+    "dialog_max": 560
+  },
+  "controls": {
+    "button_min_height": 48,
+    "button_padding_inline": 20,
+    "icon_target_min": 44,
+    "answer_min_height": 56,
+    "tatar_key_min": 48,
+    "tatar_key_gap": 8,
+    "border_width": 1,
+    "selected_border_width": 2,
+    "focus_width": 3,
+    "focus_offset": 2
+  },
+  "motion": {
+    "press": 120,
+    "feedback": 160,
+    "panel": 200,
+    "dialog": 240,
+    "route_fade": 120,
+    "reduced": 0,
+    "ease_out": "cubic-bezier(0.2, 0, 0, 1)",
+    "ease_in": "cubic-bezier(0.4, 0, 1, 1)",
+    "panel_distance": 16,
+    "dialog_distance": 12,
+    "press_scale": 0.98
+  },
+  "layers": {
+    "content": 0,
+    "sticky": 10,
+    "navigation": 20,
+    "nonmodal_panel": 30,
+    "scrim": 40,
+    "dialog": 50,
+    "status": 60
+  },
+  "rules": [
+    "Arabic text always uses ink, not semantic status text colors.",
+    "No synthetic Arabic weights or letter spacing.",
+    "No fixed content height, clipping or ellipsis for instructional writing.",
+    "Focus contrast assumes a 2px opaque host-surface gap.",
+    "All actions remain available without motion or gestures."
+  ]
+}

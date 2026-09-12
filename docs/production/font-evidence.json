@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-12",
+  "method": {
+    "engine": "HarfBuzz 11.2.1",
+    "coverage": "nominal glyph mapping and OpenType shaping",
+    "arabic_runs": 1193,
+    "arabic_codepoints": 59,
+    "cyrillic_codepoints": 74,
+    "arabic_options": {
+      "script": "Arab",
+      "language": "tt-Arab",
+      "direction": "rtl"
+    },
+    "visual_samples": 8
+  },
+  "limitations": [
+    "Tested source TTF files, not final production WOFF2.",
+    "No application or browser layout was implemented or tested.",
+    "Source URL on main/master is provenance of a snapshot; SHA-256 identifies inspected bytes.",
+    "Inter release name 4.1 is distinct from inspected internal version 4.001.",
+    "Coverage is not proof of pedagogical fidelity for every shape; browser and source comparison remain release gates."
+  ],
+  "fonts": [
+    {
+      "size": 291980,
+      "sha256": "c9a039ce48a477243c1eb7d561b13de115cfd651d8a83fa42e2f4d63c2e11b00",
+      "name": {
+        "1": "Noto Naskh Arabic",
+        "2": "Regular",
+        "5": "Version 2.021; ttfautohint (v1.8.4.16-eb64)",
+        "13": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org",
+        "14": "https://openfontlicense.org"
+      },
+      "tested_count": 59,
+      "missing": [],
+      "file": "NotoNaskhArabic-Regular.ttf",
+      "source_url": "https://github.com/notofonts/arabic/releases/download/NotoNaskhArabic-v2.021/NotoNaskhArabic-v2.021.zip",
+      "license_url": "https://raw.githubusercontent.com/notofonts/arabic/main/OFL.txt",
+      "license": "SIL Open Font License 1.1",
+      "selected_for_v1": true,
+      "archive_member": "NotoNaskhArabic/full/ttf/NotoNaskhArabic-Regular.ttf",
+      "archive_sha256": "6c050ab9bd087d69b733c505a7576e60c528c2f33cd7b91005a5bd7da4514032"
+    },
+    {
+      "size": 612940,
+      "sha256": "2444788b85996d795f0db7e14f3f6bfc3ea1c985e391267db0269b9e40f3447d",
+      "name": {
+        "1": "Amiri",
+        "2": "Regular",
+        "5": "Version 1.003",
+        "13": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org",
+        "14": "https://openfontlicense.org"
+      },
+      "tested_count": 59,
+      "missing": [],
+      "file": "Amiri-Regular.ttf",
+      "source_url": "https://raw.githubusercontent.com/aliftype/amiri/main/fonts/Amiri-Regular.ttf",
+      "license_url": "https://raw.githubusercontent.com/aliftype/amiri/main/OFL.txt",
+      "license": "SIL Open Font License 1.1",
+      "selected_for_v1": false
+    },
+    {
+      "size": 879708,
+      "sha256": "4989b125924991b90d05b2d16e0e388c48f7d5bb8b30539bbf9c755278d0ccaf",
+      "name": {
+        "1": "Inter Variable",
+        "2": "Regular",
+        "5": "Version 4.001;git-9221beed3",
+        "13": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
+        "14": "http://scripts.sil.org/OFL"
+      },
+      "tested_count": 74,
+      "missing": [],
+      "file": "InterVariable.ttf",
+      "source_url": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterVariable.ttf",
+      "license_url": "https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt",
+      "license": "SIL Open Font License 1.1",
+      "selected_for_v1": true
+    }
+  ]
+}

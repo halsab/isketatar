@@ -286,7 +286,7 @@ Settings хранится в meta под key=settings:
 - locale:tt-Cyrl, единственный язык первого выпуска;
 - theme:system|light|dark;
 - arabic_size_px:28|32|40|48, default32;
-- text_size_px:18|20|22|24, default18, только основной текст чтения;
+- text_size_px:18|20|22|24, default18, основная учебная кириллица: теория, условия и объяснения вопросов, чтение, значения словаря и справочник; размер навигации/кнопок задаёт UI-типографика, браузерный zoom действует на всё;
 - reduced_motion:system|reduce;
 - review_batch_size:целое 1…10, default10;
 - last_location:{kind,id}|null; kind=lesson|reading|dictionary|reference, ID валиден;
