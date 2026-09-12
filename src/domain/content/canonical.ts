@@ -12,7 +12,7 @@ export function canonical(value: unknown): string {
 }
 
 export function normalizeReading(text: string): string {
-  return text.normalize('NFC').replace(/\u00a0/gu, ' ').replace(/^ +| +$/gu, '').replace(/ +/gu, ' ').toLowerCase();
+  return text.normalize('NFC').replace(/\u00a0/gu, ' ').replace(/^ +| +$/gu, '').replace(/ +/gu, ' ').replace(/\p{Script=Cyrillic}/gu, character => character.toLowerCase());
 }
 
 // Только совместимые арабские presentation forms; смысловые буквы и marks сохраняются.
