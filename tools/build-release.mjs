@@ -1,4 +1,4 @@
-import { bootModules } from './boot-modules.mjs';
+import { bootModules, initialModules } from './boot-modules.mjs';
 import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -31,13 +31,13 @@ const templateRoot = `${base}releases/${placeholder}/`;
 const shellPaths = new Set([...input.get('index.html').toString().matchAll(/(?:src|href)="([^"]+)"/gu)].map(match => match[1]).filter(url => url.startsWith(templateRoot)).map(url => url.slice(templateRoot.length)));
 for (const path of input.keys()) if (['index.html', 'recovery.html', 'runtime/core.json', 'manifest.webmanifest'].includes(path) || /^assets\/Inter[^/]+\.woff2$/u.test(path) || path.startsWith('icons/')) shellPaths.add(path);
 const shellChunks = new Set();
-function includeChunk(file) {
-  if (shellChunks.has(file)) return;
+function includeChunk(file, paths = shellPaths, chunks = shellChunks) {
+  if (chunks.has(file)) return;
   const chunk = graph.find(chunk => chunk.file === file);
   if (!chunk) throw new Error(`Missing shell chunk: ${file}`);
-  shellChunks.add(file); shellPaths.add(file);
-  for (const css of chunk.css) shellPaths.add(css);
-  chunk.imports.forEach(includeChunk);
+  chunks.add(file); paths.add(file);
+  for (const css of chunk.css) paths.add(css);
+  chunk.imports.forEach(file => includeChunk(file, paths, chunks));
 }
 graph.filter(chunk => chunk.entry).forEach(chunk => includeChunk(chunk.file));
 for (const module of bootModules) {
@@ -47,6 +47,13 @@ for (const module of bootModules) {
 }
 for (const path of shellPaths) if (!input.has(path)) throw new Error(`Missing shell asset: ${path}`);
 const sortedShellPaths = [...shellPaths].sort();
+const index = input.get('index.html').toString();
+const hinted = new Set([...index.matchAll(/(?:src|href)="([^"]+)"/gu)].map(match => match[1]));
+const preloadPaths = new Set(); const preloadChunks = new Set();
+graph.filter(chunk => chunk.entry || initialModules.some(module => chunk.modules.includes(module))).forEach(chunk => includeChunk(chunk.file, preloadPaths, preloadChunks));
+const hints = [...preloadPaths].sort().filter(path => /\.(?:js|css)$/u.test(path) && !hinted.has(templateRoot + path))
+  .map(path => `<link rel="${path.endsWith('.js') ? 'modulepreload' : 'preload'}"${path.endsWith('.css') ? ' as="style"' : ''} crossorigin href="${templateRoot + path}">`).join('\n');
+if (hints) input.set('index.html', Buffer.from(index.replace('</head>', `${hints}\n</head>`)));
 const header = { app_version: app.version, content_version: content.content_version,
   content_schema: 1, progress_schema: 1, min_reader_version: '1.0.0', base_path: base, built_at: builtAt,
   question_revisions: content.question_revisions, policy_versions: content.policy_versions };

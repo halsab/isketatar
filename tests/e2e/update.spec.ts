@@ -36,10 +36,10 @@ test('explicit update flushes a live draft, reloads both windows and resumes the
   await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('әңгәмә');
   const before = await snapshot(page);
   await accept(page);
-  await expect.poll(async () => (await snapshot(page)).control.accepted_release_id).toBe(releases.next);
+  await expect(page.locator('script[type="module"][src]')).toHaveAttribute('src', new RegExp(`/releases/${releases.next}/`, 'u'));
   await expect(page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true })).toBeVisible();
   await expect(second.getByText(`Басма: ${releases.next}.`, { exact: false })).toBeVisible();
-  const after = await snapshot(page); expect(after.control.data_generation).toBe(before.control.data_generation); expect(after.control.update_gate).toBeNull();
+  const after = await snapshot(page); expect(after.control.accepted_release_id).toBe(releases.next); expect(after.control.data_generation).toBe(before.control.data_generation); expect(after.control.update_gate).toBeNull();
   expect(after.sessions).toContainEqual(expect.objectContaining({ release_id: releases.original, status: 'paused' }));
   expect(after.presentations).toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'әңгәмә' } }));
   releases.setOffline(true); await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();

@@ -7,12 +7,22 @@ import { ArabicFontGate, ArabicText } from '../../ui/ArabicText';
 import { Button, Status } from '../../ui/controls';
 import { MixedText } from '../../ui/MixedText';
 import { t } from '../../ui/copy';
-import { ContentState } from '../shared/ContentState';
+import { Loading } from '../shared/ContentState';
 import { Disclosure } from '../shared/Disclosure';
 import { parseSearch, searchAddress, searchPosition, rememberSearch, type SearchPosition, type SearchQuery } from './search-state';
 
 function Dictionary() {
   const { content, snapshot } = useApp(); const location = useLocation(); const navigate = useNavigate();
+  const courseAccess = snapshot.attempts.length > 0 || snapshot.exposures.some(item => item.kind === 'lesson' || item.kind === 'question' && item.first_answer_exposed_at !== null);
+  const resource = courseAccess ? 'dictionary.json' : 'dictionary-entries.json';
+  const [loaded, setLoaded] = useState<{ resource: string; status: 'ready' | 'error' } | null>(null);
+  const [retry, setRetry] = useState(0);
+  const loading = loaded?.resource !== resource;
+  useEffect(() => {
+    let active = true;
+    void content.load(resource).then(() => { if (active) setLoaded({ resource, status: 'ready' }); }).catch(() => { if (active) setLoaded({ resource, status: 'error' }); });
+    return () => { active = false; };
+  }, [content, resource, retry]);
   const navigationType = useNavigationType();
   const [query, setQuery] = useState(() => parseSearch(location.search)); const address = searchAddress(query);
   const locationAddress = searchAddress(parseSearch(location.search));
@@ -51,8 +61,8 @@ function Dictionary() {
     const lessons = new Set(snapshot.exposures.filter(item => item.kind === 'lesson').map(item => item.resource_id));
     const questions = new Set([...snapshot.attempts.map(item => item.question_id), ...snapshot.exposures.filter(item => item.kind === 'question' && item.first_answer_exposed_at !== null).map(item => item.resource_id)]);
     return [...content.catalog.vocabulary.values()].filter(entry => entry.release === 'with_lesson' ? lessons.has(entry.lesson_id) : entry.question_ids.some(id => questions.has(id))).map(entry => entry.id).join('|');
-  }, [content, snapshot.exposures, snapshot.attempts]);
-  const entries = useMemo(() => new Map<string, DictionaryEntry | Vocabulary>([...content.catalog.lexicon.entries(), ...accessKey.split('|').filter(Boolean).map(id => [id, content.catalog.vocabulary.get(id)!] as const)]), [content, accessKey]);
+  }, [content, snapshot.exposures, snapshot.attempts, loaded]);
+  const entries = useMemo(() => new Map<string, DictionaryEntry | Vocabulary>([...content.catalog.lexicon.entries(), ...accessKey.split('|').filter(Boolean).map(id => [id, content.catalog.vocabulary.get(id)!] as const)]), [content, accessKey, loaded]);
   const index = useMemo(() => new DictionaryIndex([...entries.values()].filter((entry): entry is DictionaryEntry => 'eligibility' in entry), [...entries.values()].filter((entry): entry is Vocabulary => 'release' in entry)), [entries]);
   const savedIds = new Set(snapshot.bookmarks.filter(bookmark => bookmark.kind === 'dictionary').map(bookmark => bookmark.target_id));
   const tooLong = [...query.q].length > QUERY_LIMIT;
@@ -108,7 +118,7 @@ function Dictionary() {
     <form role="search" onSubmit={event => { event.preventDefault(); submit(); }}><label htmlFor="dictionary-query">{t('dictionary.placeholder')}</label><input id="dictionary-query" type="search" dir="auto" value={query.q} onChange={event => change({ q: event.target.value })} aria-invalid={tooLong} aria-describedby={tooLong ? 'query-limit' : undefined} autoComplete="off" spellCheck={false} onKeyDown={event => {
       if (event.key === 'Escape' && !event.nativeEvent.isComposing) { event.preventDefault(); if (current.open.length) setView(persist({ open: [] })); }
     }} /><div className="search-filters"><label><input type="checkbox" checked={query.saved} onChange={event => change({ saved: event.target.checked })} />{t('dictionary.saved_filter')}</label><label><input type="checkbox" checked={query.expanded} onChange={event => change({ expanded: event.target.checked })} />{t('dictionary.expanded_search')}</label><Button onClick={submit}>{t('dictionary.search')}</Button></div></form>
-    {tooLong ? <Status tone="warning"><p id="query-limit">{t('dictionary.query_limit', { count: QUERY_LIMIT })}</p></Status> : pending ? <p role="status">{t('dictionary.searching')}</p> : <>
+    {tooLong ? <Status tone="warning"><p id="query-limit">{t('dictionary.query_limit', { count: QUERY_LIMIT })}</p></Status> : loading ? <Loading /> : loaded?.status === 'error' ? <Status tone="error" announce><p>{t('error.load')}</p><Button onClick={() => { setLoaded(null); setRetry(value => value + 1); }}>{t('offline.retry')}</Button></Status> : pending ? <p role="status">{t('dictionary.searching')}</p> : <>
       <p role="status" aria-live="polite">{t('dictionary.group_count', { count: groups.length })}</p>
       {!groups.length ? <p>{t(query.saved && !savedIds.size ? 'dictionary.no_saved' : 'dictionary.empty')}</p> : <ArabicFontGate><div ref={resultsElement}>{Array.from({ length: Math.ceil(visible.length / 30) }, (_, batch) => {
         const items = visible.slice(batch * 30, (batch + 1) * 30);
@@ -134,6 +144,5 @@ function Dictionary() {
   </div>;
 }
 export function DictionaryPage() {
-  const { content } = useApp();
-  return <ContentState pageTitle={t('nav.dictionary')} identity="dictionary-index" load={() => content.load('dictionary.json')}>{() => <Dictionary />}</ContentState>;
+  return <Dictionary />;
 }

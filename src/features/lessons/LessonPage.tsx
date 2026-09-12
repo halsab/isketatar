@@ -28,7 +28,7 @@ function LessonDocument({ lesson }: { lesson: Lesson }) {
   const { content, snapshot } = useApp(); const [extra, setExtra] = useState(false);
   const examples = lesson.examples.filter(example => example.usage === 'demonstration');
   const references = lesson.examples.filter(example => example.usage === 'reference');
-  return <div className="document lesson-document"><h1><MixedText text={lesson.title_tt} /></h1><p><Link to="/lessons">{t('course.all_lessons')}</Link></p>
+  return <>
     <BookmarkButton kind="lesson" id={lesson.id} />
     <Disclosure identity={`lesson:${lesson.id}`} targets={[{ kind: 'lesson', id: lesson.id }]}>
       <SemanticPosition kind="lesson" id={lesson.id} revision={lesson.content_revision} anchors={[`${lesson.id}:goals`, `${lesson.id}:theory`, ...lesson.rules.map(rule => rule.id), ...examples.map(example => example.id), `${lesson.id}:pitfalls`, `${lesson.id}:outcomes`]} />
@@ -48,12 +48,15 @@ function LessonDocument({ lesson }: { lesson: Lesson }) {
       <section className="source-card"><h2>{t('lesson.source')}</h2>{lesson.source_sections.map(id => <p key={id}><Link to={`/sources/${id}`}><MixedText text={content.catalog.core.source_sections.find(section => section.id === id)!.title} /></Link></p>)}{lesson.external_sources.map(source => <p key={source.url}><a href={source.url} rel="noreferrer">{source.supports_tt}</a> {t('about.external_link')}</p>)}</section>
       <p><Link className="button primary" to={`/lessons/${lesson.id}/practice`}>{t('lesson.practice')}</Link></p>
     </Disclosure>
-  </div>;
+  </>;
 }
 function LessonPageContent() {
   const { lesson_id = '' } = useParams(); const { content } = useApp();
-  if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
-  return <ContentState pageTitle={t('nav.lessons')} identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonDocument key={lesson.id} lesson={lesson} />}</ContentState>;
+  const summary = content.catalog.core.lessons.find(lesson => lesson.id === lesson_id);
+  if (!summary) return <Missing />;
+  return <div className="document lesson-document"><h1><MixedText text={summary.title_tt} /></h1><p><Link to="/lessons">{t('course.all_lessons')}</Link></p>
+    <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonDocument key={lesson.id} lesson={lesson} />}</ContentState>
+  </div>;
 }
 
 export function LessonPage() { return <SessionContent kind="lesson_cycle"><LessonPageContent  /></SessionContent>; }

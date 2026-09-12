@@ -4,7 +4,8 @@ import { Button, Status } from '../ui/controls';
 import { Dialog } from '../ui/Dialog';
 import { t } from '../ui/copy';
 import { StudyScope } from './StudyScope';
-import { AppRuntime, type AppState } from './runtime';
+import type { AppRuntime, AppState } from './runtime';
+import { application, startApplication } from './application';
 import { replacementToken } from '../data/progress/model';
 import { expectedFrom } from '../data/progress/repository';
 import type { Command } from '../data/progress/commands';
@@ -13,9 +14,6 @@ import { RELEASE_ID, releaseRoot } from '../data/pwa/manifest';
 interface Confirmation { title: string; body: string; action: string; danger?: boolean }
 interface AppContextValue { runtime: AppRuntime; state: AppState; confirm: (request: Confirmation) => Promise<boolean>; confirming: boolean }
 const Context = createContext<AppContextValue | null>(null);
-const application = new AppRuntime();
-let initialStart: Promise<void> | undefined;
-export const startApplication = () => initialStart ??= application.start();
 const UpdateStatus = lazy(() => import('../features/settings/UpdateStatus').then(module => ({ default: module.UpdateStatus })));
 
 export function AppProvider({ children }: { children: ReactNode }) {

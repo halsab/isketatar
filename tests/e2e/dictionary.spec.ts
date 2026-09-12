@@ -1,5 +1,18 @@
 import { test, expect } from '@playwright/test';
-import dictionary from '../../public/runtime/dictionary.json' with { type: 'json' };
+import dictionary from '../../public/runtime/vocabulary.json' with { type: 'json' };
+
+test('first course exposure in another window preserves the live search input during vocabulary loading', async ({ page, context }) => {
+  await page.goto('./#/dictionary'); await expect(page.locator('.dictionary-group').first()).toBeVisible();
+  const writer = await context.newPage(); await writer.goto('./#/settings');
+  await writer.getByRole('button', { name: 'Монда дәвам итәргә', exact: true }).click();
+  await writer.getByRole('dialog').getByRole('button', { name: 'Монда дәвам итәргә', exact: true }).click();
+  const input = page.getByRole('searchbox'); await input.fill('тәһарәт');
+  await Promise.all([page.waitForResponse(response => response.url().endsWith('/runtime/vocabulary.json')), writer.goto('./#/lessons/V04')]);
+  await expect(writer.locator('.lesson-example').first()).toBeVisible();
+  await expect(page.locator('.dictionary-group').first()).toBeVisible();
+  await expect(input).toHaveValue('тәһарәт'); await expect(input).toBeFocused();
+  await writer.close();
+});
 
 test('search separates homographs and explicit near spellings without replacing input focus', async ({ page }) => {
   await page.goto('./#/dictionary?q=عالم');

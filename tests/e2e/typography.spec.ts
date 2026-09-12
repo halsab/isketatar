@@ -27,12 +27,13 @@ test('local font, logical Arabic, reflow and independent sizes', async ({ page }
 });
 
 test('missing font hides graded surface and permits retry', async ({ page }) => {
-  await page.route('**/NotoNaskhArabic-Regular.woff2', route => route.abort());
+  const fontRequest = (request: URL) => request.pathname.endsWith('/NotoNaskhArabic-Regular.woff2') && !request.searchParams.has('import');
+  await page.route(fontRequest, route => route.abort());
   await page.goto(url);
   await expect(page.getByText('Иске язу шрифтын йөкләп булмады.', { exact: false }).first()).toBeVisible();
   await expect(page.locator('#graded-action')).toHaveCount(0);
   await expect(page.locator('bdi')).toHaveCount(0);
-  await page.unroute('**/NotoNaskhArabic-Regular.woff2');
+  await page.unroute(fontRequest);
   await page.getByRole('button', { name: 'Кабат эшләргә' }).first().click();
   await expect(page.locator('#graded-action')).toBeVisible();
 });

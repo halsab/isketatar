@@ -1,12 +1,27 @@
 import { test, expect } from '@playwright/test';
 
 test('captures an early install event, prompts on click once and distinguishes acceptance from installation', async ({ page }) => {
-  await page.goto('./#/'); await expect(page.getByRole('main')).toBeVisible();
-  await page.evaluate(() => {
-    Reflect.set(window, 'installCalls', 0);
-    const event = Object.assign(new Event('beforeinstallprompt', { cancelable: true }), { prompt: async () => { Reflect.set(window, 'installCalls', Reflect.get(window, 'installCalls') + 1); return { outcome: 'dismissed' }; } });
-    window.dispatchEvent(event);
+  let releaseRenderer!: () => void;
+  const renderer = new Promise<void>(resolve => { releaseRenderer = resolve; });
+  await page.route('**/assets/main-*.js', async route => { await renderer; await route.continue(); });
+  await page.addInitScript(() => {
+    const add = window.addEventListener.bind(window);
+    window.addEventListener = ((type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
+      add(type, listener, options);
+      if (type === 'beforeinstallprompt') Reflect.set(window, 'installListening', true);
+    }) as typeof window.addEventListener;
   });
+  await page.goto('./#/', { waitUntil: 'domcontentloaded' });
+  try {
+    await page.waitForFunction(() => Reflect.get(window, 'installListening') === true);
+    await expect(page.getByRole('main')).toHaveCount(0);
+    await page.evaluate(() => {
+      Reflect.set(window, 'installCalls', 0);
+      const event = Object.assign(new Event('beforeinstallprompt', { cancelable: true }), { prompt: async () => { Reflect.set(window, 'installCalls', Reflect.get(window, 'installCalls') + 1); return { outcome: 'dismissed' }; } });
+      window.dispatchEvent(event);
+    });
+  } finally { releaseRenderer(); }
+  await expect(page.getByRole('main')).toBeVisible();
   await page.getByRole('link', { name: 'Көйләүләр', exact: true }).first().click();
   const button = page.getByRole('button', { name: 'Кушымтаны урнаштырырга', exact: true });
   await expect(button).toBeVisible(); expect(await page.evaluate(() => Reflect.get(window, 'installCalls'))).toBe(0);

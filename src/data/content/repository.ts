@@ -54,15 +54,19 @@ export class ContentRepository {
     return task;
   }
   private async loadResource(resource: string) {
+    if (resource === 'dictionary.json' && this.assets.some(asset => asset.url.endsWith('/runtime/dictionary-entries.json'))) {
+      await Promise.all(['dictionary-entries.json', 'vocabulary.json'].map(part => this.load(part))); return;
+    }
+    // Retained выпуски с прежним единым ресурсом сохраняют доступ к своим материалам.
+    if (resource === 'dictionary-entries.json' && !this.assets.some(asset => asset.url.endsWith(`/runtime/${resource}`))) { await this.load('dictionary.json'); return; }
     const suffix = `/runtime/${resource}`;
     const asset = this.assets.find(item => item.url.endsWith(suffix));
     if (!asset) throw new Error('content_unavailable');
-    const validators = await import('../../generated/content-validators.js');
-    if (resource.startsWith('module-')) this.catalog.addModule(await checkedJson(asset, validators.validateModule));
-    else if (resource === 'readings.json') this.catalog.addReadings(await checkedJson(asset, validators.validateReadings));
-    else if (resource === 'dictionary.json') this.catalog.addDictionary(await checkedJson(asset, validators.validateDictionary));
-    else if (resource === 'references.json') this.catalog.references = await checkedJson(asset, validators.validateReferences);
-    else if (resource === 'assessments.json') this.catalog.addQuestions(await checkedJson(asset, validators.validateAssessments));
+    if (resource.startsWith('module-')) this.catalog.addModule(await checkedJson(asset, (await import('../../generated/module-validator.js')).validateModule));
+    else if (resource === 'readings.json') this.catalog.addReadings(await checkedJson(asset, (await import('../../generated/readings-validator.js')).validateReadings));
+    else if (['dictionary.json', 'dictionary-entries.json', 'vocabulary.json'].includes(resource)) this.catalog.addDictionary(await checkedJson(asset, (await import('../../generated/dictionary-validator.js')).validateDictionary));
+    else if (resource === 'references.json') this.catalog.references = await checkedJson(asset, (await import('../../generated/references-validator.js')).validateReferences);
+    else if (resource === 'assessments.json') this.catalog.addQuestions(await checkedJson(asset, (await import('../../generated/assessments-validator.js')).validateAssessments));
     else throw new Error('content_unavailable');
   }
   async lesson(id: string) {

@@ -5,9 +5,11 @@ import json
 from pathlib import Path
 import re
 import sys
+import unicodedata
 import fontTools
 from fontTools.ttLib import TTFont
 from fontTools import subset
+from fontTools.varLib.instancer import instantiateVariableFont
 import uharfbuzz as hb
 
 root = Path(__file__).resolve().parents[1]
@@ -53,14 +55,21 @@ for entry in evidence["fonts"]:
     # Поднабор сохраняет весь корпус; shaping сравнивается через исходные glyph IDs после перенумерации.
     keep = {ord(c) for text in texts for c in text if ord(c) in original_cmap}
     if entry["file"].startswith("Inter"):
-        keep.update(set(range(0x20, 0x100)) | set(range(0x300, 0x370)) | {0x2116, 0x2212, 0x25cc, 0xfffd})
+        keep.update(ord(c) for text in texts for c in unicodedata.normalize('NFD', text) if ord(c) in original_cmap)
+        keep.update(set(range(0x20, 0x7f)) | {0x300, 0x301, 0x2116, 0x2212, 0x25cc, 0xfffd})
     else:
         keep.update(range(0x600, 0x700))
     options = subset.Options()
     options.recalc_timestamp = False
+    if entry["file"].startswith("Inter"):
+        assert not any('\u2044' in text for text in texts), 'Fraction shaping needs frac/numr/dnom'
+        options.layout_features = [feature for feature in options.layout_features if feature not in {"frac", "numr", "dnom"}]
     cutter = subset.Subsetter(options=options)
     cutter.populate(unicodes=keep)
     cutter.subset(font)
+    if entry["file"].startswith("Inter"):
+        # Экранный text master: сохраняем weight axis целиком, без оптической интерполяции.
+        font = instantiateVariableFont(font, {"opsz": 14}, inplace=True)
     glyph_ids = [original_order.index(name) for name in font.getGlyphOrder()]
     font.flavor = "woff2"
     output = root / "src/assets/fonts" / entry["file"].replace(".ttf", ".woff2")
@@ -79,17 +88,18 @@ for entry in evidence["fonts"]:
         assert not cyrillic.difference(restored.getBestCmap())
         before, after = hb.Font(hb.Face(raw)), hb.Font(hb.Face(sfnt.getvalue()))
         runs = sorted({run for text in texts for run in re.findall(r"[\u0041-\u024f\u0400-\u052f]+", text)})
+        shaped_runs = sorted(set(runs) | {unicodedata.normalize('NFD', run) for run in runs})
         for weight in [400, 500, 600, 700]:
             before.set_variations({'wght': weight})
             after.set_variations({'wght': weight})
-            for run in runs:
+            for run in shaped_runs:
                 results = []
                 for face, mapping in ((before, None), (after, glyph_ids)):
                     buf = hb.Buffer(); buf.add_str(run); buf.guess_segment_properties(); hb.shape(face, buf)
                     assert all(info.codepoint != 0 for info in buf.glyph_infos), run
                     results.append([(mapping[i.codepoint] if mapping else i.codepoint, i.cluster, p.x_advance, p.y_advance, p.x_offset, p.y_offset) for i, p in zip(buf.glyph_infos, buf.glyph_positions)])
                 assert results[0] == results[1], (weight, run)
-        checks = {"cyrillic_codepoints": len(cyrillic), "missing": [], "subset": "Corpus Latin/Cyrillic and symbols, ASCII/Latin-1 and combining marks", "checked_weights": [400, 500, 600, 700], "retained_codepoints": len(restored.getBestCmap()), "latin_cyrillic_runs": len(runs), "shape_identical": True}
+        checks = {"cyrillic_codepoints": len(cyrillic), "missing": [], "subset": "All corpus symbols and canonical decompositions, ASCII, acute/grave accents and fallback symbols", "optical_size": 14, "weight_range": [100, 900], "dropped_layout_features": ["frac", "numr", "dnom"], "fraction_slash_in_corpus": False, "shape_scope": "Latin/Cyrillic runs including NFD; numeric fraction sequences are not part of this proof", "checked_weights": [400, 500, 600, 700], "retained_codepoints": len(restored.getBestCmap()), "latin_cyrillic_runs": len(runs), "runs_including_nfd": len(shaped_runs), "shape_identical": True}
     data = output.read_bytes()
     report["fonts"].append({"file": str(output.relative_to(root)), "source_sha256": entry["sha256"],
                             "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data), **checks})

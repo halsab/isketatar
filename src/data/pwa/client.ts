@@ -3,6 +3,7 @@ import type { DownloadProgress } from './packages';
 import type { Registry } from './registry';
 import type { UpdateState } from './coordination';
 import type { Preparation, UpdateBlocker } from './coordination';
+import { activeTransport, transportSupported } from './transport';
 interface WorkerState { registry: Registry; manifest: PackageManifest | null; candidate: PackageManifest | null }
 interface UpdateHost {
   identify(): { tab_id: string; release_id: string; mode: 'durable' | 'memory' };
@@ -24,20 +25,10 @@ class OfflineClient {
     return this.starting ??= this.initialize(id);
   }
   private async initialize(id: string) {
-    if (import.meta.env.DEV || !('serviceWorker' in navigator) || !('caches' in globalThis) || !globalThis.isSecureContext) { this.publish({ supported: false }); return; }
+    if (!transportSupported()) { this.publish({ supported: false }); return; }
     this.publish({ supported: true, loading: true, error: null });
     try {
-      this.registration = await navigator.serviceWorker.register(PWA_BASE + 'sw.js', { scope: PWA_BASE, updateViaCache: 'none' });
-      const active = this.registration.active;
-      if (!active || active.state !== 'activated') {
-        const installing = this.registration.installing ?? this.registration.waiting;
-        if (!installing) throw new Error('pwa_unavailable');
-        await new Promise<void>((resolve, reject) => {
-          const timeout = setTimeout(() => { installing.removeEventListener('statechange', change); reject(new Error('pwa_unavailable')); }, 30_000);
-          const change = () => { if (installing.state === 'activated' || installing.state === 'redundant') { clearTimeout(timeout); installing.removeEventListener('statechange', change); if (installing.state === 'activated') resolve(); else reject(new Error('pwa_unavailable')); } };
-          installing.addEventListener('statechange', change); change();
-        });
-      }
+      this.registration = await activeTransport();
       if (!this.listening) {
         this.listening = true;
         navigator.serviceWorker.addEventListener('message', event => { if (event.source === this.registration?.active) void this.message(event); });

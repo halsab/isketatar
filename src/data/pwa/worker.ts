@@ -6,9 +6,11 @@ import { readBoundedBytes } from '../http';
 import { ReleaseLifecycle } from './lifecycle';
 import { BlockedUpdate, sameOperation, UpdateCoordinator, type UpdatePeer } from './coordination';
 import { readUpdateState } from './progress-state';
+import { ManifestPreload } from './manifest-preload';
 declare const self: ServiceWorkerGlobalScope;
 const registry = new IndexedRegistry(); const packages = new PackageStore(registry, caches);
 const lifecycle = new ReleaseLifecycle(packages);
+const manifestPreload = new ManifestPreload();
 let operation: Promise<unknown> = Promise.resolve(); let controller: AbortController | null = null;
 function ownClient(client: Client) { const url = new URL(client.url); return client.type === 'window' && url.origin === self.location.origin && url.pathname.startsWith(PWA_BASE); }
 async function broadcast(message: unknown) { for (const client of await self.clients.matchAll({ type: 'window', includeUncontrolled: true })) if (ownClient(client)) client.postMessage(message); }
@@ -43,7 +45,11 @@ async function state() {
 }
 async function registerAvailable(id: string) {
   const cached = await (await caches.open(`isketatar-shell-${id}`)).match(releaseRoot(id) + 'release-manifest.json');
-  try { const fetched = await fetchManifest(releaseRoot(id) + 'release-manifest.json'); await packages.register(fetched.manifest, fetched.digest, fetched.response); }
+  try {
+    const request = () => fetchManifest(releaseRoot(id) + 'release-manifest.json');
+    const fetched = await (manifestPreload.take(id)?.catch(request) ?? request());
+    await packages.register(fetched.manifest, fetched.digest, fetched.response);
+  }
   catch (error) {
     if (!cached) throw error;
     const bytes = await readBoundedBytes(cached, 1_000_000); const manifest = parseRelease(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
@@ -74,7 +80,6 @@ async function initialize(id: string) {
   if (!value.releases.some(entry => entry.release_id === id)) {
     recovered = await registerAvailable(id);
   }
-  await packages.saveShell(id);
   const entry = (await registry.read()).releases.find(item => item.release_id === id)!;
   if (recovered || ['ready', 'downloading', 'verifying'].includes(entry.completeness)) {
     const complete = await packages.verify(id);
@@ -87,11 +92,21 @@ self.addEventListener('install', () => {});
 self.addEventListener('activate', () => {});
 self.addEventListener('message', event => {
   const source = event.source; const port = event.ports[0];
-  if (!source || !('type' in source) || !ownClient(source as Client) || !port) return;
+  if (!source || !('type' in source) || !ownClient(source as Client)) return;
   const message: unknown = event.data;
+  if (message && typeof message === 'object' && Reflect.get(message, 'type') === 'preload-manifest') {
+    // Один ограниченный сетевой буфер: без CacheStorage/IDB, принятия роли и доверия данным клиента.
+    port?.postMessage({ started: true });
+    event.waitUntil(manifestPreload.warm(Reflect.get(message, 'release_id'))
+      .then(value => port?.postMessage({ manifest: value?.manifest }))
+      .catch(() => port?.postMessage({ error: 'content_unavailable' }))
+      .finally(() => port?.close())); return;
+  }
+  if (!port) return;
   if (!message || typeof message !== 'object' || !['initialize', 'status', 'download', 'cancel', 'verify', 'release', 'check', 'check-auto', 'download-update', 'repair-update', 'accept', 'cancel-update', 'finish-update', 'accepted', 'boot', 'request-update', 'remove-offline'].includes(Reflect.get(message, 'type'))) return;
   const type: string = Reflect.get(message, 'type'); const id: unknown = Reflect.get(message, 'release_id');
   const reply = async () => {
+    let initialized = false;
     try {
       const updateId: unknown = Reflect.get(message, 'update_id');
       if (['accept', 'cancel-update', 'finish-update', 'remove-offline'].includes(type) && (typeof updateId !== 'string' || !updateId || updateId.length > 256)) throw new Error('stale_update');
@@ -168,7 +183,13 @@ self.addEventListener('message', event => {
         const entry = value.releases.find(item => item.release_id === id); if (!entry) throw new Error('content_unavailable');
         port.postMessage({ value: { manifest: await packages.manifest(id), digest: entry.manifest_sha256 } }); return;
       }
-      if (type === 'initialize') { if (typeof id !== 'string') throw new Error('content_corrupt'); await initialize(id); }
+      if (type === 'initialize') {
+        if (typeof id !== 'string') throw new Error('content_corrupt');
+        await initialize(id);
+        port.postMessage({ value: await state() }); initialized = true;
+        // Проверенная роль выпуска разрешает онлайн-работу; фоновый shell остаётся внутри очереди перед обновлением/удалением.
+        await packages.saveShell(id);
+      }
       if (type === 'download' || type === 'verify') {
         if ((await readUpdateState())?.control.update_gate || (await registry.read()).operation) throw new Error('update_in_progress');
         const current = (await registry.read()).current_release_id;
@@ -180,11 +201,11 @@ self.addEventListener('message', event => {
           finally { controller = null; }
         }
       }
-      const value = await state(); port.postMessage({ value }); await broadcast({ type: 'isketatar:pwa-state', value });
+      const value = await state(); if (!initialized) port.postMessage({ value }); await broadcast({ type: 'isketatar:pwa-state', value });
     } catch (error) {
       const code = error instanceof DOMException && error.name === 'QuotaExceededError' ? 'quota' : error instanceof Error ? error.name === 'AbortError' ? 'cancelled' : error.message : 'pwa_storage_unavailable';
       port.postMessage({ error: code, ...(error instanceof BlockedUpdate ? { blockers: error.blockers } : {}) });
-      try { await broadcast({ type: 'isketatar:pwa-state', value: await state() }); } catch { /* Недоступный реестр не затрагивает результаты обучения. */ }
+      try { await broadcast({ type: 'isketatar:pwa-state', value: { ...await state(), ...(initialized ? { error: code } : {}) } }); } catch { /* Недоступный реестр не затрагивает результаты обучения. */ }
     } finally { port.close(); }
   };
   if (type === 'cancel') { controller?.abort(); event.waitUntil(reply()); }

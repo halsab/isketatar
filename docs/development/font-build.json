@@ -15,19 +15,32 @@
     {
       "file": "src/assets/fonts/InterVariable.woff2",
       "source_sha256": "4989b125924991b90d05b2d16e0e388c48f7d5bb8b30539bbf9c755278d0ccaf",
-      "sha256": "d9d0de9c663114e4b819ebcbfbedf1755d28c6b1c166e1c12e0775667cdabdb5",
-      "bytes": 99840,
+      "sha256": "f9caa6c6e0b73d5b457fbb42cc867b0e034453e4eefe25949ec24678d54886ea",
+      "bytes": 37412,
       "cyrillic_codepoints": 73,
       "missing": [],
-      "subset": "Corpus Latin/Cyrillic and symbols, ASCII/Latin-1 and combining marks",
+      "subset": "All corpus symbols and canonical decompositions, ASCII, acute/grave accents and fallback symbols",
+      "optical_size": 14,
+      "weight_range": [
+        100,
+        900
+      ],
+      "dropped_layout_features": [
+        "frac",
+        "numr",
+        "dnom"
+      ],
+      "fraction_slash_in_corpus": false,
+      "shape_scope": "Latin/Cyrillic runs including NFD; numeric fraction sequences are not part of this proof",
       "checked_weights": [
         400,
         500,
         600,
         700
       ],
-      "retained_codepoints": 336,
+      "retained_codepoints": 187,
       "latin_cyrillic_runs": 8978,
+      "runs_including_nfd": 9622,
       "shape_identical": true
     }
   ]

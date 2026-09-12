@@ -65,7 +65,15 @@ export class PackageStore {
     return response;
   }
   private async incomplete(id: string) { await this.registry.change(state => { const entry = state.releases.find(item => item.release_id === id); if (entry?.completeness === 'ready') { entry.completeness = 'incomplete'; entry.verified_at = null; } }); }
-  async saveShell(id: string) { const manifest = await this.manifest(id); for (const url of manifest.shell_assets) await this.resource(id, url); }
+  async saveShell(id: string) {
+    const manifest = await this.manifest(id);
+    for (let index = 0; index < manifest.shell_assets.length; index += 4) {
+      // При отказе ждём уже начатые записи, чтобы они не пережили границу очереди worker.
+      const results = await Promise.allSettled(manifest.shell_assets.slice(index, index + 4).map(url => this.resource(id, url)));
+      const failed = results.find(result => result.status === 'rejected');
+      if (failed) throw failed.reason;
+    }
+  }
   async removeOffline() {
     const value = await this.registry.change(state => {
       if (state.operation) throw new Error('update_in_progress');

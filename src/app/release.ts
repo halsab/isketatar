@@ -1,6 +1,7 @@
 import manifest from '../generated/content-index.json';
 import { assetUrl, BASE_PATH } from './paths';
-import { fetchManifest } from '../data/pwa/manifest';
+import { fetchManifest, parseRelease } from '../data/pwa/manifest';
+import { takePreloadedManifest } from '../data/pwa/manifest-preload-client';
 import packageInfo from '../../package.json';
 import { POLICIES } from '../domain/content/types';
 
@@ -21,7 +22,10 @@ export function readerSupported(minimum: unknown) {
 
 export async function currentReleaseId(): Promise<string> {
   if (import.meta.env.DEV) return `development-${manifest.content_version}`;
-  const { manifest: value } = await fetchManifest(assetUrl('release-manifest.json'));
+  const url = assetUrl('release-manifest.json');
+  const preloaded = takePreloadedManifest(url);
+  const request = async () => (await fetchManifest(url)).manifest;
+  const value = preloaded ? parseRelease(await preloaded.catch(request)) : await request();
   if (value.content_version !== manifest.content_version || value.content_schema !== 1 || value.progress_schema !== 1) throw new Error('unsupported_release');
   if (!readerSupported(value.min_reader_version) || value.app_version !== packageInfo.version || value.base_path !== BASE_PATH) throw new Error('unsupported_release');
   if (Object.entries(POLICIES).some(([key, supported]) => Reflect.get(value.policy_versions, key) !== supported)) throw new Error('unsupported_release');

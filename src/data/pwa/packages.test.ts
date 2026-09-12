@@ -23,6 +23,24 @@ beforeEach(async()=>{
   request=vi.fn(async(input)=>{const path=String(input);if(path.endsWith('/release-manifest.json'))return new Response(JSON.stringify(manifest),{headers:{'content-type':'application/json'}});const index=manifest.assets.findIndex(asset=>asset.url===path);if(index<0)return new Response('',{status:404});return new Response(bodies[index],{headers:{'content-type':path.endsWith('.html')?'text/html':path.endsWith('.js')?'text/javascript':'application/json'}});});
 });
 async function packageStore(){const store=new PackageStore(storage,caches,request);await store.register(manifest,await sha256(new TextEncoder().encode(JSON.stringify(manifest))),new Response(JSON.stringify(manifest),{headers:{'content-type':'application/json'}}));return store;}
+it('settles every admitted shell write before reporting a failed batch and does not start the next batch', async () => {
+  manifest.shell_assets = manifest.assets.map(asset => asset.url);
+  const store = await packageStore();
+  let finish!: () => void;
+  const delayed = new Promise<void>(resolve => { finish = resolve; });
+  const resource = vi.spyOn(store, 'resource').mockImplementation(async (_id, url) => {
+    if (url === manifest.shell_assets[0]) throw new Error('content_corrupt');
+    await delayed; return new Response('ok');
+  });
+  let settled = false;
+  const saving = store.saveShell(id).catch(error => error).finally(() => { settled = true; });
+  try {
+    await vi.waitFor(() => expect(resource).toHaveBeenCalledTimes(4));
+    expect(settled).toBe(false);
+  } finally { finish(); }
+  expect(await saving).toEqual(new Error('content_corrupt'));
+  expect(resource).toHaveBeenCalledTimes(4);
+});
 it('separates automatic shell from full readiness and detects evicted objects',async()=>{
   const store=await packageStore();await store.saveShell(id);
   expect((await storage.read()).releases[0]?.completeness).toBe('not_saved');expect(request).toHaveBeenCalledTimes(4);

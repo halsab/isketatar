@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, copyFile, rm } from 'node:fs/promises';
 import Ajv from 'ajv';
 import standaloneCode from 'ajv/dist/standalone/index.js';
 import { loadSources, projectCorpus, digest } from './content-build.mjs';
@@ -8,7 +8,7 @@ const sourceSchema = JSON.parse(await readFile('tools/schemas/source-corpus.json
 const definitions = JSON.parse(await readFile('tools/schemas/runtime-content.json', 'utf8'));
 const sourceAjv = new Ajv({ strict: true, allErrors: true });
 if (!sourceAjv.validate(sourceSchema, raw.sources)) throw new Error(`Invalid source schema: ${JSON.stringify(sourceAjv.errors)}`);
-const ajv = new Ajv({ strict: true, allErrors: false, messages: false, code: { source: true, esm: true, optimize: 2 }, inlineRefs: false });
+const ajv = new Ajv({ strict: true, loopRequired: 3, loopEnum: 3, allErrors: false, messages: false, code: { source: true, esm: true, optimize: 2 }, inlineRefs: false });
 const projected = projectCorpus(raw);
 const exports = {};
 for (const [name, schema] of Object.entries(definitions)) {
@@ -18,31 +18,34 @@ for (const [name, schema] of Object.entries(definitions)) {
   exports[`schema${name[0].toUpperCase()}${name.slice(1)}`] = name;
 }
 await mkdir('src/generated', { recursive: true });
-const code = standaloneCode(ajv, exports)
-  .replaceAll('require("ajv/dist/runtime/ucs2length").default', 'ucs2length')
-  .replaceAll('require("ajv/dist/runtime/equal").default', 'equal');
-if (code.includes('require(')) throw new Error('Unexpected standalone runtime helper');
 const helpers = 'import lengthModule from "ajv/dist/runtime/ucs2length.js";\nimport equalModule from "ajv/dist/runtime/equal.js";\nconst ucs2length = typeof lengthModule === "function" ? lengthModule : lengthModule.default;\nconst equal = typeof equalModule === "function" ? equalModule : equalModule.default;\n';
-const checks = Object.values(exports).map(name => `valid${name[0].toUpperCase()}${name.slice(1)}`);
-const wrappers = Object.entries(exports).map(([schema, name]) => `export function validate${name[0].toUpperCase()}${name.slice(1)}(data) { return ${schema}(data) && valid${name[0].toUpperCase()}${name.slice(1)}(data); }`).join('\n');
-const moduleCode = helpers + `import { ${checks.join(', ')} } from '../domain/content/validation.ts';\n` + code + '\n' + wrappers;
+const modules = [];
+for (const [schema, name] of Object.entries(exports)) {
+  const title = name[0].toUpperCase() + name.slice(1);
+  const code = standaloneCode(ajv, { [schema]: name })
+    .replaceAll('require("ajv/dist/runtime/ucs2length").default', 'ucs2length')
+    .replaceAll('require("ajv/dist/runtime/equal").default', 'equal');
+  if (code.includes('require(')) throw new Error('Unexpected standalone runtime helper');
+  await writeFile(`src/generated/${name}-validator.js`, helpers + `import { valid${title} } from '../domain/content/validation.ts';\n` + code + `\nexport function validate${title}(data) { return ${schema}(data) && valid${title}(data); }\n`);
+  modules.push(`export { validate${title} } from './${name}-validator.js';`);
+}
+const moduleCode = modules.join('\n') + '\n';
 await writeFile('src/generated/content-validators.js', moduleCode);
-const coreCode = standaloneCode(ajv, { schemaCore: 'core' })
-  .replaceAll('require("ajv/dist/runtime/ucs2length").default', 'ucs2length')
-  .replaceAll('require("ajv/dist/runtime/equal").default', 'equal');
-if (coreCode.includes('require(')) throw new Error('Unexpected core validator helper');
-await writeFile('src/generated/core-validator.js', helpers + "import { validCore } from '../domain/content/validation.ts';\n" + coreCode + '\nexport function validateCore(data) { return schemaCore(data) && validCore(data); }\n');
 const standalone = await import(`../src/generated/content-validators.js?${digest(moduleCode)}`);
 for (const [name, validator] of Object.entries(exports)) {
   const values = validator === 'module' ? projected.modules : [projected[validator]];
   for (const value of values) if (!standalone[name.replace('schema', 'validate')](value)) throw new Error(`Standalone validation failed: ${name}`);
 }
 const resources = {
-  'core.json': projected.core, 'readings.json': projected.readings, 'dictionary.json': projected.dictionary,
+  'core.json': projected.core, 'readings.json': projected.readings,
+  'dictionary-entries.json': { entries: projected.dictionary.entries, vocabulary: [] },
+  'vocabulary.json': { entries: [], vocabulary: projected.dictionary.vocabulary },
   'references.json': projected.references, 'assessments.json': projected.assessments,
   ...Object.fromEntries(projected.modules.map((module, index) => [`module-${projected.core.modules[index].id}.json`, module])),
 };
 await mkdir('public/runtime', { recursive: true });
+await rm('public/runtime/dictionary.json', { force: true });
+for (const name of ['dictionary-entries.json', 'vocabulary.json']) if (!standalone.validateDictionary(resources[name])) throw new Error(`Invalid dictionary fragment: ${name}`);
 await mkdir('public/sources', { recursive: true });
 await copyFile('sources/sections.json', 'public/sources/sections.json');
 const assets = [];

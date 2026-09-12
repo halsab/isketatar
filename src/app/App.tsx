@@ -2,8 +2,6 @@ import { createHashRouter, Link, Outlet, RouterProvider } from 'react-router-dom
 import { RecoveryBoundary } from './RecoveryBoundary';
 import { AppShell } from './AppShell';
 import { AppProvider, RuntimeStatus } from './AppProvider';
-import { HomePage, CoursePage } from '../features/course/CoursePage';
-import { StartPage } from '../features/onboarding/StartPage';
 import { NavigationGuard } from './NavigationGuard';
 import { t } from '../ui/copy';
 import { Button, Status } from '../ui/controls';
@@ -22,9 +20,9 @@ async function assessmentRoute(kind: 'diagnostic' | 'final', result = false) {
 }
 function RouteLoading() { return <main className="boot-main"><h1>{t('app.name')}</h1><Status announce>{t('boot.loading')}</Status></main>; }
 const router = createHashRouter([{ element: <Layout />, HydrateFallback: RouteLoading, errorElement: <RouteFailure />, children: [
-  { path: '/', Component: HomePage },
-  { path: '/start', element: <div className="document"><StartPage /></div> },
-  { path: '/lessons', Component: CoursePage },
+  { path: '/', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).HomePage }) },
+  { path: '/start', lazy: async () => { const { StartPage } = await import('../features/onboarding/StartPage'); return { Component: () => <div className="document"><StartPage /></div> }; } },
+  { path: '/lessons', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).CoursePage }) },
   { path: '/lessons/:lesson_id', lazy: async () => ({ Component: (await import('../features/lessons/LessonPage')).LessonPage }) },
   { path: '/lessons/:lesson_id/practice', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).PracticePage }) },
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
