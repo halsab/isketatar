@@ -10,7 +10,7 @@ const provenance = JSON.parse(await readFile('quality-results/build-provenance.j
 assert.equal(provenance.product_scope_sha256, scope.sha256, 'Build final candidate before preparing review package');
 await verifyBuiltArtifact('dist', provenance);
 const copy = JSON.parse(await readFile('src/ui/tt.json', 'utf8'));
-const supplementalUi = await Promise.all(['index.html', 'public/recovery.html', 'src/app/RecoveryBoundary.tsx', 'tools/build-release.mjs'].map(async path => ({
+const supplementalUi = await Promise.all(['index.html', 'public/recovery.html', 'src/app/RecoveryBoundary.tsx', 'tools/build-release.mjs', 'RELEASE_NOTES.tt.md'].map(async path => ({
   path, context_review_required: true, source: await readFile(path, 'utf8'),
 })));
 const sources = await Promise.all(scope.files.filter(file => /^src\/.*\.[jt]sx?$/u.test(file.path)).map(async file => ({ path: file.path, lines: (await readFile(file.path, 'utf8')).split('\n') })));
