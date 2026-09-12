@@ -46,7 +46,8 @@ test('context panel changes modality without losing focus or content', async ({ 
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'Чыганакны ачарга' })).toBeFocused();
   await expect(page.getByRole('dialog')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Чыганакны ачарга' }).click();
+  await page.getByRole('button', { name: 'Чыганакны ачарга' }).focus();
+  await page.keyboard.press('Enter');
   await expect(dialog.getByRole('heading', { name: 'Чыганак', exact: true })).toBeFocused();
   expect(await dialog.evaluate(node => node.scrollTop)).toBe(0);
   await page.keyboard.press('Escape');
@@ -62,4 +63,12 @@ test('context panel changes modality without losing focus or content', async ({ 
   await page.setViewportSize({ width: 320, height: 900 });
   await page.addStyleTag({ content: ':root { font-size: 200% }' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('pointer dismissal returns focus to the compact menu trigger without a resize', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 }); await page.goto(url);
+  const trigger = page.getByRole('button', { name: 'Бүлекләрне ачарга', exact: true });
+  await trigger.click(); const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible();
+  await dialog.getByRole('button', { name: 'Ябарга', exact: true }).click();
+  await expect(dialog).toHaveCount(0); await expect(trigger).toBeFocused();
 });

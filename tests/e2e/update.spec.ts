@@ -42,13 +42,13 @@ test('explicit update flushes a live draft, reloads both windows and resumes the
   const after = await snapshot(page); expect(after.control.data_generation).toBe(before.control.data_generation); expect(after.control.update_gate).toBeNull();
   expect(after.sessions).toContainEqual(expect.objectContaining({ release_id: releases.original, status: 'paused' }));
   expect(after.presentations).toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'әңгәмә' } }));
-  await context.setOffline(true); await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();
+  releases.setOffline(true); await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();
   await expect(page.getByRole('textbox', { name: 'Җавабың', exact: true })).toHaveValue('әңгәмә');
 });
 test('IME blocks acceptance, cancellation preserves the same input, and a later retry accepts', async ({ page, context }) => {
   await practice(page); const second = await context.newPage(); await second.goto(releases.url + '#/settings'); await check(second);
   const input = page.getByRole('textbox', { name: 'Җавабың', exact: true });
-  await input.dispatchEvent('compositionstart'); await input.fill('яңа');
+  await input.fill('яңа'); await input.dispatchEvent('compositionstart');
   await accept(page);
   await expect(page.getByText('Башланган текст кертүне тәмамла', { exact: false }).first()).toBeVisible();
   expect((await snapshot(page)).control.accepted_release_id).toBe(releases.original);
@@ -67,7 +67,7 @@ test('IME blocks acceptance, cancellation preserves the same input, and a later 
 });
 test('a blocked round can be recovered from a fresh window after the coordinator disappears', async ({ page, context }) => {
   await practice(page); const second = await context.newPage(); await second.goto(releases.url + '#/settings'); await check(second);
-  const input = page.getByRole('textbox', { name: 'Җавабың', exact: true }); await input.dispatchEvent('compositionstart'); await input.fill('сакланмаган');
+  const input = page.getByRole('textbox', { name: 'Җавабың', exact: true }); await input.fill('сакланмаган'); await input.dispatchEvent('compositionstart');
   await accept(page); await expect(page.getByText('Башланган текст кертүне тәмамла', { exact: false }).first()).toBeVisible();
   const before = await snapshot(second); await page.close();
   const fresh = await context.newPage(); await fresh.goto(releases.url + '#/settings');
@@ -115,7 +115,8 @@ test('a nonresponding window blocks acceptance until its closure is observed', a
   await unknown.close(); await page.getByRole('button', { name: 'Тәрәзәләрне кабат тикшерергә', exact: true }).click();
   await expect.poll(async () => (await snapshot(page)).control.accepted_release_id).toBe(releases.next);
 });
-test('a fresh coordinator recovers commit phase, repairs an evicted candidate and finishes the same update', async ({ page, context }) => {
+test('a fresh coordinator recovers commit phase, repairs an evicted candidate and finishes the same update', async ({ page, context, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
   await page.goto(releases.url + '#/settings'); await check(page);
   const worker = context.serviceWorkers()[0]!;
   await worker.evaluate(id => {
@@ -150,7 +151,8 @@ test('a window booted during a blocked round resumes when the writer defers that
   await fresh.getByRole('link', { name: 'Курс турында', exact: true }).click(); await expect(fresh).toHaveURL(/#\/about$/u);
   await input.dispatchEvent('compositionend');
 });
-test('failed post-bootstrap cleanup remains visible and can be retried without changing progress', async ({ page, context }) => {
+test('failed post-bootstrap cleanup remains visible and can be retried without changing progress', async ({ page, context, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
   await page.goto(releases.url + '#/settings'); await page.getByRole('button', { name: 'Интернетсыз уку өчен сакларга', exact: true }).click();
   await expect(page.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible();
   const before = await snapshot(page); const obsolete = '1.0.0-1111111111111111';

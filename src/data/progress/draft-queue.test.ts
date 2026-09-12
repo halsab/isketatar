@@ -57,3 +57,30 @@ describe('draft write queue', () => {
     expect(status).toHaveBeenLastCalledWith('unsaved');
   });
 });
+
+it('keeps every flush waiting for a newer write started by another drain continuation', async () => {
+  let finishA!: (value: Expected) => void; let finishB!: (value: Expected) => void;
+  const save = vi.fn<(answer: unknown, token: Expected) => Promise<Expected>>()
+    .mockImplementationOnce(() => new Promise(resolve => { finishA = resolve; }))
+    .mockImplementationOnce(() => new Promise(resolve => { finishB = resolve; }));
+  const queue = new DraftQueue(save, () => {});
+  queue.input({ kind: 'set', option_ids: ['a'] }, expected, true);
+  queue.input({ kind: 'set', option_ids: ['a', 'b'] }, expected, true);
+  let flushed = false; const flush = queue.flush().then(() => { flushed = true; });
+  finishA({ ...expected, revisions: [{ store: 'presentations', key: 'p', revision: 2 }] });
+  await vi.waitFor(() => expect(save).toHaveBeenCalledTimes(2));
+  expect(flushed).toBe(false);
+  expect(save.mock.calls[1]![1].revisions[0]!.revision).toBe(2);
+  finishB({ ...expected, revisions: [{ store: 'presentations', key: 'p', revision: 3 }] });
+  await flush; expect(flushed).toBe(true); await queue.cancel();
+});
+
+it('preserves the debounce of newer text while the previous timed write completes', async () => {
+  vi.useFakeTimers(); let complete!: (value: Expected) => void;
+  const save = vi.fn<(answer: unknown, token: Expected) => Promise<Expected>>().mockImplementationOnce(() => new Promise(resolve => { complete = resolve; })).mockResolvedValue(expected);
+  const queue = new DraftQueue(save, () => {});
+  queue.input({ kind: 'text', text: 'first' }, expected); await vi.advanceTimersByTimeAsync(300);
+  queue.input({ kind: 'text', text: 'second' }, expected);
+  complete(expected); await vi.advanceTimersByTimeAsync(299); expect(save).toHaveBeenCalledTimes(1);
+  await vi.advanceTimersByTimeAsync(1); expect(save).toHaveBeenCalledTimes(2); await queue.cancel();
+});

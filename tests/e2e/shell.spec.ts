@@ -9,7 +9,7 @@ test('Pages subpath, direct hash route and reload', async ({ page }) => {
   await expect(page.locator('body')).toHaveCSS('margin', '0px');
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Курс турында' })).toBeVisible();
-  await page.getByRole('link', { name: 'Баш бит', exact: true }).click();
+  await page.getByRole('link', { name: 'Иске имля', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Иске имля', exact: true })).toBeVisible();
   expect(failures).toEqual([]);
 });

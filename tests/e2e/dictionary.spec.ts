@@ -53,6 +53,7 @@ test('null readings stay source-only and saved filtering is distinct from an emp
 test('results disclose help before showing meanings during an unfinished diagnostic', async ({ page }) => {
   await page.goto('./#/diagnostic'); await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
+  await expect(page).toHaveURL(/#\/$/u);
   await page.goto('./#/dictionary?q=عالم');
   await expect(page.locator('.dictionary-group')).toHaveCount(0);
   await page.getByRole('button', { name: 'Материалны ачарга', exact: true }).click();

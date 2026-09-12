@@ -23,7 +23,7 @@ function Controls() {
     <div className="actions"><Button variant="primary" onClick={() => setSubmitted(count => count + 1)}>Тикшерергә</Button><Button>Әлегә белмим</Button></div>
     <ChoiceGroup label="Бер җавапны сайла" options={[{id:'a',content:<ArabicText>ۇ</ArabicText>},{id:'b',content:<ArabicText>وُ</ArabicText>}]} selected={selected} onChange={setSelected} />
     <Status announce>Җаваплар: <output id="submitted">{submitted}</output></Status>
-    <Button onClick={() => setOpen(true)}>Чыганакны ачарга</Button>
-  </div><aside><Dialog context open={open} title="Чыганак" onClose={() => setOpen(false)}><SourceCard title="Язылыш"><ArabicText block>كتاب</ArabicText><label>Билге<input type="text" /></label></SourceCard></Dialog></aside></div></AppShell></HashRouter>;
+    <Button id="source-trigger" onClick={() => setOpen(true)}>Чыганакны ачарга</Button>
+  </div><aside><Dialog restoreTargetId="source-trigger" context open={open} title="Чыганак" onClose={() => setOpen(false)}><SourceCard title="Язылыш"><ArabicText block>كتاب</ArabicText><label>Билге<input type="text" /></label></SourceCard></Dialog></aside></div></AppShell></HashRouter>;
 }
 createRoot(document.getElementById('root')!).render(<Controls />);

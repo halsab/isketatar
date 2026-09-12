@@ -22,15 +22,23 @@ export async function releaseServer() {
   execFileSync(process.execPath, [resolve('tools/build-release.mjs')], { cwd: directory, env: { ...process.env, SOURCE_DATE_EPOCH: String(original.built_at / 1000 + 1) } });
   const next = JSON.parse(await readFile(join(directory, 'dist/release-manifest.json'), 'utf8'));
   let published = false;
+  const server = await serveArtifact(path => path.startsWith(`releases/${next.release_id}/`) || published && !path.startsWith('releases/') ? join(directory, 'dist') : resolve('dist'));
+  return { ...server, original: original.release_id as string, next: next.release_id as string, publish: () => { published = true; }, reset: () => { published = false; server.setOffline(false); }, close: async () => { await server.close(); await rm(directory, { recursive: true }); } };
+}
+
+async function serveArtifact(rootFor: (path: string) => string) {
+  let offline = false;
   const types: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.css': 'text/css', '.woff2': 'font/woff2', '.png': 'image/png', '.txt': 'text/plain' };
   const server = createServer(async (request, response) => {
+    if (offline) { request.socket.destroy(); return; }
     const url = new URL(request.url!, 'http://localhost'); const path = url.pathname.slice('/isketatar/'.length) || 'index.html';
     if (!url.pathname.startsWith('/isketatar/') || path.includes('..')) { response.writeHead(404).end(); return; }
-    const alternate = path.startsWith(`releases/${next.release_id}/`) || published && !path.startsWith('releases/');
-    try { const body = await readFile(join(alternate ? join(directory, 'dist') : resolve('dist'), path)); response.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' }).end(body); }
+    const root = rootFor(path);
+    try { const body = await readFile(join(root, path)); if (offline) { request.socket.destroy(); return; } response.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' }).end(body); }
     catch { response.writeHead(404).end(); }
   });
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
   const address = server.address(); if (!address || typeof address === 'string') throw new Error('missing_test_server');
-  return { url: `http://127.0.0.1:${address.port}/isketatar/`, original: original.release_id as string, next: next.release_id as string, publish: () => { published = true; }, reset: () => { published = false; }, close: async () => { await new Promise<void>(resolve => server.close(() => resolve())); await rm(directory, { recursive: true }); } };
+  return { url: `http://127.0.0.1:${address.port}/isketatar/`, setOffline: (value: boolean) => { offline = value; }, close: () => new Promise<void>(resolve => server.close(() => resolve())) };
 }
+export async function artifactServer() { return serveArtifact(() => resolve('dist')); }

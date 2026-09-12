@@ -64,6 +64,7 @@ test('source roundtrip restores the originating word-panel control', async ({ pa
 test('the alphabet waits for confirmed help while a diagnostic is unfinished', async ({ page }) => {
   await page.goto('./#/diagnostic'); await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
+  await expect(page).toHaveURL(/#\/$/u);
   await page.goto('./#/reference');
   await page.locator('.chapter-contents a[href="#/reference?at=terms"]').click();
   await expect(page.locator('#terms')).toBeFocused();

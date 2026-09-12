@@ -7,7 +7,7 @@ test('route settings survive reload and duplicated tabs need explicit takeover',
   await expect(page).toHaveURL(/#\/lessons\/B01$/u);
   const id = await page.evaluate(() => sessionStorage.getItem('iske-imla-tab'));
   await page.reload();
-  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.locator('.lesson-example').first()).toBeVisible();
   expect(await page.evaluate(() => sessionStorage.getItem('iske-imla-tab'))).toBe(id);
   const popupPromise = page.waitForEvent('popup');
   await page.evaluate(() => { window.open(location.href); });

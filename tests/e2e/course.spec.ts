@@ -5,6 +5,7 @@ test('eight modules expose all 53 lessons with route-specific foundation require
   await page.goto('./#/start');
   await page.getByRole('radio', { name: 'Гарәп хәрефләрен беләм', exact: false }).check();
   await page.getByRole('button', { name: 'Башларга', exact: true }).click();
+  await expect(page).toHaveURL(/#\/lessons\/[A-Z][0-9]+$/u);
   await page.goto('./#/lessons');
   await expect(page.getByText('0 / 46 дәрес', { exact: true }).first()).toBeVisible();
   await expect(page.locator('.course-module')).toHaveCount(8);
@@ -19,6 +20,7 @@ test('eight modules expose all 53 lessons with route-specific foundation require
   await page.getByRole('link', { name: 'Уку юлын үзгәртергә', exact: true }).click();
   await page.getByRole('radio', { name: 'Гарәп хәрефләрен өйрәнәм', exact: false }).check();
   await page.getByRole('button', { name: 'Башларга', exact: true }).click();
+  await expect(page).toHaveURL(/#\/lessons\/[A-Z][0-9]+$/u);
   await page.goto('./#/lessons');
   await expect(page.getByText('0 / 53 дәрес', { exact: true }).first()).toBeVisible();
   await expect(page.locator('[data-module="M00"] summary')).not.toContainText('Өстәмә');

@@ -1,13 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../helpers/pwa';
 test.use({ serviceWorkers: 'allow' });
-test('full package survives a cold offline window and opens unvisited course routes', async ({ context, page }) => {
+test('full package survives a cold offline window and opens unvisited course routes', async ({ context, page, network }) => {
   await page.goto('./#/settings');
   await expect(page.getByRole('button', {name:'Интернетсыз уку өчен сакларга',exact:true})).toBeEnabled();
   await expect(page.getByText('Тулы курс әлегә сакланмаган.',{exact:true})).toBeVisible();
   await page.getByRole('button', {name:'Интернетсыз уку өчен сакларга',exact:true}).click();
   await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   const release=await (await page.request.get('./release-manifest.json')).json();
-  await context.setOffline(true);await page.close();const cold=await context.newPage();
+  network.setOffline(true);await page.close();const cold=await context.newPage();
   const errors:string[]=[];cold.on('pageerror',error=>errors.push(error.message));
   await cold.goto('./#/settings');await expect(cold.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   for(const route of ['lessons/B01','lessons/C01','lessons/V04','lessons/K01','lessons/G01','lessons/A01','lessons/L01','lessons/H01']) {await cold.goto(`./#/${route}`);await expect(cold.locator('.lesson-example').first()).toBeVisible();}
@@ -26,7 +26,8 @@ test('eviction changes readiness and retry repairs the exact resource', async ({
   await page.getByRole('button',{name:'Сакланган курсны тикшерергә',exact:true}).click();await expect(page.getByText('Курсның бер өлеше җитми. Кабат сакларга кирәк.',{exact:true})).toBeVisible();
   await save.click();await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
 });
-for(const failure of ['registry','cache'] as const)test(`technical ${failure} denial keeps the installed online course usable`,async({context,page})=>{
+for(const failure of ['registry','cache'] as const)test(`technical ${failure} denial keeps the installed online course usable`,async({context,page,browserName})=>{
+  test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
   await page.goto('./#/settings');await page.getByRole('button',{name:'Интернетсыз уку өчен сакларга',exact:true}).click();await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   await context.serviceWorkers()[0]!.evaluate(failure=>{
     if(failure==='registry')IDBDatabase.prototype.transaction=function(){throw new DOMException('denied','SecurityError');};
@@ -43,7 +44,8 @@ test('a lost and corrupt release manifest repairs online without changing releas
     await page.getByRole('button',{name:'Интернетсыз уку өчен сакларга',exact:true}).click();await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   }
 });
-test('cancel aborts an in-flight download and quota has an actionable separate error',async({context,page})=>{
+test('cancel aborts an in-flight download and quota has an actionable separate error',async({context,page,browserName})=>{
+  test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
   await page.goto('./#/settings');const save=page.getByRole('button',{name:'Интернетсыз уку өчен сакларга',exact:true});await expect(save).toBeEnabled();
   const worker=context.serviceWorkers()[0]!;
   await worker.evaluate(()=>{const original=fetch;Object.assign(globalThis,{testFetch:original,testBlocked:false});globalThis.fetch=(input,init)=>{

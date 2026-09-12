@@ -57,10 +57,10 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
       <Link className="brand" to="/">{t('app.name')}</Link>
       <div className="header-navigation"><Navigation /></div>
       <Link className="settings-link" to="/settings" aria-label={t('nav.settings')}><Icon name="settings" /></Link>
-      <div className="compact-menu"><IconButton icon="menu" label={t('accessibility.menu')} aria-expanded={menu} onClick={() => setMenuKey(key)} /></div>
+      <div className="compact-menu"><IconButton id="compact-menu-trigger" icon="menu" label={t('accessibility.menu')} aria-expanded={menu} onClick={() => setMenuKey(key)} /></div>
     </div></header>
     <main className="app-main" id="main" tabIndex={-1}>{status}{children}</main>
     <div className="bottom-navigation"><Navigation /></div>
-    <Dialog open={menu} title={t('accessibility.menu')} onClose={() => setMenuKey(null)}><Navigation onNavigate={() => setMenuKey(null)} /></Dialog>
+    <Dialog restoreTargetId="compact-menu-trigger" open={menu} title={t('accessibility.menu')} onClose={() => setMenuKey(null)}><Navigation onNavigate={() => setMenuKey(null)} /></Dialog>
   </div>;
 }

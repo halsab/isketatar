@@ -39,10 +39,11 @@ test('removal preserves progress and shells, removes staged release, and fences 
   expect(await page.evaluate(async id => (await (await caches.open(`isketatar-course-${id}`)).keys()).length, releases.original)).toBe(0);
   const stale = await page.evaluate(id => new Promise<string>(resolve => { const channel = new MessageChannel(); channel.port1.onmessage = event => { resolve(event.data.error); channel.port1.close(); }; navigator.serviceWorker.getRegistration().then(registration => registration!.active!.postMessage({ type: 'download', release_id: id, offline_epoch: 0 }, [channel.port2])); }), releases.original);
   expect(stale).toBe('offline_changed');
-  await context.setOffline(true); await viewer.goto(releases.url + 'recovery.html'); await expect(viewer.getByRole('heading', { name: 'Курс ачылмады', exact: true })).toBeVisible();
-  await context.setOffline(false); await viewer.close(); await save(page);
+  releases.setOffline(true); await viewer.goto(releases.url + 'recovery.html'); await expect(viewer.getByRole('heading', { name: 'Курс ачылмады', exact: true })).toBeVisible();
+  releases.setOffline(false); await viewer.close(); await save(page);
 });
-test('failed deletion keeps an incomplete marker and a different window can recover and retry', async ({ page, context }) => {
+test('failed deletion keeps an incomplete marker and a different window can recover and retry', async ({ page, context, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
   await page.goto(releases.url + '#/settings'); await save(page); const before = await snapshot(page);
   const viewer = await context.newPage(); await viewer.goto(releases.url + '#/settings');
   const worker = context.serviceWorkers()[0]!;

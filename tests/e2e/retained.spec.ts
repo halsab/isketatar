@@ -1,4 +1,5 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '../helpers/pwa';
+import type { Page } from '@playwright/test';
 import type { PackageManifest } from '../../src/data/pwa/manifest';
 import type { Registry } from '../../src/data/pwa/registry';
 import type { CoreData, ModuleData } from '../../src/domain/content/types';
@@ -49,8 +50,8 @@ async function pinnedFixture(page: Page, retained: boolean) {
     const presentation = await read<Presentation>(tx.objectStore('presentations'), session.active_presentation_id!); presentation.grading_revision = revision; tx.objectStore('presentations').put(presentation); await done(tx); db.close(); return oldId;
   }, { manifest, retained });
 }
-for (const loseRegistry of [false, true]) test(`new shell resumes cached previous content offline and grades against its old answer (lost registry=${loseRegistry})`, async ({ page, context }) => {
-  const oldId = await pinnedFixture(page, true); await context.setOffline(true);
+for (const loseRegistry of [false, true]) test(`new shell resumes cached previous content offline and grades against its old answer (lost registry=${loseRegistry})`, async ({ page, network }) => {
+  const oldId = await pinnedFixture(page, true); network.setOffline(true);
   if (loseRegistry) await page.evaluate(() => new Promise<void>(resolve => { const open = indexedDB.open('isketatar-pwa', 1); open.onsuccess = () => { const db = open.result; const tx = db.transaction('registry', 'readwrite'); tx.objectStore('registry').delete('state'); tx.oncomplete = () => { db.close(); resolve(); }; }; }));
   await page.goto('./#/lessons/V04/practice'); await page.reload();
   await expect(page.getByText('Бу дәрес сакланган элекке басма буенча дәвам итә:', { exact: false })).toBeVisible();
@@ -67,8 +68,8 @@ for (const loseRegistry of [false, true]) test(`new shell resumes cached previou
   });
   expect(records.attempts).toContainEqual(expect.objectContaining({ grade: 'correct', release_id: oldId, answer_raw: { kind: 'text', text: 'элек' } })); expect(records.cards).toEqual([]);
 });
-test('missing old package preserves raw input and explicit release of the pin starts current content', async ({ page, context }) => {
-  await pinnedFixture(page, false); await context.setOffline(true); await page.goto('./#/lessons/V04/practice'); await page.reload();
+test('missing old package preserves raw input and explicit release of the pin starts current content', async ({ page, network }) => {
+  await pinnedFixture(page, false); network.setOffline(true); await page.goto('./#/lessons/V04/practice'); await page.reload();
   await expect(page.getByRole('heading', { name: 'Сакланган җаваплар', exact: true })).toBeVisible();
   await expect(page.locator('textarea').first()).toHaveValue('элек');
   await page.getByRole('button', { name: 'Дәресне тарихта калдырырга', exact: true }).click();

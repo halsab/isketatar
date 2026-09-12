@@ -28,8 +28,13 @@ export class DraftQueue {
   private async drain(force: boolean): Promise<void> {
     if (force) this.clearTimer();
     if (this.composing) throw new Error('composition_in_progress');
-    if (this.running) { await this.running; if (this.pending && (force || this.timer === null)) return this.drain(force); return; }
+    if (this.running) {
+      await this.running;
+      // Другой waiter мог уже начать следующую запись и забрать pending; ждём и её.
+      return this.drain(force);
+    }
     if (this.error) throw this.error;
+    if (!force && this.timer !== null) return;
     const draft = this.pending;
     if (!draft || this.stopped) return;
     this.pending = null;

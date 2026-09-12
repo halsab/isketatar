@@ -76,6 +76,11 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
   return <dialog ref={dialog} inert={!open || suspended} aria-hidden={!open || suspended} className={`dialog ${context ? 'context-panel' : ''}`} data-modal={modal} role={modal ? 'dialog' : 'region'} aria-modal={modal && open && !suspended ? true : undefined} aria-labelledby={id}
     onScroll={event => { if (modal && open) modalScroll.current = event.currentTarget.scrollTop; if (!pendingRestore.current) onPosition?.({ scroll: modalScroll.current, control: savedFocus.current?.dataset.panelControl ?? null }); }}
     onFocusCapture={event => { if (event.target instanceof HTMLElement) savedFocus.current = event.target; if (!pendingRestore.current) onPosition?.({ scroll: modalScroll.current, control: savedFocus.current?.dataset.panelControl ?? null }); }}
+    onClickCapture={event => {
+      // Safari не фокусирует ссылку при клике; сохраняем сам активированный элемент до перехода.
+      const control = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-panel-control]') : null;
+      if (control && event.currentTarget.contains(control)) { savedFocus.current = control; if (!pendingRestore.current) onPosition?.({ scroll: modalScroll.current, control: control.dataset.panelControl ?? null }); }
+    }}
     onCancel={event => { event.preventDefault(); if (!busy) onClose(); }}
     onKeyDown={event => { if (event.key === 'Escape' && !modal) { event.stopPropagation(); if (!busy) onClose(); } }}>
     <div className="dialog-heading"><h2 id={id} ref={heading} tabIndex={-1}>{title}</h2><IconButton icon="close" label={t('action.close')} disabled={busy} onClick={onClose} /></div>

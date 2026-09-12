@@ -1,4 +1,5 @@
-import { expect, test, type Page } from '@playwright/test';
+import { test, expect } from '../helpers/pwa';
+import type { Page } from '@playwright/test';
 test.use({ serviceWorkers: 'allow' });
 const old = '1.0.0-1111111111111111';
 async function seedCommit(page: Page, phase: 'quiescing' | 'commit') {
@@ -40,10 +41,10 @@ test('a verified committed bootstrap finishes without resetting progress while c
   await page.reload(); await expect(page.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible();
   expect(await control(page)).toMatchObject({ accepted_release_id: before.current, data_generation: before.generation, state_revision: before.revision + 1, update_gate: null });
 });
-for (const [offline, immutable] of [[false, false], [true, false], [true, true]] as const) test(`the accepted shell recovers after the technical registry is lost (offline=${offline}, immutable=${immutable})`, async ({ page, context }) => {
+for (const [offline, immutable] of [[false, false], [true, false], [true, true]] as const) test(`the accepted shell recovers after the technical registry is lost (offline=${offline}, immutable=${immutable})`, async ({ page, context, network }) => {
   await page.goto('./#/settings'); await page.getByRole('button', { name: 'Интернетсыз уку өчен сакларга', exact: true }).click(); await expect(page.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible();
   const before = await control(page);
   await page.evaluate(() => new Promise<void>(resolve => { const open = indexedDB.open('isketatar-pwa', 1); open.onsuccess = () => { const db = open.result; const tx = db.transaction('registry', 'readwrite'); tx.objectStore('registry').delete('state'); tx.oncomplete = () => { db.close(); resolve(); }; }; }));
-  await context.setOffline(offline); await page.close(); const cold = await context.newPage(); await cold.goto(immutable ? `./releases/${before.accepted_release_id}/index.html#/settings` : './#/settings');
+  network.setOffline(offline); await page.close(); const cold = await context.newPage(); await cold.goto(immutable ? `./releases/${before.accepted_release_id}/index.html#/settings` : './#/settings');
   await expect(cold.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible(); expect(await control(cold)).toMatchObject({ accepted_release_id: before.accepted_release_id, data_generation: before.data_generation, state_revision: before.state_revision });
 });
