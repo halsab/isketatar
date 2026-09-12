@@ -8,10 +8,10 @@
 
 | Тип | Контракт |
 |---|---|
-| `ContentId` | Непустая строка до128символов; должна существовать в соответствующем каталоге. Регистр значим. Примеры: V04, Q-V04-07, EX-V04-05, READ-F01, lex-55-046 |
+| `ContentId` | Непустая строка до 128 символов; должна существовать в соответствующем каталоге. Регистр значим. Примеры: V04, Q-V04-07, EX-V04-05, READ-F01, lex-55-046 |
 | `LocalId` | UUID, создаваемый вне чистой предметной функции; session_id, presentation_id, tab_id, data_generation |
 | `Revision` | Целое безопасное число >=0; сравнивается на равенство для CAS |
-| `Hash` | SHA-256, 64строчных шестнадцатеричных символа |
+| `Hash` | SHA-256, 64 строчных шестнадцатеричных символа |
 | `TimeMs` | Целое число UTC epoch milliseconds, >=0 и <=8_640_000_000_000_000; локальные даты не принимаются вместо него |
 | `Version` | Положительное целое для схем; SemVer-строка для app_version/min_reader_version; непрозрачная строка для content_version/release_id |
 | `Profile` | book_jadid_10, book_jadid_6, book_kadimi, book_yanga, loan_original, book_unspecified |
@@ -23,7 +23,7 @@ Runtime-модели и обменный конверт закрыты: неиз
 
 ## Два манифеста и четыре версии
 
-`content/manifest.json` — существующий редакционный манифест. Он содержит schema_version, content_version, language, assets с path/bytes/sha256/required, total_bytes и editorial_only_paths. Выпуск `2026.09.11.1` содержит31обязательный ресурс; приложение не зашивает это число в код.
+`content/manifest.json` — существующий редакционный манифест. Он содержит schema_version, content_version, language, assets с path/bytes/sha256/required, total_bytes и editorial_only_paths. Выпуск `2026.09.11.1` содержит 31 обязательный ресурс; приложение не зашивает это число в код.
 
 Будущая сборка создаёт отдельный **release manifest**:
 
@@ -75,7 +75,7 @@ explanation_tt, hints_tt, source_lines и редакционная заметк�
 
 Дополнительные известные поля урока сохраняются явно: letter_groups={sun:string[],moon:string[]}, component_inventory=[{form,function_tt}], external_sources=[{url,supports_tt}]. Это существующие данные L07/L09, а не повод для универсального CMS.
 
-Маршрут — упорядоченный массив уникальных LessonId. В текущем выпуске arabic_reader содержит46уроков, new_to_script —53. Диагностика не является уроком маршрута. `required_for_completion` применяется только к выбранному массиву route; B-уроки нельзя включить в знаменатель arabic_reader одним глобальным фильтром.
+Маршрут — упорядоченный массив уникальных LessonId. В текущем выпуске arabic_reader содержит 46 уроков, new_to_script —53. Диагностика не является уроком маршрута. `required_for_completion` применяется только к выбранному массиву route; B-уроки нельзя включить в знаменатель arabic_reader одним глобальным фильтром.
 
 ### Правило и пример
 
@@ -93,7 +93,7 @@ explanation_tt, hints_tt, source_lines и редакционная заметк�
 
 ### Проверяемый вопрос
 
-Общий runtime-вопрос: id, origin, type, grading, prompt_tt, stimulus, options[], accepted_answers[], explanation_tt, hints_tt[], skill, difficulty, profile, grading_revision. `origin`: course, diagnostic, final, reading. `skill`: letter, reading, rule, morphology; difficulty — целое1…3.
+Общий runtime-вопрос: id, origin, type, grading, prompt_tt, stimulus, options[], accepted_answers[], explanation_tt, hints_tt[], skill, difficulty, profile, grading_revision. `origin`: course, diagnostic, final, reading. `skill`: letter, reading, rule, morphology; difficulty — целое 1…3.
 
 | Сочетание | Допустимый ответ и ключ |
 |---|---|
@@ -110,7 +110,7 @@ explanation_tt, hints_tt, source_lines и редакционная заметк�
 - diagnostic/final: group, recommend_lessons[], source_form, source_lines; assessment_role=diagnostic|final;
 - reading: source_reading_id, line_ids[], assessment_role=reading_practice|final; профиль/происхождение разрешаются через текст.
 
-У RQ нет обязательного lesson_id; адаптер не выдумывает его. `final.items` содержит16вопросов, а reading_text_ids и question_ids текстов добавляют четыре уже существующих RQ. Один ID не копируется в другую коллекцию как новая задача.
+У RQ нет обязательного lesson_id; адаптер не выдумывает его. `final.items` содержит 16 вопросов, а reading_text_ids и question_ids текстов добавляют четыре уже существующих RQ. Один ID не копируется в другую коллекцию как новая задача.
 
 По умолчанию allow_terminal_punctuation=false; если будет разрешён, параметр входит в grading_revision. Ключи Q-L08-02 явно принимают «тәрҗемә-и хәл» и «тәрҗемәи хәл»; это не общее разрешение удалять дефисы. Q-A06-09 принимает «бар + дык», а не «бар + ды + к».
 
@@ -118,13 +118,13 @@ explanation_tt, hints_tt, source_lines и редакционная заметк�
 
 Текст: id, title_tt, level, role, lesson_ids[], profile, provenance, instructions_tt, lines[], help_order[], question_ids[]. Строка: id, source_form, display_form, reading_tt, meaning_tt, source_lines, reading_status, words[]. Слово: surface, reading_tt, meaning_tt, explanation_tt, lexicon_id:string|null.
 
-В runtime слову добавляются word_id=`line_id:ordinal`, ordinal и диапазон в display_form. Диапазон считается последовательным проходом с курсором; повторяющееся surface нельзя каждый раз искать от начала строки. Координаты JS — UTF-16 code units, границы не разрывают surrogate pair/combining sequence. Для сохранённой позиции нужны line_id и revision строки; старый ordinal не применяется к изменённой строке молча.
+В runtime слову добавляются word_id=`line_id:ordinal`, ordinal и диапазон в display_form. ordinal слова нумеруется с 0 (READ-01-L01:0 — первое слово); это отличается от ordinal предъявления, которое начинается с 1. Диапазон считается последовательным проходом с курсором; повторяющееся surface нельзя каждый раз искать от начала строки. Координаты JS — UTF-16 code units, границы не разрывают surrogate pair/combining sequence. Для сохранённой позиции нужны line_id и revision строки; старый ordinal не применяется к изменённой строке молча.
 
 Runtime-запись словаря сохраняет id, source_form, display_form, reading_tt, meaning_tt, section/source, origin.profile, status, eligibility, constraints, links, forms и editorial_notes_tt. Разрешение показа определяется eligibility.dictionary_visible; практики — eligibility.practice_allowed **и наличием подготовленного QID**. Archive не попадает в пользовательский каталог. Reference с null reading_tt показывается со строкой «Мәгънәсе чыганак буенча бирелде. Татарча укылышы күрсәтелмәгән.»
 
 course_vocabulary содержит существующие id, lesson_id, source_example_id, display_form, reading_tt, meaning_tt, profile, source_lines, status, kind, source_dictionary_ids[], release, question_ids[]. release=with_lesson|after_linked_question. Правила момента открытия принадлежат механике; сам факт нахождения объекта в пакете не открывает его.
 
-251из258active-записей основного словаря сейчас не имеют точной связи через source_dictionary_ids с готовым вопросом. Для них доступна закладка; разрешение редактора не превращается в автогенерацию теста. У عالم сохраняются lex-55-046 «галим» и lex-55-158 «галәм». Группировка выдачи сохраняет дочерние IDs, разные смыслы и источники.
+251 из 258active-записей основного словаря сейчас не имеют точной связи через source_dictionary_ids с готовым вопросом. Для них доступна закладка; разрешение редактора не превращается в автогенерацию теста. У عالم сохраняются lex-55-046 «галим» и lex-55-158 «галәм». Группировка выдачи сохраняет дочерние IDs, разные смыслы и источники.
 
 ## Сохраняемые ответы
 
@@ -134,13 +134,13 @@ course_vocabulary содержит существующие id, lesson_id, sourc
 |---|---|
 | option | option_id:ContentId |
 | set | option_ids:ContentId[], уникальные; пустое множество допустимо как отправленный неверный ответ |
-| text | text:string, максимум4096UTF-16 code units |
-| segments | text:string с явным +, максимум4096UTF-16 code units |
+| text | text:string, максимум 4096UTF-16 code units |
+| segments | text:string с явным +, максимум 4096UTF-16 code units |
 | unknown | Дополнительных полей нет; явное «Әлегә белмим» |
 
 Отсутствие черновика обозначается null, а не unknown. kind обязан соответствовать вопросу, кроме unknown, разрешённого всем типам. Для text пустую/пробельную строку UI не отправляет; пользователь может выбрать unknown. Массив опций всегда проверяется по плану конкретной ревизии.
 
-`NormalizedAnswer`: option_id для option; отсортированный массив ID для set; строка для text; упорядоченный массив непустых строк для segments; null для unknown. Raw и normalized не подменяют друг друга. Нормализация не исправляет автоматически татарские буквы и не использует поисковый индекс.
+`NormalizedAnswer`: option_id для option; отсортированный массив ID для set; строка для text; упорядоченный массив строк для segments (пустая часть допускается только как сохранённый неверный ввод, не как правильный ключ); null для unknown. Raw и normalized не подменяют друг друга. Нормализация не исправляет автоматически татарские буквы и не использует поисковый индекс.
 
 ## Session и Presentation
 
@@ -157,6 +157,9 @@ course_vocabulary содержит существующие id, lesson_id, sourc
 | policy_versions | Снимок политик выпуска |
 | lesson_id | LessonId для lesson_cycle, иначе null |
 | reading_ids | ReadingId[] для чтения/итога, иначе [] |
+| diagnostic_imla_deferred | boolean; true только для diagnostic при явном завершении после script; отложенные imla не входят в score/рекомендации |
+| assessment_help_opened_at | TimeMs или null; для diagnostic/final факт открытия учебной помощи во время незавершённого сеанса, остальные kinds всегда null |
+| reading_help | Массив {line_id,word_id,kind,opened_at}; kind=letters,rule,reading,meaning; word_id может быть null для всей строки; для reading_practice, иначе [] |
 | route_at_start | arabic_reader, new_to_script или null; история выбора, не текущая настройка |
 | question_plan | Непустой массив PlanItem, порядок неизменяем после старта |
 | active_presentation_id | LocalId текущего предъявления либо null |
@@ -224,7 +227,7 @@ Exposure — агрегированный факт показа, не лемма
 | Поле | Тип / ограничение |
 |---|---|
 | exposure_key | Строка primary key; ресурсный ключ либо material:Hash |
-| kind | lesson, question, example, reading_line, reading_word, dictionary_entry, material |
+| kind | lesson, reading, question, example, reading_line, reading_word, dictionary_entry, material |
 | resource_id | Существующий ID/word_id либо null для material |
 | material_key | Hash|null |
 | exposure_policy | Версия exposure |
@@ -232,14 +235,15 @@ Exposure — агрегированный факт показа, не лемма
 | first_reading_exposed_at | TimeMs|null |
 | first_meaning_exposed_at | TimeMs|null |
 | first_answer_exposed_at | TimeMs|null |
+| first_completed_at | TimeMs|null; только kind=reading, явная отметка прочтения, отдельно от ответов RQ |
 
-Консервативный material_key вычисляется из NFC-формы с **явно известным разложением совместимых презентационных форм** и удалением tatweel. Нет глобальной NFKC-мутации контента, удаления всех marks или смешения татарских гласных. Ключ включает профиль, а для омографии при необходимости отдельный контекст/смысл. Правило построения и таблица допустимых совместимых преобразований версионируются. Исходный текст не изменяется.
+Консервативный material_key вычисляется из NFC-формы с **явно известным разложением совместимых презентационных форм** и удалением tatweel. Нет глобальной NFKC-мутации контента, удаления всех marks или смешения татарских гласных. Есть два вида агрегированного ключа: visual=Hash(тип,форма,профиль) для знакомства с написанием и reading=Hash(тип,форма,профиль,нормализованное конкретное чтение) для раскрытого чтения. У них разные хеши и общий kind=material. При показе формы пишется visual Exposure; при раскрытии подтверждённого чтения — дополнительно reading Exposure. material_seen_before проверяет visual; reading_exposed_before — соответствующее допустимое чтение данного контекста. Разные чтения омографа не сливаются. Сырая формулировка meaning_tt и example_id не входят в material hash: B07/V01 должны узнавать одну форму при разных пояснениях. Правило построения и таблица допустимых совместимых преобразований версионируются. Исходный текст не изменяется.
 
 Первое фактическое открытие теории записывает lesson exposure с resource_id=lesson_id. first_started_at урока определяется минимумом first_seen_at этого факта и started_at его учебных сеансов; открытие теории без упражнения поэтому не теряется. Создание плана или prefetch не считается открытием.
 
 Надёжное утверждение UI — первая попытка конкретного вопроса. Отсутствие Exposure не доказывает, что человек никогда не видел слово. Для доступа after_linked_question используется подтверждённая отправка/reveal соответствующего вопроса, не эвристическое сходство material_key. Поиск, доступ и оценка имеют разные функции.
 
-Помощь из текста связывается с line_id/word_id и незавершёнными вопросами этой строки. Полное чтение строки не открывается в итоговом сеансе до завершения. Источниковая карточка офлайн показывает сохранённый source_form, название раздела и LF-адрес; полный учебник не обещается офлайн.
+Помощь из текста связывается с line_id/word_id и незавершёнными вопросами этой строки. Session.reading_help сохраняет события до первого показа соответствующего RQ; Assistance текущего Presentation не получает невозможное время раньше shown_at. Session.assessment_help_opened_at отмечает учебный режим всех active/paused диагностик/итогов одной транзакцией по механике раздела 6; это не очищаемый визуальным скрытием флаг. Полное чтение строки не открывается в итоговом сеансе до завершения. Источниковая карточка офлайн показывает сохранённый source_form, название раздела и LF-адрес; полный учебник не обещается офлайн.
 
 ## ReviewCard и вычисляемый прогресс
 
@@ -260,7 +264,7 @@ ReviewCard хранится только для разрешённых **course*
 | attempt_count, independent_success_count, incorrect_count, unknown_count, assisted_count | Целые >=0; представление статистики карточки, пересчитываемое из её событий |
 | policy_version | Версия review |
 
-Автоматическое добавление: неверный, unknown или подсказанный course/ordinary-reading ответ. Верный ответ сам по себе не создаёт карточку; он влияет на расписание только если карточка уже добавлена либо пользователь добавляет её вручную. Досрочный повтор и предел30суток определяет механика, а не компонент карточки.
+Автоматическое добавление: неверный, unknown или подсказанный course/ordinary-reading ответ. Верный ответ сам по себе не создаёт карточку; он влияет на расписание только если карточка уже добавлена либо пользователь добавляет её вручную. Досрочный повтор и предел 30 суток определяет механика, а не компонент карточки.
 
 LessonProgress — **вычисляемая проекция**, не независимо редактируемая таблица:
 
@@ -284,7 +288,7 @@ Settings хранится в meta под key=settings:
 - arabic_size_px:28|32|40|48, default32;
 - text_size_px:18|20|22|24, default18, только основной текст чтения;
 - reduced_motion:system|reduce;
-- review_batch_size:целое1…10, default10;
+- review_batch_size:целое 1…10, default10;
 - last_location:{kind,id}|null; kind=lesson|reading|dictionary|reference, ID валиден;
 - revision:Revision, updated_at:TimeMs.
 
@@ -293,6 +297,8 @@ Settings хранится в meta под key=settings:
 В настройках нет произвольного URL шрифта, исполняемого CSS, секретных ключей или серверного аккаунта. Незаписанное аудио не включается настройкой: доступность берётся из media manifest с asset_path!=null и ui_available=true.
 
 Bookmark: bookmark_key, kind, target_id, created_at, updated_at, position. kind=lesson|reading|dictionary|rule; bookmark_key детерминирован из kind+target_id, дубликаты не создаются. position=null, кроме чтения, где допустимы line_id, line_revision, word_ordinal:number|null. Ошибочный ordinal не переносится на другой текст. Изменение размерности шрифта не требует сохранения пиксельного scroll как единственного ориентира.
+
+ResumePosition хранится в meta под key=`position:{kind}:{target_id}`: kind=lesson|reading|reference; target_id; anchor_id:string|null; within_block_ratio:number от 0 до 1; content_revision:Hash; updated_at:TimeMs. Якорь — существующий смысловой блок: строка чтения, правило или адресованный абзац урока. Позиция обновляется при остановке прокрутки и уходе со страницы; это не закладка и не факт завершения. При иной content_revision сначала восстанавливается существующий стабильный anchor_id, иначе начало материала; старый ordinal не переносится на изменённый блок. Все позиции входят в экспорт как resume_positions[].
 
 ## IndexedDB: stores, ключи и CAS
 
@@ -332,17 +338,17 @@ UI получает подтверждение сохранения после t
 
 ### Конверт
 
-Export={format:'iske-imla-progress',schema_version,content_version,app_version,exported_at,data}. schema_version соответствует progress_schema; exported_at=TimeMs. data содержит settings, sessions[], presentations[], attempts[], exposures[], review_cards[], bookmarks[], legacy[].
+Export={format:'iske-imla-progress',schema_version,content_version,app_version,exported_at,data}. schema_version соответствует progress_schema; exported_at=TimeMs. data содержит settings, sessions[], presentations[], attempts[], exposures[], review_cards[], bookmarks[], resume_positions[], legacy[].
 
 Контент, ключи курса, аудио, кэш и исполняемые ресурсы не экспортируются. writer_id/epoch, active tab identity и физическая db_version не переносятся как право записи. Ссылки сеансов на release/revision сохраняются. Экспорт читается согласованным readonly-снимком всех пользовательских stores после завершения текущей команды записи; не собирается из несвязанных чтений в разные моменты.
 
 ### Проверка до замены
 
-Максимальный размер — **20MiB**, максимум **100000Attempt**. Для остальных массивов: sessions<=100000, presentations<=200000, exposures<=100000, bookmarks<=100000, review_cards<=числа допустимых известных QIDs, legacy<=100000. Общий лимит байт действует поверх счётчиков. Превышение не приводит к усечению.
+Максимальный размер — **20MiB**, максимум **100000Attempt**. Для остальных массивов: sessions<=100000, presentations<=200000, exposures<=100000, bookmarks<=100000, resume_positions<=10000, review_cards<=числа допустимых известных QIDs, legacy<=100000. Общий лимит байт действует поверх счётчиков. Превышение не приводит к усечению.
 
 Обычный экспорт создаёт восстанавливаемый файл только если итоговая UTF-8 сериализация и все счётчики укладываются в те же пределы. Проверка выполняется при экспорте, а не полной сериализацией после каждого ответа. Для обычного накопления истории действует мягкий порог **16MiB пользовательских записей или 90000Attempt**: перед изменением истории оценивается размер результата транзакции. При достижении порога дальнейшие durable history writes приостанавливаются; текущая сохранённая история остаётся доступна для полного совместимого экспорта. UI показывает «Сакланган тарих өчен урын җитми», предлагает сохранить копию и отдельно явно начать новую локальную историю. Практика может продолжаться в памяти с обычной отметкой несохранённого состояния. Экспорт, просмотр, настройки и явный reset не блокируются. Автоматического удаления и усечения нет.
 
-meta/control дополнительно содержит estimated_record_bytes и attempt_count — неотрицательные целые. estimated_record_bytes — сумма UTF-8 размеров JSON-представлений экспортируемых записей (без control); счётчики обновляются дельтами изменённых записей в той же транзакции. Это воспроизводимая оценка, не отдельная история событий: после импорта/миграции она пересчитывается. Резерв4MiB оставлен для конверта и структуры массивов; окончательная проверка полного экспорта всё равно обязательна. Импорт корректного файла до20MiB разрешён даже выше мягкого порога: он сразу переводит накопление durable history в history_full, сохраняя возможность экспорта. Пределы количества остальных массивов проверяются при записи так же, как при импорте.
+meta/control дополнительно содержит estimated_record_bytes и attempt_count — неотрицательные целые. estimated_record_bytes — сумма UTF-8 размеров JSON-представлений экспортируемых записей (без control); счётчики обновляются дельтами изменённых записей в той же транзакции. Это воспроизводимая оценка, не отдельная история событий: после импорта/миграции она пересчитывается. Резерв 4MiB оставлен для конверта и структуры массивов; окончательная проверка полного экспорта всё равно обязательна. Импорт корректного файла до 20MiB разрешён даже выше мягкого порога: он сразу переводит накопление durable history в history_full, сохраняя возможность экспорта. Пределы количества остальных массивов проверяются при записи так же, как при импорте.
 
 Если из-за дефекта оценки или старой миграции полный экспорт всё же превышает жёсткий предел, UI не выдаёт такой файл за восстанавливаемую копию и не сообщает об успешном backup; локальная история сохраняется. Это ошибка совместимости, требующая исправления/миграции перед обещанием восстановления, а не повод автоматически удалить часть данных. Штатный history_full — редкое ограничение длинной локальной истории, которое должно быть указано в справке о хранении.
 

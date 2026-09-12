@@ -1,0 +1,2760 @@
+{
+  "schema_version": 1,
+  "policies": {
+    "grading": "grading/1",
+    "normalization": "tt-reading/1",
+    "mastery": "lesson-mastery/1",
+    "diagnostic": "diagnostic/1",
+    "final": "final/1",
+    "review": "review/1",
+    "exposure": "exposure/1",
+    "release_access": "release-access/1",
+    "search": "dictionary-search/1",
+    "import": "progress-import/1"
+  },
+  "authority": "docs/production/03-learning-mechanics.md",
+  "description": "Пассивные приёмочные сценарии. Не являются реализацией проверяющего кода или отдельной политикой. При изменении нормативной механики обновляются вместе с ней.",
+  "fixture_conventions": {
+    "catalog": "Текущий корпус content/; QID разрешается в текущую grading_revision при будущей реализации тестов.",
+    "record_fragments": "Входы являются минимальными проекциями состояния для сценария, а не полными импортируемыми Session/Attempt. Ответы answer_raw соответствуют AnswerValue из02; expected поля задают только проверяемые свойства.",
+    "variants": "Каждый вариант начинается с одного и того же исходного состояния; варианты не следуют друг за другом.",
+    "clock": {
+      "utc_example": "2026-09-12T09:00:00.000Z",
+      "now": 1789203600000,
+      "day_ms": 86400000
+    },
+    "question_plan": "Массивы QIDs в сценариях задают точный фиксированный порядок; future harness разрешает PlanItem из каталога.",
+    "grade_snapshots": "Пороговые сценарии получают уже вычисленные grade/independent_correct и отдельно не тестируют нормализацию; исходные варианты ответов проверяются в grading-сценариях.",
+    "no_runtime_hash_literals": "Синтетические хеши не подменяют будущий манифест; для ревизионного сценария проверяется отношение changed, а не заранее выдуманный digest.",
+    "first_presentation": "Если ordinal явно не задан, сценарий моделирует первое предъявление ordinal=1; последовательность плановых review-отправок использует отдельные новые сеансы. Повторы ordinal>1 указаны явно."
+  },
+  "cases": [
+    {
+      "id": "LC-01",
+      "kind": "grading",
+      "description": "Верный ID сохраняет значение после перестановки видимых опций.",
+      "input": {
+        "question_id": "Q-L07-07",
+        "answer_raw": {
+          "kind": "option",
+          "option_id": "b"
+        },
+        "option_order": [
+          "c",
+          "b",
+          "a"
+        ]
+      },
+      "expected": {
+        "answer_normalized": "b",
+        "grade": "correct",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-02",
+      "kind": "grading",
+      "description": "Множество правильных вариантов принимается в обратном порядке.",
+      "input": {
+        "question_id": "Q-G01-05",
+        "answer_raw": {
+          "kind": "set",
+          "option_ids": [
+            "b",
+            "a"
+          ]
+        }
+      },
+      "expected": {
+        "answer_normalized": [
+          "a",
+          "b"
+        ],
+        "grade": "correct",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-03",
+      "kind": "grading",
+      "description": "Частичный набор и набор с лишней опцией не проходят сравнение множества.",
+      "input": {
+        "question_id": "Q-G01-05",
+        "variants": [
+          {
+            "answer_raw": {
+              "kind": "set",
+              "option_ids": [
+                "a"
+              ]
+            }
+          },
+          {
+            "answer_raw": {
+              "kind": "set",
+              "option_ids": [
+                "a",
+                "b",
+                "c"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "answer_normalized": [
+              "a"
+            ],
+            "grade": "incorrect"
+          },
+          {
+            "answer_normalized": [
+              "a",
+              "b",
+              "c"
+            ],
+            "grade": "incorrect"
+          }
+        ],
+        "description": "Полный ключ — множество a,b; дробных баллов нет."
+      }
+    },
+    {
+      "id": "LC-04",
+      "kind": "assessment_assistance",
+      "description": "После паузы открытая учебная помощь делает весь итог учебным, даже если все ответы верны.",
+      "input": {
+        "question_plan": [
+          "F-01",
+          "F-02",
+          "F-03",
+          "F-04",
+          "F-05",
+          "F-06",
+          "F-07",
+          "F-08",
+          "F-09",
+          "F-10",
+          "F-11",
+          "F-12",
+          "F-13",
+          "F-14",
+          "F-15",
+          "F-16",
+          "RQ-F01-01",
+          "RQ-F01-02",
+          "RQ-F02-01",
+          "RQ-F02-02"
+        ],
+        "answers": [
+          {
+            "question_id": "F-01",
+            "answer_raw": {
+              "kind": "text",
+              "text": "борыч"
+            }
+          },
+          {
+            "question_id": "F-02",
+            "answer_raw": {
+              "kind": "text",
+              "text": "көмеш"
+            }
+          },
+          {
+            "question_id": "F-03",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыма"
+            }
+          },
+          {
+            "question_id": "F-04",
+            "answer_raw": {
+              "kind": "text",
+              "text": "килделәр"
+            }
+          },
+          {
+            "question_id": "F-05",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-06",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-08",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-09",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-10",
+            "answer_raw": {
+              "kind": "text",
+              "text": "чыгып"
+            }
+          },
+          {
+            "question_id": "F-11",
+            "answer_raw": {
+              "kind": "text",
+              "text": "тарих"
+            }
+          },
+          {
+            "question_id": "F-12",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-13",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-14",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-15",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-16",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "RQ-F01-01",
+            "answer_raw": {
+              "kind": "set",
+              "option_ids": [
+                "a",
+                "c"
+              ]
+            }
+          },
+          {
+            "question_id": "RQ-F01-02",
+            "answer_raw": {
+              "kind": "text",
+              "text": "яктырак"
+            }
+          },
+          {
+            "question_id": "RQ-F02-01",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыгызга"
+            }
+          },
+          {
+            "question_id": "RQ-F02-02",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          }
+        ],
+        "session_kind": "final",
+        "paused_at": 1789203600000,
+        "assessment_help_opened_at": 1789203601000,
+        "resumed_at": 1789203602000,
+        "submitted_at": 1789203603000
+      },
+      "expected": {
+        "completed": true,
+        "correct": 20,
+        "independent_correct": 0,
+        "passed": false,
+        "review_cards_created": 0,
+        "draft_answers_preserved": true,
+        "description": "Подтверждённое открытие теории/справки/статьи при незавершённом итоге относится ко всему сеансу, а не только текущему вопросу."
+      }
+    },
+    {
+      "id": "LC-05",
+      "kind": "grading",
+      "description": "Регистр и внешние NBSP не меняют явный татарский ключ.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "answer_raw": {
+          "kind": "text",
+          "text": " ЫЗАН "
+        }
+      },
+      "expected": {
+        "answer_normalized": "ызан",
+        "grade": "correct",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-06",
+      "kind": "grading",
+      "description": "Омограф в другом значении не принимается вместо требуемого ызан.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "answer_raw": {
+          "kind": "text",
+          "text": "азан"
+        }
+      },
+      "expected": {
+        "answer_normalized": "азан",
+        "grade": "incorrect",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-07",
+      "kind": "grading",
+      "description": "Два изафетных написания разрешены адресными ключами; произвольное удаление дефиса не разрешено.",
+      "input": {
+        "question_id": "Q-L08-02",
+        "variants": [
+          {
+            "answer_raw": {
+              "kind": "text",
+              "text": "ТӘРҖЕМӘ-И   ХӘЛ"
+            }
+          },
+          {
+            "answer_raw": {
+              "kind": "text",
+              "text": "тәрҗемәи хәл"
+            }
+          },
+          {
+            "answer_raw": {
+              "kind": "text",
+              "text": "тәрҗемәи хел"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "answer_normalized": "тәрҗемә-и хәл",
+            "grade": "correct"
+          },
+          {
+            "answer_normalized": "тәрҗемәи хәл",
+            "grade": "correct"
+          },
+          {
+            "answer_normalized": "тәрҗемәи хел",
+            "grade": "incorrect"
+          }
+        ],
+        "description": "ә и е различаются; допустимые варианты берутся только из Q-L08-02."
+      }
+    },
+    {
+      "id": "LC-08",
+      "kind": "grading",
+      "description": "Пробелы вокруг + не меняют границу исторического масдара.",
+      "input": {
+        "question_id": "Q-A05-09",
+        "answer_raw": {
+          "kind": "segments",
+          "text": " АЛ+ МАК "
+        }
+      },
+      "expected": {
+        "answer_normalized": [
+          "ал",
+          "мак"
+        ],
+        "grade": "correct",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-09",
+      "kind": "grading",
+      "description": "Морфемы нельзя дополнительно дробить вместо явно запрошенной целой формы.",
+      "input": {
+        "question_id": "Q-A06-09",
+        "answer_raw": {
+          "kind": "segments",
+          "text": "бар + ды + к"
+        }
+      },
+      "expected": {
+        "answer_normalized": [
+          "бар",
+          "ды",
+          "к"
+        ],
+        "grade": "incorrect",
+        "description": "Ответ сравнивается с явным ключом текущей ревизии; поиск словаря не участвует."
+      }
+    },
+    {
+      "id": "LC-10",
+      "kind": "answer_validation",
+      "description": "Пустая segment-часть остаётся неверной частью ответа; null-черновик отличается от явного unknown.",
+      "input": {
+        "variants": [
+          {
+            "question_id": "Q-A05-09",
+            "answer_raw": {
+              "kind": "segments",
+              "text": "ал++мак"
+            }
+          },
+          {
+            "question_id": "Q-V04-07",
+            "draft_answer": null
+          },
+          {
+            "question_id": "Q-V04-07",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "answer_normalized": [
+              "ал",
+              "",
+              "мак"
+            ],
+            "grade": "incorrect",
+            "attempt_created": true
+          },
+          {
+            "attempt_created": false,
+            "grade": null
+          },
+          {
+            "answer_normalized": null,
+            "grade": "unknown",
+            "attempt_created": true
+          }
+        ],
+        "description": "Пустая часть не исчезает при нормализации и не совпадает с ключом; неотвеченный черновик не создаёт Attempt."
+      }
+    },
+    {
+      "id": "LC-11",
+      "kind": "lesson_mastery",
+      "description": "V04: граница освоения при 6 практических вопросах — 5, а оба переноса обязательны.",
+      "input": {
+        "lesson_id": "V04",
+        "variants": [
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-V04-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ]
+          },
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-V04-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "practice_count": 6,
+            "independent_practice_correct": 4,
+            "required_practice_correct": 5,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "practiced"
+          },
+          {
+            "practice_count": 6,
+            "independent_practice_correct": 5,
+            "required_practice_correct": 5,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "mastered"
+          }
+        ],
+        "description": "Берутся первые отправки данного полного цикла; не объединять лучшие ответы из разных циклов."
+      }
+    },
+    {
+      "id": "LC-12",
+      "kind": "lesson_mastery",
+      "description": "G01: граница освоения при 7 практических вопросах — 6, а оба переноса обязательны.",
+      "input": {
+        "lesson_id": "G01",
+        "variants": [
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-G01-01",
+              "Q-G01-02",
+              "Q-G01-03",
+              "Q-G01-04",
+              "Q-G01-05",
+              "Q-G01-06",
+              "Q-G01-09",
+              "Q-G01-07",
+              "Q-G01-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-G01-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-G01-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-G01-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-G01-01",
+              "Q-G01-02",
+              "Q-G01-03",
+              "Q-G01-04",
+              "Q-G01-05",
+              "Q-G01-06",
+              "Q-G01-09",
+              "Q-G01-07",
+              "Q-G01-08"
+            ]
+          },
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-G01-01",
+              "Q-G01-02",
+              "Q-G01-03",
+              "Q-G01-04",
+              "Q-G01-05",
+              "Q-G01-06",
+              "Q-G01-09",
+              "Q-G01-07",
+              "Q-G01-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-G01-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-G01-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-G01-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-G01-01",
+              "Q-G01-02",
+              "Q-G01-03",
+              "Q-G01-04",
+              "Q-G01-05",
+              "Q-G01-06",
+              "Q-G01-09",
+              "Q-G01-07",
+              "Q-G01-08"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "practice_count": 7,
+            "independent_practice_correct": 5,
+            "required_practice_correct": 6,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "practiced"
+          },
+          {
+            "practice_count": 7,
+            "independent_practice_correct": 6,
+            "required_practice_correct": 6,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "mastered"
+          }
+        ],
+        "description": "Берутся первые отправки данного полного цикла; не объединять лучшие ответы из разных циклов."
+      }
+    },
+    {
+      "id": "LC-13",
+      "kind": "lesson_mastery",
+      "description": "A06: граница освоения при 8 практических вопросах — 7, а оба переноса обязательны.",
+      "input": {
+        "lesson_id": "A06",
+        "variants": [
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-A06-01",
+              "Q-A06-02",
+              "Q-A06-03",
+              "Q-A06-04",
+              "Q-A06-05",
+              "Q-A06-06",
+              "Q-A06-09",
+              "Q-A06-10",
+              "Q-A06-07",
+              "Q-A06-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-A06-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A06-10",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A06-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-A06-01",
+              "Q-A06-02",
+              "Q-A06-03",
+              "Q-A06-04",
+              "Q-A06-05",
+              "Q-A06-06",
+              "Q-A06-09",
+              "Q-A06-10",
+              "Q-A06-07",
+              "Q-A06-08"
+            ]
+          },
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-A06-01",
+              "Q-A06-02",
+              "Q-A06-03",
+              "Q-A06-04",
+              "Q-A06-05",
+              "Q-A06-06",
+              "Q-A06-09",
+              "Q-A06-10",
+              "Q-A06-07",
+              "Q-A06-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-A06-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-10",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A06-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A06-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-A06-01",
+              "Q-A06-02",
+              "Q-A06-03",
+              "Q-A06-04",
+              "Q-A06-05",
+              "Q-A06-06",
+              "Q-A06-09",
+              "Q-A06-10",
+              "Q-A06-07",
+              "Q-A06-08"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "practice_count": 8,
+            "independent_practice_correct": 6,
+            "required_practice_correct": 7,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "practiced"
+          },
+          {
+            "practice_count": 8,
+            "independent_practice_correct": 7,
+            "required_practice_correct": 7,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "mastered"
+          }
+        ],
+        "description": "Берутся первые отправки данного полного цикла; не объединять лучшие ответы из разных циклов."
+      }
+    },
+    {
+      "id": "LC-14",
+      "kind": "lesson_mastery",
+      "description": "A02: граница освоения при 9 практических вопросах — 8, а оба переноса обязательны.",
+      "input": {
+        "lesson_id": "A02",
+        "variants": [
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-A02-01",
+              "Q-A02-02",
+              "Q-A02-03",
+              "Q-A02-04",
+              "Q-A02-05",
+              "Q-A02-06",
+              "Q-A02-09",
+              "Q-A02-10",
+              "Q-A02-11",
+              "Q-A02-07",
+              "Q-A02-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-A02-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-10",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A02-11",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A02-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-A02-01",
+              "Q-A02-02",
+              "Q-A02-03",
+              "Q-A02-04",
+              "Q-A02-05",
+              "Q-A02-06",
+              "Q-A02-09",
+              "Q-A02-10",
+              "Q-A02-11",
+              "Q-A02-07",
+              "Q-A02-08"
+            ]
+          },
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-A02-01",
+              "Q-A02-02",
+              "Q-A02-03",
+              "Q-A02-04",
+              "Q-A02-05",
+              "Q-A02-06",
+              "Q-A02-09",
+              "Q-A02-10",
+              "Q-A02-11",
+              "Q-A02-07",
+              "Q-A02-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-A02-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-09",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-10",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-11",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-A02-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-A02-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-A02-01",
+              "Q-A02-02",
+              "Q-A02-03",
+              "Q-A02-04",
+              "Q-A02-05",
+              "Q-A02-06",
+              "Q-A02-09",
+              "Q-A02-10",
+              "Q-A02-11",
+              "Q-A02-07",
+              "Q-A02-08"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "practice_count": 9,
+            "independent_practice_correct": 7,
+            "required_practice_correct": 8,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "practiced"
+          },
+          {
+            "practice_count": 9,
+            "independent_practice_correct": 8,
+            "required_practice_correct": 8,
+            "independent_transfer_correct": 2,
+            "transfer_count": 2,
+            "state": "mastered"
+          }
+        ],
+        "description": "Берутся первые отправки данного полного цикла; не объединять лучшие ответы из разных циклов."
+      }
+    },
+    {
+      "id": "LC-15",
+      "kind": "lesson_mastery",
+      "description": "Правильные повторы после ошибки и подсказанный перенос не заменяют независимые первые ответы.",
+      "input": {
+        "lesson_id": "V04",
+        "variants": [
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-V04-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "unknown",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-05",
+                "ordinal": 2,
+                "first_submission_in_cycle": false,
+                "grade": "correct",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-06",
+                "ordinal": 2,
+                "first_submission_in_cycle": false,
+                "grade": "correct",
+                "independent_correct": false
+              }
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ]
+          },
+          {
+            "session_status": "submitted",
+            "question_plan": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ],
+            "attempts": [
+              {
+                "question_id": "Q-V04-01",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-02",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-03",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-04",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-05",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-06",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              },
+              {
+                "question_id": "Q-V04-07",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": false
+              },
+              {
+                "question_id": "Q-V04-08",
+                "ordinal": 1,
+                "first_submission_in_cycle": true,
+                "grade": "correct",
+                "independent_correct": true
+              }
+            ],
+            "assisted_question_ids": [
+              "Q-V04-07"
+            ],
+            "feedback_acknowledged_question_ids": [
+              "Q-V04-01",
+              "Q-V04-02",
+              "Q-V04-03",
+              "Q-V04-04",
+              "Q-V04-05",
+              "Q-V04-06",
+              "Q-V04-07",
+              "Q-V04-08"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "state": "practiced",
+            "independent_practice_correct": 4,
+            "independent_transfer_correct": 2
+          },
+          {
+            "state": "practiced",
+            "independent_practice_correct": 6,
+            "independent_transfer_correct": 1
+          }
+        ],
+        "description": "Оба цикла выполнены, но каждый не удовлетворяет собственной рубрике освоения."
+      }
+    },
+    {
+      "id": "LC-16",
+      "kind": "diagnostic",
+      "description": "Семь из восьми базовых ответов при выполненных критичных вопросах.",
+      "input": {
+        "question_plan": [
+          "D-01",
+          "D-02",
+          "D-03",
+          "D-04",
+          "D-05",
+          "D-06",
+          "D-07",
+          "D-08",
+          "D-09",
+          "D-10",
+          "D-11",
+          "D-12",
+          "D-13",
+          "D-14",
+          "D-15",
+          "D-16",
+          "D-17",
+          "D-18"
+        ],
+        "answers": [
+          {
+            "question_id": "D-01",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-02",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "D-03",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "D-04",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-05",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "D-06",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-08",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-09",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-10",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-11",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-12",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-13",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-14",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-15",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-16",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-17",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-18",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          }
+        ],
+        "assistance_requested": false,
+        "diagnostic_imla_deferred": true
+      },
+      "expected": {
+        "script_correct": 7,
+        "script_total": 8,
+        "all_critical_correct": true,
+        "recommended_route": "arabic_reader",
+        "automatically_mastered_lesson_ids": [],
+        "imla_score": null,
+        "description": "Отложенная вторая часть не становится оценкой знания татарского и не засчитывает общий курс.",
+        "deferred_imla_used_for_recommendations": false
+      }
+    },
+    {
+      "id": "LC-17",
+      "kind": "diagnostic",
+      "description": "Семь из восьми базовых ответов при ошибке на обязательном направлении письма.",
+      "input": {
+        "question_plan": [
+          "D-01",
+          "D-02",
+          "D-03",
+          "D-04",
+          "D-05",
+          "D-06",
+          "D-07",
+          "D-08",
+          "D-09",
+          "D-10",
+          "D-11",
+          "D-12",
+          "D-13",
+          "D-14",
+          "D-15",
+          "D-16",
+          "D-17",
+          "D-18"
+        ],
+        "answers": [
+          {
+            "question_id": "D-01",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-02",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "D-03",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "D-04",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-05",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "D-06",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "D-08",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "D-09",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-10",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-11",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-12",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-13",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-14",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-15",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-16",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-17",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "D-18",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          }
+        ],
+        "assistance_requested": false,
+        "diagnostic_imla_deferred": true
+      },
+      "expected": {
+        "script_correct": 7,
+        "script_total": 8,
+        "all_critical_correct": false,
+        "recommended_route": "new_to_script",
+        "automatically_mastered_lesson_ids": [],
+        "imla_score": null,
+        "description": "Отложенная вторая часть не становится оценкой знания татарского и не засчитывает общий курс.",
+        "deferred_imla_used_for_recommendations": false
+      }
+    },
+    {
+      "id": "LC-18",
+      "kind": "final_rubric",
+      "description": "Итог 18/20 с пропусками вне критичных групп.",
+      "input": {
+        "question_plan": [
+          "F-01",
+          "F-02",
+          "F-03",
+          "F-04",
+          "F-05",
+          "F-06",
+          "F-07",
+          "F-08",
+          "F-09",
+          "F-10",
+          "F-11",
+          "F-12",
+          "F-13",
+          "F-14",
+          "F-15",
+          "F-16",
+          "RQ-F01-01",
+          "RQ-F01-02",
+          "RQ-F02-01",
+          "RQ-F02-02"
+        ],
+        "answers": [
+          {
+            "question_id": "F-01",
+            "answer_raw": {
+              "kind": "text",
+              "text": "борыч"
+            }
+          },
+          {
+            "question_id": "F-02",
+            "answer_raw": {
+              "kind": "text",
+              "text": "көмеш"
+            }
+          },
+          {
+            "question_id": "F-03",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыма"
+            }
+          },
+          {
+            "question_id": "F-04",
+            "answer_raw": {
+              "kind": "text",
+              "text": "килделәр"
+            }
+          },
+          {
+            "question_id": "F-05",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "F-06",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "F-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-08",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-09",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-10",
+            "answer_raw": {
+              "kind": "text",
+              "text": "чыгып"
+            }
+          },
+          {
+            "question_id": "F-11",
+            "answer_raw": {
+              "kind": "text",
+              "text": "тарих"
+            }
+          },
+          {
+            "question_id": "F-12",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-13",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-14",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-15",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-16",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "RQ-F01-01",
+            "answer_raw": {
+              "kind": "set",
+              "option_ids": [
+                "a",
+                "c"
+              ]
+            }
+          },
+          {
+            "question_id": "RQ-F01-02",
+            "answer_raw": {
+              "kind": "text",
+              "text": "яктырак"
+            }
+          },
+          {
+            "question_id": "RQ-F02-01",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыгызга"
+            }
+          },
+          {
+            "question_id": "RQ-F02-02",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          }
+        ],
+        "assistance_requested": false
+      },
+      "expected": {
+        "completed": true,
+        "independent_correct": 18,
+        "total": 20,
+        "vowels_correct": 4,
+        "morphology_correct": 4,
+        "reading_correct": 4,
+        "passed": true,
+        "review_cards_created": 0,
+        "description": "Общий порог16/20 применяется совместно с минимумами3/4 в каждой обязательной группе."
+      }
+    },
+    {
+      "id": "LC-19",
+      "kind": "final_rubric",
+      "description": "Итог 18/20 не компенсирует 2/4 по гласным.",
+      "input": {
+        "question_plan": [
+          "F-01",
+          "F-02",
+          "F-03",
+          "F-04",
+          "F-05",
+          "F-06",
+          "F-07",
+          "F-08",
+          "F-09",
+          "F-10",
+          "F-11",
+          "F-12",
+          "F-13",
+          "F-14",
+          "F-15",
+          "F-16",
+          "RQ-F01-01",
+          "RQ-F01-02",
+          "RQ-F02-01",
+          "RQ-F02-02"
+        ],
+        "answers": [
+          {
+            "question_id": "F-01",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "F-02",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "F-03",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыма"
+            }
+          },
+          {
+            "question_id": "F-04",
+            "answer_raw": {
+              "kind": "text",
+              "text": "килделәр"
+            }
+          },
+          {
+            "question_id": "F-05",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-06",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-08",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-09",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-10",
+            "answer_raw": {
+              "kind": "text",
+              "text": "чыгып"
+            }
+          },
+          {
+            "question_id": "F-11",
+            "answer_raw": {
+              "kind": "text",
+              "text": "тарих"
+            }
+          },
+          {
+            "question_id": "F-12",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            }
+          },
+          {
+            "question_id": "F-13",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-14",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "F-15",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "c"
+            }
+          },
+          {
+            "question_id": "F-16",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          },
+          {
+            "question_id": "RQ-F01-01",
+            "answer_raw": {
+              "kind": "set",
+              "option_ids": [
+                "a",
+                "c"
+              ]
+            }
+          },
+          {
+            "question_id": "RQ-F01-02",
+            "answer_raw": {
+              "kind": "text",
+              "text": "яктырак"
+            }
+          },
+          {
+            "question_id": "RQ-F02-01",
+            "answer_raw": {
+              "kind": "text",
+              "text": "кулыгызга"
+            }
+          },
+          {
+            "question_id": "RQ-F02-02",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "b"
+            }
+          }
+        ],
+        "assistance_requested": false
+      },
+      "expected": {
+        "completed": true,
+        "independent_correct": 18,
+        "total": 20,
+        "vowels_correct": 2,
+        "morphology_correct": 4,
+        "reading_correct": 4,
+        "passed": false,
+        "review_cards_created": 0,
+        "description": "Общий порог16/20 применяется совместно с минимумами3/4 в каждой обязательной группе."
+      }
+    },
+    {
+      "id": "LC-20",
+      "kind": "review_schedule",
+      "description": "Новая ручная карточка проходит интервалы1/3/7/14/30 суток; 30 суток остаются пределом.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "card_before": {
+          "step": -1,
+          "due_at": 1789203600000,
+          "origins": [
+            {
+              "kind": "manual",
+              "id": "Q-V04-07"
+            }
+          ]
+        },
+        "submissions": [
+          {
+            "submitted_at": 1789203600000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "submitted_at": 1789290000000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "submitted_at": 1789549200000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "submitted_at": 1790154000000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "submitted_at": 1791363600000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "submitted_at": 1793955600000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": false
+          }
+        ],
+        "session_kind": "review",
+        "each_submission_new_session": true
+      },
+      "expected": {
+        "after_each_submission": [
+          {
+            "step": 0,
+            "due_at": 1789290000000
+          },
+          {
+            "step": 1,
+            "due_at": 1789549200000
+          },
+          {
+            "step": 2,
+            "due_at": 1790154000000
+          },
+          {
+            "step": 3,
+            "due_at": 1791363600000
+          },
+          {
+            "step": 4,
+            "due_at": 1793955600000
+          },
+          {
+            "step": 4,
+            "due_at": 1796547600000
+          }
+        ],
+        "description": "Каждая следующая отправка совершается ровно в due_at; интервалы равны целому числу86400000ms, независимо от местной даты."
+      }
+    },
+    {
+      "id": "LC-21",
+      "kind": "review_schedule",
+      "description": "Досрочное самостоятельное закрепление не отодвигает срок и не повышает ступень.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "card_before": {
+          "step": 2,
+          "due_at": 1789808400000
+        },
+        "submitted_at": 1789290000000,
+        "answer_raw": {
+          "kind": "text",
+          "text": "ызан"
+        },
+        "assistance_requested": false
+      },
+      "expected": {
+        "step": 2,
+        "due_at": 1789808400000,
+        "attempt_count_delta": 1,
+        "independent_success_count_delta": 1,
+        "description": "Ответ остаётся в истории, но новая дата и повышение не применяются до назначенного срока."
+      }
+    },
+    {
+      "id": "LC-22",
+      "kind": "review_schedule",
+      "description": "Ошибка, unknown и верный ответ с помощью возвращают даже досрочную карточку к суткам.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "card_before": {
+          "step": 3,
+          "due_at": 1790413200000
+        },
+        "submitted_at": 1789203600000,
+        "variants": [
+          {
+            "answer_raw": {
+              "kind": "text",
+              "text": "азан"
+            },
+            "assistance_requested": false
+          },
+          {
+            "answer_raw": {
+              "kind": "unknown"
+            },
+            "assistance_requested": false
+          },
+          {
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "assistance_requested": true
+          }
+        ]
+      },
+      "expected": {
+        "variants": [
+          {
+            "grade": "incorrect",
+            "last_outcome": "incorrect",
+            "step": 0,
+            "due_at": 1789290000000
+          },
+          {
+            "grade": "unknown",
+            "last_outcome": "unknown",
+            "step": 0,
+            "due_at": 1789290000000
+          },
+          {
+            "grade": "correct",
+            "last_outcome": "assisted",
+            "step": 0,
+            "due_at": 1789290000000
+          }
+        ],
+        "description": "Помощь не меняет правильность текста, но меняет самостоятельность и результат расписания."
+      }
+    },
+    {
+      "id": "LC-23",
+      "kind": "review_deduplication",
+      "description": "Добавление из урока и учебного словаря создаёт одну карточку, а двойной submit — одну попытку.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "card_before": null,
+        "origins_to_add": [
+          {
+            "kind": "lesson",
+            "id": "V04"
+          },
+          {
+            "kind": "dictionary",
+            "id": "COURSE-EX-V04-05"
+          }
+        ],
+        "duplicate_submit_commands": [
+          {
+            "presentation_id": "20000000-0000-4000-8000-000000000001",
+            "submitted_at": 1789203600000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "азан"
+            }
+          },
+          {
+            "presentation_id": "20000000-0000-4000-8000-000000000001",
+            "submitted_at": 1789203600000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "азан"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "review_cards_for_question": 1,
+        "origin_count": 2,
+        "attempts_created": 1,
+        "attempt_count_delta": 1,
+        "step": 0,
+        "due_at": 1789290000000,
+        "description": "presentation_id — идемпотентный ключ отправки; повтор команды не повышает счётчик и не сдвигает срок."
+      }
+    },
+    {
+      "id": "LC-24",
+      "kind": "review_enrollment",
+      "description": "Первый правильный самостоятельный ответ обычного курса сам не создаёт SRS-карточку.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "session_kind": "lesson_cycle",
+        "card_before": null,
+        "submitted_at": 1789203600000,
+        "answer_raw": {
+          "kind": "text",
+          "text": "ызан"
+        },
+        "assistance_requested": false
+      },
+      "expected": {
+        "grade": "correct",
+        "independent_correct": true,
+        "attempts_created": 1,
+        "review_cards_created": 0,
+        "description": "Ручное добавление остаётся доступно; уже существующая карточка обрабатывается по расписанию."
+      }
+    },
+    {
+      "id": "LC-25",
+      "kind": "review_enrollment",
+      "description": "Диагностика, итоговые правила и итоговые RQ не добавляются в SRS даже после unknown.",
+      "input": {
+        "submissions": [
+          {
+            "question_id": "D-01",
+            "session_kind": "diagnostic",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "F-01",
+            "session_kind": "final",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          },
+          {
+            "question_id": "RQ-F01-01",
+            "session_kind": "final",
+            "answer_raw": {
+              "kind": "unknown"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "review_cards_created": 0,
+        "recommend_course_lessons": true,
+        "description": "Рекомендация возвращает к обычным урокам; идентичный RQ-final не превращается в review-вопрос."
+      }
+    },
+    {
+      "id": "LC-26",
+      "kind": "exposure_and_release",
+      "description": "B07 раскрывает аралаша внутри prompt; у V01 новый вопрос, но знакомый материал и уже показанное чтение.",
+      "input": {
+        "events": [
+          {
+            "kind": "show_question",
+            "question_id": "Q-B07-07",
+            "at": 1789203600000
+          },
+          {
+            "kind": "submit",
+            "question_id": "Q-B07-07",
+            "answer_raw": {
+              "kind": "option",
+              "option_id": "a"
+            },
+            "at": 1789203601000
+          },
+          {
+            "kind": "show_question",
+            "question_id": "Q-V01-07",
+            "at": 1789203602000
+          },
+          {
+            "kind": "submit",
+            "question_id": "Q-V01-07",
+            "answer_raw": {
+              "kind": "text",
+              "text": "аралаша"
+            },
+            "at": 1789203603000
+          }
+        ],
+        "no_prior_exposures": true,
+        "no_requested_assistance": true
+      },
+      "expected": {
+        "b07_independent_correct": true,
+        "v01_familiarity_at_show": {
+          "question_seen_before": false,
+          "material_seen_before": true,
+          "reading_exposed_before": true
+        },
+        "v01_independent_correct": true,
+        "release_checks": [
+          {
+            "after_event": 1,
+            "entry_id": "COURSE-EX-B07-05",
+            "released": false
+          },
+          {
+            "after_event": 2,
+            "entry_id": "COURSE-EX-B07-05",
+            "released": true
+          },
+          {
+            "after_event": 2,
+            "entry_id": "COURSE-EX-V01-05",
+            "released": false
+          },
+          {
+            "after_event": 4,
+            "entry_id": "COURSE-EX-V01-05",
+            "released": true
+          }
+        ],
+        "must_not_claim_tt": "Бу сүзне беренче тапкыр мөстәкыйль укыдың.",
+        "description": "after_event нумеруется с1. Авторское чтение не является запрошенной подсказкой; материал не открывает чужую source-запись по сходству."
+      }
+    },
+    {
+      "id": "LC-27",
+      "kind": "dictionary_eligibility",
+      "description": "Чтение одной формы не заполняет null всей статьи; разрешённая практика без подготовленного QID не генерируется.",
+      "input": {
+        "entry_ids": [
+          "lex-56-122",
+          "lex-55-001"
+        ],
+        "action": "inspect_and_add_to_review"
+      },
+      "expected": {
+        "entries": [
+          {
+            "entry_id": "lex-56-122",
+            "dictionary_visible": true,
+            "reading_tt": null,
+            "reading_question_generated": false,
+            "review_card_created": false,
+            "message_tt": "Мәгънәсе чыганак буенча бирелде. Татарча укылышы күрсәтелмәгән."
+          },
+          {
+            "entry_id": "lex-55-001",
+            "dictionary_visible": true,
+            "reading_tt": "тәһарәт",
+            "prepared_question_ids": [],
+            "reading_question_generated": false,
+            "review_card_created": false,
+            "bookmark_available": true
+          }
+        ],
+        "description": "Форма ذِى с чтением зи не становится общим ключом статьи; practice_allowed у тәһарәт не означает готовый вопрос."
+      }
+    },
+    {
+      "id": "LC-28",
+      "kind": "grading_revision",
+      "description": "Правка видимой строки чтения меняет ревизию RQ, даже если сам объект вопроса не менялся.",
+      "input": {
+        "question_id": "RQ-F01-01",
+        "source_reading_id": "READ-F01",
+        "line_ids": [
+          "READ-F01-L01"
+        ],
+        "change": {
+          "target": "resolved_visible_reading_line.display_form",
+          "old_value_source": "current_catalog",
+          "new_value": "شيكر قامشدن بولا"
+        },
+        "question_object_changed": false
+      },
+      "expected": {
+        "grading_revision_changed": true,
+        "old_attempt_preserved": true,
+        "old_attempt_graded_with_new_key": false,
+        "unfinished_session_silently_switched": false,
+        "description": "Мутация — синтетическая проверка контракта ревизии, а не предлагаемая редактура учебного текста."
+      }
+    },
+    {
+      "id": "LC-29",
+      "kind": "assistance_persistence",
+      "description": "Hint до submit переживает перезагрузку; раскрытие обратной связи после submit не меняет прошлую самостоятельность.",
+      "input": {
+        "question_id": "Q-V04-07",
+        "variants": [
+          {
+            "shown_at": 1789203600000,
+            "hint_opened_at": 1789203601000,
+            "hint_index": 0,
+            "reload_at": 1789203602000,
+            "submitted_at": 1789203603000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            }
+          },
+          {
+            "shown_at": 1789203600000,
+            "submitted_at": 1789203601000,
+            "answer_raw": {
+              "kind": "text",
+              "text": "ызан"
+            },
+            "feedback_opened_at": 1789203602000,
+            "no_help_before_submit": true
+          }
+        ],
+        "card_before": null
+      },
+      "expected": {
+        "variants": [
+          {
+            "grade": "correct",
+            "independent_correct": false,
+            "assistance_before_submit": {
+              "hint_indices": [
+                0
+              ],
+              "first_hint_at": 1789203601000
+            },
+            "review_card_created": true
+          },
+          {
+            "grade": "correct",
+            "independent_correct": true,
+            "assistance_before_submit": {
+              "hint_indices": [],
+              "first_hint_at": null
+            },
+            "attempt_changed_after_feedback": false
+          }
+        ],
+        "description": "Assistance в expected — проверяемый фрагмент полного объекта; остальные поля null."
+      }
+    },
+    {
+      "id": "LC-30",
+      "kind": "review_enrollment",
+      "description": "Помощь строке до показа RQ сохраняется в Session и делает обычное чтение подсказанным; такое RQ входит в SRS.",
+      "input": {
+        "question_id": "RQ-01-01",
+        "source_reading_id": "READ-01",
+        "session_kind": "reading_practice",
+        "card_before": null,
+        "reading_help": [
+          {
+            "line_id": "READ-01-L01",
+            "word_id": null,
+            "kind": "reading",
+            "opened_at": 1789203600000
+          }
+        ],
+        "shown_at": 1789203601000,
+        "submitted_at": 1789203602000,
+        "answer_raw": {
+          "kind": "text",
+          "text": "бал"
+        }
+      },
+      "expected": {
+        "grade": "correct",
+        "independent_correct": false,
+        "review_card_created": true,
+        "question_id": "RQ-01-01",
+        "step": 0,
+        "due_at": 1789290002000,
+        "origins": [
+          {
+            "kind": "reading",
+            "id": "READ-01"
+          }
+        ],
+        "description": "Помощь появилась раньше Presentation и не теряется из-за отсутствия её личного reading_opened_at; lesson_id для RQ не выдумывается."
+      }
+    }
+  ]
+}
