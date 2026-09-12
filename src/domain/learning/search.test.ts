@@ -42,3 +42,23 @@ describe('dictionary search and eligibility', () => {
     expect(['Б', 'Ә', 'А', 'Ө', 'О', 'Җ', 'Ж'].sort(tatarCompare)).toEqual(['А', 'Ә', 'Б', 'Ж', 'Җ', 'О', 'Ө']);
   });
 });
+
+it('groups only explicit links with identical visible form, reading, meaning and profile', async () => {
+  const { groupResults } = await import('./search');
+  const first = catalog.lexicon.get('lex-55-046')!;
+  const second = catalog.lexicon.get('lex-55-158')!;
+  const linked = { ...first, id: 'copy', links: [{ id: first.id, type: 'duplicate' }] };
+  const unlinked = { ...first, id: 'unlinked', links: [] };
+  const entries = new Map([first, second, linked, unlinked].map(entry => [entry.id, entry]));
+  const results = [first, second, linked, unlinked].map(entry => ({ id: entry.id, kind: 'dictionary' as const, tier: 'exact' as const }));
+  const groups = groupResults(results, entries);
+  expect(groups.map(group => group.results.map(result => result.id))).toEqual([[first.id, linked.id], [second.id], [unlinked.id]]);
+});
+
+it('limits queries by 256 code points rather than UTF-16 units', () => {
+  const original = catalog.lexicon.get('lex-55-025')!;
+  const word = '𞸀'.repeat(256);
+  const index = new DictionaryIndex([{ ...original, display_form: word, reading_tt: null, forms: [] }], []);
+  expect(index.search(word)).toHaveLength(1);
+  expect(index.search(`${word}𞸀`)).toEqual([]);
+});

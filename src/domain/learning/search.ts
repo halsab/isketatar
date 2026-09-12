@@ -2,6 +2,7 @@ import { typographicForm } from '../content/canonical';
 import { graphemeBoundaries } from '../content/validation';
 import type { DictionaryEntry, Vocabulary } from '../content/types';
 
+export const QUERY_LIMIT = 256;
 const alphabet = [...'аәбвгдеёжҗзийклмнңоөпрстуүфхһцчшщъыьэюя'];
 const rank = new Map(alphabet.map((letter, index) => [letter, index]));
 export function tatarCompare(left: string, right: string): number {
@@ -40,7 +41,7 @@ export class DictionaryIndex {
   }
   search(raw: string, options: { expanded?: boolean; limit?: number } = {}): SearchResult[] {
     const query = normalizeSearch(raw);
-    if (!query || query.length > 250) return [];
+    if (!query || [...raw].length > QUERY_LIMIT) return [];
     const typography = typographicForm(query);
     if (!typography) return [];
     const optional = optionalMarks(typography);
@@ -60,4 +61,19 @@ export class DictionaryIndex {
       .slice(0, Math.max(1, Math.min(1000, options.limit ?? 50)))
       .map(({ item, level }) => ({ id: item.entry.id, kind: item.kind, tier: tiers[level]! }));
   }
+}
+
+export interface SearchGroup { id: string; results: SearchResult[] }
+export function groupResults(results: SearchResult[], entries: ReadonlyMap<string, DictionaryEntry | Vocabulary>): SearchGroup[] {
+  const roots = new Map(results.map(result => [result.id, result.id]));
+  const root = (id: string): string => { let value = id; while (roots.get(value) !== value) value = roots.get(value)!; return value; };
+  const same = (left: DictionaryEntry | Vocabulary, right: DictionaryEntry | Vocabulary) => left.display_form === right.display_form && left.reading_tt === right.reading_tt && left.meaning_tt === right.meaning_tt && left.profile === right.profile;
+  for (const result of results) {
+    const entry = entries.get(result.id)!;
+    const linked = 'links' in entry ? entry.links.map(link => link.id) : entry.source_dictionary_ids;
+    for (const id of linked) if (roots.has(id) && same(entry, entries.get(id)!)) roots.set(root(id), root(entry.id));
+  }
+  const groups = new Map<string, SearchResult[]>();
+  for (const result of results) { const key = root(result.id); const items = groups.get(key) ?? []; items.push(result); groups.set(key, items); }
+  return [...groups.values()].map(items => ({ id: items.map(item => item.id).sort(tatarCompare)[0]!, results: items }));
 }

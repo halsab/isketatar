@@ -337,5 +337,21 @@
   "source.invalid_context": "Бу өзек сайланган чыганак бүлегенә туры килми яки әлегә ачылмаган.",
   "bookmark.add": "Сакларга",
   "bookmark.remove": "Сакланганнардан алырга",
-  "bookmark.saved": "Сакланган"
+  "bookmark.saved": "Сакланган",
+  "dictionary.meaning_matches": "Мәгънә буенча туры килүләр",
+  "dictionary.matches": "Сүзләр",
+  "dictionary.saved_filter": "Сакланган сүзләр",
+  "dictionary.expanded_search": "Киңәйтелгән эзләү",
+  "dictionary.search": "Эзләргә",
+  "dictionary.query_limit": "Эзләү соравы {count} билгедән озынрак булмаска тиеш.",
+  "dictionary.searching": "Эзләнә…",
+  "dictionary.group_count": "Табылган төркемнәр: {count}",
+  "dictionary.no_saved": "Әлегә сакланган сүзләр юк. Сүзне сүзлек мәкаләсендә саклый аласың.",
+  "dictionary.source_entries": "Чыганактагы язмалар: {count}",
+  "dictionary.show_more": "Тагын күрсәтергә",
+  "review.choose_question": "Нәрсәне кабатларга телисең?",
+  "review.skill_letter": "Хәрефләрне тану",
+  "review.skill_reading": "Укылыш",
+  "review.skill_rule": "Кагыйдә",
+  "review.skill_morphology": "Сүз төзелеше"
 }

@@ -22,6 +22,7 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
   { path: '/reading', lazy: async () => ({ Component: (await import('../features/reader/ReadingCatalog')).ReadingCatalog }) },
   { path: '/reading/:reading_id', lazy: async () => ({ Component: (await import('../features/reader/ReaderPage')).ReaderPage }) },
+  { path: '/dictionary', lazy: async () => ({ Component: (await import('../features/dictionary/DictionaryPage')).DictionaryPage }) },
   { path: '/dictionary/:entry_id', lazy: async () => ({ Component: (await import('../features/dictionary/EntryPage')).EntryPage }) },
   { path: '/diagnostic', lazy: () => assessmentRoute('diagnostic') },
   { path: '/diagnostic/result/:session_id', lazy: () => assessmentRoute('diagnostic', true) },
