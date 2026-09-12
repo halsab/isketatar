@@ -26,7 +26,11 @@
     "pretypecheck": "npm run generate",
     "prebuild": "npm run check:content && npm run generate",
     "check:budgets": "node tools/check-budgets.mjs",
-    "test:performance": "node tools/measure-performance.mjs"
+    "test:performance": "node tools/measure-performance.mjs",
+    "test:delivery": "node tools/delivery-smoke.mjs",
+    "prepare:release": "node tools/stage-release.mjs",
+    "review:package": "node tools/build-review-package.mjs",
+    "check:acceptance": "node tools/check-acceptance.mjs"
   },
   "dependencies": {
     "idb": "8.0.3",
