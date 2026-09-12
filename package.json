@@ -26,6 +26,7 @@
     "prebuild": "npm run check:content && npm run generate"
   },
   "dependencies": {
+    "idb": "8.0.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-router-dom": "7.18.3"
@@ -37,6 +38,7 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
     "ajv": "8.20.0",
+    "fake-indexeddb": "6.2.5",
     "typescript": "7.0.2",
     "vite": "8.3.0",
     "vitest": "5.0.0"

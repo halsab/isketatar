@@ -1,0 +1,142 @@
+import type { ContentCatalog } from '../../domain/content/catalog';
+import type { CoreData } from '../../domain/content/types';
+import { defaultSettings, recordBytes } from './model';
+import type { Control, Expected, ProgressSnapshot } from './model';
+import { IndexedBackend } from './backend';
+import type { Backend } from './backend';
+import { readControl, WriteContext } from './transaction';
+import { CommandEngine } from './engine';
+import type { CommandResult } from './engine';
+import type { Command } from './commands';
+import { observe } from './observation';
+import { bookmarkCommand, markReadingComplete, positionCommand, settingsCommand, validateReviewOrigin } from './preferences';
+
+interface Options { catalog: ContentCatalog; currentCore?: CoreData; releaseId: string; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
+export function expectedFrom(snapshot: ProgressSnapshot): Expected {
+  const unfinished = snapshot.sessions.filter(session => ['active', 'paused'].includes(session.status));
+  const ids = new Set(unfinished.map(session => session.session_id));
+  return { data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch, revisions: [
+    { store: 'meta', key: 'settings', revision: snapshot.settings.revision },
+    ...unfinished.map(session => ({ store: 'sessions' as const, key: session.session_id, revision: session.revision })),
+    ...snapshot.presentations.filter(presentation => ids.has(presentation.session_id)).map(presentation => ({ store: 'presentations' as const, key: presentation.presentation_id, revision: presentation.revision })),
+    ...snapshot.review_cards.map(card => ({ store: 'review_cards' as const, key: card.question_id, revision: card.revision })),
+  ] };
+}
+export class ProgressRepository {
+  readonly tabId: string;
+  private readonly clock: () => number;
+  private readonly uuid: () => string;
+  private readonly listeners = new Set<() => void>();
+  private channel: BroadcastChannel | null = null;
+  private serial: Promise<unknown> = Promise.resolve();
+  private closed = false;
+  private constructor(readonly backend: Backend, readonly options: Options) {
+    this.uuid = options.uuid ?? (() => crypto.randomUUID()); this.clock = options.clock ?? (() => Date.now()); this.tabId = options.tabId ?? this.uuid();
+  }
+  static async open(options: Options) {
+    let repository: ProgressRepository | undefined;
+    const backend = await IndexedBackend.open(options.name ?? 'iske-imla-progress', () => repository?.connectionClosed());
+    repository = new ProgressRepository(backend, options);
+    const opened = repository;
+    try { await repository.initialize(); } catch (error) { backend.close(); throw error; }
+    if (typeof window !== 'undefined' && typeof BroadcastChannel !== 'undefined') {
+      repository.channel = new BroadcastChannel(options.name ?? 'iske-imla-progress');
+      repository.channel.onmessage = event => {
+        const value: unknown = event.data;
+        if (value && typeof value === 'object' && Object.keys(value).sort().join(',') === 'data_generation,state_revision,type' && Reflect.get(value, 'type') === 'changed' && typeof Reflect.get(value, 'data_generation') === 'string' && Number.isSafeInteger(Reflect.get(value, 'state_revision'))) opened.notify();
+      };
+    }
+    return repository;
+  }
+  private async initialize() {
+    await this.backend.run('readwrite', async tx => {
+      const previous = await tx.get('meta', 'control');
+      if (previous) { await readControl(tx); return; }
+      const at = this.clock();
+      if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
+      const settings = defaultSettings(at);
+      const control: Control = { key: 'control', progress_schema: 1, db_version: 1, data_generation: this.uuid(), writer_id: this.tabId, writer_epoch: 1, state_revision: 0, active_session_id: null, update_gate: null, estimated_record_bytes: recordBytes(settings), attempt_count: 0 };
+      await tx.put('meta', { key: 'settings', value: settings });
+      await tx.put('meta', control);
+    });
+  }
+  private enqueue<T>(operation: () => Promise<T>): Promise<T> {
+    const next = this.serial.then(() => { if (this.closed) throw new Error('storage_unavailable'); return operation(); });
+    this.serial = next.catch(() => {});
+    return next;
+  }
+  subscribe(listener: () => void) { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; }
+  private notify() {
+    // Ошибка подписчика не отменяет уже подтверждённую запись в БД.
+    for (const listener of this.listeners) try { listener(); } catch (error) { queueMicrotask(() => { throw error; }); }
+  }
+  private connectionClosed() { this.closed = true; this.channel?.close(); this.channel = null; this.notify(); }
+  get available() { return !this.closed; }
+  private changed(control: Control) { this.channel?.postMessage({ type: 'changed', data_generation: control.data_generation, state_revision: control.state_revision }); this.notify(); }
+  snapshot(): Promise<ProgressSnapshot> {
+    return this.enqueue(() => this.backend.run('readonly', async tx => {
+      const [control, meta, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy] = await Promise.all([readControl(tx), tx.all('meta'), tx.all('sessions'), tx.all('presentations'), tx.all('attempts'), tx.all('exposures'), tx.all('review_cards'), tx.all('bookmarks'), tx.all('legacy')]);
+      const settings = meta.find(record => record.key === 'settings');
+      if (!settings || settings.key !== 'settings') throw new Error('storage_corrupt');
+      return { control, settings: settings.value, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy, resume_positions: meta.flatMap(record => record.key !== 'control' && record.key !== 'settings' ? [record.value] : []) };
+    }));
+  }
+  takeover(generation: string, epoch: number): Promise<void> {
+    return this.enqueue(async () => {
+      const control = await this.backend.run('readwrite', async tx => {
+        const control = await readControl(tx);
+        if (control.data_generation !== generation || control.writer_epoch !== epoch) throw new Error('write_conflict');
+        if (control.update_gate) throw new Error('update_in_progress');
+        if (control.writer_id !== this.tabId) { control.writer_id = this.tabId; control.writer_epoch++; control.state_revision++; await tx.put('meta', control); }
+        return control;
+      });
+      this.changed(control);
+    });
+  }
+  dispatch(command: Command, expected: Expected): Promise<CommandResult> {
+    const captured = structuredClone(command); const token = structuredClone(expected); const at = this.clock();
+    return this.enqueue(async () => {
+      if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
+      const committed = await this.backend.run('readwrite', async tx => {
+        const control = await readControl(tx);
+        const helpObservation = captured.type === 'help' && (captured.kind !== 'reveal' || (await tx.get('presentations', captured.presentation_id))?.status === 'submitted');
+        const observation = captured.type === 'observe' || captured.type === 'show' || helpObservation;
+        if (control.data_generation !== token.data_generation || !observation && (control.writer_epoch !== token.writer_epoch || control.writer_id !== this.tabId)) throw new Error('write_conflict');
+        if (control.update_gate?.phase === 'commit' || control.update_gate?.phase === 'quiescing' && !observation && !['draft', 'pause'].includes(captured.type)) throw new Error('update_in_progress');
+        const context = new WriteContext(tx, control, token, observation);
+        const engine = new CommandEngine(context, this.options.catalog, this.options.currentCore ?? this.options.catalog.core, this.options.releaseId, at, this.uuid);
+        const result = await this.execute(engine, captured);
+        await context.finish(captured.type !== 'settings');
+        return { result: { ...result, expected: context.nextExpected() }, control, dirty: context.dirty };
+      });
+      if (committed.dirty) this.changed(committed.control);
+      return committed.result;
+    });
+  }
+  private async execute(engine: CommandEngine, command: Command): Promise<CommandResult> {
+    switch (command.type) {
+      case 'start': return engine.start(command);
+      case 'pause': case 'resume': return engine.pauseResume(command.session_id, command.type === 'resume');
+      case 'show': return engine.show(command.presentation_id, command.confirm_assessment_help);
+      case 'draft': return engine.draft(command.presentation_id, command.answer);
+      case 'submit': return engine.submit(command.presentation_id, command.answer, false, command.confirm_assessment_help);
+      case 'finish_assessment': return engine.finishAssessment(command);
+      case 'ack': case 'retry': return engine.ack(command.presentation_id, command.type === 'retry');
+      case 'navigate_question': return engine.navigate(command.session_id, command.question_id);
+      case 'help': return engine.help(command);
+      case 'observe': return observe(engine, command.target, command.confirm_assessment_help);
+      case 'read_complete': return markReadingComplete(engine, command.reading_id);
+      case 'review_add': await validateReviewOrigin(engine, command); return engine.reviewAdd(command);
+      case 'settings': return settingsCommand(engine, command);
+      case 'bookmark': return bookmarkCommand(engine, command);
+      case 'position': return positionCommand(engine, command);
+      case 'review_suspend': {
+        const card = await engine.tx.get('review_cards', command.question_id);
+        if (!card) throw new Error('unknown_review_card');
+        if (card.status === 'active') await engine.context.put('review_cards', { ...card, status: 'suspended', revision: card.revision + 1, updated_at: engine.at });
+        return {};
+      }
+    }
+  }
+  close() { this.closed = true; this.channel?.close(); this.channel = null; this.listeners.clear(); this.backend.close(); }
+}
