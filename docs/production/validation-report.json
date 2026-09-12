@@ -1,0 +1,32 @@
+{
+  "status": "pass",
+  "scope": "Documentation structure, corpus hashes, passive fixtures, typography codepoints, palette arithmetic and requirement evidence paths.",
+  "limitations": [
+    "Does not execute application grading, IndexedDB, PWA or browser flows.",
+    "Does not prove linguistic correctness, scientific review, rights or usability.",
+    "Font files were inspected during design; this command checks recorded evidence, not fresh font shaping.",
+    "Requirement meaning and cross-document consistency require the separate human-readable completion audit.",
+    "Local file targets are checked; Markdown heading fragments and external URL availability are not revalidated."
+  ],
+  "counts": {
+    "markdown_documents": 16,
+    "local_file_links": 121,
+    "specification_json_files": 7,
+    "manifest_resources": 31,
+    "manifest_bytes": 2131151,
+    "learning_cases": 30,
+    "distinct_fixture_content_ids": 91,
+    "typed_answer_fragments": 130,
+    "ui_base": 194,
+    "ui_additions": 72,
+    "ui_replacements": 8,
+    "ui_merged": 266,
+    "typography_cases": 11,
+    "contrast_pairs": 122,
+    "documented_font_files": 3,
+    "selected_fonts": 2,
+    "screens": 20,
+    "traced_requirements": 20
+  },
+  "errors": []
+}

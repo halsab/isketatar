@@ -8,7 +8,18 @@
 
 ## Планирование разработки приложения
 
-[Производственный план и реестр требований](docs/production/00-plan.md) · [Продукт](PRODUCT.md). Документы разрабатываются последовательно; приложение пока не реализуется.
+Производственный комплект завершён. Начать с [дорожной карты D0–D12](docs/production/11-development-roadmap.md), [продукта](PRODUCT.md) и [итоговой приёмки документации](docs/production/12-completion-audit.md). Приложение ещё не реализовано.
+
+- [План документов и требования](docs/production/00-plan.md)
+- [Архитектура](docs/production/01-architecture.md) · [Контракты данных](docs/production/02-data-contracts.md)
+- [Учебные механики](docs/production/03-learning-mechanics.md) · [Приёмочные случаи](docs/production/learning-cases.json)
+- [Дизайн](DESIGN.md) · [Дизайн-система](docs/production/04-design-system.md) · [Токены](docs/production/design-tokens.json)
+- [Маршруты](docs/production/05-routing.md) · [Экраны](docs/production/06-screen-specs.md) · [Татарские дополнения интерфейса](docs/production/ui-copy-additions.json)
+- [Ввод, анимация и доступность](docs/production/07-interaction-accessibility.md)
+- [PWA и платформы](docs/production/08-pwa-platforms.md) · [Безопасность и сохранность](docs/production/09-security-reliability.md)
+- [Качество и выпуск](docs/production/10-quality-release.md) · [Покрытие требований](docs/production/requirements-traceability.json)
+
+Проверка спецификаций: `python3 tools/validate_production_docs.py`. Она дополняет проверку содержания и не запускает приложение.
 
 ## Документация
 

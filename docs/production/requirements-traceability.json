@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "status": "documentation_review",
+  "requirements": [
+    {
+      "id": "R01",
+      "requirement": "Татарская аудитория и полностью татарский продукт",
+      "evidence": [
+        "PRODUCT.md",
+        "docs/production/06-screen-specs.md",
+        "docs/production/07-interaction-accessibility.md",
+        "content/interface/tt.json",
+        "docs/production/ui-copy-additions.json"
+      ],
+      "review_conclusion": "Продукт адресован знающим татарский; оба маршрута различаются подготовкой к арабской графике. Определены татарские подписи, языковая разметка и типизированные подстановки. Русский курс и перевод всей теории в v1 не включены; профессиональная языковая вычитка ещё требуется."
+    },
+    {
+      "id": "R02",
+      "requirement": "Использовать существующий полный комплект",
+      "evidence": [
+        "PRODUCT.md",
+        "docs/production/01-architecture.md",
+        "docs/production/02-data-contracts.md",
+        "docs/production/03-learning-mechanics.md",
+        "content/manifest.json",
+        "docs/production/11-development-roadmap.md",
+        "docs/production/10-quality-release.md"
+      ],
+      "review_conclusion": "Спецификации используют весь существующий корпус: 53 урока, 436 вопросов уроков, отдельные диагностику, итог и чтение. Реальные объёмы сверены с JSON. Финальные 10/11 требуют проверки всего каталога и полного v1; промежуточный срез не заменяет выпуск. Исполняемая приёмка будущего приложения не проводилась."
+    },
+    {
+      "id": "R03",
+      "requirement": "PWA на GitHub Pages без обязательного сервера",
+      "evidence": [
+        "PRODUCT.md",
+        "docs/production/01-architecture.md",
+        "docs/production/05-routing.md",
+        "docs/production/08-pwa-platforms.md"
+      ],
+      "review_conclusion": "Выбраны статический React/Vite, HashRouter и путь /isketatar/ на GitHub Pages; обязательных API, аккаунта и сервера нет. Документ 08 описывает поставку PWA и обычный браузерный режим. Сборка, размещение и работа опубликованного сайта этим обзором не проверялись."
+    },
+    {
+      "id": "R04",
+      "requirement": "Архитектура, стек, зависимости и границы модулей",
+      "evidence": [
+        "docs/production/01-architecture.md",
+        "docs/production/02-data-contracts.md"
+      ],
+      "review_conclusion": "Определены стек, владельцы модулей, направления зависимостей, каталог содержания, модели прогресса и версии. Выбор точных стабильных зависимостей отнесён к началу разработки с lockfile. Документы описывают будущие модули; исходники этих модулей не проверялись как реализованные."
+    },
+    {
+      "id": "R05",
+      "requirement": "Маршрутизация, deep links, назад, продолжение",
+      "evidence": [
+        "docs/production/05-routing.md",
+        "docs/production/06-screen-specs.md",
+        "docs/production/02-data-contracts.md"
+      ],
+      "review_conclusion": "Проверены каталог hash-маршрутов, валидация ID/query, история панелей, прямой вход и смысловая позиция. Start/resume/restart разделены; paused сохраняет план и требует явного продолжения. Работа Back/Forward и восстановление фокуса требуют будущих браузерных испытаний."
+    },
+    {
+      "id": "R06",
+      "requirement": "Все учебные механики, проверка, повторение",
+      "evidence": [
+        "docs/production/03-learning-mechanics.md",
+        "docs/production/02-data-contracts.md",
+        "docs/production/06-screen-specs.md",
+        "docs/production/learning-cases.json"
+      ],
+      "review_conclusion": "Описаны четыре типа ответа, диагностика, практика/перенос, итоговые пороги, помощь и интервалы повторения. 30 пассивных сценариев сверены с реальными ID и ключами. Независимость первой отправки, знакомство и проработанность разделены; исполняемых проверок движка этот аудит не подтверждает."
+    },
+    {
+      "id": "R07",
+      "requirement": "Словарь, поиск, чтение и справочник",
+      "evidence": [
+        "docs/production/02-data-contracts.md",
+        "docs/production/03-learning-mechanics.md",
+        "docs/production/06-screen-specs.md",
+        "content/lexicon/lexicon.json",
+        "content/readings/texts.json"
+      ],
+      "review_conclusion": "Описаны 502 разрешённые основные статьи, открываемые учебные вхождения, 12 подборок чтения и справочник. Nullable reading и отсутствие подготовленного QID имеют явное поведение. Поисковые варианты не становятся ключами ответа; source/reading/meaning разделены. Проверено покрытие документацией, не работа поиска в приложении."
+    },
+    {
+      "id": "R08",
+      "requirement": "Дизайн-система, шрифты, цвета, компоненты",
+      "evidence": [
+        "DESIGN.md",
+        "docs/production/04-design-system.md",
+        "docs/production/design-tokens.json",
+        "docs/production/font-evidence.json",
+        "docs/production/contrast-report.json"
+      ],
+      "review_conclusion": "Зафиксированы выбранные Inter/Noto, семантические цвета, размеры, компоненты и ограничения арабографики. Имеются документированные расчёты палитры и свидетельства проверки исходных шрифтов; они отделены от будущей проверки production WOFF2 и интерфейса. Рендер приложения не оценивался."
+    },
+    {
+      "id": "R09",
+      "requirement": "Смешанная татарская кириллица и арабица",
+      "evidence": [
+        "docs/production/02-data-contracts.md",
+        "docs/production/04-design-system.md",
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/typography-fixtures.json"
+      ],
+      "review_conclusion": "Контракт сохраняет логический Unicode, профиль, значимые знаки и отдельные source/display/reading/meaning. Определены tt-Cyrl/tt-Arab, RTL-изоляция и границы слов; fixtures задают будущую проверку глифов и смешанного текста. Наличие сценариев не подтверждает качество произношения или браузерного shaping."
+    },
+    {
+      "id": "R10",
+      "requirement": "Адаптивность: телефон, планшет, компьютер",
+      "evidence": [
+        "docs/production/04-design-system.md",
+        "docs/production/06-screen-specs.md",
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/08-pwa-platforms.md",
+        "docs/production/10-quality-release.md"
+      ],
+      "review_conclusion": "Описаны узкий экран, телефонная навигация, среднее окно и широкая компоновка, изменение модальности, обе ориентации, клавиатура и крупный текст. В финальном 10 закреплена матрица автоматических и реальных платформенных проверок, включая 320/360/640/1120 CSS px. Адаптивность готового приложения не проверялась."
+    },
+    {
+      "id": "R11",
+      "requirement": "iOS, iPadOS, Android, macOS, Windows",
+      "evidence": [
+        "docs/production/08-pwa-platforms.md",
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/10-quality-release.md"
+      ],
+      "review_conclusion": "В 08 просмотрена матрица iOS/iPadOS, Android, macOS и Windows, браузерного и установленного режимов. Финальный 10 отделяет Playwright Chromium/Firefox/WebKit от реальных Safari/iPhone/iPad/Android/desktop, а 07 задаёт проверки AT. Матрица определена; фактические испытания устройств ещё предстоят."
+    },
+    {
+      "id": "R12",
+      "requirement": "Анимации, жесты, клавиатура и другие способы ввода",
+      "evidence": [
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/design-tokens.json"
+      ],
+      "review_conclusion": "Описаны клавиатура, IME, шесть татарских клавиш, вставка в выделение, отмена указателя, выделение текста и немодальный/модальный фокус. Движение имеет численные токены и правила прерывания; жесты не обязательны. Предусмотрена проверка undo на платформах; фактическая реализация не испытана."
+    },
+    {
+      "id": "R13",
+      "requirement": "Доступность, крупный текст и уменьшенное движение",
+      "evidence": [
+        "PRODUCT.md",
+        "docs/production/04-design-system.md",
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/typography-fixtures.json",
+        "docs/production/10-quality-release.md"
+      ],
+      "review_conclusion": "Зафиксирована цель WCAG 2.2 AA с применимостью критериев, видимым фокусом, reflow, большим текстом и reduced motion. Заданы ручные проверки AT и недопущение утечек скрытых ключей. Это требования и матрица будущей приёмки, а не декларация соответствия WCAG."
+    },
+    {
+      "id": "R14",
+      "requirement": "Офлайн, установка, обновление и восстановление",
+      "evidence": [
+        "docs/production/02-data-contracts.md",
+        "docs/production/08-pwa-platforms.md",
+        "docs/production/09-security-reliability.md"
+      ],
+      "review_conclusion": "Просмотрены раздельные состояния установки, кэша и прогресса, полная проверка пакета, закреплённые выпуски, согласование обновления и восстановление. Удаление офлайн-курса не равно reset прогресса. Сценарии потери ресурса и отказа хранения описаны; холодный офлайн-старт и обновление на устройствах не выполнялись."
+    },
+    {
+      "id": "R15",
+      "requirement": "Сохранение, перенос, миграции, несколько вкладок",
+      "evidence": [
+        "docs/production/02-data-contracts.md",
+        "docs/production/03-learning-mechanics.md",
+        "docs/production/09-security-reliability.md",
+        "docs/production/learning-cases.json"
+      ],
+      "review_conclusion": "Определены immutable Attempt, CAS, writer takeover, монотонная помощь любой вкладки, data_generation и атомарная замена импорта. Проверены ограничения ветви памяти и durable reset; формат экспорта отделён от кэшей и прав записи. Сохранность сформулирована как контракт и будущие отказные тесты, а не доказанная работа БД."
+    },
+    {
+      "id": "R16",
+      "requirement": "Производительность, безопасность и приватность",
+      "evidence": [
+        "docs/production/01-architecture.md",
+        "docs/production/09-security-reliability.md",
+        "docs/production/10-quality-release.md"
+      ],
+      "review_conclusion": "В 09 проверены закрытый импорт, лимиты, CSP без runtime eval, Ajv standalone, приватность и отказы. Финальный 10 задаёт бюджеты JS/CSS/шрифтов/полного пакета, воспроизводимые лабораторные прогоны и безопасное разделение build/deploy. Это принятые пределы и методы будущей проверки, а не измеренные достижения или завершённый security-аудит приложения."
+    },
+    {
+      "id": "R17",
+      "requirement": "План разработки по зависимостям и критерии этапов",
+      "evidence": [
+        "docs/production/00-plan.md",
+        "docs/production/11-development-roadmap.md"
+      ],
+      "review_conclusion": "Финальный 11 проверен: D0–D12 имеют зависимости, владельцев, критерии выходов, сквозной срез и полный v1. Числа корпуса сверены; READ-01 использует line.words, реальная словарная связь проверяется на READ-03, основной словарь не запирается как итоговый материал. Сроки обозначены предварительной оценкой с пересчётом после среза."
+    },
+    {
+      "id": "R18",
+      "requirement": "Стратегия проверок, редактура и публичный выпуск",
+      "evidence": [
+        "docs/production/07-interaction-accessibility.md",
+        "docs/production/09-security-reliability.md",
+        "docs/production/10-quality-release.md",
+        "docs/production/11-development-roadmap.md"
+      ],
+      "review_conclusion": "Финальные 10/11 задают строгую проверку содержания, unit/component, настоящий IDB, E2E трёх движков, реальные платформы и AT, бюджеты, защищённый CI/CD, smoke и совместимый rollback. Татарская вычитка, предметная рецензия, права и пилот выделены условиями выпуска. Покрытие плана подтверждено; сами проверки, рецензии и публикация не объявлены выполненными."
+    },
+    {
+      "id": "R19",
+      "requirement": "Отдельный коммит каждого этапа документации",
+      "evidence": [
+        "docs/production/00-plan.md",
+        "docs/production/12-completion-audit.md"
+      ],
+      "review_conclusion": "История Git от c821f84 содержит отдельные последовательные коммиты этапов 0–7; этап 8 фиксирует итоговый отчёт и реестр одним завершающим коммитом. Точные hashes перечислены в 12; его собственный hash проверяется в Git после фиксации."
+    },
+    {
+      "id": "R20",
+      "requirement": "Не разрабатывать само приложение",
+      "evidence": [
+        "PRODUCT.md",
+        "docs/production/00-plan.md",
+        "docs/production/12-completion-audit.md"
+      ],
+      "review_conclusion": "Итоговый diff относительно c821f84 и список новых файлов проверены: добавлены только документы, пассивные JSON-спецификации и валидатор документации. Исходники приложения, package/lockfile приложения, dist, workflow и worker не созданы; исходный корпус не изменён."
+    }
+  ]
+}
