@@ -9,7 +9,9 @@ const content = JSON.parse(await readFile('src/generated/content-manifest.json',
 const files = (await readdir('dist', { recursive: true, withFileTypes: true })).filter(entry => entry.isFile()).map(entry => `${entry.parentPath}/${entry.name}`.replace(/^dist\//, '')).sort();
 const allowed = new Set(['index.html', 'recovery.html', 'licenses/Inter.txt', 'licenses/NotoNaskhArabic.txt', 'licenses/ThirdParty.txt', 'sources/sections.json', 'runtime/content-manifest.json', ...content.assets.map(asset => asset.url.slice(base.length))]);
 const input = new Map();
+const transport = await readFile('dist/sw.js');
 for (const path of files) {
+  if (path === 'sw.js') continue;
   if (!allowed.has(path) && !/^assets\/[A-Za-z0-9_-]+\.(?:js|css|woff2)$/u.test(path) && !/^icons\/(?:icon-192|icon-512|maskable-512|apple-touch)\.png$/u.test(path)) throw new Error(`Unexpected release file: ${path}`);
   input.set(path, await readFile(`dist/${path}`));
 }
@@ -21,7 +23,7 @@ input.set('manifest.webmanifest', Buffer.from(JSON.stringify(webmanifest)));
 const builtAt = Number(process.env.SOURCE_DATE_EPOCH ?? execFileSync('git', ['show', '-s', '--format=%ct', 'HEAD'], { encoding: 'utf8' }).trim()) * 1000;
 if (!Number.isSafeInteger(builtAt) || builtAt < 0) throw new Error('Invalid build timestamp');
 // ID определяется шаблонными байтами: подстановка собственного пути не создаёт цикл хеширования.
-const fingerprint = hash(JSON.stringify({ files: [...input].map(([path, bytes]) => [path, hash(bytes)]), built_at: builtAt }));
+const fingerprint = hash(JSON.stringify({ transport: hash(transport), files: [...input].map(([path, bytes]) => [path, hash(bytes)]), built_at: builtAt }));
 const id = `${app.version}-${fingerprint.slice(0, 16)}`; const root = `${base}releases/${id}/`;
 await rm('dist', { recursive: true }); await mkdir(`dist/releases/${id}`, { recursive: true });
 const assets = [];
@@ -42,6 +44,7 @@ const release = {
 const serialized = JSON.stringify(release);
 await writeFile(`dist/releases/${id}/release-manifest.json`, serialized);
 await writeFile('dist/release-manifest.json', serialized);
+await writeFile('dist/sw.js', transport);
 await writeFile('dist/index.html', html);
 await writeFile('dist/recovery.html', await readFile(`dist/releases/${id}/recovery.html`));
 await writeFile('dist/manifest.webmanifest', await readFile(`dist/releases/${id}/manifest.webmanifest`));

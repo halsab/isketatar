@@ -53,11 +53,12 @@ export async function checkedResponse(response: Response, asset: Pick<Asset, 'ur
   if (unexpectedUrl(response, asset.url) || !mimeFor(asset.url).includes(response.headers.get('content-type')?.split(';')[0]?.trim().toLowerCase() ?? '')) throw new Error('content_corrupt');
   const bytes = await readBoundedBytes(response, asset.bytes);
   if (bytes.length !== asset.bytes || await sha256(bytes) !== asset.sha256) throw new Error('content_corrupt');
-  return new Response(bytes, { status: 200, headers: response.headers });
+  const headers = new Headers(response.headers); headers.delete('content-encoding'); headers.delete('content-length');
+  return new Response(bytes, { status: 200, headers });
 }
-export async function fetchManifest(url: string, expectedHash?: string, signal?: AbortSignal): Promise<{ manifest: PackageManifest; digest: string; response: Response }> {
+export async function fetchManifest(url: string, expectedHash?: string, signal?: AbortSignal, request: typeof fetch = fetch): Promise<{ manifest: PackageManifest; digest: string; response: Response }> {
   if (!/^\/isketatar\/(?:releases\/\d+\.\d+\.\d+-[a-f0-9]{16}\/)?release-manifest\.json$/u.test(url)) throw new Error('content_corrupt');
-  const response = await fetch(url, { redirect: 'error', cache: 'no-store', signal });
+  const response = await request(url, { redirect: 'error', cache: 'no-store', signal });
   if (response.status !== 200) throw new Error('content_unavailable');
   if (unexpectedUrl(response, url) || !mimeFor(url).includes(response.headers.get('content-type')?.split(';')[0]?.trim().toLowerCase() ?? '')) throw new Error('content_corrupt');
   const bytes = await readBoundedBytes(response, 1_000_000); const digest = await sha256(bytes);

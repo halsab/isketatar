@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 import type { Settings } from '../../data/progress/model';
 import { ArabicText } from '../../ui/ArabicText';
-import { Status } from '../../ui/controls';
+import { OfflineSettings } from './OfflineSettings';
 import { t } from '../../ui/copy';
 
 export function SettingsPage() {
@@ -24,7 +24,7 @@ export function SettingsPage() {
       <label>{t('settings.learning_path')}<select value={settings.selected_route ?? ''} onChange={event => { void save({ type: 'settings', patch: { selected_route: event.target.value as 'arabic_reader' | 'new_to_script', onboarding_completed: true } }); }}><option value="" disabled>{t('onboarding.choose_route')}</option><option value="arabic_reader">{t('onboarding.arabic_known')}</option><option value="new_to_script">{t('onboarding.arabic_new')}</option></select></label>
       <label>{t('settings.review_batch')}<select value={settings.review_batch_size} onChange={event => { void save({ type: 'settings', patch: { review_batch_size: Number(event.target.value) } }); }}>{Array.from({ length: 10 }, (_, index) => <option key={index + 1}>{index + 1}</option>)}</select></label>
     </fieldset>
-    <section id="offline"><h2>{t('settings.offline')}</h2><Status>{t('settings.offline_pending')}</Status></section>
+    <OfflineSettings />
     <section><h2>{t('settings.progress')}</h2><p>{t('about.local_data')}</p><Link className="button primary" to="/settings/backup">{t('settings.backup')}</Link></section>
     <p><Link to="/about">{t('about.title')}</Link></p>
   </div>;

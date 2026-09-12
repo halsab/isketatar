@@ -46,6 +46,7 @@ export class AppRuntime {
         this.attach(progress);
       }
       await this.refresh();
+      if (import.meta.env.PROD) void import('../data/pwa/client').then(({ offline }) => offline.start(this.releaseId)).catch(() => {});
     } catch (error) { this.publish({ phase: this.content ? 'storage_error' : 'error', error: errorCode(error) }); }
   }
   private attach(progress: ProgressRepository) {

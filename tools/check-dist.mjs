@@ -30,7 +30,7 @@ console.log('Release integrity: pass');
 const root = `dist/releases/${release.release_id}/`;
 assert.equal(await readFile(root + 'index.html', 'utf8'), html);
 assert.equal(await readFile(root + 'release-manifest.json', 'utf8'), await readFile('dist/release-manifest.json', 'utf8'));
-const allowed = new Set(['index.html', 'recovery.html', 'release-manifest.json', 'manifest.webmanifest', `releases/${release.release_id}/release-manifest.json`, ...release.assets.map(asset => asset.url.slice('/isketatar/'.length))]);
+const allowed = new Set(['sw.js', 'index.html', 'recovery.html', 'release-manifest.json', 'manifest.webmanifest', `releases/${release.release_id}/release-manifest.json`, ...release.assets.map(asset => asset.url.slice('/isketatar/'.length))]);
 for(const path of await readdir('dist',{recursive:true,withFileTypes:true}))if(path.isFile())assert.ok(allowed.has(`${path.parentPath}/${path.name}`.replace(/^dist\//u,'')), `Unexpected artifact: ${path.name}`);
 assert.ok(release.assets.reduce((sum,asset)=>sum+asset.bytes,0) <= 8*1024*1024);
 for(const url of release.shell_assets)assert.ok(release.assets.some(asset=>asset.url===url));
