@@ -7,15 +7,12 @@ import { NavigationGuard } from './NavigationGuard';
 import { t } from '../ui/copy';
 import { Button } from '../ui/controls';
 
-function Start() {
-  return <div className="document"><h1>{t('app.name')}</h1><p className="study-text">{t('app.tagline')}</p><div className="actions"><Link className="button primary" to="/start">{t('action.start')}</Link><Link to="/about">Курс турында</Link></div></div>;
-}
-
 function Layout() { return <AppProvider><NavigationGuard /><AppShell status={<RuntimeStatus />}><Outlet /></AppShell></AppProvider>; }
 function RouteFailure() { return <main><h1>{t('error.load')}</h1><Button onClick={() => location.reload()}>{t('offline.retry')}</Button><p><Link to="/settings">{t('nav.settings')}</Link></p></main>; }
 const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFailure />, children: [
-  { path: '/', element: <Start /> },
+  { path: '/', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).HomePage }) },
   { path: '/start', element: <div className="document"><StartPage /></div> },
+  { path: '/lessons', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).CoursePage }) },
   { path: '/lessons/:lesson_id', lazy: async () => ({ Component: (await import('../features/lessons/LessonPage')).LessonPage }) },
   { path: '/lessons/:lesson_id/practice', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).PracticePage }) },
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },

@@ -32,3 +32,13 @@
 .word-help > .button { width: 100%; }
 .letter-help { padding-inline-start: 24px; }
 .letter-help li { margin-block: 8px; }
+.home-continuation { padding-block: 24px; border-block: 1px solid var(--divider-decorative); margin-block: 24px; }
+.course-progress { margin-block: 24px; }
+.course-progress progress { width: 100%; height: 6px; accent-color: var(--primary); }
+.course-module { border-block-start: 1px solid var(--divider-decorative); }
+.course-module > summary { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; min-height: 64px; padding: 16px 8px; cursor: pointer; }
+.course-module > summary::before { content: '+'; font-size: 24px; }
+.course-module[open] > summary::before { content: '−'; }
+.course-module > summary > span:first-of-type { flex: 1; min-width: 180px; font-size: var(--text-size); font-weight: 600; overflow-wrap: anywhere; }
+.course-lessons { list-style: none; padding: 0; }
+.course-lesson { padding: 24px 8px; border-top: 1px solid var(--divider-decorative); }

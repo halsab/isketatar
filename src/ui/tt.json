@@ -281,5 +281,10 @@
   "reading.word_details": "Сүз турында",
   "reading.mode": "Уку тәртибе",
   "reading.final_locked": "Бу текст йомгаклау тикшерүен тәмамлагач ачыла.",
-  "dictionary.course_locked": "Бу сүз бәйле дәрес яки бирем белән танышкач ачыла."
+  "dictionary.course_locked": "Бу сүз бәйле дәрес яки бирем белән танышкач ачыла.",
+  "home.continue": "Укуны дәвам итү",
+  "home.started": "Башланган эшләр",
+  "course.all_lessons": "Барлык дәресләр",
+  "course.history": "Элекке нәтиҗәләр",
+  "course.refresh_count": "Яңадан карарга кирәк: {count} дәрес."
 }

@@ -68,6 +68,24 @@ export function routeProgress(core: CoreData, route: RouteId, lessons: ReadonlyM
     next_lesson_id: required.find(id => !practiced.includes(id)) ?? null, final_completed: finalCompleted, final_passed: finalPassed,
     completed: practiced.length === required.length && finalCompleted };
 }
+
+export function courseProgress(core: CoreData, route: RouteId, records: LearningRecords) {
+  const groups = new Map(core.lessons.map(lesson => [lesson.id, { sessions: [], presentations: [], attempts: [], exposures: [] } as LearningRecords]));
+  const sessionLessons = new Map<string, string>();
+  const finalAttempts = new Map(records.sessions.filter(session => session.kind === 'final' && session.status === 'submitted').map(session => [session.session_id, [] as Attempt[]]));
+  for (const session of records.sessions) if (session.kind === 'lesson_cycle' && session.lesson_id && groups.has(session.lesson_id)) {
+    groups.get(session.lesson_id)!.sessions.push(session); sessionLessons.set(session.session_id, session.lesson_id);
+  }
+  for (const presentation of records.presentations) groups.get(sessionLessons.get(presentation.session_id) ?? '')?.presentations.push(presentation);
+  for (const attempt of records.attempts) { groups.get(sessionLessons.get(attempt.session_id) ?? '')?.attempts.push(attempt); finalAttempts.get(attempt.session_id)?.push(attempt); }
+  for (const exposure of records.exposures) if (exposure.kind === 'lesson') groups.get(exposure.resource_id ?? '')?.exposures.push(exposure);
+  const lessons = new Map(core.lessons.map(lesson => [lesson.id, lessonProgress(core, lesson.id, groups.get(lesson.id)!)]));
+  const finals = records.sessions.filter(session => session.kind === 'final' && session.status === 'submitted').flatMap(session => {
+    try { return [{ session, score: scoreFinal(core, session, finalAttempts.get(session.session_id)!) }]; }
+    catch (error) { if (error instanceof Error && error.message === 'incompatible_session') return []; throw error; }
+  }).sort((a, b) => (b.session.submitted_at ?? 0) - (a.session.submitted_at ?? 0) || b.session.session_id.localeCompare(a.session.session_id));
+  return { lessons, route: routeProgress(core, route, lessons, finals.some(item => item.score.completed), finals.some(item => item.score.passed)), latest_final: finals[0] ?? null };
+}
 function assessmentAnswers(core: CoreData, session: Session, attempts: readonly Attempt[], kind: 'diagnostic' | 'final') {
   const ids = kind === 'final' ? core.final_ids : core.diagnostic_ids;
   const refs = ids.map(id => core.questions.find(question => question.id === id)!);

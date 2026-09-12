@@ -3,7 +3,7 @@ import cases from '../../../docs/production/learning-cases.json';
 import { catalog, correctAnswer, fixtureSession, now } from '../../../tests/learning-fixture';
 import type { AnswerValue, Attempt, LearningRecords, SessionStatus } from './types';
 import { makeAttempt } from './attempt';
-import { lessonProgress, routeProgress, scoreDiagnostic, scoreFinal } from './progress';
+import { courseProgress, lessonProgress, routeProgress, scoreDiagnostic, scoreFinal } from './progress';
 
 interface CycleCase { question_plan: string[]; session_status: SessionStatus; attempts: { question_id: string; ordinal: number; grade: string; independent_correct: boolean }[]; feedback_acknowledged_question_ids: string[] }
 function cycle(input: CycleCase, started = now): LearningRecords {
@@ -23,6 +23,16 @@ function cycle(input: CycleCase, started = now): LearningRecords {
   return { sessions: [session], presentations, attempts, exposures: [] };
 }
 describe('lesson and route projections', () => {
+  it('projects the whole course without losing the route denominators or lesson history', () => {
+    const ids = catalog.lessonPlan('V04').map(item => item.id);
+    const records = cycle({ question_plan: ids, session_status: 'submitted', attempts: ids.map(question_id => ({ question_id, ordinal: 1, grade: 'correct', independent_correct: true })), feedback_acknowledged_question_ids: ids });
+    const course = courseProgress(catalog.core, 'arabic_reader', records);
+    expect(course.lessons.size).toBe(53);
+    expect(course.lessons.get('V04')).toEqual(lessonProgress(catalog.core, 'V04', records));
+    expect(course.route).toMatchObject({ practiced_count: 1, mastered_count: 1, completed: false });
+    expect(course.route.required_lesson_ids).toHaveLength(46);
+    expect(courseProgress(catalog.core, 'new_to_script', records).route.required_lesson_ids).toHaveLength(53);
+  });
   for (const fixture of cases.cases.filter(item => item.kind === 'lesson_mastery')) {
     const input = fixture.input as { lesson_id: string; variants: CycleCase[] };
     const expected = fixture.expected as { variants: object[] };
