@@ -298,7 +298,7 @@ Settings хранится в meta под key=settings:
 
 Bookmark: bookmark_key, kind, target_id, created_at, updated_at, position. kind=lesson|reading|dictionary|rule; bookmark_key детерминирован из kind+target_id, дубликаты не создаются. position=null, кроме чтения, где допустимы line_id, line_revision, word_ordinal:number|null. Ошибочный ordinal не переносится на другой текст. Изменение размерности шрифта не требует сохранения пиксельного scroll как единственного ориентира.
 
-ResumePosition хранится в meta под key=`position:{kind}:{target_id}`: kind=lesson|reading|reference; target_id; anchor_id:string|null; within_block_ratio:number от 0 до 1; content_revision:Hash; updated_at:TimeMs. Якорь — существующий смысловой блок: строка чтения, правило или адресованный абзац урока. Позиция обновляется при остановке прокрутки и уходе со страницы; это не закладка и не факт завершения. При иной content_revision сначала восстанавливается существующий стабильный anchor_id, иначе начало материала; старый ordinal не переносится на изменённый блок. Все позиции входят в экспорт как resume_positions[].
+ResumePosition хранится в meta под key=`position:{kind}:{target_id}`: kind=lesson|reading|reference; target_id; anchor_id:string|null; within_block_ratio:number от 0 до 1; content_revision:Hash; updated_at:TimeMs. Якорь — существующий смысловой блок: строка чтения, правило, пример либо раздел урока {lesson_id}:theory с within_block_ratio. Стабильные ID отдельных абзацев theory_tt не предполагаются; полный каталог якорей задан в 05. Позиция обновляется при остановке прокрутки и уходе со страницы; это не закладка и не факт завершения. При иной content_revision сначала восстанавливается существующий стабильный anchor_id, иначе начало материала; старый ordinal не переносится на изменённый блок. Все позиции входят в экспорт как resume_positions[].
 
 ## IndexedDB: stores, ключи и CAS
 
@@ -317,6 +317,8 @@ ResumePosition хранится в meta под key=`position:{kind}:{target_id}`
 
 meta/control={key:'control',progress_schema,db_version,data_generation,writer_id,writer_epoch,state_revision,active_session_id}. writer_id=tab LocalId|null; writer_epoch и state_revision — Revision. writer_id не является идентификатором человека.
 
+control.update_gate=null либо {update_id:LocalId,target_release_id:string,phase:quiescing|commit,coordinator_id:LocalId,requested_at:TimeMs}. Это техническое ограждение обновления, не экспортируемое право: команды проверяют gate внутри транзакции. Протокол ACK, отмены, восстановления и допустимые записи определены в 08/09. Таймаут не означает согласия другой вкладки; commit блокирует пользовательские мутации до согласованного завершения/отмены.
+
 Инварианты счётчиков различны:
 
 - data_generation — новый UUID только при полной замене импорта/reset; поздние callbacks прежнего набора отвергаются;
@@ -324,7 +326,7 @@ meta/control={key:'control',progress_schema,db_version,data_generation,writer_id
 - Session.revision/Presentation.revision/ReviewCard.revision проверяют ожидаемую версию конкретной изменяемой записи;
 - state_revision увеличивается один раз на успешную пользовательскую транзакцию; используется для обновления snapshot других вкладок и проверки, что preview импорта не устарел. Он не заменяет предметные revisions.
 
-Каждая команда записи несёт expected data_generation, writer_epoch и revisions изменяемых записей. Репозиторий читает control и записи **внутри той же readwrite-транзакции**, проверяет ожидания, затем пишет. Проверка только в React перед await недостаточна. При конфликте команда ничего не меняет и возвращает write_conflict; UI перечитывает состояние. Старый callback не получает новое право записи автоматически.
+Каждая команда изменения учебного состояния несёт expected data_generation, writer_epoch и revisions изменяемых записей. Исключение — монотонное наблюдение фактического показа/помощи из любой вкладки: оно проверяет data_generation и текущие записи в транзакции, не требует writer_epoch, не меняет ответы/черновики/SRS и только дополняет exposure/assistance; порядок и ограничения заданы в 09. Репозиторий читает control и записи **внутри той же readwrite-транзакции**, проверяет ожидания, затем пишет. Проверка только в React перед await недостаточна. При конфликте команда ничего не меняет и возвращает write_conflict; UI перечитывает состояние. Старый callback не получает новое право записи автоматически.
 
 Переход права записи — явная операция с повышением writer_epoch. Актуальная вкладка может продолжить существующий сеанс. Закрытие вкладки не должно требовать успешного unload для сохранности данных; реализация координации не полагается на него. Схема не вводит дополнительную session generation: restart всегда новый session_id.
 
