@@ -9,12 +9,14 @@ export interface PwaOperation { update_id: string; from_release_id: string; targ
 export interface Registry {
   schema_version: 1; current_release_id: string | null; previous_release_id: string | null; candidate_release_id: string | null;
   offline_requested: boolean; releases: StoredRelease[]; operation: PwaOperation | null;
+  checked_at?: number;
 }
 export const emptyRegistry = (): Registry => ({ schema_version: 1, current_release_id: null, previous_release_id: null, candidate_release_id: null, offline_requested: false, releases: [], operation: null });
 export interface RegistryStore { read(): Promise<Registry>; change(change: (value: Registry) => void): Promise<Registry> }
 interface PwaDB extends DBSchema { registry: { key: string; value: Registry } }
 function checked(value: Registry | undefined): Registry {
   if (value === undefined) return emptyRegistry();
+  if (value?.checked_at !== undefined && (!Number.isSafeInteger(value.checked_at) || value.checked_at < 0)) throw new Error('pwa_storage_unavailable');
   if (!value || value.schema_version !== 1 || !Array.isArray(value.releases) || value.releases.length > 3 || typeof value.offline_requested !== 'boolean' || value.operation === undefined || !['current_release_id', 'previous_release_id', 'candidate_release_id'].every(key => Reflect.get(value, key) === null || typeof Reflect.get(value, key) === 'string' && RELEASE_ID.test(Reflect.get(value, key)))) throw new Error('pwa_storage_unavailable');
   for (const release of value.releases) if (!release || !RELEASE_ID.test(release.release_id) || release.shell_cache !== `isketatar-shell-${release.release_id}` || release.course_cache !== `isketatar-course-${release.release_id}` || release.manifest_url !== `/isketatar/releases/${release.release_id}/release-manifest.json` || !/^[a-f0-9]{64}$/u.test(release.manifest_sha256)) throw new Error('pwa_storage_unavailable');
   const ids = value.releases.map(entry => entry.release_id); const roles = [value.current_release_id, value.previous_release_id, value.candidate_release_id].filter((id): id is string => id !== null);
