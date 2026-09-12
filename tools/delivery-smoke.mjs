@@ -39,11 +39,11 @@ export async function seedDraft(page, url) {
   await page.goto(url + '#/settings');
   await expect(page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true })).toBeVisible();
   const saved = await progressSnapshot(page);
-  assert.ok(saved.sessions.length && saved.presentations.some(record => record.draft_answer?.text === 'әңгәмә'));
+  assert.ok(saved.sessions.some(record => record.status === 'paused') && saved.presentations.some(record => record.draft_answer?.text === 'әңгәмә'));
   return saved;
 }
 export async function acceptRelease(page, url, id) {
-  await page.goto(url + '#/settings');
+  if (new URL(page.url()).hash !== '#/settings' || !await page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true }).isVisible()) await page.goto(url + '#/settings');
   await page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true }).click();
   await expect(page.getByText(`Яңа басма бар: ${id}.`, { exact: false })).toBeVisible();
   await page.getByRole('button', { name: 'Саклап яңартырга', exact: true }).click();
@@ -54,7 +54,9 @@ export async function acceptRelease(page, url, id) {
 export async function offlineSmoke(context, page, url, id) {
   await page.goto(url + '#/settings');
   const ready = page.getByText('Курс интернетсыз уку өчен әзер.', { exact: true });
-  if (!await ready.isVisible()) await page.getByRole('button', { name: 'Интернетсыз уку өчен сакларга', exact: true }).click();
+  const save = page.getByRole('button', { name: 'Интернетсыз уку өчен сакларга', exact: true });
+  await expect(ready.or(save)).toBeVisible();
+  if (!await ready.isVisible()) await save.click({ timeout: 3000 }).catch(async error => { if (!await ready.isVisible()) throw error; });
   await expect(ready).toBeVisible({ timeout: 30_000 });
   await page.close(); await context.setOffline(true);
   const offline = await context.newPage(); await offline.goto(url + '#/lessons/V04');

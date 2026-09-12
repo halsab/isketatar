@@ -1,0 +1,124 @@
+name: Restore known release
+on:
+  workflow_dispatch:
+    inputs:
+      target_run_id:
+        description: Successful publication run containing the desired last-good artifact
+        required: true
+        type: string
+      current_run_id:
+        description: Publication run whose release-candidate matches the site currently served
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'halsab/isketatar' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      pages_id: ${{ steps.pages.outputs.artifact-id }}
+      bundle_id: ${{ steps.bundle.outputs.artifact-id }}
+      profile_id: ${{ steps.profile.outputs.artifact-id }}
+      archive_sha256: ${{ steps.package.outputs.archive_sha256 }}
+    steps:
+      - name: Require protected main
+        env:
+          PROTECTED: ${{ github.ref_protected }}
+        run: test "$PROTECTED" = true
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm install --global npm@11.9.0
+      - run: npm ci
+      - id: selection
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_RUN: ${{ inputs.target_run_id }}
+          CURRENT_RUN: ${{ inputs.current_run_id }}
+        run: node tools/github-release.mjs select-rollback
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ steps.selection.outputs.target_id }}
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.selection.outputs.target_run }}
+          path: quality-results/rollback-target
+          merge-multiple: true
+          digest-mismatch: error
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ steps.selection.outputs.current_id }}
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.selection.outputs.current_run }}
+          path: quality-results/rollback-current
+          merge-multiple: true
+          digest-mismatch: error
+      - run: node tools/github-release.mjs unpack-rollback
+      - run: npx playwright install --with-deps chromium
+      - name: Verify historical code with the current database
+        env:
+          PREVIOUS_DIST: quality-results/rollback-current/dist
+        run: npm run test:delivery
+      - name: Seed a fresh test database on the currently published site
+        env:
+          PREVIOUS_DIST: quality-results/rollback-current/dist
+        run: node tools/published-smoke.mjs seed
+      - id: package
+        env:
+          ROLLBACK_BUNDLE: quality-results/rollback-target
+          CURRENT_BUNDLE: quality-results/rollback-current
+        run: |
+          node tools/stage-rollback.mjs
+          cp quality-results/rollback-target/acceptance.json quality-results/rollback-release/acceptance.json
+          cp quality-results/rollback-target/performance.json quality-results/rollback-release/performance.json
+          cp quality-results/delivery-smoke.json quality-results/rollback-release/delivery-smoke.json
+          cp quality-results/rollback-selection.json quality-results/rollback-release/rollback-selection.json
+          node --input-type=module -e "import {readFile,appendFile} from 'node:fs/promises';const e=JSON.parse(await readFile('quality-results/rollback-release/release-evidence.json'));await appendFile(process.env.GITHUB_OUTPUT,'archive_sha256='+e.archive_sha256+'\n');"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        id: pages
+        with:
+          name: github-pages
+          path: quality-results/rollback-release/artifact.tar
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        id: bundle
+        with:
+          name: release-candidate
+          path: quality-results/rollback-release/
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        id: profile
+        with:
+          name: test-profile
+          path: quality-results/predeploy-profile.json
+          if-no-files-found: error
+          retention-days: 7
+          overwrite: true
+  publish:
+    needs: prepare
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/publish.yml
+    with:
+      pages_id: ${{ needs.prepare.outputs.pages_id }}
+      bundle_id: ${{ needs.prepare.outputs.bundle_id }}
+      profile_id: ${{ needs.prepare.outputs.profile_id }}
+      archive_sha256: ${{ needs.prepare.outputs.archive_sha256 }}

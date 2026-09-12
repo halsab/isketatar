@@ -1,0 +1,100 @@
+name: Publish checked artifact
+on:
+  workflow_call:
+    inputs:
+      pages_id:
+        required: true
+        type: string
+      bundle_id:
+        required: true
+        type: string
+      profile_id:
+        required: true
+        type: string
+      archive_sha256:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  deploy:
+    name: Publish Pages
+    if: github.repository == 'halsab/isketatar' && github.ref == 'refs/heads/main' && github.ref_protected && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Confirm selected main commit and artifact ownership
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ inputs.pages_id }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID" --jq .workflow_run.id)" = "$GITHUB_RUN_ID"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID" --jq .name)" = github-pages
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ inputs.pages_id }}
+          path: ${{ runner.temp }}/pages-check
+          merge-multiple: true
+          digest-mismatch: error
+      - name: Verify exact checked tar
+        env:
+          ARCHIVE_SHA256: ${{ inputs.archive_sha256 }}
+        run: |
+          [[ "$ARCHIVE_SHA256" =~ ^[a-f0-9]{64}$ ]]
+          echo "$ARCHIVE_SHA256  $RUNNER_TEMP/pages-check/artifact.tar" | sha256sum --check --status
+      - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        id: deployment
+        with:
+          artifact_name: github-pages
+
+  verify:
+    name: Verify published site
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm install --global npm@11.9.0
+      - run: npm ci
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ inputs.bundle_id }}
+          path: quality-results/release
+          merge-multiple: true
+          digest-mismatch: error
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ inputs.profile_id }}
+          path: quality-results
+          merge-multiple: true
+          digest-mismatch: error
+      - name: Restore exact published artifact for comparison
+        run: node --input-type=module -e "import {readReleaseBundle} from './tools/read-release-bundle.mjs';await readReleaseBundle('quality-results/release','quality-results/pages');"
+      - run: npx playwright install --with-deps chromium
+      - run: node tools/published-smoke.mjs verify
+      - name: Retain verified publication evidence
+        run: cp quality-results/published-smoke.json quality-results/release/published-smoke.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: last-good
+          path: quality-results/release/
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true

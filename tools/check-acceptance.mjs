@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { lstat, readFile } from 'node:fs/promises';
+import { appendFile, lstat, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { productScope, sha256 } from './product-scope.mjs';
@@ -46,4 +46,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     root: process.cwd(), scope: scope.sha256, artifact: provenance.product_artifact_sha256, requireApproved: process.argv.includes('--require-approved'),
   });
   console.log(JSON.stringify(result));
+  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `status=${result.status}\n`);
 }
