@@ -6,7 +6,7 @@ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const app = JSON.parse(await readFile('package.json', 'utf8'));
 const content = JSON.parse(await readFile('src/generated/content-manifest.json', 'utf8'));
 const files = (await readdir('dist', { recursive: true, withFileTypes: true })).filter(entry => entry.isFile()).map(entry => `${entry.parentPath}/${entry.name}`.replace(/^dist\//, '')).sort();
-const allowed = new Set(['index.html', 'recovery.html', 'sources/sections.json', 'runtime/content-manifest.json', ...content.assets.map(asset => asset.url.slice('/isketatar/'.length))]);
+const allowed = new Set(['index.html', 'recovery.html', 'licenses/Inter.txt', 'licenses/NotoNaskhArabic.txt', 'sources/sections.json', 'runtime/content-manifest.json', ...content.assets.map(asset => asset.url.slice('/isketatar/'.length))]);
 const assets = [];
 for (const path of files) {
   if (!allowed.has(path) && !/^assets\/[A-Za-z0-9_-]+\.(?:js|css|woff2)$/u.test(path)) throw new Error(`Unexpected release file: ${path}`);

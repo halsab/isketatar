@@ -1,0 +1,22 @@
+{
+  "fonttools": "4.65.0",
+  "harfbuzz": "14.4.0",
+  "fonts": [
+    {
+      "file": "src/assets/fonts/NotoNaskhArabic-Regular.woff2",
+      "source_sha256": "c9a039ce48a477243c1eb7d561b13de115cfd651d8a83fa42e2f4d63c2e11b00",
+      "sha256": "abffcce5c78e6847978c6620bb3a6e6fab62606f2aa42b1943a278cfa2cf54e3",
+      "bytes": 100228,
+      "arabic_runs": 1200,
+      "shape_identical": true
+    },
+    {
+      "file": "src/assets/fonts/InterVariable.woff2",
+      "source_sha256": "4989b125924991b90d05b2d16e0e388c48f7d5bb8b30539bbf9c755278d0ccaf",
+      "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "bytes": 352240,
+      "cyrillic_codepoints": 73,
+      "missing": []
+    }
+  ]
+}
