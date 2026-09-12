@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "rights": {
+    "status": "confirmed",
+    "confirmed_by": "repository_owner",
+    "confirmed_at": "2026-09-12",
+    "evidence": "Владелец подтвердил: права на материалы есть."
+  },
+  "language": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
+  "subject": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
+  "pilot": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null },
+  "platforms": { "status": "pending", "reviewer": null, "reviewed_at": null, "product_scope_sha256": null, "report": null }
+}
