@@ -18,5 +18,8 @@ export function ArabicFontGate({ children }: { children: ReactNode }) {
 }
 
 export function ArabicText({ children, block = false, letter = false }: { children: ReactNode; block?: boolean; letter?: boolean }) {
-  return <ArabicFontGate><bdi lang="tt-Arab" dir="rtl" className={`arabic${block ? ' arabic-block' : ''}${letter ? ' arabic-letter' : ''}`}>{children}</bdi></ArabicFontGate>;
+  const status = useArabicFont();
+  // Текст может находиться внутри label/button; повтор загрузки живёт во внешнем gate.
+  if (status !== 'ready') return <span className="font-message">{t(status === 'error' ? 'font.failed' : 'font.loading')}</span>;
+  return <bdi lang="tt-Arab" dir="rtl" className={`arabic${block ? ' arabic-block' : ''}${letter ? ' arabic-letter' : ''}`}>{children}</bdi>;
 }
