@@ -96,7 +96,7 @@ function ReviewPageContent() {
   const { session_id } = useParams(); const { content, snapshot } = useApp();
   const known = new Set(content.catalog.core.questions.map(question => question.id));
   const ids = [...new Set([...snapshot.review_cards.map(card => card.question_id), ...snapshot.sessions.filter(session => session.kind === 'review').flatMap(session => session.question_plan.map(plan => plan.question_id))])].filter(id => known.has(id)).sort();
-  return <ContentState identity={`review:${ids.join(',')}`} load={() => content.questions(ids)}>{() => <Review key={session_id ?? 'queue'} sessionId={session_id} />}</ContentState>;
+  return <ContentState pageTitle={t('nav.review')} identity={`review:${ids.join(',')}`} load={() => content.questions(ids)}>{() => <Review key={session_id ?? 'queue'} sessionId={session_id} />}</ContentState>;
 }
 
 export function ReviewPage() { return <SessionContent kind="review" explicitOnly><ReviewPageContent  /></SessionContent>; }

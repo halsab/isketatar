@@ -77,7 +77,7 @@ export function CoursePage() {
       const done = required.filter(id => ['practiced', 'mastered'].includes(course.lessons.get(id)!.state)).length;
       return <details className="course-module" data-module={module.id} key={module.id} open={open.has(module.id)} onToggle={event => {
         const expanded = event.currentTarget.open; setOpen(previous => { if (previous.has(module.id) === expanded) return previous; const next = new Set(previous); if (expanded) next.add(module.id); else next.delete(module.id); return next; });
-      }}><summary><span>{module.title_tt}</span><span className="meta">{optional ? t('lesson.optional') : route ? t('lesson.progress', { completed: done, total: required.length }) : null}</span></summary>
+      }}><summary><h2>{module.title_tt}</h2><span className="meta">{optional ? t('lesson.optional') : route ? t('lesson.progress', { completed: done, total: required.length }) : null}</span></summary>
         {open.has(module.id) && <ContentState identity={module.id} load={async () => { await content.load(core.lessons.find(lesson => lesson.module_id === module.id)!.resource); return module.lesson_ids.map(id => content.catalog.lessons.get(id)!); }}>{lessons => <ol className="course-lessons">{lessons.map(lesson => {
           const progress = course.lessons.get(lesson.id)!;
           const prior = lesson.prerequisites.find(id => !['practiced', 'mastered'].includes(course.lessons.get(id)?.state ?? 'not_started'));

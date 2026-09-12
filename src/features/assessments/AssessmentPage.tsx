@@ -94,11 +94,11 @@ function Result({ kind, sessionId }: { kind: Kind; sessionId: string }) {
 }
 function AssessmentPageContent({ kind }: { kind: Kind }) {
   const { content } = useApp(); const ids = kind === 'diagnostic' ? content.catalog.core.diagnostic_ids : content.catalog.core.final_ids;
-  return <ContentState identity={kind} load={() => content.questions(ids)}>{() => <Assessment key={kind} kind={kind} />}</ContentState>;
+  return <ContentState pageTitle={t(kind === 'diagnostic' ? 'onboarding.diagnostic' : 'assessment.final')} identity={kind} load={() => content.questions(ids)}>{() => <Assessment key={kind} kind={kind} />}</ContentState>;
 }
 function AssessmentResultPageContent({ kind }: { kind: Kind }) {
   const { session_id = '' } = useParams(); const { content } = useApp(); const ids = kind === 'diagnostic' ? content.catalog.core.diagnostic_ids : content.catalog.core.final_ids;
-  return <ContentState identity={kind} load={() => content.questions(ids)}>{() => <Result key={`${kind}:${session_id}`} kind={kind} sessionId={session_id} />}</ContentState>;
+  return <ContentState pageTitle={t(kind === 'diagnostic' ? 'onboarding.diagnostic' : 'assessment.final')} identity={kind} load={() => content.questions(ids)}>{() => <Result key={`${kind}:${session_id}`} kind={kind} sessionId={session_id} />}</ContentState>;
 }
 
 export function AssessmentPage({ kind }: { kind: Kind }) { return <SessionContent kind={kind}><AssessmentPageContent kind={kind} /></SessionContent>; }

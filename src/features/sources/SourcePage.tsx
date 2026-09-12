@@ -34,5 +34,5 @@ export function SourcePage() {
   if (!content.catalog.core.source_sections.some(section => section.id === source_id)) return <Missing parent="/reference" />;
   const values = query.getAll('context'); const contextId = values.length === 1 && values[0]!.length <= 128 ? values[0]! : null;
   const invalid = values.length > 1 || values.length === 1 && !contextId;
-  return <ContentState identity={`${source_id}:${query}`} load={() => loadContext(content, contextId)}>{() => <Source id={source_id} contextId={contextId} invalid={invalid} />}</ContentState>;
+  return <ContentState pageTitle={t('lesson.source')} identity={`${source_id}:${query}`} load={() => loadContext(content, contextId)}>{() => <Source id={source_id} contextId={contextId} invalid={invalid} />}</ContentState>;
 }

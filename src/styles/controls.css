@@ -1,5 +1,5 @@
 .icon { flex: none; vertical-align: middle; }
-.button { display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; text-align: center; text-decoration: none; transition: background-color var(--press), transform var(--press) var(--ease-out); }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; text-align: center; text-decoration: none; transition: transform var(--press) var(--ease-out); }
 a.button { min-height: 3rem; padding: 0.5rem 1.25rem; border: 1px solid var(--control-border); border-radius: 0.625rem; background: var(--surface); }
 .button.primary { border-color: var(--primary); color: var(--on-primary); background: var(--primary); }
 .button.primary:hover:not(:disabled):not([aria-disabled=true]) { background: var(--primary-hover); }

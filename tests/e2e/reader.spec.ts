@@ -68,7 +68,7 @@ test('selection does not open a panel and an unsuccessful help write exposes no 
   await expect(page.locator('dialog[open]')).toHaveCount(0);
   await page.evaluate(() => getSelection()?.removeAllRanges());
   await page.goto('./#/reading/READ-01?panel=word&word=READ-01-L01%3A0');
-  const panel = page.getByRole('region', { name: 'Сүз турында', exact: true });
+  const panel = page.getByRole('dialog', { name: 'Сүз турында', exact: true });
   await panel.getByRole('button', { name: 'Мәгънәсен ачарга', exact: true }).waitFor();
   await page.evaluate(() => {
     const put = IDBObjectStore.prototype.put;

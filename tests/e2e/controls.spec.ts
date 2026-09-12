@@ -28,7 +28,7 @@ test('context panel changes modality without losing focus or content', async ({ 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(url);
   await page.getByRole('button', { name: 'Чыганакны ачарга' }).click();
-  await expect(page.getByRole('region', { name: 'Чыганак' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Чыганак' })).toHaveAttribute('data-modal', 'false');
   const inside = page.getByLabel('Билге');
   await inside.fill('саклана');
   await page.setViewportSize({ width: 390, height: 800 });
@@ -39,9 +39,9 @@ test('context panel changes modality without losing focus or content', async ({ 
   await dialog.evaluate(node => { const paragraph = document.createElement('p'); paragraph.textContent = 'Озын текст. '.repeat(500); node.append(paragraph); node.scrollTop = 220; });
   const scroll = await dialog.evaluate(node => node.scrollTop);
   await page.setViewportSize({ width: 1280, height: 900 });
-  await expect(page.getByRole('region', { name: 'Чыганак' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Чыганак' })).toHaveAttribute('data-modal', 'false');
   await page.setViewportSize({ width: 390, height: 800 });
-  await expect(dialog).toBeVisible();
+  await expect(dialog).toHaveAttribute('data-modal', 'true');
   expect(await dialog.evaluate(node => node.scrollTop)).toBe(scroll);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'Чыганакны ачарга' })).toBeFocused();
@@ -71,4 +71,29 @@ test('pointer dismissal returns focus to the compact menu trigger without a resi
   await trigger.click(); const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible();
   await dialog.getByRole('button', { name: 'Ябарга', exact: true }).click();
   await expect(dialog).toHaveCount(0); await expect(trigger).toBeFocused();
+});
+
+test('narrowing a panel from background focus moves to its heading', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 }); await page.goto(url);
+  await page.getByRole('button', { name: 'Чыганакны ачарга' }).click(); await page.getByLabel('Билге').focus();
+  await page.getByLabel('Җавабың', { exact: true }).focus();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.getByRole('dialog')).toHaveAttribute('data-modal', 'true');
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Чыганак', exact: true })).toBeFocused();
+});
+
+test('touch Tatar keys and undo preserve input selection and composition', async ({ browser }) => {
+  const context = await browser.newContext({ hasTouch: true, viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
+  const page = await context.newPage();
+  try {
+    await page.goto(url); const input = page.getByLabel('Җавабың', { exact: true });
+    await input.fill('китап'); await input.evaluate((node: HTMLInputElement) => { node.focus(); node.setSelectionRange(1, 4); node.dispatchEvent(new Event('select', { bubbles: true })); });
+    await page.getByRole('button', { name: 'ә хәрефен куярга', exact: true }).tap();
+    await expect(input).toHaveValue('кәп'); await expect(input).toBeFocused();
+    await input.dispatchEvent('compositionstart');
+    await page.getByRole('button', { name: 'Кертүне кире кайтарырга' }).tap(); await expect(input).toHaveValue('кәп'); await expect(input).toBeFocused();
+    await input.dispatchEvent('compositionend');
+    await page.getByRole('button', { name: 'Кертүне кире кайтарырга' }).tap(); await expect(input).toHaveValue('китап'); await expect(input).toBeFocused();
+    expect(await input.evaluate((node: HTMLInputElement) => [node.selectionStart, node.selectionEnd])).toEqual([1, 4]);
+  } finally { await context.close(); }
 });

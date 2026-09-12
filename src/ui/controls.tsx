@@ -1,8 +1,14 @@
 import { useId, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Icon, type IconName } from './Icon';
 
-export function Button({ variant = 'secondary', busy = false, className = '', disabled, onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'quiet' | 'danger'; busy?: boolean }) {
-  return <button type="button" {...props} className={`button ${variant} ${className}`} disabled={disabled} aria-disabled={busy || disabled || undefined} aria-busy={busy || undefined} onClick={event => { if (busy || disabled) event.preventDefault(); else onClick?.(event); }} />;
+export function Button({ variant = 'secondary', busy = false, className = '', disabled, onClick, preserveFocus = false, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'quiet' | 'danger'; busy?: boolean; preserveFocus?: boolean }) {
+  return <button type="button" {...props} className={`button ${variant} ${className}`} disabled={disabled} aria-disabled={busy || disabled || undefined} aria-busy={busy || undefined}
+    onClick={event => {
+      if (busy || disabled) { event.preventDefault(); return; }
+      // Safari не фокусирует кнопку мышью; TT-вставка явно сохраняет поле и IME.
+      if (!preserveFocus) event.currentTarget.focus({ preventScroll: true });
+      onClick?.(event);
+    }} />;
 }
 export function IconButton({ icon, label, ...props }: Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'aria-label'> & { icon: IconName; label: string }) {
   return <Button {...props} className={`icon-button ${props.className ?? ''}`} aria-label={label}><Icon name={icon} /></Button>;

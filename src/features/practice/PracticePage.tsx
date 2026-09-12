@@ -41,7 +41,7 @@ function Practice({ lesson }: { lesson: Lesson }) {
 function PracticePageContent() {
   const { lesson_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
-  return <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <Practice key={lesson.id} lesson={lesson} />}</ContentState>;
+  return <ContentState pageTitle={t('nav.lessons')} identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <Practice key={lesson.id} lesson={lesson} />}</ContentState>;
 }
 function LessonResult({ lesson, sessionId }: { lesson: Lesson; sessionId: string }) {
   const { snapshot, content, command, progress, runtime } = useApp();
@@ -81,7 +81,7 @@ function LessonResult({ lesson, sessionId }: { lesson: Lesson; sessionId: string
 function ResultPageContent() {
   const { lesson_id = '', session_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.lessons.some(lesson => lesson.id === lesson_id)) return <Missing />;
-  return <ContentState identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonResult lesson={lesson} sessionId={session_id} />}</ContentState>;
+  return <ContentState pageTitle={t('nav.lessons')} identity={lesson_id} load={() => content.lesson(lesson_id)}>{lesson => <LessonResult lesson={lesson} sessionId={session_id} />}</ContentState>;
 }
 
 export function PracticePage() { return <SessionContent kind="lesson_cycle"><PracticePageContent  /></SessionContent>; }

@@ -5,7 +5,7 @@ import { AppProvider, RuntimeStatus } from './AppProvider';
 import { StartPage } from '../features/onboarding/StartPage';
 import { NavigationGuard } from './NavigationGuard';
 import { t } from '../ui/copy';
-import { Button } from '../ui/controls';
+import { Button, Status } from '../ui/controls';
 import { useState } from 'react';
 import { useApp } from './AppProvider';
 
@@ -19,7 +19,8 @@ async function assessmentRoute(kind: 'diagnostic' | 'final', result = false) {
   const { AssessmentPage, AssessmentResultPage } = await import('../features/assessments/AssessmentPage');
   return { Component: () => result ? <AssessmentResultPage kind={kind} /> : <AssessmentPage kind={kind} /> };
 }
-const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFailure />, children: [
+function RouteLoading() { return <main className="boot-main"><h1>{t('app.name')}</h1><Status announce>{t('boot.loading')}</Status></main>; }
+const router = createHashRouter([{ element: <Layout />, HydrateFallback: RouteLoading, errorElement: <RouteFailure />, children: [
   { path: '/', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).HomePage }) },
   { path: '/start', element: <div className="document"><StartPage /></div> },
   { path: '/lessons', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).CoursePage }) },
@@ -47,6 +48,6 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
   { path: '/settings', lazy: async () => ({ Component: (await import('../features/settings/SettingsPage')).SettingsPage }) },
   { path: '/settings/backup', lazy: async () => ({ Component: (await import('../features/settings/BackupPage')).BackupPage }) },
   { path: '/about', lazy: async () => ({ Component: (await import('../features/settings/AboutPage')).AboutPage }) },
-  { path: '*', element: <div className="document"><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></div> },
+  { path: '*', element: <div className="document"><h1>{t('error.not_found')}</h1><Link to="/lessons">{t('nav.lessons')}</Link></div> },
 ] }]);
 export function App() { return <RecoveryBoundary><RouterProvider router={router} /></RecoveryBoundary>; }

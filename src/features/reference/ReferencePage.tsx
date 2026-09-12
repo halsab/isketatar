@@ -74,7 +74,7 @@ function Detail({ section, id, references }: { section: Exclude<Section, 'letter
 export function ReferencePage({ section }: { section?: Section }) {
   const params = useParams(); const id = params.letter_id ?? params.rule_id ?? params.profile_id ?? params.term_id;
   const { content } = useApp();
-  return <ContentState identity={`reference:${section}:${id}`} load={async () => {
+  return <ContentState pageTitle={t('nav.reference')} identity={`reference:${section}:${id}`} load={async () => {
     const resources = !section ? [...new Set(content.catalog.core.lessons.map(lesson => lesson.resource))] : section === 'rules' ? content.catalog.core.lessons.filter(lesson => id?.startsWith(`R-${lesson.id}-`)).map(lesson => lesson.resource) : [];
     await Promise.all(['references.json', ...(section === 'rules' ? ['dictionary.json'] : []), ...resources].map(resource => content.load(resource)));
     return content.catalog.references!;

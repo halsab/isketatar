@@ -38,5 +38,5 @@ function Entry({ entry }: { entry: DictionaryEntry | Vocabulary }) {
 }
 export function EntryPage() {
   const { entry_id = '' } = useParams(); const { content } = useApp();
-  return <ContentState identity={entry_id} load={async () => { await content.load('dictionary.json'); return content.catalog.lexicon.get(entry_id) ?? content.catalog.vocabulary.get(entry_id) ?? null; }}>{entry => entry ? <Entry key={entry.id} entry={entry} /> : <Missing parent="/dictionary" />}</ContentState>;
+  return <ContentState pageTitle={t('nav.dictionary')} identity={entry_id} load={async () => { await content.load('dictionary.json'); return content.catalog.lexicon.get(entry_id) ?? content.catalog.vocabulary.get(entry_id) ?? null; }}>{entry => entry ? <Entry key={entry.id} entry={entry} /> : <Missing parent="/dictionary" />}</ContentState>;
 }

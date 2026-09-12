@@ -135,5 +135,5 @@ function Dictionary() {
 }
 export function DictionaryPage() {
   const { content } = useApp();
-  return <ContentState identity="dictionary-index" load={() => content.load('dictionary.json')}>{() => <Dictionary />}</ContentState>;
+  return <ContentState pageTitle={t('nav.dictionary')} identity="dictionary-index" load={() => content.load('dictionary.json')}>{() => <Dictionary />}</ContentState>;
 }

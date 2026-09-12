@@ -30,5 +30,5 @@ function Catalog({ readings }: { readings: Reading[] }) {
 }
 export function ReadingCatalog() {
   const { content } = useApp();
-  return <ContentState identity="reading-catalog" load={async () => { await content.load('readings.json'); return content.catalog.core.reading_ids.map(id => content.catalog.readings.get(id)!); }}>{readings => <Catalog readings={readings} />}</ContentState>;
+  return <ContentState pageTitle={t('nav.reading')} identity="reading-catalog" load={async () => { await content.load('readings.json'); return content.catalog.core.reading_ids.map(id => content.catalog.readings.get(id)!); }}>{readings => <Catalog readings={readings} />}</ContentState>;
 }

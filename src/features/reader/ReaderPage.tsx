@@ -120,7 +120,7 @@ function Reader({ reading }: { reading: Reading }) {
 function ReaderPageContent() {
   const { reading_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.reading_ids.includes(reading_id)) return <Missing parent="/reading" />;
-  return <ContentState identity={reading_id} load={async () => { await content.load('readings.json'); return content.catalog.readings.get(reading_id)!; }}>{reading => <Reader key={reading.id} reading={reading} />}</ContentState>;
+  return <ContentState pageTitle={t('nav.reading')} identity={reading_id} load={async () => { await content.load('readings.json'); return content.catalog.readings.get(reading_id)!; }}>{reading => <Reader key={reading.id} reading={reading} />}</ContentState>;
 }
 
 export function ReaderPage() { return <SessionContent kind="reading_practice"><ReaderPageContent  /></SessionContent>; }

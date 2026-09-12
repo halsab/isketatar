@@ -26,6 +26,7 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
   const heading = useRef<HTMLHeadingElement>(null);
   const returnTo = useRef<HTMLElement | null>(null);
   const wasOpen = useRef(false);
+  const wasModal = useRef(modal);
   const modalScroll = useRef(0);
   const savedFocus = useRef<HTMLElement | null>(null);
   const initialPosition = useRef(position);
@@ -48,6 +49,7 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
     if (open && !suspended) {
       if (modal) node.showModal(); else node.show();
       if (focused) focused.focus({ preventScroll: true });
+      else if (wasOpen.current && modal && !wasModal.current) heading.current?.focus({ preventScroll: true });
       else if (rememberedFocus?.isConnected) rememberedFocus.focus({ preventScroll: true });
       else if (initialCancel) (node.querySelector<HTMLElement>('[data-cancel]') ?? heading.current)?.focus({ preventScroll: true });
       else heading.current?.focus({ preventScroll: true });
@@ -62,7 +64,7 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
     } else if (!open && wasOpen.current) {
       restoreFocus(restoreId.current ? document.getElementById(restoreId.current) ?? returnTo.current : returnTo.current);
     }
-    wasOpen.current = open;
+    wasOpen.current = open; wasModal.current = modal;
     document.documentElement.classList.toggle('modal-open', !!document.querySelector('dialog[open][data-modal=true]'));
   }, [open, modal, initialCancel, suspended, contentReady]);
   useLayoutEffect(() => {
@@ -73,7 +75,7 @@ export function Dialog({ open, title, children, onClose, context = false, busy =
     if (wasOpen.current) restoreFocus(restoreId.current ? document.getElementById(restoreId.current) ?? returnTo.current : returnTo.current);
     };
   }, []);
-  return <dialog ref={dialog} inert={!open || suspended} aria-hidden={!open || suspended} className={`dialog ${context ? 'context-panel' : ''}`} data-modal={modal} role={modal ? 'dialog' : 'region'} aria-modal={modal && open && !suspended ? true : undefined} aria-labelledby={id}
+  return <dialog ref={dialog} inert={!open || suspended} aria-hidden={!open || suspended} className={`dialog ${context ? 'context-panel' : ''}`} data-modal={modal} role="dialog" aria-modal={modal && open && !suspended ? true : undefined} aria-labelledby={id}
     onScroll={event => { if (modal && open) modalScroll.current = event.currentTarget.scrollTop; if (!pendingRestore.current) onPosition?.({ scroll: modalScroll.current, control: savedFocus.current?.dataset.panelControl ?? null }); }}
     onFocusCapture={event => { if (event.target instanceof HTMLElement) savedFocus.current = event.target; if (!pendingRestore.current) onPosition?.({ scroll: modalScroll.current, control: savedFocus.current?.dataset.panelControl ?? null }); }}
     onClickCapture={event => {

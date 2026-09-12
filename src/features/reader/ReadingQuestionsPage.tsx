@@ -60,7 +60,7 @@ function ReadingQuestions({ reading, sessionId }: { reading: Reading; sessionId?
 function ReadingQuestionsPageContent({ result = false }: { result?: boolean }) {
   const { reading_id = '', session_id = '' } = useParams(); const { content } = useApp();
   if (!content.catalog.core.reading_ids.includes(reading_id)) return <Missing parent="/reading" />;
-  return <ContentState identity={reading_id} load={async () => {
+  return <ContentState pageTitle={t('reading.questions')} identity={reading_id} load={async () => {
     await content.load('readings.json'); const reading = content.catalog.readings.get(reading_id)!;
     await content.questions(reading.question_ids);
     return reading;

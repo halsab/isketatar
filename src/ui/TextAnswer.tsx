@@ -62,9 +62,9 @@ function AnswerField({ value, onChange, segment = false, disabled = false, error
     <div className="tatar-keys" role="group" aria-label={t('accessibility.tatar_keyboard')}>
       {['ә', 'ө', 'ү', 'җ', 'ң', 'һ', ...(segment ? ['+'] : [])].map(letter => <Button key={letter} disabled={disabled}
         aria-label={t(letter === '+' ? 'accessibility.insert_segment_separator' : 'accessibility.insert_letter', { letter })}
-        onPointerDown={event => { if (event.pointerType === 'mouse' && event.button === 0) event.preventDefault(); }} onClick={() => insert(letter)}>{letter}</Button>)}
+        preserveFocus onMouseDown={event => { if (event.button === 0) event.preventDefault(); }} onClick={() => insert(letter)}>{letter}</Button>)}
     </div>
     {compositionMessage && <p id={`${id}-composition`} role="status">{t('keyboard.finish_composition')}</p>}
-    {undo && value === undo.after && <Button variant="quiet" disabled={disabled} onClick={() => { if (composing.current) { setCompositionMessage(true); return; } const saved = undo; setUndo(null); onChange(saved.before); if (input.current) input.current.value = saved.before; restoreSelection(saved.range); }}>{t('keyboard.undo_insert')}</Button>}
+    {undo && value === undo.after && <Button variant="quiet" disabled={disabled} preserveFocus onMouseDown={event => { if (event.button === 0) event.preventDefault(); }} onClick={() => { if (composing.current) { setCompositionMessage(true); return; } const saved = undo; setUndo(null); onChange(saved.before); if (input.current) input.current.value = saved.before; restoreSelection(saved.range); }}>{t('keyboard.undo_insert')}</Button>}
   </div>;
 }

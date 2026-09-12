@@ -2,7 +2,7 @@
 .lesson-document li { margin-block: 0.5rem; }
 .chapter-contents { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-block: 1rem; border-block: 1px solid var(--divider-decorative); }
 .lesson-example { padding-block: 1.5rem; border-block-end: 1px solid var(--divider-decorative); }
-.example-details { font-size: var(--text-size); }
+.example-details { font-size: var(--text-size); overflow-wrap: anywhere; }
 .example-details dt { color: var(--text-muted); font-size: 0.875rem; }
 .example-details dd { margin: 0 0 1rem; }
 .rule-block { padding: 1.5rem; background: var(--surface-alt); border-inline-start: 3px solid var(--primary); border-radius: 0.25rem; }
@@ -39,7 +39,7 @@
 .course-module > summary { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; min-height: 64px; padding: 16px 8px; cursor: pointer; }
 .course-module > summary::before { content: '+'; font-size: 24px; }
 .course-module[open] > summary::before { content: '−'; }
-.course-module > summary > span:first-of-type { flex: 1; min-width: 180px; font-size: var(--text-size); font-weight: 600; overflow-wrap: anywhere; }
+.course-module > summary > h2 { margin: 0; flex: 1; min-width: 180px; font-size: var(--text-size); font-weight: 600; overflow-wrap: anywhere; }
 .course-lessons { list-style: none; padding: 0; }
 .course-lesson { padding: 24px 8px; border-top: 1px solid var(--divider-decorative); }
 .assessment-navigation { margin-block: 24px; }
