@@ -67,6 +67,18 @@ export class AppRuntime {
     const progress = scope.repository;
     if (progress !== this.progress) throw new Error('write_conflict');
     try {
+      if (command.type === 'help' || command.type === 'observe') {
+        const content = this.content!;
+        const snapshot = await progress.snapshot();
+        const pending = new Map(snapshot.sessions.filter(session => ['active', 'paused'].includes(session.status) && !['diagnostic', 'final'].includes(session.kind)).map(session => [session.session_id, session]));
+        const ids = snapshot.presentations.filter(item => {
+          const session = pending.get(item.session_id);
+          return session && item.status === 'draft' && (session.kind === 'reading_practice' || item.shown_at !== null && session.active_presentation_id === item.presentation_id);
+        }).map(item => item.question_id).filter(id => !content.catalog.questions.has(id));
+        // Данные для сопоставления помощи загружаются до IDB-транзакции; полномочия callback не обновляются.
+        if (ids.length) await content.questions([...new Set(ids)]);
+        if (progress !== this.progress) throw new Error('write_conflict');
+      }
       const result = await progress.dispatch(command, scope.expected);
       if (progress !== this.progress) throw new Error('write_conflict');
       await this.refresh(); return result;

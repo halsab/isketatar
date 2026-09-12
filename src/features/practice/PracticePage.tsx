@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 import type { Lesson } from '../../domain/content/types';
+import { POLICIES } from '../../domain/content/types';
 import { lessonProgress } from '../../domain/learning/progress';
 import { ArabicFontGate } from '../../ui/ArabicText';
 import { Button, Status } from '../../ui/controls';
@@ -11,6 +12,7 @@ import { ContentState, Missing } from '../shared/ContentState';
 import { Disclosure } from '../shared/Disclosure';
 import { AcceptedAnswer, AnswerSummary } from './QuestionView';
 import { SessionPlayer } from './SessionPlayer';
+import { HistoricalResult } from '../shared/HistoricalResult';
 
 function Practice({ lesson }: { lesson: Lesson }) {
   const { runtime, snapshot, command, progress, confirm } = useApp(); const navigate = useNavigate();
@@ -24,7 +26,7 @@ function Practice({ lesson }: { lesson: Lesson }) {
     try { await command(unfinished && !restart ? { type: 'resume', session_id: unfinished.session_id } : { type: 'start', kind: 'lesson_cycle', lesson_id: lesson.id, restart }); }
     catch { /* Команда не меняет введение до подтверждённого сохранения. */ } finally { setBusy(false); }
   }
-  return <div className="session-document"><h1>{lesson.title_tt}</h1>
+  return <div className="session-document"><h1><MixedText text={lesson.title_tt} /></h1>
     {compatible && unfinished?.status === 'active' ? <SessionPlayer session={unfinished} onResult={id => navigate(`/lessons/${lesson.id}/result/${id}`, { replace: true })} /> : <>
       {unfinished && <Status tone={compatible ? 'neutral' : 'warning'}>{t(compatible ? 'session.existing_draft' : 'session.incompatible')}</Status>}
       <p>{t('exercise.untimed')}</p><p>{t('exercise.question_count', { current: 0, total: lesson.question_ids.length })}</p>
@@ -45,18 +47,22 @@ function LessonResult({ lesson, sessionId }: { lesson: Lesson; sessionId: string
   const session = snapshot.sessions.find(item => item.session_id === sessionId && item.kind === 'lesson_cycle' && item.lesson_id === lesson.id);
   if (!session) return <Missing parent={`/lessons/${lesson.id}`} />;
   if (session.status !== 'submitted') return <div className="document"><h1>{t('assessment.result')}</h1><p>{t(['active', 'paused'].includes(session.status) ? 'session.existing_draft' : 'session.incompatible')}</p><Link to={`/lessons/${lesson.id}/practice`}>{t('action.continue')}</Link></div>;
+  const expected = content.catalog.lessonPlan(lesson.id);
+  const current = session.question_plan.length === expected.length && session.question_plan.every((item, index) => item.question_id === expected[index]!.id && item.grading_revision === expected[index]!.grading_revision) && Object.entries(POLICIES).every(([key, version]) => Reflect.get(session.policy_versions, key) === version);
+  if (!current) return <HistoricalResult session={session} backTo={`/lessons/${lesson.id}/practice`} />;
   const records = { ...snapshot, sessions: [session] };
   const score = lessonProgress(content.catalog.core, lesson.id, records);
   const route = content.catalog.core.routes[snapshot.settings.selected_route ?? 'arabic_reader'];
   const next = route[route.indexOf(lesson.id) + 1];
-  return <div className="document"><h1>{t('assessment.result')} · {lesson.title_tt}</h1>
+  return <div className="document"><h1>{t('assessment.result')} · <MixedText text={lesson.title_tt} /></h1>
+    {session.content_version !== content.catalog.core.content_version && <p>{t('history.previous_version', { version: session.content_version })}</p>}
     <Disclosure identity={`result:${sessionId}`} targets={[{ kind: 'lesson', id: lesson.id }]}>
       <Status tone={score.state === 'mastered' ? 'success' : 'neutral'}>{t(`lesson.${score.state}`)}</Status>
       <p>{t('lesson.practice')}: {t('assessment.score', { correct: score.independent_practice_correct, total: score.practice_count })}</p>
       <p>{t('lesson.transfer')}: {t('assessment.score', { correct: score.independent_transfer_correct, total: score.transfer_count })}</p>
       <p>{t(score.state === 'mastered' ? 'lesson.mastered_detail' : 'lesson.practiced_detail')}</p>
       {score.needs_refresh && <Status tone="warning">{t('update.needs_refresh')}</Status>}
-      <div className="actions"><Link className="button primary" to={next ? `/lessons/${next}` : '/final'}>{next ? t('lesson.next_title', { lesson: content.catalog.core.lessons.find(item => item.id === next)!.title_tt }) : t('assessment.final')}</Link><Link className="button" to={`/lessons/${lesson.id}/practice`}>{t('session.restart')}</Link></div>
+      <div className="actions"><Link className="button primary" to={next ? `/lessons/${next}` : '/final'}><MixedText text={next ? t('lesson.next_title', { lesson: content.catalog.core.lessons.find(item => item.id === next)!.title_tt }) : t('assessment.final')} /></Link><Link className="button" to={`/lessons/${lesson.id}/practice`}>{t('session.restart')}</Link></div>
       <h2>{t('assessment.practice_after')}</h2>
       {session.question_plan.map(plan => {
         const attempts = snapshot.attempts.filter(attempt => attempt.session_id === sessionId && attempt.question_id === plan.question_id).sort((a, b) => a.ordinal - b.ordinal);

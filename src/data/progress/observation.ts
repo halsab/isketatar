@@ -5,7 +5,7 @@ import type { Exposure } from '../../domain/learning/types';
 import type { ObservationTarget } from './commands';
 import type { CommandEngine } from './engine';
 
-interface TargetData { kind: Exposure['kind'] | null; id: string; materials: Material[]; lessonId?: string; ruleId?: string; readingId?: string; lineId?: string; wordId?: string; educational: boolean }
+interface TargetData { kind: Exposure['kind'] | null; id: string; materials: Material[]; lessonId?: string; ruleId?: string; readingId?: string; lineId?: string; wordId?: string; questionId?: string; educational: boolean }
 async function resolve(engine: CommandEngine, target: ObservationTarget): Promise<TargetData[]> {
   const { catalog, tx } = engine;
   const base = { id: 'id' in target ? target.id : '', materials: [] as Material[], educational: true };
@@ -68,32 +68,8 @@ async function resolve(engine: CommandEngine, target: ObservationTarget): Promis
 }
 export async function observe(engine: CommandEngine, target: ObservationTarget, confirmation: boolean) {
   const targets = await resolve(engine, target);
-  const pending = await engine.tx.unfinishedSessions();
-  const educational = targets.some(target => target.educational);
-  if (educational) await engine.confirmDisclosure(confirmation);
-  for (const session of pending.filter(session => !['diagnostic', 'final'].includes(session.kind))) {
-    const presentations = await engine.tx.bySession('presentations', session.session_id);
-    let updatedSession = session;
-    for (const targetData of targets.filter(item => item.educational)) {
-      if (session.kind === 'reading_practice' && targetData.readingId && targetData.lineId && session.reading_ids.includes(targetData.readingId)) {
-        const unfinished = presentations.some(presentation => presentation.status === 'draft' && engine.catalog.question(presentation.question_id).line_ids.includes(targetData.lineId!));
-        if (unfinished) {
-          const help = { line_id: targetData.lineId, word_id: targetData.wordId ?? null, kind: 'level' in target ? target.level ?? 'rule' : 'reading', opened_at: engine.at } as const;
-          if (!updatedSession.reading_help.some(item => item.line_id === help.line_id && item.word_id === help.word_id && item.kind === help.kind)) updatedSession = { ...updatedSession, reading_help: [...updatedSession.reading_help, help] };
-        }
-      }
-      const current = presentations.find(presentation => presentation.presentation_id === session.active_presentation_id);
-      if (!current || current.status !== 'draft' || current.shown_at === null) continue;
-      const question = engine.catalog.question(current.question_id);
-      const related = targetData.lessonId === question.lesson_id || targetData.ruleId !== undefined && question.rule_ids.includes(targetData.ruleId) || targetData.materials.some(material => question.materials.some(item => item.visual === material.visual)) || target.kind === 'reference';
-      if (related && current.assistance.reference_opened_at === null) {
-        const updated = { ...current, assistance: { ...current.assistance, reference_opened_at: Math.max(engine.at, current.shown_at) }, revision: current.revision + 1 };
-        await engine.context.put('presentations', updated);
-        Object.assign(current, updated);
-      }
-    }
-    if (canonical(updatedSession) !== canonical(session)) await engine.context.put('sessions', { ...updatedSession, revision: session.revision + 1, updated_at: engine.at });
-  }
+  if (targets.some(target => target.educational)) await engine.confirmDisclosure(confirmation);
+  await markRelatedHelp(engine, targets, 'level' in target ? target.level ?? 'rule' : 'reading', target.kind === 'reference');
   for (const item of targets) {
     const reading = target.kind === 'dictionary_results' || 'level' in target && target.level === 'reading';
     const meaning = target.kind === 'dictionary_results' || 'level' in target && target.level === 'meaning';
@@ -102,4 +78,31 @@ export async function observe(engine: CommandEngine, target: ObservationTarget, 
     await engine.putExposures(exposeMaterials(await engine.exposures(keys), item.materials, engine.at, { reading, meaning }));
   }
   return {};
+}
+
+export async function markRelatedHelp(engine: CommandEngine, targets: TargetData[], level: 'letters' | 'rule' | 'reading' | 'meaning' = 'reading', broad = false) {
+  const pending = await engine.tx.unfinishedSessions();
+  for (const session of pending.filter(session => !['diagnostic', 'final'].includes(session.kind))) {
+    const presentations = await engine.tx.bySession('presentations', session.session_id);
+    let updatedSession = session;
+    for (const targetData of targets.filter(item => item.educational)) {
+      if (session.kind === 'reading_practice' && targetData.readingId && targetData.lineId && session.reading_ids.includes(targetData.readingId)) {
+        const unfinished = presentations.some(presentation => presentation.status === 'draft' && engine.catalog.question(presentation.question_id).line_ids.includes(targetData.lineId!));
+        if (unfinished) {
+          const help = { line_id: targetData.lineId, word_id: targetData.wordId ?? null, kind: level, opened_at: engine.at } as const;
+          if (!updatedSession.reading_help.some(item => item.line_id === help.line_id && item.word_id === help.word_id && item.kind === help.kind)) updatedSession = { ...updatedSession, reading_help: [...updatedSession.reading_help, help] };
+        }
+      }
+      const current = presentations.find(presentation => presentation.presentation_id === session.active_presentation_id);
+      if (!current || current.status !== 'draft' || current.shown_at === null) continue;
+      const question = engine.catalog.question(current.question_id);
+      const related = targetData.lessonId === question.lesson_id || targetData.ruleId !== undefined && question.rule_ids.includes(targetData.ruleId) || targetData.materials.some(material => question.materials.some(item => item.visual === material.visual)) || broad || targetData.questionId === question.id;
+      if (related && current.assistance.reference_opened_at === null) {
+        const updated = { ...current, assistance: { ...current.assistance, reference_opened_at: Math.max(engine.at, current.shown_at) }, revision: current.revision + 1 };
+        await engine.context.put('presentations', updated);
+        Object.assign(current, updated);
+      }
+    }
+    if (canonical(updatedSession) !== canonical(session)) await engine.context.put('sessions', { ...updatedSession, revision: session.revision + 1, updated_at: engine.at });
+  }
 }

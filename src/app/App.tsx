@@ -9,6 +9,10 @@ import { Button } from '../ui/controls';
 
 function Layout() { return <AppProvider><NavigationGuard /><AppShell status={<RuntimeStatus />}><Outlet /></AppShell></AppProvider>; }
 function RouteFailure() { return <main><h1>{t('error.load')}</h1><Button onClick={() => location.reload()}>{t('offline.retry')}</Button><p><Link to="/settings">{t('nav.settings')}</Link></p></main>; }
+async function assessmentRoute(kind: 'diagnostic' | 'final', result = false) {
+  const { AssessmentPage, AssessmentResultPage } = await import('../features/assessments/AssessmentPage');
+  return { Component: () => result ? <AssessmentResultPage kind={kind} /> : <AssessmentPage kind={kind} /> };
+}
 const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFailure />, children: [
   { path: '/', lazy: async () => ({ Component: (await import('../features/course/CoursePage')).HomePage }) },
   { path: '/start', element: <div className="document"><StartPage /></div> },
@@ -18,6 +22,10 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
   { path: '/reading/:reading_id', lazy: async () => ({ Component: (await import('../features/reader/ReaderPage')).ReaderPage }) },
   { path: '/dictionary/:entry_id', lazy: async () => ({ Component: (await import('../features/dictionary/EntryPage')).EntryPage }) },
+  { path: '/diagnostic', lazy: () => assessmentRoute('diagnostic') },
+  { path: '/diagnostic/result/:session_id', lazy: () => assessmentRoute('diagnostic', true) },
+  { path: '/final', lazy: () => assessmentRoute('final') },
+  { path: '/final/result/:session_id', lazy: () => assessmentRoute('final', true) },
   { path: '/about', element: <div className="document"><h1>Курс турында</h1><p>Аңлатмалар хәзерге татар телендә бирелә.</p><Link to="/">Баш бит</Link></div> },
   { path: '*', element: <div className="document"><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></div> },
 ] }]);

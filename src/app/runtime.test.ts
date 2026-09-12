@@ -2,6 +2,7 @@ import 'fake-indexeddb/auto';
 import { IDBFactory } from 'fake-indexeddb';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { catalog } from '../../tests/learning-fixture';
+import { ContentCatalog } from '../domain/content/catalog';
 import { ContentRepository } from '../data/content/repository';
 import { expectedFrom } from '../data/progress/repository';
 import { replacementToken } from '../data/progress/transfer';
@@ -19,6 +20,25 @@ beforeEach(() => {
 afterEach(() => { for (const runtime of runtimes.splice(0)) runtime.progress?.close(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 async function open() { const runtime = new AppRuntime(); runtimes.push(runtime); await runtime.start(); return runtime; }
 const command = { type: 'settings' as const, patch: { theme: 'dark' as const } };
+
+it('loads a paused lesson question before disclosing final feedback on a cold catalog', async () => {
+  const partial = new ContentCatalog(catalog.core);
+  partial.addQuestions({ questions: [...catalog.questions.values()] } as Parameters<ContentCatalog['addQuestions']>[0]);
+  const questions = vi.fn(async (ids: string[]) => { const loaded = ids.map(id => catalog.question(id)); partial.addQuestions({ questions: loaded } as Parameters<ContentCatalog['addQuestions']>[0]); return loaded; });
+  vi.mocked(ContentRepository.open).mockResolvedValue({ catalog: partial, questions } as unknown as ContentRepository);
+  const runtime = await open(); const repository = runtime.progress!;
+  const run = async (value: Parameters<AppRuntime['command']>[0]) => runtime.command(value, { repository, expected: expectedFrom(await repository.snapshot()) });
+  const final = await run({ type: 'start', kind: 'final' });
+  await run({ type: 'finish_assessment', session_id: final.session_id!, confirm_incomplete: true, defer_imla: false });
+  const lesson = await run({ type: 'start', kind: 'lesson_cycle', lesson_id: 'L09' });
+  await run({ type: 'show', presentation_id: lesson.presentation_id! });
+  await run({ type: 'pause', session_id: lesson.session_id! });
+  for (const question of partial.questions.values()) if (question.origin === 'course') partial.questions.delete(question.id);
+  const feedbackId = (await repository.snapshot()).attempts.find(item => item.question_id === 'F-15')!.presentation_id;
+  await run({ type: 'help', kind: 'reveal', presentation_id: feedbackId });
+  expect(questions).toHaveBeenCalledWith(['Q-L09-01']);
+  expect((await repository.snapshot()).presentations.find(item => item.presentation_id === feedbackId)?.feedback_opened_at).not.toBeNull();
+});
 
 it('does not reauthorize a captured callback after reset', async () => {
   const runtime = await open();

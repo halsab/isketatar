@@ -27,7 +27,7 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
   const { pathname, key } = useLocation();
   const menu = menuKey === key;
   useEffect(() => setMenuKey(null), [key]);
-  const sessionRoute = /\/practice$|\/questions$|^\/review\/session\//u.test(pathname);
+  const sessionRoute = /\/practice$|\/questions$|^\/review\/session\/|^\/(?:diagnostic|final)$/u.test(pathname);
   useEffect(() => {
     const viewport = window.visualViewport;
     const update = () => {

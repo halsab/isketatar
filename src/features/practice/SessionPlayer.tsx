@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 import type { Session } from '../../domain/learning/types';
@@ -66,7 +66,7 @@ function EditorView({ editor, session, onResult }: { editor: SessionEditor; sess
     </section>}
   </div>;
 }
-function BoundEditor({ session, onResult }: { session: Session; onResult: (id: string) => void }) {
+function BoundEditor({ session, onResult, renderEditor }: { session: Session; onResult: (id: string) => void; renderEditor?: (editor: SessionEditor) => ReactNode }) {
   const { runtime, snapshot, progress, state } = useApp(); const [editor, setEditor] = useState<{ instance: SessionEditor; revision: number } | null>(null);
   const previous = useRef<SessionEditor | null>(null);
   useEffect(() => {
@@ -77,11 +77,11 @@ function BoundEditor({ session, onResult }: { session: Session; onResult: (id: s
     setEditor({ instance: next, revision: state.editorRevision }); const unregister = runtime.registerEditor(next);
     return () => { unregister(); void next.dispose(); };
   }, [progress, session.active_presentation_id, state.editorRevision]);
-  return editor && editor.revision === state.editorRevision && editor.instance.repository === progress ? <EditorView editor={editor.instance} session={session} onResult={onResult} /> : <Status>{t('boot.loading')}</Status>;
+  return editor && editor.revision === state.editorRevision && editor.instance.repository === progress ? renderEditor ? renderEditor(editor.instance) : <EditorView editor={editor.instance} session={session} onResult={onResult} /> : <Status>{t('boot.loading')}</Status>;
 }
-export function SessionPlayer({ session, onResult }: { session: Session; onResult: (id: string) => void }) {
+export function SessionPlayer({ session, onResult, renderEditor }: { session: Session; onResult: (id: string) => void; renderEditor?: (editor: SessionEditor) => ReactNode }) {
   const { snapshot, progress, command, confirm } = useApp(); const font = useArabicFont();
-  const pending = pendingAssessments(snapshot.sessions).filter(item => item.assessment_help_opened_at === null);
+  const pending = ['diagnostic', 'final'].includes(session.kind) ? [] : pendingAssessments(snapshot.sessions).filter(item => item.assessment_help_opened_at === null);
   const key = `${snapshot.control.data_generation}:${session.active_presentation_id}:${pending.map(item => item.session_id).join(',')}`;
   const [shown, setShown] = useState<string | null>(null); const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -98,5 +98,5 @@ export function SessionPlayer({ session, onResult }: { session: Session; onResul
     const confirmed = needsConfirmation ? await confirm({ title: t('assessment.pending_help_title'), body: t('assessment.pending_help_body', { count: pending.length || 1 }), action: t('assessment.open_learning_material') }) : false;
     if (!needsConfirmation || confirmed) try { await command({ type: 'show', presentation_id: session.active_presentation_id!, confirm_assessment_help: confirmed }); if (!pending.length) setShown(key); } catch (reason) { setError(reason instanceof Error ? reason.message : 'storage_unavailable'); }
   })(); }}>{t(pending.length || error === 'assessment_help_confirmation_required' ? 'assessment.open_learning_material' : 'draft.retry')}</Button>}</Status>;
-  return <BoundEditor key={`${snapshot.control.data_generation}:${session.active_presentation_id}`} session={session} onResult={onResult} />;
+  return <BoundEditor key={`${snapshot.control.data_generation}:${session.active_presentation_id}`} session={session} onResult={onResult} renderEditor={renderEditor} />;
 }

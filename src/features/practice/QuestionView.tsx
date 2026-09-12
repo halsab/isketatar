@@ -18,9 +18,9 @@ export function QuestionView({ question, identity, optionOrder, answer, disabled
   onChange: (answer: AnswerValue, immediate?: boolean) => void; onEnter: () => void; composition: (active: boolean) => void; error?: string;
 }) {
   return <>
-    <h2 className="question-prompt" tabIndex={-1}><MixedText text={question.prompt_tt} /></h2>
-    <div className="question-stimulus"><MixedText text={question.stimulus} /></div>
     {question.visible_context.map(context => <p key={context.id}><ArabicText block>{context.display_form}</ArabicText></p>)}
+    <h2 className="question-prompt" data-question-id={question.id} tabIndex={-1}><MixedText text={question.prompt_tt} /></h2>
+    <div className="question-stimulus"><MixedText text={question.stimulus} /></div>
     {question.type === 'choice' || question.type === 'select_many' ? <ChoiceGroup label={t(`exercise.${question.type}`)} multiple={question.type === 'select_many'} disabled={disabled}
       options={optionOrder.map(id => ({ id, content: <MixedText text={question.options.find(option => option.id === id)!.text_tt} /> }))}
       selected={answer?.kind === 'option' ? [answer.option_id] : answer?.kind === 'set' ? answer.option_ids : []}

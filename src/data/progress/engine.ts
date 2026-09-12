@@ -10,25 +10,26 @@ import type { AnswerValue, Attempt, Exposure, Presentation, Session } from '../.
 import type { Command } from './commands';
 import type { WriteContext } from './transaction';
 import type { Expected } from './model';
+import { markRelatedHelp } from './observation';
 
 export type CommandResult = { session_id?: string; presentation_id?: string; attempt?: Attempt; expected?: Expected };
 export class CommandEngine {
   constructor(readonly context: WriteContext, readonly catalog: ContentCatalog, readonly currentCore: CoreData, readonly releaseId: string, readonly at: number, readonly uuid: () => string) {}
   get tx() { return this.context.tx; }
-  async session(id: string, check = true): Promise<Session> {
+  async session(id: string, check = true, submittedFeedback = false): Promise<Session> {
     const session = await this.tx.get('sessions', id);
     if (!session) throw new Error('unknown_session');
     if (check) this.context.check('sessions', id, session);
     if (session.data_generation !== this.context.control.data_generation) throw new Error('write_conflict');
-    if (session.release_id !== this.releaseId || session.content_schema !== 1 || !Object.entries(POLICIES).every(([key, version]) => Reflect.get(session.policy_versions, key) === version)) throw new Error('incompatible_session');
+    if (session.release_id !== this.releaseId && !(submittedFeedback && session.status === 'submitted') || session.content_schema !== 1 || !Object.entries(POLICIES).every(([key, version]) => Reflect.get(session.policy_versions, key) === version)) throw new Error('incompatible_session');
     for (const item of session.question_plan) if (this.catalog.core.questions.find(question => question.id === item.question_id)?.grading_revision !== item.grading_revision) throw new Error('incompatible_session');
     return session;
   }
-  async presentation(id: string, check = true) {
+  async presentation(id: string, check = true, submittedFeedback = false) {
     const presentation = await this.tx.get('presentations', id);
     if (!presentation) throw new Error('unknown_presentation');
     if (check) this.context.check('presentations', id, presentation);
-    const session = await this.session(presentation.session_id, check);
+    const session = await this.session(presentation.session_id, check, submittedFeedback && presentation.status === 'submitted');
     const question = this.catalog.question(presentation.question_id);
     return { presentation, session, question };
   }
@@ -175,10 +176,11 @@ export class CommandEngine {
     const presentations = await this.tx.bySession('presentations', session.session_id);
     const first = session.question_plan.map(item => presentations.find(presentation => presentation.presentation_id === item.first_presentation_id)!);
     if (first.some(presentation => !presentation)) throw new Error('storage_corrupt');
-    if (first.some(presentation => presentation.draft_answer === null) && !command.confirm_incomplete) throw new Error('incomplete_confirmation_required');
+    const answerFor = (presentation: Presentation) => presentation.draft_answer !== null && canSubmit(this.catalog.question(presentation.question_id), presentation.draft_answer) ? presentation.draft_answer : null;
+    if (first.some(presentation => answerFor(presentation) === null) && !command.confirm_incomplete) throw new Error('incomplete_confirmation_required');
     if (command.defer_imla && session.kind !== 'diagnostic') throw new Error('invalid_session_state');
     await this.context.put('sessions', { ...session, diagnostic_imla_deferred: command.defer_imla, revision: session.revision + 1 });
-    for (const presentation of first) await this.submit(presentation.presentation_id, command.defer_imla && this.catalog.question(presentation.question_id).group === 'imla' ? { kind: 'unknown' } : presentation.draft_answer ?? { kind: 'unknown' }, true);
+    for (const presentation of first) await this.submit(presentation.presentation_id, command.defer_imla && this.catalog.question(presentation.question_id).group === 'imla' ? { kind: 'unknown' } : answerFor(presentation) ?? { kind: 'unknown' }, true);
     const updated = await this.session(session.session_id);
     await this.context.put('sessions', { ...updated, status: 'submitted', submitted_at: this.at, active_presentation_id: null, revision: updated.revision + 1, updated_at: this.at });
     this.context.control.active_session_id = null;
@@ -217,7 +219,7 @@ export class CommandEngine {
     return { presentation_id: target.presentation_id, session_id: sessionId };
   }
   async help(command: Extract<Command, { type: 'help' }>) {
-    const { presentation, session, question } = await this.presentation(command.presentation_id, false);
+    const { presentation, session, question } = await this.presentation(command.presentation_id, false, true);
     if (['diagnostic', 'final'].includes(session.kind) && session.status !== 'submitted') throw new Error('assessment_help_disabled');
     if (presentation.status === 'draft' && presentation.shown_at === null) throw new Error('invalid_presentation');
     if (command.kind === 'hint' && (!Number.isInteger(command.hint_index) || command.hint_index! < 0 || command.hint_index! >= question.hints_tt.length)) throw new Error('invalid_hint');
@@ -242,6 +244,10 @@ export class CommandEngine {
     } else if (presentation.feedback_opened_at === null) {
       await this.context.put('presentations', { ...presentation, feedback_opened_at: this.at, revision: presentation.revision + 1 });
     }
+    if (presentation.status === 'submitted') await markRelatedHelp(this, (question.line_ids.length ? question.line_ids : [undefined]).map(lineId => ({
+      kind: null, id: question.id, questionId: question.id, materials: question.materials, educational: true,
+      readingId: question.source_reading_id ?? undefined, lineId,
+    })));
     if (command.kind === 'reveal') await this.exposeResource('question', question.id, { answer: true });
     const keys = question.materials.flatMap(material => [`material:${material.visual}`, ...(material.reading === null ? [] : [`material:${material.reading}`])]);
     await this.putExposures(exposeMaterials(await this.exposures(keys), question.materials, this.at, { reading: ['reading', 'reveal'].includes(command.kind), meaning: command.kind === 'meaning' }));

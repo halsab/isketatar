@@ -12,6 +12,41 @@ async function open(name = `progress-test-${++sequence}`, tabId: string = crypto
 }
 afterEach(() => { for (const repository of opened.splice(0)) repository.close(); vi.unstubAllGlobals(); });
 describe('atomic progress commands', () => {
+  it('disclosing submitted feedback marks a related paused transfer as assisted without changing old attempts', async () => {
+    const repository = await open();
+    const run = async (command: Parameters<ProgressRepository['dispatch']>[0]) => repository.dispatch(command, expectedFrom(await repository.snapshot()));
+    const final = await run({ type: 'start', kind: 'final' });
+    await run({ type: 'finish_assessment', session_id: final.session_id!, confirm_incomplete: true, defer_imla: false });
+    const old = (await repository.snapshot()).attempts;
+    const lesson = await run({ type: 'start', kind: 'lesson_cycle', lesson_id: 'L09' });
+    let active = lesson.presentation_id!;
+    while ((await repository.snapshot()).presentations.find(item => item.presentation_id === active)!.question_id !== 'Q-L09-07') {
+      await run({ type: 'show', presentation_id: active });
+      await run({ type: 'submit', presentation_id: active, answer: { kind: 'unknown' } });
+      active = (await run({ type: 'ack', presentation_id: active })).presentation_id!;
+    }
+    await run({ type: 'show', presentation_id: active });
+    await run({ type: 'pause', session_id: lesson.session_id! });
+    await run({ type: 'help', kind: 'reveal', presentation_id: old.find(item => item.question_id === 'F-15')!.presentation_id });
+    await run({ type: 'resume', session_id: lesson.session_id! });
+    const result = await run({ type: 'submit', presentation_id: active, answer: correctAnswer('Q-L09-07') });
+    expect(result.attempt?.independent_correct).toBe(false);
+    expect(result.attempt?.assistance_before_submit.reference_opened_at).toBe(now);
+    expect((await repository.snapshot()).attempts.filter(item => item.session_id === final.session_id)).toEqual(old);
+  });
+  it('opens compatible submitted feedback across app releases but fences unfinished sessions', async () => {
+    const name = `release-feedback-${++sequence}`;
+    const previous = await open(name);
+    const final = await previous.dispatch({ type: 'start', kind: 'final' }, expectedFrom(await previous.snapshot()));
+    await previous.dispatch({ type: 'finish_assessment', session_id: final.session_id!, confirm_incomplete: true, defer_imla: false }, expectedFrom(await previous.snapshot()));
+    const active = await previous.dispatch({ type: 'start', kind: 'diagnostic' }, expectedFrom(await previous.snapshot()));
+    const next = await ProgressRepository.open({ catalog, releaseId: 'next-release', name, tabId: previous.tabId, clock: () => now });
+    opened.push(next);
+    const before = await next.snapshot();
+    await next.dispatch({ type: 'help', kind: 'reveal', presentation_id: before.attempts[0]!.presentation_id, confirm_assessment_help: true }, expectedFrom(before));
+    await expect(next.dispatch({ type: 'resume', session_id: active.session_id! }, expectedFrom(await next.snapshot()))).rejects.toThrow('incompatible_session');
+    expect((await next.snapshot()).attempts).toEqual(before.attempts);
+  });
   it('freezes A02 in full practice/transfer order, pauses and resumes without changing IDs/options', async () => {
     const repository = await open();
     await repository.dispatch({ type: 'start', kind: 'lesson_cycle', lesson_id: 'A02' }, expectedFrom(await repository.snapshot()));
@@ -77,6 +112,18 @@ describe('atomic progress commands', () => {
     expect(final.presentations.every(presentation => presentation.feedback_opened_at === null)).toBe(true);
     await repository.dispatch({ ...command, confirm_incomplete: true }, expectedFrom(snapshot));
     expect((await repository.snapshot()).control.state_revision).toBe(final.control.state_revision);
+  });
+  it('treats a cleared assessment text draft as unanswered on confirmed completion', async () => {
+    const repository = await open();
+    const started = await repository.dispatch({ type: 'start', kind: 'final' }, expectedFrom(await repository.snapshot()));
+    const questionId = catalog.core.final_ids.find(id => catalog.question(id).type === 'reading')!;
+    const selected = await repository.dispatch({ type: 'navigate_question', session_id: started.session_id!, question_id: questionId }, expectedFrom(await repository.snapshot()));
+    await repository.dispatch({ type: 'show', presentation_id: selected.presentation_id! }, expectedFrom(await repository.snapshot()));
+    await repository.dispatch({ type: 'draft', presentation_id: selected.presentation_id!, answer: { kind: 'text', text: '   ' } }, expectedFrom(await repository.snapshot()));
+    const before = await repository.snapshot();
+    await expect(repository.dispatch({ type: 'finish_assessment', session_id: started.session_id!, confirm_incomplete: false, defer_imla: false }, expectedFrom(before))).rejects.toThrow('incomplete_confirmation_required');
+    await repository.dispatch({ type: 'finish_assessment', session_id: started.session_id!, confirm_incomplete: true, defer_imla: false }, expectedFrom(before));
+    expect((await repository.snapshot()).attempts.find(attempt => attempt.question_id === questionId)?.answer_raw).toEqual({ kind: 'unknown' });
   });
   it('rolls back successful requests when a later request aborts the transaction', async () => {
     const repository = await open();

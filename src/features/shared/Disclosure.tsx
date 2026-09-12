@@ -5,9 +5,9 @@ import { pendingAssessments } from '../../domain/learning/attempt';
 import { Button, Status } from '../../ui/controls';
 import { t } from '../../ui/copy';
 
-export function Disclosure({ identity, targets, children, onDisclosed }: { identity: string; targets: ObservationTarget[]; children: ReactNode; onDisclosed?: () => void }) {
+export function Disclosure({ identity, targets, children, onDisclosed, feedbackIds = [] }: { identity: string; targets: ObservationTarget[]; children: ReactNode; onDisclosed?: () => void; feedbackIds?: string[] }) {
   const { runtime, snapshot, scope, confirm } = useApp();
-  const educational = targets.some(target => !['reading', 'reading_line', 'reading_word'].includes(target.kind) || 'level' in target && target.level !== undefined);
+  const educational = feedbackIds.length > 0 || targets.some(target => !['reading', 'reading_line', 'reading_word'].includes(target.kind) || 'level' in target && target.level !== undefined);
   const pending = educational ? pendingAssessments(snapshot.sessions).filter(session => session.assessment_help_opened_at === null) : [];
   const key = `${identity}:${snapshot.control.data_generation}:${pending.map(item => item.session_id).sort().join(',')}`;
   const [allowed, setAllowed] = useState<string | null>(null);
@@ -20,6 +20,10 @@ export function Disclosure({ identity, targets, children, onDisclosed }: { ident
       let expected = scope.expected;
       for (const target of targets) {
         const receipt = await runtime.command({ type: 'observe', target, confirm_assessment_help: confirmed }, { ...scope, expected });
+        expected = receipt.expected!;
+      }
+      for (const presentation_id of feedbackIds) {
+        const receipt = await runtime.command({ type: 'help', presentation_id, kind: 'reveal', confirm_assessment_help: confirmed }, { ...scope, expected });
         expected = receipt.expected!;
       }
       // Подтверждение само снимает pending-флаги; generation и владелец материала сохраняются.

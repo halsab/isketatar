@@ -42,3 +42,7 @@
 .course-module > summary > span:first-of-type { flex: 1; min-width: 180px; font-size: var(--text-size); font-weight: 600; overflow-wrap: anywhere; }
 .course-lessons { list-style: none; padding: 0; }
 .course-lesson { padding: 24px 8px; border-top: 1px solid var(--divider-decorative); }
+.assessment-navigation { margin-block: 24px; }
+.assessment-navigation summary { padding-block: 12px; min-height: 48px; cursor: pointer; }
+.assessment-navigation nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); gap: 8px; margin-block: 16px; }
+.assessment-navigation .button[aria-current=step] { border-width: 2px; background: var(--primary-subtle); }
