@@ -13,6 +13,7 @@ async function importFile(page: Page, buffer: Buffer) {
 test('settings persist independently and the neutral preview does not disclose assessment help', async ({ page }) => {
   await page.goto('./#/diagnostic'); await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
+  await expect(page).toHaveURL(/#\/$/u);
   await page.goto('./#/settings');
   for (const [label, value, attribute] of [['Төс тәртибе', 'dark', 'data-theme'], ['Язу зурлыгы', '24', 'data-text-size'], ['Гарәп язуы зурлыгы', '48', 'data-arabic-size'], ['Хәрәкәтләр', 'reduce', 'data-motion']]) {
     await page.getByRole('combobox', { name: label!, exact: true }).selectOption(value!);
@@ -29,7 +30,7 @@ test('settings persist independently and the neutral preview does not disclose a
   await page.goto('./#/about');
   await expect(page.getByRole('textbox', { name: 'Техник мәгълүмат', exact: true })).toHaveValue(/1\.0\.0/u);
   expect(await page.getByRole('textbox', { name: 'Техник мәгълүмат', exact: true }).inputValue()).not.toContain(data.data.sessions[0].session_id);
-  for (const href of ['licenses/Inter.txt', 'licenses/NotoNaskhArabic.txt', 'licenses/ThirdParty.txt']) expect((await page.request.get(`/isketatar/${href}`)).ok()).toBe(true);
+  for (const href of ['licenses/Inter.txt', 'licenses/NotoNaskhArabic.txt', 'licenses/ThirdParty.txt']) expect((await page.request.get((await page.locator(`a[href$="${href}"]`).getAttribute('href'))!)).ok()).toBe(true);
 });
 
 test('download, cancel, reset and confirmed import restore exact attempts, bookmarks and draft', async ({ page }) => {

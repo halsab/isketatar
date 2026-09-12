@@ -39,7 +39,7 @@ export class ContentRepository {
   private constructor(catalog: ContentCatalog, readonly assets: Asset[]) { this.catalog = catalog; }
 
   static async open(release?: ReleaseManifest, signal?: AbortSignal) {
-    const assets: Asset[] = release?.assets ?? contentManifest.assets.map(asset => ({ ...asset, kind: 'content' as const }));
+    const assets: Asset[] = release?.assets ?? contentManifest.assets.map(asset => ({ ...asset, url: assetUrl(asset.url.slice('/isketatar/'.length)), kind: 'content' as const }));
     const coreAsset = assets.find(asset => asset.url.endsWith('/runtime/core.json'));
     if (!coreAsset) throw new Error('content_unavailable');
     const core = await checkedJson(coreAsset, compatibleCore, signal);
@@ -54,7 +54,7 @@ export class ContentRepository {
     return task;
   }
   private async loadResource(resource: string) {
-    const suffix = assetUrl(`runtime/${resource}`).slice('/isketatar'.length);
+    const suffix = `/runtime/${resource}`;
     const asset = this.assets.find(item => item.url.endsWith(suffix));
     if (!asset) throw new Error('content_unavailable');
     const validators = await import('../../generated/content-validators.js');

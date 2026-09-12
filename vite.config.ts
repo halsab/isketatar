@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
-  base: '/isketatar/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/isketatar/releases/__ISKE_RELEASE__/' : '/isketatar/',
   plugins: [
     react(),
     {
@@ -14,4 +14,4 @@ export default defineConfig({
   ],
   build: { target: 'es2022', sourcemap: false },
   test: { include: ['src/**/*.test.ts'], environment: 'node' },
-});
+}));

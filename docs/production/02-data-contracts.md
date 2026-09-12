@@ -38,10 +38,11 @@ Runtime-модели и обменный конверт закрыты: неиз
 | base_path | Нормализованный project path, например /isketatar/ |
 | built_at | TimeMs, время сборки |
 | assets | Массив {url,sha256,bytes,kind,required}; URL уникальны и находятся внутри base_path; bytes — целое >=0 |
+| shell_assets | Уникальные URL подмножества assets для автоматической оболочки; включает HTML, recovery, стартовые JS/CSS, core и интерфейсный шрифт |
 | question_revisions | Объект QuestionId → Hash, для каждого Q/D/F/RQ текущего выпуска |
 | policy_versions | Полный объект версий предметных политик, описанный ниже |
 
-`kind`: shell, script, style, font, content, media. Обязательные assets включают shell/JS/CSS/шрифты и нужное содержание. Сам release manifest и service worker не включают собственный хеш в себя; порядок формирования worker/precache определяет PWA-контракт. Не вычислять самореферентный хеш.
+`kind`: shell, script, style, font, content, media. Обязательные assets включают shell/JS/CSS/шрифты и нужное содержание. Сам release manifest и service worker не включают собственный хеш в себя; порядок формирования worker/precache определяет PWA-контракт. Не вычислять самореферентный хеш. Реализация D8.1 вычисляет release_id из отсортированного набора исходных файлов сборки с маркером собственного пути и стабильного built_at; затем подставляет ID и вычисляет настоящие SHA-256 поставляемых тел. Имя asset chunk само по себе не является проверкой целостности. Корневой release-manifest.json служит указателем опубликованного кандидата; shell загружает только manifest своего неизменяемого адреса.
 
 Различаются app_version, content_version, progress_schema и физическая `db_version` IndexedDB. Изменение индекса БД не обязано менять формат экспорта. Замена ключа вопроса не требует новой физической БД.
 
