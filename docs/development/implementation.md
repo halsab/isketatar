@@ -9,7 +9,7 @@
 | Этап | Область | Приёмка / зависимость | Состояние |
 |---|---|---|---|
 | D0 | Этот журнал, замороженный корпус, внешние условия | Валидаторы, hashes, список условий | Проверки пройдены; внешние условия ожидают подтверждения |
-| D1 | package/lockfile, app bootstrap, base path, CI build | Типы, сборка, hash deep link; D0 | Ожидает |
+| D1 | package/lockfile, app bootstrap, base path, CI build | Типы, сборка, hash deep link; D0 | Завершён |
 | D2 | domain/content, domain/learning, сборка каталога | 30 learning-cases, полный корпус; D1 | Ожидает |
 | D3 | data/progress, импорт/экспорт, IDB | Атомарность, CAS, помощь, восстановление; D2 | Ожидает |
 | D4 | ui, styles, шрифты и лицензии | Токены, RTL, глифы, адаптивность; D3 | Ожидает |
@@ -51,3 +51,12 @@ UI-copy: 194 исходные строки + 72 добавления / 8 зам�
 Агрегатный `corpus_sha256`: SHA-256 от UTF-8 сериализации массива `files` через `json.dumps(files, ensure_ascii=False, sort_keys=True, separators=(',', ':'))`, без завершающего LF. Пути отсортированы; каждый объект содержит path/sha256/bytes.
 
 Независимое ревью D0: воспроизведены валидаторы и все 33 hashes; исправлена привязка S09–S19 к экранам, уточнены алгоритм hash и объём татарской вычитки. Инженерная приёмка D0 завершена; внешние условия остаются в отдельном реестре.
+
+
+## D1: основа и сборка
+
+Закреплены Node 24.21.0 LTS, npm 11.9.0 и точные версии зависимостей в package.json/lockfile. Добавлены React/Vite/TypeScript strict + noUncheckedIndexedAccess, HashRouter, base `/isketatar/`, татарские noscript/recovery, строгая production CSP и проверки границ модулей/состава dist. CI выполняет проверки и сборку без deploy; официальные actions проверены по Git refs и закреплены полными SHA. PR имеет только contents:read.
+
+Проверки на Node 24.21.0: оба исходных валидатора, module boundaries, TypeScript, 7 unit assertions, production build; initial JS 82.96 kB gzip. Во встроенном Chromium открыта и перезагружена прямая `/isketatar/#/about`; закреплённый Playwright smoke проверяет ссылку/reload/переход домой. `npm audit --omit=dev --audit-level=high`: 0 известных уязвимостей. Shell этого этапа не является завершённым курсом; шрифты/экраны/прогресс/worker добавляются последовательно.
+
+Независимое ревью D1: исправлена блокировка CSS Vite в dev, повторно проверены styles/console, production CSP, bootstrap/recovery и hash-навигация. Открытых замечаний нет; этап допущен к локальному коммиту.

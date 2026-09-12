@@ -1,0 +1,9 @@
+:root { font-family: system-ui, sans-serif; color: #242b29; background: #f7f4ed; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header, main { max-width: 80rem; margin: auto; padding: 1.5rem; }
+main { max-width: 45.5rem; font-size: 1.125rem; line-height: 1.6; }
+a { color: #17594f; }
+:focus-visible { outline: 3px solid #17594f; outline-offset: 2px; }
+.skip-link { position: fixed; left: 1rem; top: -10rem; padding: 1rem; background: #fffdf8; z-index: 100; }
+.skip-link:focus { top: 1rem; }
