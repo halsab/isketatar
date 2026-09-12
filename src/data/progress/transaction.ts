@@ -72,6 +72,6 @@ export class WriteContext {
   nextExpected(): Expected {
     const revisions = new Map(this.expected.revisions.map(item => [`${item.store}:${item.key}`, item]));
     for (const [key, value] of this.revisions) revisions.set(key, value);
-    return { data_generation: this.control.data_generation, writer_epoch: this.control.writer_epoch, revisions: [...revisions.values()] };
+    return { data_generation: this.control.data_generation, writer_epoch: this.control.writer_epoch, update_id: this.control.update_gate?.update_id ?? null, revisions: [...revisions.values()] };
   }
 }

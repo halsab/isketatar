@@ -53,7 +53,7 @@ export interface ProgressExport { format: 'iske-imla-progress'; schema_version: 
 export interface ReplacementToken { data_generation: string; writer_epoch: number; state_revision: number }
 export interface ImportPreview { id: string; recognized_lessons: number; recognized_attempts: number; legacy_records: number; legacy_reasons: Record<Legacy['reason'], number>; bookmarks: number; route: RouteId | null; expected: ReplacementToken }
 export interface RecordExpectation { store: 'sessions' | 'presentations' | 'review_cards' | 'meta'; key: string; revision: number | null }
-export interface Expected { data_generation: string; writer_epoch: number; revisions: RecordExpectation[] }
+export interface Expected { data_generation: string; writer_epoch: number; update_id?: string | null; revisions: RecordExpectation[] }
 export const defaultSettings = (at: number): Settings => ({ selected_route: null, onboarding_completed: false, locale: 'tt-Cyrl', theme: 'system', arabic_size_px: 32, text_size_px: 18, reduced_motion: 'system', review_batch_size: 10, last_location: null, revision: 0, updated_at: at });
 export function exportedRecord(store: StoreName, record: StoreRecords[StoreName]): unknown {
   if (store !== 'meta') return record;

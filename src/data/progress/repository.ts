@@ -1,9 +1,9 @@
 import type { ContentCatalog } from '../../domain/content/catalog';
 import type { CoreData } from '../../domain/content/types';
 import { defaultSettings, recordBytes, STORE_NAMES } from './model';
-import type { Control, Expected, ImportPreview, ProgressData, ProgressSnapshot, ReplacementToken } from './model';
+import type { Control, Expected, ImportPreview, ProgressData, ProgressSnapshot, ReplacementToken, UpdateGate } from './model';
 import { IndexedBackend } from './backend';
-import type { Backend } from './backend';
+import type { Backend, Transaction } from './backend';
 import { readControl, WriteContext } from './transaction';
 import { CommandEngine } from './engine';
 import type { CommandResult } from './engine';
@@ -25,7 +25,7 @@ interface DurableProtection extends KnownProtection { source: ProgressRepository
 export function expectedFrom(snapshot: ProgressSnapshot): Expected {
   const unfinished = snapshot.sessions.filter(session => ['active', 'paused'].includes(session.status));
   const ids = new Set(unfinished.map(session => session.session_id));
-  return { data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch, revisions: [
+  return { data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch, update_id: snapshot.control.update_gate?.update_id ?? null, revisions: [
     { store: 'meta', key: 'settings', revision: snapshot.settings.revision },
     ...unfinished.map(session => ({ store: 'sessions' as const, key: session.session_id, revision: session.revision })),
     ...snapshot.presentations.filter(presentation => ids.has(presentation.session_id)).map(presentation => ({ store: 'presentations' as const, key: presentation.presentation_id, revision: presentation.revision })),
@@ -202,6 +202,64 @@ export class ProgressRepository {
       this.changed(control);
     });
   }
+  private changeGate(expected: ReplacementToken, mutate: (control: Control, tx: Transaction) => Promise<void> | void) {
+    if (this.detached) return Promise.reject(new Error('repository_detached'));
+    if (this.mode !== 'durable') return Promise.reject(new Error('update_memory_mode'));
+    const token = structuredClone(expected);
+    return this.enqueue(async () => {
+      if (this.detached) throw new Error('repository_detached');
+      const control = await this.backend.run('readwrite', async tx => {
+        const control = await readControl(tx);
+        if (control.data_generation !== token.data_generation || control.writer_epoch !== token.writer_epoch || control.state_revision !== token.state_revision) throw new Error('write_conflict');
+        await mutate(control, tx); control.state_revision++; await tx.put('meta', control); return control;
+      });
+      this.changed(control); return control;
+    });
+  }
+  async beginUpdate(expected: ReplacementToken, targetReleaseId: string): Promise<UpdateGate> {
+    const id = this.uuid(); const at = this.clock();
+    if (!targetReleaseId || targetReleaseId.length > 256 || !Number.isSafeInteger(at) || at < 0 || at > 8_640_000_000_000_000) throw new Error('invalid_update');
+    const control = await this.changeGate(expected, control => {
+      if (control.writer_id !== this.tabId) throw new Error('write_conflict');
+      if (control.update_gate) throw new Error('update_in_progress');
+      control.update_gate = { update_id: id, target_release_id: targetReleaseId, phase: 'quiescing', coordinator_id: this.tabId, requested_at: at };
+    });
+    return control.update_gate!;
+  }
+  private ownGate(control: Control, updateId: string) {
+    if (control.writer_id !== this.tabId || control.update_gate?.coordinator_id !== this.tabId) throw new Error('write_conflict');
+    if (control.update_gate.update_id !== updateId) throw new Error('stale_update');
+    return control.update_gate;
+  }
+  async commitUpdate(expected: ReplacementToken, updateId: string) {
+    await this.changeGate(expected, async (control, tx) => {
+      const gate = this.ownGate(control, updateId);
+      if (gate.phase !== 'quiescing') throw new Error('update_already_committed');
+      if (control.active_session_id !== null || (await tx.unfinishedSessions()).some(session => session.status === 'active')) throw new Error('update_not_quiet');
+      gate.phase = 'commit';
+    });
+  }
+  async cancelUpdate(expected: ReplacementToken, updateId: string) {
+    await this.changeGate(expected, control => {
+      if (this.ownGate(control, updateId).phase !== 'quiescing') throw new Error('update_already_committed');
+      control.update_gate = null;
+    });
+  }
+  async finishUpdate(expected: ReplacementToken, updateId: string) {
+    await this.changeGate(expected, control => {
+      const gate = control.update_gate;
+      if (!gate || gate.update_id !== updateId || gate.phase !== 'commit') throw new Error('stale_update');
+      if (this.options.releaseId !== gate.target_release_id) throw new Error('unsupported_release');
+      control.update_gate = null;
+    });
+  }
+  async recoverUpdate(expected: ReplacementToken, updateId: string, confirmed: boolean) {
+    if (!confirmed) throw new Error('confirmation_required');
+    await this.changeGate(expected, control => {
+      if (control.update_gate?.update_id !== updateId) throw new Error('stale_update');
+      control.writer_id = this.tabId; control.writer_epoch++; control.update_gate.coordinator_id = this.tabId;
+    });
+  }
   dispatch(command: Command, expected: Expected): Promise<CommandResult> {
     if (this.detached) return Promise.reject(new Error('repository_detached'));
     const captured = structuredClone(command); const token = structuredClone(expected); const at = this.clock();
@@ -213,7 +271,7 @@ export class ProgressRepository {
         const helpObservation = captured.type === 'help' && (captured.kind !== 'reveal' || (await tx.get('presentations', captured.presentation_id))?.status === 'submitted');
         const observation = captured.type === 'observe' || captured.type === 'show' || helpObservation;
         if (control.data_generation !== token.data_generation || !observation && (control.writer_epoch !== token.writer_epoch || control.writer_id !== this.tabId)) throw new Error('write_conflict');
-        if (control.update_gate?.phase === 'commit' || control.update_gate?.phase === 'quiescing' && !observation && !['draft', 'pause'].includes(captured.type)) throw new Error('update_in_progress');
+        if (control.update_gate?.phase === 'commit' || control.update_gate?.phase === 'quiescing' && !(observation && token.update_id === null) && !['draft', 'pause', 'position'].includes(captured.type)) throw new Error('update_in_progress');
         const context = new WriteContext(tx, control, token, observation);
         const engine = new CommandEngine(context, this.options.catalog, this.options.currentCore ?? this.options.catalog.core, this.options.releaseId, at, this.uuid);
         const result = await this.execute(engine, captured);
@@ -239,7 +297,7 @@ export class ProgressRepository {
       const committed = await backend.run('readwrite', async tx => {
         const control = await readControl(tx);
         if (control.data_generation !== protection.generation) throw new Error('write_conflict');
-        if (control.update_gate?.phase === 'commit') throw new Error('update_in_progress');
+        if (control.update_gate) throw new Error('update_in_progress');
         const pending = await tx.unfinishedSessions();
         const needsHelp = pendingAssessments(pending).filter(session => session.assessment_help_opened_at === null);
         if (needsHelp.length && !confirmed) throw new Error('assessment_help_confirmation_required');
