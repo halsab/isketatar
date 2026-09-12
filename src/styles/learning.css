@@ -1,0 +1,22 @@
+.lesson-document section { margin-block: 2.5rem; }
+.lesson-document li { margin-block: 0.5rem; }
+.chapter-contents { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-block: 1rem; border-block: 1px solid var(--divider-decorative); }
+.lesson-example { padding-block: 1.5rem; border-block-end: 1px solid var(--divider-decorative); }
+.example-details { font-size: var(--text-size); }
+.example-details dt { color: var(--text-muted); font-size: 0.875rem; }
+.example-details dd { margin: 0 0 1rem; }
+.rule-block { padding: 1.5rem; background: var(--surface-alt); border-inline-start: 3px solid var(--primary); border-radius: 0.25rem; }
+.session-document { max-width: 40rem; margin-inline: auto; min-width: 0; overflow-anchor: none; }
+.session-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-block: 1.5rem 2rem; }
+.question-prompt { font-size: var(--text-size); line-height: 1.6; font-weight: 500; }
+.question-prompt:focus { outline: none; box-shadow: none; }
+.question-stimulus { padding: 1.5rem; margin-block: 1rem 2rem; background: var(--surface); border: 1px solid var(--divider-decorative); border-radius: 0.75rem; overflow-wrap: anywhere; }
+.question-stimulus .arabic { font-size: max(2.5rem, var(--arabic-size)); }
+.exercise-help { margin-block: 2rem; padding-block-start: 1rem; border-block-start: 1px solid var(--divider-decorative); }
+.exercise-help button { margin-inline-end: 0.5rem; margin-block-end: 0.5rem; }
+.feedback { margin-block-start: 2rem; font-size: var(--text-size); }
+.result-question { border-block-end: 1px solid var(--divider-decorative); padding-block: 1rem; }
+.result-question summary { cursor: pointer; min-height: 3rem; padding-block: 0.5rem; }
+.session-shell .header-navigation, .session-shell .bottom-navigation, .session-shell .compact-menu, .session-shell .settings-link { display: none; }
+.session-shell .app-main { padding-block-end: 2rem; }
+@media (max-width: 639px) { .rule-block, .question-stimulus { padding: 1rem; } }

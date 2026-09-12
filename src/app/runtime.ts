@@ -6,8 +6,13 @@ import { applyPreferences } from '../ui/preferences';
 import { currentReleaseId } from './release';
 import { tabIdentity } from './tab-identity';
 
-export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory' }
+export interface AppState { phase: 'loading' | 'ready' | 'error' | 'storage_error'; snapshot: ProgressSnapshot | null; error: string | null; mode: 'durable' | 'memory'; editorRevision: number; recoveryText: string | null }
 export interface CommandScope { repository: ProgressRepository; expected: Expected }
+export interface ActiveEditor {
+  readonly dirty: boolean; flush(): Promise<void>; leave(): Promise<void>;
+  suspend(): Promise<void>;
+  prepareMemory(): Promise<{ text: string; restore: (branch: ProgressRepository) => Promise<boolean> }>;
+}
 export const errorCode = (error: unknown) => error instanceof Error ? error.message : 'storage_unavailable';
 export class AppRuntime {
   content: ContentRepository | null = null;
@@ -17,7 +22,9 @@ export class AppRuntime {
   private opening: Promise<void> | null = null;
   private stopListening: (() => void) | null = null;
   private switching: Promise<void> | null = null;
-  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable' };
+  editor: ActiveEditor | null = null;
+  registerEditor(editor: ActiveEditor) { this.editor = editor; return () => { if (this.editor === editor) this.editor = null; }; }
+  private state: AppState = { phase: 'loading', snapshot: null, error: null, mode: 'durable', editorRevision: 0, recoveryText: null };
   private readonly listeners = new Set<() => void>();
   getState = () => this.state;
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
@@ -34,7 +41,7 @@ export class AppRuntime {
         const [content, releaseId, tabId] = await Promise.all([ContentRepository.open(), currentReleaseId(), tabIdentity()]);
         this.content = content; this.releaseId = releaseId; this.tabId = tabId;
       }
-      if (!this.progress || !this.progress.available) {
+      if (!this.progress || !this.progress.acceptsCommands) {
         const progress = await ProgressRepository.open({ catalog: this.content.catalog, releaseId: this.releaseId, tabId: this.tabId });
         this.attach(progress);
       }
@@ -67,12 +74,16 @@ export class AppRuntime {
   }
   clearError() { this.publish({ error: null }); }
   async retry() {
-    if (!this.progress?.available) return this.start();
-    await this.refresh(); this.clearError();
+    if (!this.content) return this.start();
+    await this.editor?.suspend();
+    try {
+      if (!this.progress?.acceptsCommands) this.attach(await ProgressRepository.open({ catalog: this.content.catalog, releaseId: this.releaseId, tabId: this.tabId }));
+      await this.refresh(); this.publish({ editorRevision: this.state.editorRevision + 1, error: null });
+    } catch (error) { this.publish({ error: errorCode(error) }); throw error; }
   }
   async takeover(progress: ProgressRepository, expected: ReplacementToken) {
     if (progress !== this.progress) throw new Error('write_conflict');
-    try { await progress.takeover(expected.data_generation, expected.writer_epoch); await this.refresh(); this.clearError(); }
+    try { await this.editor?.suspend(); await progress.takeover(expected.data_generation, expected.writer_epoch); await this.refresh(); this.publish({ editorRevision: this.state.editorRevision + 1, error: null }); }
     catch (error) { this.publish({ error: errorCode(error) }); throw error; }
   }
   useMemory(): Promise<void> {
@@ -83,8 +94,11 @@ export class AppRuntime {
     if (!this.content) throw new Error('content_unavailable');
     if (this.progress?.mode === 'memory') return;
     try {
+      const recovery = await this.editor?.prepareMemory();
       const branch = this.progress ? await this.progress.branchToMemory() : await ProgressRepository.memory({ catalog: this.content.catalog, releaseId: this.releaseId });
-      this.attach(branch); await this.refresh(); this.clearError();
+      let restored = !recovery;
+      try { restored = await recovery?.restore(branch) ?? true; } catch { /* Исходный ввод остаётся отдельно от пустой или частично восстановленной ветви. */ }
+      this.attach(branch); await this.refresh(); this.publish({ error: null, recoveryText: restored ? this.state.recoveryText : recovery!.text });
     } catch (error) { this.publish({ error: errorCode(error) }); throw error; }
   }
   async loadAllContent() {

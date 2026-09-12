@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { RouteId } from '../../domain/content/types';
 import { useApp } from '../../app/AppProvider';
 import { Button, ChoiceGroup } from '../../ui/controls';
@@ -10,6 +10,9 @@ export function StartPage() {
   const [route, setRoute] = useState<RouteId | null>(snapshot.settings.selected_route);
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const requested: unknown = location.state && typeof location.state === 'object' ? Reflect.get(location.state, 'returnTo') : null;
+  const returnTo = typeof requested === 'string' && content.catalog.core.lessons.some(lesson => requested === `/lessons/${lesson.id}/practice`) ? requested : null;
   const mounted = useRef(true);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   const readonly = snapshot.control.writer_id !== progress.tabId;
@@ -18,7 +21,7 @@ export function StartPage() {
     setBusy(true);
     try {
       await command({ type: 'settings', patch: { selected_route: route, onboarding_completed: true } });
-      if (mounted.current) navigate(`/lessons/${content.catalog.core.routes[route][0]}`, { replace: true });
+      if (mounted.current) navigate(returnTo ?? `/lessons/${content.catalog.core.routes[route][0]}`, { replace: true });
     } catch { /* Выбор остаётся на экране, причина сохранения показана рядом. */ } finally { setBusy(false); }
   }
   return <div className="document"><h1>{t('onboarding.title')}</h1><p className="study-text">{t('onboarding.intro')}</p>

@@ -6,8 +6,9 @@ import { loadSources, projectCorpus, digest } from './content-build.mjs';
 const raw = await loadSources();
 const sourceSchema = JSON.parse(await readFile('tools/schemas/source-corpus.json', 'utf8'));
 const definitions = JSON.parse(await readFile('tools/schemas/runtime-content.json', 'utf8'));
-const ajv = new Ajv({ strict: true, allErrors: true, code: { source: true, esm: true } });
-if (!ajv.validate(sourceSchema, raw.sources)) throw new Error(`Invalid source schema: ${JSON.stringify(ajv.errors)}`);
+const sourceAjv = new Ajv({ strict: true, allErrors: true });
+if (!sourceAjv.validate(sourceSchema, raw.sources)) throw new Error(`Invalid source schema: ${JSON.stringify(sourceAjv.errors)}`);
+const ajv = new Ajv({ strict: true, allErrors: false, messages: false, code: { source: true, esm: true, optimize: 2 }, inlineRefs: false });
 const projected = projectCorpus(raw);
 const exports = {};
 for (const [name, schema] of Object.entries(definitions)) {
@@ -52,5 +53,6 @@ for (const [name, value] of Object.entries(resources)) {
 }
 const contentManifest = { content_version: raw.manifest.content_version, assets, question_revisions: Object.fromEntries(projected.core.questions.map(q => [q.id, q.grading_revision])), policy_versions: projected.core.policy_versions };
 await writeFile('src/generated/content-manifest.json', JSON.stringify(contentManifest));
+await writeFile('src/generated/content-index.json', JSON.stringify({ content_version: contentManifest.content_version, assets }));
 await writeFile('public/runtime/content-manifest.json', JSON.stringify(contentManifest));
 console.log(`Runtime catalog: ${projected.core.lessons.length} lessons, ${projected.core.questions.length} questions, ${assets.length} checked resources`);

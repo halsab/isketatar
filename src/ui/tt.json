@@ -267,5 +267,15 @@
   "keyboard.undo_insert": "Кертүне кире кайтарырга",
   "keyboard.finish_composition": "Башта хәзерге хәрефне кертүне тәмамла.",
   "keyboard.answer_limit": "Җавап артык озын. Аны кыскарт.",
-  "storage.use_memory": "Вакытлыча саклап дәвам итәргә"
+  "storage.use_memory": "Вакытлыча саклап дәвам итәргә",
+  "lesson.contents": "Дәрес бүлекләре",
+  "lesson.pitfalls": "Игътибар ит",
+  "lesson.extra_examples": "Өстәмә мисаллар",
+  "lesson.transfer_intro": "Хәзер кагыйдәне башка мисалларда кулланып кара.",
+  "draft.saving": "Җавап саклана…",
+  "draft.retry": "Саклауны кабатларга",
+  "attempt.first": "Беренче җавап",
+  "attempt.last": "Соңгы җавап",
+  "draft.recovery": "Сакланмаган җавап",
+  "draft.recovery_detail": "Элекке эшне ачып булмады. Соңгы язуың монда калды: аны күчереп ал. Яңа эш аерым башлана."
 }

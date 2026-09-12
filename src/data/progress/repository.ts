@@ -105,6 +105,7 @@ export class ProgressRepository {
   }
   private connectionClosed() { this.closed = true; this.channel?.close(); this.channel = null; this.notify(); }
   get available() { return !this.closed; }
+  get acceptsCommands() { return !this.closed && !this.detached; }
   private changed(control: Control) { this.channel?.postMessage({ type: 'changed', data_generation: control.data_generation, state_revision: control.state_revision }); this.notify(); }
   snapshot(): Promise<ProgressSnapshot> {
     return this.enqueue(() => this.backend.run('readonly', async tx => {

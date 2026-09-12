@@ -1,4 +1,4 @@
-import manifest from '../generated/content-manifest.json';
+import manifest from '../generated/content-index.json';
 import { assetUrl, BASE_PATH } from './paths';
 import { readBoundedBytes } from '../data/http';
 import packageInfo from '../../package.json';

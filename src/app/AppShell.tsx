@@ -25,6 +25,7 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
 export function AppShell({ children, status }: { children: ReactNode; status?: ReactNode }) {
   const [menu, setMenu] = useState(false);
   const { pathname } = useLocation();
+  const sessionRoute = /\/practice$|\/questions$|^\/review\/session\//u.test(pathname);
   useEffect(() => {
     const viewport = window.visualViewport;
     const update = () => {
@@ -35,11 +36,17 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
     return () => { viewport?.removeEventListener('resize', update); document.removeEventListener('focusin', update); document.removeEventListener('focusout', update); document.documentElement.classList.remove('keyboard-open'); };
   }, []);
   useLayoutEffect(() => {
-    const title = document.querySelector<HTMLElement>('#main h1');
-    if (title) { title.tabIndex = -1; title.focus({ preventScroll: true }); document.title = `${title.textContent} · ${t('app.name')}`; }
+    const focus = () => {
+      const title = document.querySelector<HTMLElement>('#main h1');
+      if (!title) return false;
+      title.tabIndex = -1; title.focus({ preventScroll: true }); document.title = `${title.textContent} · ${t('app.name')}`; return true;
+    };
+    const observer = new MutationObserver(() => { if (focus()) observer.disconnect(); });
+    if (!focus()) observer.observe(document.getElementById('main')!, { childList: true, subtree: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
+    return () => observer.disconnect();
   }, [pathname]);
-  return <>
+  return <div className={sessionRoute ? 'session-shell' : undefined}>
     <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main')?.focus(); }}>{t('accessibility.skip_main')}</a>
     <header className="site-header"><div className="header-inner">
       <Link className="brand" to="/">{t('app.name')}</Link>
@@ -50,5 +57,5 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
     <main className="app-main" id="main" tabIndex={-1}>{status}{children}</main>
     <div className="bottom-navigation"><Navigation /></div>
     <Dialog open={menu} title={t('accessibility.menu')} onClose={() => setMenu(false)}><Navigation onNavigate={() => setMenu(false)} /></Dialog>
-  </>;
+  </div>;
 }

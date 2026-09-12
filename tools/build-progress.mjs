@@ -3,7 +3,7 @@ import Ajv from 'ajv';
 import standaloneCode from 'ajv/dist/standalone/index.js';
 import { progressSchema, progressValidators } from './schemas/progress.mjs';
 
-const ajv = new Ajv({ strict: true, allErrors: false, code: { source: true, esm: true }, inlineRefs: false });
+const ajv = new Ajv({ strict: true, allErrors: false, messages: false, code: { source: true, esm: true, optimize: 2 }, inlineRefs: false });
 ajv.addSchema(progressSchema);
 const exports = Object.fromEntries(Object.entries(progressValidators).map(([name, definition]) => [name, `progress#/$defs/${definition}`]));
 const code = standaloneCode(ajv, exports).replaceAll('require("ajv/dist/runtime/ucs2length").default', 'ucs2length').replaceAll('require("ajv/dist/runtime/equal").default', 'equal');

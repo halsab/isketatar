@@ -53,6 +53,7 @@ export function RuntimeStatus() {
   }
   return <>
     {state.mode === 'memory' && <Status tone="warning">{t('storage.memory_mode')}</Status>}
+    {state.recoveryText !== null && <Status tone="warning"><details open><summary>{t('draft.recovery')}</summary><p>{t('draft.recovery_detail')}</p><textarea readOnly aria-label={t('draft.recovery')} value={state.recoveryText} /></details></Status>}
     {snapshot.control.writer_id !== progress.tabId && <Status tone="warning"><p>{t('writer.read_only')}</p><Button busy={busy} onClick={() => { void takeControl(); }}>{t('writer.takeover_action')}</Button></Status>}
     {state.error && <Status tone="error" announce><p>{t(state.error === 'write_conflict' ? 'writer.conflict' : state.error === 'history_full' ? 'storage.history_full_detail' : 'storage.unsaved')}</p><div className="actions">
       <Button onClick={() => { void runtime.retry().catch(() => {}); }}>{t('offline.retry')}</Button>

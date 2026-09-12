@@ -2,7 +2,7 @@ import { ContentCatalog } from '../../domain/content/catalog';
 import type { Asset, CoreData, ReleaseManifest } from '../../domain/content/types';
 import { POLICIES } from '../../domain/content/types';
 import { validateCore } from '../../generated/core-validator.js';
-import contentManifest from '../../generated/content-manifest.json';
+import contentManifest from '../../generated/content-index.json';
 import { assetUrl } from '../../app/paths';
 import { readBoundedBytes } from '../http';
 

@@ -1,4 +1,5 @@
 import { canonical } from '../../domain/content/canonical';
+import { lessonAnchors } from '../../domain/content/anchors';
 import type { ContentCatalog } from '../../domain/content/catalog';
 import { POLICIES } from '../../domain/content/types';
 import { hasAssistance, makeAttempt } from '../../domain/learning/attempt';
@@ -153,7 +154,7 @@ export function prepareProgress(envelope: ProgressExport, catalog: ContentCatalo
     if (!known(position.kind, position.target_id)) { retain('resume_position', position, 'unknown_content_id'); return false; }
     const lesson = catalog.lessons.get(position.target_id); const reading = catalog.readings.get(position.target_id);
     if (position.content_revision === (lesson?.content_revision ?? reading?.content_revision) && position.anchor_id !== null) {
-      const anchors = lesson ? [`${lesson.id}:theory`, ...lesson.rules.map(rule => rule.id), ...lesson.examples.map(example => example.id)] : reading!.lines.map(line => line.id);
+      const anchors = lesson ? lessonAnchors(lesson) : reading!.lines.map(line => line.id);
       requireImport(anchors.includes(position.anchor_id));
     }
     return true;

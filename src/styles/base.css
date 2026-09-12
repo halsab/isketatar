@@ -1,6 +1,7 @@
 @import './tokens.css';
 @import './controls.css';
 @import './layout.css';
+@import './learning.css';
 @font-face { font-family: Inter; src: url('../assets/fonts/InterVariable.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 :root { font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--canvas); font-synthesis: none; line-height: 1.5; }
 * { box-sizing: border-box; }

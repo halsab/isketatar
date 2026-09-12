@@ -1,21 +1,25 @@
-import { HashRouter, Link, Route, Routes } from 'react-router-dom';
+import { createHashRouter, Link, Outlet, RouterProvider } from 'react-router-dom';
 import { RecoveryBoundary } from './RecoveryBoundary';
 import { AppShell } from './AppShell';
 import { AppProvider, RuntimeStatus } from './AppProvider';
 import { StartPage } from '../features/onboarding/StartPage';
+import { NavigationGuard } from './NavigationGuard';
 import { t } from '../ui/copy';
+import { Button } from '../ui/controls';
 
 function Start() {
-  return <><h1>{t('app.name')}</h1><p className="study-text">{t('app.tagline')}</p><div className="actions"><Link className="button primary" to="/start">{t('action.start')}</Link><Link to="/about">Курс турында</Link></div></>;
+  return <div className="document"><h1>{t('app.name')}</h1><p className="study-text">{t('app.tagline')}</p><div className="actions"><Link className="button primary" to="/start">{t('action.start')}</Link><Link to="/about">Курс турында</Link></div></div>;
 }
 
-export function App() {
-  return <RecoveryBoundary><HashRouter><AppProvider>
-    <AppShell status={<RuntimeStatus />}><div className="document"><Routes>
-      <Route path="/" element={<Start />} />
-      <Route path="/start" element={<StartPage />} />
-      <Route path="/about" element={<><h1>Курс турында</h1><p>Аңлатмалар хәзерге татар телендә бирелә.</p><Link to="/">Баш бит</Link></>} />
-      <Route path="*" element={<><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></>} />
-    </Routes></div></AppShell>
-  </AppProvider></HashRouter></RecoveryBoundary>;
-}
+function Layout() { return <AppProvider><NavigationGuard /><AppShell status={<RuntimeStatus />}><Outlet /></AppShell></AppProvider>; }
+function RouteFailure() { return <main><h1>{t('error.load')}</h1><Button onClick={() => location.reload()}>{t('offline.retry')}</Button><p><Link to="/settings">{t('nav.settings')}</Link></p></main>; }
+const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFailure />, children: [
+  { path: '/', element: <Start /> },
+  { path: '/start', element: <div className="document"><StartPage /></div> },
+  { path: '/lessons/:lesson_id', lazy: async () => ({ Component: (await import('../features/lessons/LessonPage')).LessonPage }) },
+  { path: '/lessons/:lesson_id/practice', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).PracticePage }) },
+  { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
+  { path: '/about', element: <div className="document"><h1>Курс турында</h1><p>Аңлатмалар хәзерге татар телендә бирелә.</p><Link to="/">Баш бит</Link></div> },
+  { path: '*', element: <div className="document"><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></div> },
+] }]);
+export function App() { return <RecoveryBoundary><RouterProvider router={router} /></RecoveryBoundary>; }

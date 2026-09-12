@@ -46,4 +46,14 @@ describe('draft write queue', () => {
     expect(status).toHaveBeenLastCalledWith('unsaved');
     await queue.cancel();
   });
+  it('keeps a cancelled newer draft unsaved when an older write completes', async () => {
+    let complete!: (value: Expected) => void;
+    const save = vi.fn(() => new Promise<Expected>(resolve => { complete = resolve; }));
+    const status = vi.fn(); const queue = new DraftQueue(save, status);
+    queue.input({ kind: 'text', text: 'first' }, expected, true);
+    queue.input({ kind: 'text', text: 'newer' }, expected);
+    const cancelled = queue.cancel(); complete(expected); await cancelled;
+    expect(save).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenLastCalledWith('unsaved');
+  });
 });

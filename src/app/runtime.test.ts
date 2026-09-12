@@ -6,6 +6,7 @@ import { ContentRepository } from '../data/content/repository';
 import { expectedFrom } from '../data/progress/repository';
 import { replacementToken } from '../data/progress/transfer';
 import { AppRuntime } from './runtime';
+import { SessionEditor } from '../features/practice/editor';
 
 vi.mock('../ui/preferences', () => ({ applyPreferences: vi.fn() }));
 vi.mock('./release', () => ({ currentReleaseId: async () => 'test-release' }));
@@ -47,4 +48,20 @@ it('reopens a closed connection with previous data and rejects callbacks bound t
   expect(runtime.getState()).toMatchObject({ phase: 'ready', error: null, snapshot: { settings: { theme: 'dark' } } });
   expect(runtime.progress).not.toBe(repository);
   await expect(runtime.command({ type: 'settings', patch: { theme: 'light' } }, scope)).rejects.toThrow('write_conflict');
+});
+
+it('keeps unsaved raw input available when unreadable durable storage requires an empty memory branch', async () => {
+  const runtime = await open(); const repository = runtime.progress!;
+  await runtime.command({ type: 'start', kind: 'lesson_cycle', lesson_id: 'V04' }, { repository, expected: expectedFrom(runtime.getState().snapshot!) });
+  const id = runtime.getState().snapshot!.sessions[0]!.active_presentation_id!;
+  await runtime.command({ type: 'show', presentation_id: id }, { repository, expected: expectedFrom(runtime.getState().snapshot!) });
+  const editor = new SessionEditor(repository, runtime.getState().snapshot!, id, () => runtime.refresh()); runtime.registerEditor(editor);
+  editor.input({ kind: 'text', text: 'әңгәмә' });
+  vi.spyOn(repository.backend, 'run').mockRejectedValue(new Error('storage_unavailable'));
+  const switching = runtime.useMemory();
+  editor.input({ kind: 'text', text: 'late callback' });
+  await switching;
+  expect(runtime.getState()).toMatchObject({ phase: 'ready', mode: 'memory', recoveryText: 'әңгәмә', snapshot: { sessions: [] } });
+  expect(repository.acceptsCommands).toBe(false);
+  await editor.dispose(); repository.close();
 });

@@ -52,5 +52,11 @@ export class DraftQueue {
     await this.running;
     if (this.pending && (force || this.timer === null)) await this.drain(force);
   }
-  async cancel() { this.stopped = true; this.clearTimer(); this.pending = null; await this.running?.catch(() => {}); }
+  async cancel() {
+    const discarded = this.pending !== null;
+    this.stopped = true; this.clearTimer(); this.pending = null;
+    await this.running?.catch(() => {});
+    // Завершённая A не означает сохранение отменённого более нового ввода B.
+    if (discarded) this.status('unsaved');
+  }
 }
