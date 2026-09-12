@@ -20,12 +20,20 @@ const router = createHashRouter([{ element: <Layout />, errorElement: <RouteFail
   { path: '/lessons/:lesson_id', lazy: async () => ({ Component: (await import('../features/lessons/LessonPage')).LessonPage }) },
   { path: '/lessons/:lesson_id/practice', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).PracticePage }) },
   { path: '/lessons/:lesson_id/result/:session_id', lazy: async () => ({ Component: (await import('../features/practice/PracticePage')).ResultPage }) },
+  { path: '/reading', lazy: async () => ({ Component: (await import('../features/reader/ReadingCatalog')).ReadingCatalog }) },
   { path: '/reading/:reading_id', lazy: async () => ({ Component: (await import('../features/reader/ReaderPage')).ReaderPage }) },
   { path: '/dictionary/:entry_id', lazy: async () => ({ Component: (await import('../features/dictionary/EntryPage')).EntryPage }) },
   { path: '/diagnostic', lazy: () => assessmentRoute('diagnostic') },
   { path: '/diagnostic/result/:session_id', lazy: () => assessmentRoute('diagnostic', true) },
   { path: '/final', lazy: () => assessmentRoute('final') },
   { path: '/final/result/:session_id', lazy: () => assessmentRoute('final', true) },
+  { path: '/reference', lazy: async () => ({ Component: (await import('../features/reference/ReferencePage')).ReferencePage }) },
+  ...(['letters', 'rules', 'profiles', 'terms'] as const).flatMap(section => {
+    const parameter = { letters: 'letter_id', rules: 'rule_id', profiles: 'profile_id', terms: 'term_id' }[section];
+    const lazy = async () => { const { ReferencePage } = await import('../features/reference/ReferencePage'); return { Component: () => <ReferencePage section={section} /> }; };
+    return [...(section === 'letters' ? [{ path: '/reference/letters', lazy }] : []), { path: `/reference/${section}/:${parameter}`, lazy }];
+  }),
+  { path: '/sources/:source_id', lazy: async () => ({ Component: (await import('../features/sources/SourcePage')).SourcePage }) },
   { path: '/about', element: <div className="document"><h1>Курс турында</h1><p>Аңлатмалар хәзерге татар телендә бирелә.</p><Link to="/">Баш бит</Link></div> },
   { path: '*', element: <div className="document"><h1>Бу бүлек табылмады</h1><Link to="/">Баш бит</Link></div> },
 ] }]);

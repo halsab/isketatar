@@ -10,6 +10,7 @@ import { MixedText } from '../../ui/MixedText';
 import { t } from '../../ui/copy';
 import { ContentState, Missing } from '../shared/ContentState';
 import { Disclosure } from '../shared/Disclosure';
+import { SourceLinks } from '../shared/SourceLinks';
 import { SemanticPosition } from '../shared/SemanticPosition';
 import { findPanelWord, wordSegments } from './words';
 import { rememberReaderPanel } from './history';
@@ -57,6 +58,7 @@ function WordPanel({ reading, line, word, onClose, independent }: { reading: Rea
         <Button data-panel-control={level} disabled={independent && ['reading', 'meaning'].includes(level)} aria-expanded={levels.includes(level) && !(independent && ['reading', 'meaning'].includes(level))} onClick={() => toggle(level)}>{labels[level]}</Button>
         {levels.includes(level) && !(independent && ['reading', 'meaning'].includes(level)) && <Disclosure identity={`${word.word_id}:${level}`} targets={[{ kind: 'reading_word', id: word.word_id, reading_id: reading.id, line_id: line.id, level }]} onDisclosed={() => disclosed(level)}>{help(level)}</Disclosure>}
       </section>)}
+      <SourceLinks ids={content.catalog.core.source_sections.filter(section => section.line_start <= line.source_lines[0] && section.line_end >= line.source_lines[1]).map(section => section.id)} context={line.id} />
       <div className="actions"><Button data-panel-control="bookmark" disabled={readonly} busy={busy} onClick={() => { setBusy(true); void command({ type: 'bookmark', kind: 'reading', target_id: reading.id, position: { line_id: line.id, line_revision: line.content_revision, word_ordinal: word.ordinal }, remove: !!bookmark }).catch(() => {}).finally(() => setBusy(false)); }}>{t(bookmark ? 'dictionary.unsave' : 'dictionary.bookmark')}</Button>
       {word.lexicon_id && <Link data-panel-control="dictionary" to={`/dictionary/${word.lexicon_id}`} state={{ reader: `${location.pathname}${location.search}`, readerKey: location.key }}>{t('nav.dictionary')}</Link>}</div>
     </Disclosure></ArabicFontGate>
@@ -102,11 +104,12 @@ function Reader({ reading }: { reading: Reading }) {
   const readonly = snapshot.control.writer_id !== progress.tabId;
   const complete = snapshot.exposures.some(item => item.kind === 'reading' && item.resource_id === reading.id && item.first_completed_at !== null);
   return <div className={selected ? 'page-grid' : 'document'}><div>
-    <h1>{reading.title_tt}</h1><p>{t(`profile.${reading.profile}`)}</p><p>{reading.provenance.note_tt}</p><p className="study-text">{reading.instructions_tt}</p>
+    <h1><MixedText text={reading.title_tt} /></h1><p>{t(`profile.${reading.profile}`)}</p><p>{reading.provenance.note_tt}</p><p className="study-text">{reading.instructions_tt}</p>
     <div className="reader-controls"><label>{t('reading.mode')}<select value={independent ? 'independent' : 'guided'} onChange={event => { setIndependent(event.target.value === 'independent'); history.replaceState({ ...history.state, iskeReaderMode: event.target.value }, ''); }}><option value="guided">{t('reading.guided')}</option><option value="independent">{t('reading.independent')}</option></select></label>
       <label>{t('settings.arabic_size')}<select disabled={readonly} value={snapshot.settings.arabic_size_px} onChange={event => { void command({ type: 'settings', patch: { arabic_size_px: Number(event.target.value) as 28 | 32 | 40 | 48 } }).catch(() => {}); }}>{[28, 32, 40, 48].map(size => <option key={size} value={size}>{size}</option>)}</select></label></div>
     <ArabicFontGate><Disclosure identity={`reading:${reading.id}`} targets={[{ kind: 'reading', id: reading.id }, ...reading.lines.map(line => ({ kind: 'reading_line' as const, id: line.id, line_id: line.id, reading_id: reading.id }))]}>{reading.lines.map(line => <Line key={line.id} line={line} openWord={openWord} chooseInitially={!!selected && selected.line.id === line.id && (panelState(selected.word.word_id).trigger ?? location.state?.wordTrigger)?.startsWith('choose:') === true} />)}</Disclosure></ArabicFontGate>
     <div className="actions"><Button disabled={readonly || complete} busy={busy} onClick={() => { setBusy(true); void command({ type: 'read_complete', reading_id: reading.id }).catch(() => {}).finally(() => setBusy(false)); }}>{t(complete ? 'reading.complete' : 'reading.mark_complete')}</Button><Link to={`/reading/${reading.id}/questions`}>{t('reading.questions')}</Link></div>
+    <SourceLinks ids={reading.provenance.source_sections} />
     <p><Link to="/reading">{t('reading.title')}</Link></p>
     <SemanticPosition kind="reading" id={reading.id} revision={reading.content_revision} anchors={reading.lines.map(line => line.id)} focusAnchor={!selected} focusTargetId={history.state?.iskeReaderTrigger ?? location.state?.wordReturnTrigger} />
   </div>{selected && <WordPanel key={`${location.key}:${selected.word.word_id}:${snapshot.control.data_generation}`} reading={reading} {...selected} independent={independent} onClose={close} />}</div>;

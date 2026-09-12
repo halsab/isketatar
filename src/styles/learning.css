@@ -46,3 +46,18 @@
 .assessment-navigation summary { padding-block: 12px; min-height: 48px; cursor: pointer; }
 .assessment-navigation nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); gap: 8px; margin-block: 16px; }
 .assessment-navigation .button[aria-current=step] { border-width: 2px; background: var(--primary-subtle); }
+
+.reading-catalog, .reference-catalog { min-width: 0; }
+.reading-catalog section, .reference-index section, .reference-detail section { margin-block: 2rem; }
+.reading-grid, .letter-grid { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); }
+.reading-card, .letter-card { padding: 1.5rem; border: 1px solid var(--divider-decorative); border-radius: 0.75rem; background: var(--surface); min-width: 0; overflow-wrap: anywhere; }
+.reading-card h4, .letter-card h2 { margin-top: 0; font-size: 1.25rem; }
+.reading-card summary, .rule-list li { overflow-wrap: anywhere; }
+.rule-list li { margin-block: 1rem; }
+.letter-forms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.letter-forms dt { font-size: 0.875rem; color: var(--text-muted); }
+.letter-forms dd { margin: 0; }
+.source-fragment { padding-block: 1rem; border-block-end: 1px solid var(--divider-decorative); overflow-wrap: anywhere; }
+@media (min-width: 50rem) { .reading-grid, .reference-catalog .letter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.source-document, .source-card { overflow-wrap: anywhere; }

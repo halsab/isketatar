@@ -18,7 +18,7 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
     const active = pathname === item.path || pathname.startsWith(`${item.path}/`) || item.path === '/lessons' && /^\/(?:start|diagnostic|final)(?:\/|$)/u.test(pathname) || item.path === '/reference' && pathname.startsWith('/sources/');
     return <Link to={item.path} key={item.path} aria-current={active ? 'page' : undefined} onClick={event => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      if (active) event.preventDefault(); onNavigate?.();
+      if (pathname === item.path) event.preventDefault(); onNavigate?.();
     }}><Icon name={item.icon} /><span>{t(item.label)}</span></Link>;
   })}</nav>;
 }
@@ -38,13 +38,16 @@ export function AppShell({ children, status }: { children: ReactNode; status?: R
     return () => { viewport?.removeEventListener('resize', update); document.removeEventListener('focusin', update); document.removeEventListener('focusout', update); document.documentElement.classList.remove('keyboard-open'); };
   }, []);
   useLayoutEffect(() => {
-    const focus = () => {
+    let previous: HTMLElement | null = null;
+    const updateTitle = () => {
       const title = document.querySelector<HTMLElement>('#main h1');
-      if (!title) return false;
-      title.tabIndex = -1; title.focus({ preventScroll: true }); document.title = `${title.textContent} · ${t('app.name')}`; return true;
+      if (!title) return;
+      if (title !== previous) { title.tabIndex = -1; title.focus({ preventScroll: true }); previous = title; }
+      document.title = `${title.textContent} · ${t('app.name')}`;
     };
-    const observer = new MutationObserver(() => { if (focus()) observer.disconnect(); });
-    if (!focus()) observer.observe(document.getElementById('main')!, { childList: true, subtree: true });
+    const observer = new MutationObserver(updateTitle);
+    observer.observe(document.getElementById('main')!, { childList: true, subtree: true, characterData: true });
+    updateTitle();
     window.scrollTo({ top: 0, behavior: 'instant' });
     return () => observer.disconnect();
   }, [pathname]);

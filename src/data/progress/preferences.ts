@@ -13,7 +13,7 @@ async function validTarget(engine: CommandEngine, kind: string, id: string) {
     return reading !== undefined && readingAvailable(reading, await tx.all('sessions'));
   }
   if (kind === 'rule') return catalog.rules.has(id);
-  if (kind === 'reference') return ['letters', 'profiles', 'rules', 'terms'].includes(id) || catalog.rules.has(id) || catalog.references?.letters.some(letter => letter.id === id) === true || catalog.references?.profiles.some(profile => profile.id === id) === true;
+  if (kind === 'reference') return ['letters', 'profiles', 'rules', 'terms'].includes(id) || catalog.rules.has(id) || catalog.references?.letters.some(letter => letter.id === id) === true || catalog.references?.profiles.some(profile => profile.id === id) === true || catalog.references?.terms.some(term => term.id === id) === true;
   if (kind === 'dictionary') {
     if (catalog.lexicon.has(id)) return true;
     const entry = catalog.vocabulary.get(id);
@@ -52,7 +52,7 @@ export async function positionCommand(engine: CommandEngine, command: Extract<Co
   if (!await validTarget(engine, position.kind, position.target_id) || !Number.isFinite(position.within_block_ratio) || position.within_block_ratio < 0 || position.within_block_ratio > 1 || !/^[a-f0-9]{64}$/u.test(position.content_revision)) throw new Error('invalid_position');
   const lesson = engine.catalog.lessons.get(position.target_id);
   const reading = engine.catalog.readings.get(position.target_id);
-  const anchors = position.kind === 'lesson' && lesson ? lessonAnchors(lesson) : position.kind === 'reading' && reading ? reading.lines.map(line => line.id) : ['letters', 'profiles', 'rules', 'terms', ...(engine.catalog.references?.letters.map(letter => letter.id) ?? []), ...(engine.catalog.references?.profiles.map(profile => profile.id) ?? []), ...engine.catalog.rules.keys()];
+  const anchors = position.kind === 'lesson' && lesson ? lessonAnchors(lesson) : position.kind === 'reading' && reading ? reading.lines.map(line => line.id) : ['letters', 'profiles', 'rules', 'terms', ...(engine.catalog.references?.letters.map(letter => letter.id) ?? []), ...(engine.catalog.references?.profiles.map(profile => profile.id) ?? []), ...engine.catalog.rules.keys(), ...(engine.catalog.references?.terms.map(term => term.id) ?? [])];
   if (position.anchor_id !== null && !anchors.includes(position.anchor_id)) throw new Error('invalid_position');
   if (lesson && position.content_revision !== lesson.content_revision || reading && position.content_revision !== reading.content_revision) throw new Error('invalid_position');
   await engine.context.put('meta', { key: `position:${position.kind}:${position.target_id}`, value: { ...position, updated_at: engine.at } });
