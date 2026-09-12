@@ -22,7 +22,7 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
     }}><Icon name={item.icon} /><span>{t(item.label)}</span></Link>;
   })}</nav>;
 }
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, status }: { children: ReactNode; status?: ReactNode }) {
   const [menu, setMenu] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => {
@@ -47,7 +47,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <Link className="settings-link" to="/settings" aria-label={t('nav.settings')}><Icon name="settings" /></Link>
       <div className="compact-menu"><IconButton icon="menu" label={t('accessibility.menu')} aria-expanded={menu} onClick={() => setMenu(true)} /></div>
     </div></header>
-    <main className="app-main" id="main" tabIndex={-1}>{children}</main>
+    <main className="app-main" id="main" tabIndex={-1}>{status}{children}</main>
     <div className="bottom-navigation"><Navigation /></div>
     <Dialog open={menu} title={t('accessibility.menu')} onClose={() => setMenu(false)}><Navigation onNavigate={() => setMenu(false)} /></Dialog>
   </>;

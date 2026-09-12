@@ -266,5 +266,6 @@
   "reading.choose_word": "Сүз сайларга",
   "keyboard.undo_insert": "Кертүне кире кайтарырга",
   "keyboard.finish_composition": "Башта хәзерге хәрефне кертүне тәмамла.",
-  "keyboard.answer_limit": "Җавап артык озын. Аны кыскарт."
+  "keyboard.answer_limit": "Җавап артык озын. Аны кыскарт.",
+  "storage.use_memory": "Вакытлыча саклап дәвам итәргә"
 }

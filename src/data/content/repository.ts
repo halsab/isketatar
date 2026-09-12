@@ -1,9 +1,10 @@
 import { ContentCatalog } from '../../domain/content/catalog';
 import type { Asset, CoreData, ReleaseManifest } from '../../domain/content/types';
 import { POLICIES } from '../../domain/content/types';
-import { validateCore } from '../../generated/content-validators.js';
+import { validateCore } from '../../generated/core-validator.js';
 import contentManifest from '../../generated/content-manifest.json';
 import { assetUrl } from '../../app/paths';
+import { readBoundedBytes } from '../http';
 
 function compatibleCore(value: unknown): value is CoreData {
   if (value && typeof value === 'object') {
@@ -22,23 +23,8 @@ export async function checkedJson<T>(asset: Asset, validate: (value: unknown) =>
   const response = await fetch(asset.url, { signal, redirect: 'error' });
   if (!response.ok) throw new Error('content_unavailable');
   if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('content_corrupt');
-  const declaredLength = Number(response.headers.get('content-length'));
-  if (declaredLength > asset.bytes) throw new Error('content_corrupt');
-  if (!response.body) throw new Error('content_unavailable');
-  const reader = response.body.getReader();
-  const chunks: Uint8Array[] = [];
-  let size = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    size += value.length;
-    if (size > asset.bytes) { await reader.cancel(); throw new Error('content_corrupt'); }
-    chunks.push(value);
-  }
-  if (size !== asset.bytes) throw new Error('content_corrupt');
-  const bytes = new Uint8Array(size);
-  let offset = 0;
-  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+  const bytes = await readBoundedBytes(response, asset.bytes);
+  if (bytes.length !== asset.bytes) throw new Error('content_corrupt');
   const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(byte => byte.toString(16).padStart(2, '0')).join('');
   if (hash !== asset.sha256) throw new Error('content_corrupt');
   let value: unknown;

@@ -26,6 +26,11 @@ const checks = Object.values(exports).map(name => `valid${name[0].toUpperCase()}
 const wrappers = Object.entries(exports).map(([schema, name]) => `export function validate${name[0].toUpperCase()}${name.slice(1)}(data) { return ${schema}(data) && valid${name[0].toUpperCase()}${name.slice(1)}(data); }`).join('\n');
 const moduleCode = helpers + `import { ${checks.join(', ')} } from '../domain/content/validation.ts';\n` + code + '\n' + wrappers;
 await writeFile('src/generated/content-validators.js', moduleCode);
+const coreCode = standaloneCode(ajv, { schemaCore: 'core' })
+  .replaceAll('require("ajv/dist/runtime/ucs2length").default', 'ucs2length')
+  .replaceAll('require("ajv/dist/runtime/equal").default', 'equal');
+if (coreCode.includes('require(')) throw new Error('Unexpected core validator helper');
+await writeFile('src/generated/core-validator.js', helpers + "import { validCore } from '../domain/content/validation.ts';\n" + coreCode + '\nexport function validateCore(data) { return schemaCore(data) && validCore(data); }\n');
 const standalone = await import(`../src/generated/content-validators.js?${digest(moduleCode)}`);
 for (const [name, validator] of Object.entries(exports)) {
   const values = validator === 'module' ? projected.modules : [projected[validator]];
