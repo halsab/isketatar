@@ -1,0 +1,13 @@
+import type { Attempt, Exposure, Presentation, ReviewCard, Session } from '../domain/learning/types';
+import type { Bookmark, Legacy, MetaRecord, ProgressData, ProgressExport, ResumePosition } from '../data/progress/model';
+export function validateExport(value: unknown): value is ProgressExport;
+export function validateData(value: unknown): value is ProgressData;
+export function validateMeta(value: unknown): value is MetaRecord;
+export function validateSession(value: unknown): value is Session;
+export function validatePresentation(value: unknown): value is Presentation;
+export function validateAttempt(value: unknown): value is Attempt;
+export function validateExposure(value: unknown): value is Exposure;
+export function validateReviewCard(value: unknown): value is ReviewCard;
+export function validateBookmark(value: unknown): value is Bookmark;
+export function validatePosition(value: unknown): value is ResumePosition;
+export function validateLegacy(value: unknown): value is Legacy;

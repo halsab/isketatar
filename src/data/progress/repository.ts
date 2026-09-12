@@ -1,7 +1,7 @@
 import type { ContentCatalog } from '../../domain/content/catalog';
 import type { CoreData } from '../../domain/content/types';
-import { defaultSettings, recordBytes } from './model';
-import type { Control, Expected, ProgressSnapshot } from './model';
+import { defaultSettings, recordBytes, STORE_NAMES } from './model';
+import type { Control, Expected, ImportPreview, ProgressData, ProgressSnapshot, ReplacementToken } from './model';
 import { IndexedBackend } from './backend';
 import type { Backend } from './backend';
 import { readControl, WriteContext } from './transaction';
@@ -10,8 +10,13 @@ import type { CommandResult } from './engine';
 import type { Command } from './commands';
 import { observe } from './observation';
 import { bookmarkCommand, markReadingComplete, positionCommand, settingsCommand, validateReviewOrigin } from './preferences';
+import { decodeImport, encodeExport, replacementToken } from './transfer';
+import { prepareProgress } from './import-content';
+import { checkReplacement, replaceProgress } from './replacement';
+import { integrity } from './import-integrity';
+import packageInfo from '../../../package.json';
 
-interface Options { catalog: ContentCatalog; currentCore?: CoreData; releaseId: string; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
+interface Options { catalog: ContentCatalog; currentCore?: CoreData; releaseId: string; availableReleaseIds?: string[]; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
 export function expectedFrom(snapshot: ProgressSnapshot): Expected {
   const unfinished = snapshot.sessions.filter(session => ['active', 'paused'].includes(session.status));
   const ids = new Set(unfinished.map(session => session.session_id));
@@ -30,6 +35,8 @@ export class ProgressRepository {
   private channel: BroadcastChannel | null = null;
   private serial: Promise<unknown> = Promise.resolve();
   private closed = false;
+  private importSequence = 0;
+  private preparedImport: { preview: ImportPreview; data: ProgressData } | null = null;
   private constructor(readonly backend: Backend, readonly options: Options) {
     this.uuid = options.uuid ?? (() => crypto.randomUUID()); this.clock = options.clock ?? (() => Date.now()); this.tabId = options.tabId ?? this.uuid();
   }
@@ -52,6 +59,7 @@ export class ProgressRepository {
     await this.backend.run('readwrite', async tx => {
       const previous = await tx.get('meta', 'control');
       if (previous) { await readControl(tx); return; }
+      if ((await Promise.all(STORE_NAMES.map(store => tx.count(store)))).some(count => count !== 0)) throw new Error('storage_corrupt');
       const at = this.clock();
       if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
       const settings = defaultSettings(at);
@@ -78,8 +86,53 @@ export class ProgressRepository {
       const [control, meta, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy] = await Promise.all([readControl(tx), tx.all('meta'), tx.all('sessions'), tx.all('presentations'), tx.all('attempts'), tx.all('exposures'), tx.all('review_cards'), tx.all('bookmarks'), tx.all('legacy')]);
       const settings = meta.find(record => record.key === 'settings');
       if (!settings || settings.key !== 'settings') throw new Error('storage_corrupt');
-      return { control, settings: settings.value, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy, resume_positions: meta.flatMap(record => record.key !== 'control' && record.key !== 'settings' ? [record.value] : []) };
+      const snapshot = { control, settings: settings.value, sessions, presentations, attempts, exposures, review_cards, bookmarks, legacy, resume_positions: meta.flatMap(record => record.key !== 'control' && record.key !== 'settings' ? [record.value] : []) };
+      try { integrity(snapshot); } catch { throw new Error('storage_corrupt'); }
+      if (attempts.length !== control.attempt_count || (sessions.find(session => session.status === 'active')?.session_id ?? null) !== control.active_session_id || sessions.some(session => session.data_generation !== control.data_generation)) throw new Error('storage_corrupt');
+      return snapshot;
     }));
+  }
+  async exportProgress(): Promise<Blob> {
+    const snapshot = await this.snapshot();
+    return encodeExport(snapshot, packageInfo.version, this.options.catalog.core.content_version, this.clock());
+  }
+  async previewImport(file: Blob): Promise<ImportPreview> {
+    const sequence = ++this.importSequence; this.preparedImport = null;
+    const decoded = await decodeImport(file);
+    const data = prepareProgress(decoded, this.options.catalog, this.options.availableReleaseIds ?? [this.options.releaseId], this.clock());
+    const snapshot = await this.snapshot();
+    if (sequence !== this.importSequence) throw new Error('invalid_preview');
+    const preview: ImportPreview = { id: this.uuid(), recognized_attempts: data.attempts.length, legacy_records: data.legacy.length, bookmarks: data.bookmarks.length, route: data.settings.selected_route, expected: replacementToken(snapshot) };
+    this.preparedImport = { preview, data };
+    return structuredClone(preview);
+  }
+  cancelImport() { this.importSequence++; this.preparedImport = null; }
+  commitImport(id: string, confirmed: boolean): Promise<void> {
+    const prepared = this.preparedImport;
+    if (!confirmed) return Promise.reject(new Error('confirmation_required'));
+    if (!prepared || prepared.preview.id !== id) return Promise.reject(new Error('invalid_preview'));
+    const generation = this.uuid();
+    return this.enqueue(async () => {
+      if (this.preparedImport !== prepared) throw new Error('invalid_preview');
+      const control = await this.backend.run('readwrite', async tx => {
+        const current = await readControl(tx);
+        checkReplacement(current, prepared.preview.expected, this.tabId);
+        return replaceProgress(tx, current, prepared.data, generation, this.tabId);
+      });
+      this.cancelImport(); this.changed(control);
+    });
+  }
+  reset(expected: ReplacementToken, confirmed: boolean): Promise<void> {
+    if (!confirmed) return Promise.reject(new Error('confirmation_required'));
+    const token = structuredClone(expected); const generation = this.uuid(); const at = this.clock();
+    const data: ProgressData = { settings: defaultSettings(at), sessions: [], presentations: [], attempts: [], exposures: [], review_cards: [], bookmarks: [], resume_positions: [], legacy: [] };
+    return this.enqueue(async () => {
+      const control = await this.backend.run('readwrite', async tx => {
+        const current = await readControl(tx); checkReplacement(current, token, this.tabId);
+        return replaceProgress(tx, current, data, generation, this.tabId);
+      });
+      this.cancelImport(); this.changed(control);
+    });
   }
   takeover(generation: string, epoch: number): Promise<void> {
     return this.enqueue(async () => {

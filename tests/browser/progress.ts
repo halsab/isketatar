@@ -2,6 +2,7 @@ import { deleteDB } from 'idb';
 import { ContentRepository } from '../../src/data/content/repository';
 import { ProgressRepository, expectedFrom } from '../../src/data/progress/repository';
 import type { ProgressSnapshot } from '../../src/data/progress/model';
+import { replacementToken } from '../../src/data/progress/transfer';
 
 async function run() {
   const content = await ContentRepository.open();
@@ -36,11 +37,25 @@ async function run() {
       });
     } catch { /* Проверяется сохранность исходного снимка после abort. */ }
     const after = await second.snapshot();
+    await Promise.all([...content.catalog.core.modules.map(module => content.load(content.catalog.core.lessons.find(lesson => lesson.module_id === module.id)!.resource)), content.load('dictionary.json'), content.load('references.json')]);
+    const exported = await second.exportProgress();
+    const preview = await second.previewImport(exported);
+    await second.commitImport(preview.id, true);
+    const restored = await second.snapshot();
+    const importRoundtrip = JSON.stringify(restored.attempts) === JSON.stringify(after.attempts) && restored.control.data_generation !== after.control.data_generation && restored.sessions.every(session => session.status !== 'active');
+    const staleGeneration = await staleRejected(first.dispatch({ type: 'observe', target: { kind: 'lesson', id: 'V04' }, confirm_assessment_help: true }, expectedFrom(after)));
+    const stalePreview = await second.previewImport(exported);
+    await second.dispatch({ type: 'settings', patch: { theme: 'dark' } }, expectedFrom(restored));
+    const previewRejected = await staleRejected(second.commitImport(stalePreview.id, true));
+    const resetBefore = await second.snapshot();
+    await second.reset(replacementToken(resetBefore), true);
+    const resetAfter = await second.snapshot();
     const comparable = (snapshot: ProgressSnapshot) => JSON.stringify({ control: snapshot.control, settings: snapshot.settings, attempts: snapshot.attempts });
     return { duplicate: submitted.attempts.length === 1 && submitted.review_cards[0]?.attempt_count === 1,
       staleHelp, helpSaved: all.sessions.find(session => session.session_id === final.session_id)!.assessment_help_opened_at !== null,
       finalBulk: all.attempts.filter(attempt => attempt.session_id === final.session_id).length === 20 && all.review_cards.length === 1,
-      staleWriter, aborted: comparable(after) === comparable(unchanged) };
+      staleWriter, aborted: comparable(after) === comparable(unchanged), importRoundtrip, staleGeneration, previewRejected,
+      reset: resetAfter.attempts.length === 0 && resetAfter.sessions.length === 0 && resetAfter.control.data_generation !== resetBefore.control.data_generation };
   } finally { first.close(); second.close(); await deleteDB(name); }
 }
 run().then(result => { document.querySelector('#result')!.textContent = JSON.stringify(result); }, error => { document.querySelector('#result')!.textContent = `failed: ${error instanceof Error ? error.message : 'unknown'}`; });

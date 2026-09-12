@@ -2,6 +2,7 @@ import { openDB } from 'idb';
 import type { IDBPDatabase, IDBPTransaction } from 'idb';
 import { STORE_NAMES } from './model';
 import type { ProgressDB, StoreName, StoreRecords } from './model';
+import { checkedRecord } from './store-validation';
 
 export interface Transaction {
   get<K extends StoreName>(store: K, key: string): Promise<StoreRecords[K] | undefined>;
@@ -20,18 +21,18 @@ export interface Backend {
 }
 class IndexedTransaction implements Transaction {
   constructor(private readonly transaction: IDBPTransaction<ProgressDB, StoreName[], 'readwrite'>) {}
-  async get<K extends StoreName>(store: K, key: string) { return await this.transaction.objectStore(store).get(key) as StoreRecords[K] | undefined; }
-  async all<K extends StoreName>(store: K) { return await this.transaction.objectStore(store).getAll() as StoreRecords[K][]; }
+  async get<K extends StoreName>(store: K, key: string) { const value = await this.transaction.objectStore(store).get(key); return value === undefined ? undefined : checkedRecord(store, value); }
+  async all<K extends StoreName>(store: K) { return (await this.transaction.objectStore(store).getAll()).map(value => checkedRecord(store, value)); }
   async bySession<K extends 'presentations' | 'attempts'>(store: K, id: string) {
-    return await (store === 'presentations' ? this.transaction.objectStore('presentations').index('session_id').getAll(id) : this.transaction.objectStore('attempts').index('session_id').getAll(id)) as StoreRecords[K][];
+    return (await (store === 'presentations' ? this.transaction.objectStore('presentations').index('session_id').getAll(id) : this.transaction.objectStore('attempts').index('session_id').getAll(id))).map(value => checkedRecord(store, value));
   }
-  async byQuestion(id: string) { return this.transaction.objectStore('attempts').index('question_revision').getAll(IDBKeyRange.bound([id, ''], [id, '\uffff'])); }
+  async byQuestion(id: string) { return (await this.transaction.objectStore('attempts').index('question_revision').getAll(IDBKeyRange.bound([id, ''], [id, '\uffff']))).map(value => checkedRecord('attempts', value)); }
   async unfinishedSessions() {
     const index = this.transaction.objectStore('sessions').index('status');
     const [active, paused] = await Promise.all([index.getAll('active'), index.getAll('paused')]);
-    return [...active, ...paused];
+    return [...active, ...paused].map(value => checkedRecord('sessions', value));
   }
-  async put<K extends StoreName>(store: K, value: StoreRecords[K]) { await this.transaction.objectStore(store).put(value); }
+  async put<K extends StoreName>(store: K, value: StoreRecords[K]) { await this.transaction.objectStore(store).put(checkedRecord(store, value)); }
   async delete(store: StoreName, key: string) { await this.transaction.objectStore(store).delete(key); }
   async clear(store: StoreName) { await this.transaction.objectStore(store).clear(); }
   async count(store: StoreName) { return this.transaction.objectStore(store).count(); }

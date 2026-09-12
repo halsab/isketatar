@@ -147,7 +147,7 @@ export class CommandEngine {
     if (!assessment) await this.confirmDisclosure(confirmation);
     const attempt = makeAttempt(question, presentation, session, answer, this.at);
     await this.context.put('attempts', attempt);
-    await this.context.put('presentations', { ...presentation, status: 'submitted', draft_answer: structuredClone(answer), draft_updated_at: this.at, feedback_opened_at: assessment ? null : this.at, revision: presentation.revision + 1 });
+    await this.context.put('presentations', { ...presentation, assistance: attempt.assistance_before_submit, status: 'submitted', draft_answer: structuredClone(answer), draft_updated_at: this.at, feedback_opened_at: assessment ? null : this.at, revision: presentation.revision + 1 });
     await this.context.put('sessions', { ...session, revision: session.revision + 1, updated_at: this.at });
     if (!assessment) {
       await this.exposeResource('question', question.id, { answer: true });

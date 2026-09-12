@@ -20,10 +20,14 @@ export function makeAttempt(question: Question, presentation: Presentation, sess
   const unseenUnknown = presentation.shown_at === null && answer.kind === 'unknown' && ['diagnostic', 'final'].includes(session.kind);
   if (presentation.status !== 'draft' || presentation.shown_at === null && !unseenUnknown || presentation.ordinal === 1 && presentation.presentation_id !== item.first_presentation_id) throw new Error('invalid_presentation');
   const grade = gradeAnswer(question, answer);
+  const assistance = structuredClone(presentation.assistance);
+  const lineHelp = session.reading_help.filter(help => question.line_ids.includes(help.line_id));
+  // Снимок сохраняет помощь строки: поздний retry может дополнить Session.reading_help.
+  if (lineHelp.length && presentation.shown_at !== null) assistance.reference_opened_at ??= Math.max(presentation.shown_at, Math.min(...lineHelp.map(help => help.opened_at)));
   return {
     presentation_id: presentation.presentation_id, session_id: session.session_id, question_id: question.id, grading_revision: question.grading_revision,
     ordinal: presentation.ordinal, release_id: session.release_id, content_version: session.content_version, policy_versions: { ...session.policy_versions },
-    answer_raw: structuredClone(answer), ...grade, assistance_before_submit: structuredClone(presentation.assistance), familiarity_at_show: { ...presentation.familiarity_at_show },
+    answer_raw: structuredClone(answer), ...grade, assistance_before_submit: assistance, familiarity_at_show: { ...presentation.familiarity_at_show },
     first_submission_in_cycle: presentation.ordinal === 1,
     independent_correct: grade.grade === 'correct' && presentation.ordinal === 1 && !assistedBeforeSubmit(question, presentation, session),
     submitted_at: at, elapsed_ms: presentation.shown_at === null ? null : Math.max(0, at - presentation.shown_at),
