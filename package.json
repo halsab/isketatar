@@ -15,7 +15,7 @@
     "check:boundaries": "node tools/check-boundaries.mjs",
     "test": "vitest run",
     "check": "npm run check:content && npm run check:boundaries && npm run typecheck && npm test",
-    "build": "npm run typecheck && vite build && node tools/build-worker.mjs && node tools/build-release.mjs && node tools/check-dist.mjs",
+    "build": "npm run typecheck && vite build && node tools/build-worker.mjs && node tools/build-release.mjs && node tools/check-dist.mjs && npm run check:budgets",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test:e2e": "playwright test",
     "generate": "node tools/build-content.mjs && node tools/build-progress.mjs && node tools/build-licenses.mjs",
@@ -23,7 +23,9 @@
     "predev": "npm run generate",
     "pretest": "npm run generate",
     "pretypecheck": "npm run generate",
-    "prebuild": "npm run check:content && npm run generate"
+    "prebuild": "npm run check:content && npm run generate",
+    "check:budgets": "node tools/check-budgets.mjs",
+    "test:performance": "node tools/measure-performance.mjs"
   },
   "dependencies": {
     "idb": "8.0.3",
@@ -40,6 +42,7 @@
     "@vitejs/plugin-react": "6.1.1",
     "ajv": "8.20.0",
     "fake-indexeddb": "6.2.5",
+    "lighthouse": "13.4.1",
     "typescript": "7.0.2",
     "vite": "8.3.0",
     "vitest": "5.0.0"

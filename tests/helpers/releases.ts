@@ -9,7 +9,8 @@ export async function releaseServer() {
   const directory = await mkdtemp(join(tmpdir(), 'isketatar-update-'));
   const original = JSON.parse(await readFile('dist/release-manifest.json', 'utf8'));
   await mkdir(join(directory, 'src/generated'), { recursive: true });
-  for (const path of ['package.json', 'src/generated/content-manifest.json']) await writeFile(join(directory, path), await readFile(path));
+  await mkdir(join(directory, 'quality-results'), { recursive: true });
+  for (const path of ['package.json', 'src/generated/content-manifest.json', 'quality-results/bundle-graph.json']) await writeFile(join(directory, path), await readFile(path));
   for (const asset of original.assets) {
     const path = asset.url.split(`/releases/${original.release_id}/`)[1];
     if (path === 'manifest.webmanifest') continue;

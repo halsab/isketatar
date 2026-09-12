@@ -1,5 +1,6 @@
 import type { Attempt, Exposure, Presentation, ReviewCard, Session } from '../domain/learning/types';
-import type { Bookmark, Legacy, MetaRecord, ProgressData, ProgressExport, ResumePosition } from '../data/progress/model';
+import type { Bookmark, Control, Legacy, MetaRecord, ProgressData, ProgressExport, ResumePosition } from '../data/progress/model';
+export function validateControl(value: unknown): value is Control;
 export function validateExport(value: unknown): value is ProgressExport;
 export function validateData(value: unknown): value is ProgressData;
 export function validateMeta(value: unknown): value is MetaRecord;

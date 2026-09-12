@@ -4,7 +4,7 @@ import { offline } from '../../data/pwa/client';
 import { Button, Status } from '../../ui/controls';
 import { t } from '../../ui/copy';
 import { formatDate } from '../../ui/date';
-import { replacementToken } from '../../data/progress/transfer';
+import { replacementToken } from '../../data/progress/model';
 export function OfflineSettings() {
   const { runtime, snapshot, progress, confirm } = useApp(); const state = useSyncExternalStore(offline.subscribe, offline.getState);
   const [persistence, setPersistence] = useState<boolean | null>(null);

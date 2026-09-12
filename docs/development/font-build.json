@@ -5,18 +5,30 @@
     {
       "file": "src/assets/fonts/NotoNaskhArabic-Regular.woff2",
       "source_sha256": "c9a039ce48a477243c1eb7d561b13de115cfd651d8a83fa42e2f4d63c2e11b00",
-      "sha256": "abffcce5c78e6847978c6620bb3a6e6fab62606f2aa42b1943a278cfa2cf54e3",
-      "bytes": 100228,
+      "sha256": "8bb356f130617ebbb3628c296eac2ac0fdc60810af6d337bb66751f5332963bb",
+      "bytes": 42944,
       "arabic_runs": 1200,
-      "shape_identical": true
+      "shape_identical": true,
+      "subset": "Complete Arabic block and all corpus symbols",
+      "retained_codepoints": 358
     },
     {
       "file": "src/assets/fonts/InterVariable.woff2",
       "source_sha256": "4989b125924991b90d05b2d16e0e388c48f7d5bb8b30539bbf9c755278d0ccaf",
-      "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
-      "bytes": 352240,
+      "sha256": "d9d0de9c663114e4b819ebcbfbedf1755d28c6b1c166e1c12e0775667cdabdb5",
+      "bytes": 99840,
       "cyrillic_codepoints": 73,
-      "missing": []
+      "missing": [],
+      "subset": "Corpus Latin/Cyrillic and symbols, ASCII/Latin-1 and combining marks",
+      "checked_weights": [
+        400,
+        500,
+        600,
+        700
+      ],
+      "retained_codepoints": 336,
+      "latin_cyrillic_runs": 8978,
+      "shape_identical": true
     }
   ]
 }

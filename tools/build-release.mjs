@@ -1,7 +1,11 @@
+import { bootModules } from './boot-modules.mjs';
 import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
 
+const sourceRoot = resolve(import.meta.dirname, '..');
+const sourceGit = args => execFileSync('git', ['-C', sourceRoot, ...args], { encoding: 'utf8' }).trim();
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const base = '/isketatar/'; const placeholder = '__ISKE_RELEASE__';
 const app = JSON.parse(await readFile('package.json', 'utf8'));
@@ -22,8 +26,32 @@ const webmanifest = {
 input.set('manifest.webmanifest', Buffer.from(JSON.stringify(webmanifest)));
 const builtAt = Number(process.env.SOURCE_DATE_EPOCH ?? execFileSync('git', ['show', '-s', '--format=%ct', 'HEAD'], { encoding: 'utf8' }).trim()) * 1000;
 if (!Number.isSafeInteger(builtAt) || builtAt < 0) throw new Error('Invalid build timestamp');
+const graph = JSON.parse(await readFile('quality-results/bundle-graph.json', 'utf8'));
+const templateRoot = `${base}releases/${placeholder}/`;
+const shellPaths = new Set([...input.get('index.html').toString().matchAll(/(?:src|href)="([^"]+)"/gu)].map(match => match[1]).filter(url => url.startsWith(templateRoot)).map(url => url.slice(templateRoot.length)));
+for (const path of input.keys()) if (['index.html', 'recovery.html', 'runtime/core.json', 'manifest.webmanifest'].includes(path) || /^assets\/Inter[^/]+\.woff2$/u.test(path) || path.startsWith('icons/')) shellPaths.add(path);
+const shellChunks = new Set();
+function includeChunk(file) {
+  if (shellChunks.has(file)) return;
+  const chunk = graph.find(chunk => chunk.file === file);
+  if (!chunk) throw new Error(`Missing shell chunk: ${file}`);
+  shellChunks.add(file); shellPaths.add(file);
+  for (const css of chunk.css) shellPaths.add(css);
+  chunk.imports.forEach(includeChunk);
+}
+graph.filter(chunk => chunk.entry).forEach(chunk => includeChunk(chunk.file));
+for (const module of bootModules) {
+  const chunk = graph.find(chunk => chunk.modules.includes(module));
+  if (!chunk) throw new Error(`Missing boot module: ${module}`);
+  includeChunk(chunk.file);
+}
+for (const path of shellPaths) if (!input.has(path)) throw new Error(`Missing shell asset: ${path}`);
+const sortedShellPaths = [...shellPaths].sort();
+const header = { app_version: app.version, content_version: content.content_version,
+  content_schema: 1, progress_schema: 1, min_reader_version: '1.0.0', base_path: base, built_at: builtAt,
+  question_revisions: content.question_revisions, policy_versions: content.policy_versions };
 // ID определяется шаблонными байтами: подстановка собственного пути не создаёт цикл хеширования.
-const fingerprint = hash(JSON.stringify({ transport: hash(transport), files: [...input].map(([path, bytes]) => [path, hash(bytes)]), built_at: builtAt }));
+const fingerprint = hash(JSON.stringify({ transport: hash(transport), files: [...input].map(([path, bytes]) => [path, hash(bytes)]), header, shell_paths: sortedShellPaths }));
 const id = `${app.version}-${fingerprint.slice(0, 16)}`; const root = `${base}releases/${id}/`;
 await rm('dist', { recursive: true }); await mkdir(`dist/releases/${id}`, { recursive: true });
 const assets = [];
@@ -34,13 +62,7 @@ for (const [path, original] of input) {
   assets.push({ url: root + path, sha256: hash(bytes), bytes: bytes.length, kind, required: true });
 }
 const html = await readFile(`dist/releases/${id}/index.html`, 'utf8');
-const initial = new Set([...html.matchAll(/(?:src|href)="([^"]+)"/gu)].map(match => match[1]));
-const shell = assets.filter(asset => initial.has(asset.url) || ['index.html', 'recovery.html', 'runtime/core.json', 'manifest.webmanifest'].some(path => asset.url === root + path) || /\/assets\/Inter[^/]+\.woff2$/u.test(asset.url) || asset.url.includes('/icons/')).map(asset => asset.url);
-const release = {
-  release_id: id, app_version: app.version, content_version: content.content_version,
-  content_schema: 1, progress_schema: 1, min_reader_version: '1.0.0', base_path: base, built_at: builtAt,
-  assets, shell_assets: shell, question_revisions: content.question_revisions, policy_versions: content.policy_versions,
-};
+const release = { release_id: id, ...header, assets, shell_assets: sortedShellPaths.map(path => root + path) };
 const serialized = JSON.stringify(release);
 await writeFile(`dist/releases/${id}/release-manifest.json`, serialized);
 await writeFile('dist/release-manifest.json', serialized);
@@ -48,4 +70,10 @@ await writeFile('dist/sw.js', transport);
 await writeFile('dist/index.html', html);
 await writeFile('dist/recovery.html', await readFile(`dist/releases/${id}/recovery.html`));
 await writeFile('dist/manifest.webmanifest', await readFile(`dist/releases/${id}/manifest.webmanifest`));
+await mkdir('quality-results', { recursive: true });
+await writeFile('quality-results/build-provenance.json', JSON.stringify({
+  release_id: id, manifest_sha256: hash(serialized), build_inputs_sha256: fingerprint,
+  base_commit: sourceGit(['rev-parse', 'HEAD']),
+  working_tree_dirty: resolve(process.cwd()) !== sourceRoot || sourceGit(['status', '--porcelain', '--untracked-files=normal']).length > 0,
+}, null, 2) + '\n');
 console.log(`Release ${id}: ${assets.length} assets, ${assets.reduce((sum, asset) => sum + asset.bytes, 0)} bytes`);

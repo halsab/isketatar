@@ -56,3 +56,5 @@ await writeFile('src/generated/content-manifest.json', JSON.stringify(contentMan
 await writeFile('src/generated/content-index.json', JSON.stringify({ content_version: contentManifest.content_version, assets }));
 await writeFile('public/runtime/content-manifest.json', JSON.stringify(contentManifest));
 console.log(`Runtime catalog: ${projected.core.lessons.length} lessons, ${projected.core.questions.length} questions, ${assets.length} checked resources`);
+
+await writeFile('src/generated/startup-resources.json', JSON.stringify(Object.fromEntries(projected.core.lessons.map(lesson => [lesson.id, lesson.resource]))));

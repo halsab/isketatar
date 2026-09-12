@@ -10,7 +10,8 @@ import type { AnswerValue, Attempt, Exposure, Presentation, Session } from '../.
 import type { Command } from './commands';
 import type { WriteContext } from './transaction';
 import type { Expected } from './model';
-import { markRelatedHelp } from './observation';
+import { markRelatedHelp, observe } from './observation';
+import { bookmarkCommand, markReadingComplete, positionCommand, settingsCommand, validateReviewOrigin } from './preferences';
 
 export type CommandResult = { session_id?: string; presentation_id?: string; attempt?: Attempt; expected?: Expected };
 export class CommandEngine {
@@ -277,5 +278,40 @@ export class CommandEngine {
     const previous = await this.tx.get('review_cards', question.id);
     await this.context.put('review_cards', addReviewCard(previous ?? null, question, command.origin, this.at));
     return {};
+  }
+  async execute(command: Command): Promise<CommandResult> {
+    switch (command.type) {
+      case 'start': return this.start(command);
+      case 'pause': case 'resume': return this.pauseResume(command.session_id, command.type === 'resume');
+      case 'show': return this.show(command.presentation_id, command.confirm_assessment_help);
+      case 'draft': return this.draft(command.presentation_id, command.answer);
+      case 'submit': return this.submit(command.presentation_id, command.answer, false, command.confirm_assessment_help);
+      case 'finish_assessment': return this.finishAssessment(command);
+      case 'ack': case 'retry': return this.ack(command.presentation_id, command.type === 'retry');
+      case 'skip': return this.skip(command.presentation_id);
+      case 'navigate_question': return this.navigate(command.session_id, command.question_id);
+      case 'help': return this.help(command);
+      case 'observe': return observe(this, command.target, command.confirm_assessment_help);
+      case 'leave_historical': {
+        if (!command.confirmed) throw new Error('confirmation_required');
+        const session = await this.tx.get('sessions', command.session_id);
+        if (!session || !['active', 'paused'].includes(session.status)) throw new Error('invalid_session_state');
+        this.context.check('sessions', session.session_id, session);
+        await this.context.put('sessions', { ...session, status: 'incompatible', incompatibility_reason: 'release_not_continued', updated_at: this.at, revision: session.revision + 1 });
+        if (this.context.control.active_session_id === session.session_id) this.context.control.active_session_id = null;
+        return {};
+      }
+      case 'read_complete': return markReadingComplete(this, command.reading_id);
+      case 'review_add': await validateReviewOrigin(this, command); return this.reviewAdd(command);
+      case 'settings': return settingsCommand(this, command);
+      case 'bookmark': return bookmarkCommand(this, command);
+      case 'position': return positionCommand(this, command);
+      case 'review_suspend': {
+        const card = await this.tx.get('review_cards', command.question_id);
+        if (!card) throw new Error('unknown_review_card');
+        if (card.status === 'active') await this.context.put('review_cards', { ...card, status: 'suspended', revision: card.revision + 1, updated_at: this.at });
+        return {};
+      }
+    }
   }
 }

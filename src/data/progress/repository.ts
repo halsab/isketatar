@@ -5,18 +5,13 @@ import type { Control, Expected, ImportPreview, ProgressData, ProgressSnapshot, 
 import { IndexedBackend } from './backend';
 import type { Backend, Transaction } from './backend';
 import { readControl, WriteContext } from './transaction';
-import { CommandEngine } from './engine';
 import type { CommandResult } from './engine';
 import type { Command } from './commands';
-import { observe } from './observation';
-import { bookmarkCommand, markReadingComplete, positionCommand, settingsCommand, validateReviewOrigin } from './preferences';
-import { decodeImport, encodeExport, replacementToken } from './transfer';
-import { prepareProgress } from './import-content';
+import { exportData, replacementToken } from './model';
 import { checkReplacement, replaceProgress } from './replacement';
 import { integrity } from './import-integrity';
 import packageInfo from '../../../package.json';
 import { MemoryBackend } from './memory-backend';
-import { exportData } from './transfer';
 import { markAssessmentHelp, pendingAssessments } from '../../domain/learning/attempt';
 
 interface Options { catalog: ContentCatalog; catalogs?: Map<string, ContentCatalog>; currentCore?: CoreData; releaseId: string; availableReleaseIds?: string[]; tabId?: string; name?: string; clock?: () => number; uuid?: () => string }
@@ -122,10 +117,12 @@ export class ProgressRepository {
   }
   async exportProgress(): Promise<Blob> {
     const snapshot = await this.snapshot();
+    const { encodeExport } = await import('./transfer');
     return encodeExport(snapshot, packageInfo.version, this.options.catalog.core.content_version, this.clock());
   }
   async previewImport(file: Blob, prepareContent?: (releaseIds: string[]) => Promise<void>): Promise<ImportPreview> {
     const sequence = ++this.importSequence; this.preparedImport = null;
+    const [{ decodeImport }, { prepareProgress }] = await Promise.all([import('./transfer'), import('./import-content')]);
     const decoded = await decodeImport(file);
     await prepareContent?.([...new Set(decoded.data.sessions.map(session => session.release_id))]);
     if (sequence !== this.importSequence) throw new Error('invalid_preview');
@@ -277,6 +274,10 @@ export class ProgressRepository {
     return this.enqueue(async () => {
       if (this.detached) throw new Error('repository_detached');
       if (!Number.isSafeInteger(at) || at < 0) throw new Error('invalid_clock');
+      // Сетевое ожидание модуля завершается до открытия IDB-транзакции.
+      const { CommandEngine } = await import('./engine');
+      if (this.closed) throw new Error('storage_unavailable');
+      if (this.detached) throw new Error('repository_detached');
       const committed = await this.backend.run('readwrite', async tx => {
         const control = await readControl(tx); this.checkShell(control);
         const helpObservation = captured.type === 'help' && (captured.kind !== 'reveal' || (await tx.get('presentations', captured.presentation_id))?.status === 'submitted');
@@ -290,7 +291,7 @@ export class ProgressRepository {
         const source = requestedId === this.options.releaseId ? this.options.catalog : this.options.catalogs?.get(requestedId);
         if (!source && !session) throw new Error('content_unavailable');
         const engine = new CommandEngine(context, source ?? this.options.catalog, this.options.currentCore ?? this.options.catalog.core, source ? requestedId : this.options.releaseId, at, this.uuid, this.options.catalogs);
-        const result = await this.execute(engine, captured);
+        const result = await engine.execute(captured);
         await context.finish(captured.type !== 'settings', this.mode === 'durable');
         if (this.mode === 'memory' && context.disclosure && this.protection) {
           // Ожидание допустимо только в транзакции памяти; durable-транзакция здесь ещё не открыта.
@@ -329,41 +330,6 @@ export class ProgressRepository {
       if (error instanceof Error && ['assessment_help_confirmation_required', 'write_conflict', 'update_in_progress'].includes(error.message)) throw error;
       throw new Error('durable_help_required');
     } finally { transient?.close(); }
-  }
-  private async execute(engine: CommandEngine, command: Command): Promise<CommandResult> {
-    switch (command.type) {
-      case 'start': return engine.start(command);
-      case 'pause': case 'resume': return engine.pauseResume(command.session_id, command.type === 'resume');
-      case 'show': return engine.show(command.presentation_id, command.confirm_assessment_help);
-      case 'draft': return engine.draft(command.presentation_id, command.answer);
-      case 'submit': return engine.submit(command.presentation_id, command.answer, false, command.confirm_assessment_help);
-      case 'finish_assessment': return engine.finishAssessment(command);
-      case 'ack': case 'retry': return engine.ack(command.presentation_id, command.type === 'retry');
-      case 'skip': return engine.skip(command.presentation_id);
-      case 'navigate_question': return engine.navigate(command.session_id, command.question_id);
-      case 'help': return engine.help(command);
-      case 'observe': return observe(engine, command.target, command.confirm_assessment_help);
-      case 'leave_historical': {
-        if (!command.confirmed) throw new Error('confirmation_required');
-        const session = await engine.tx.get('sessions', command.session_id);
-        if (!session || !['active', 'paused'].includes(session.status)) throw new Error('invalid_session_state');
-        engine.context.check('sessions', session.session_id, session);
-        await engine.context.put('sessions', { ...session, status: 'incompatible', incompatibility_reason: 'release_not_continued', updated_at: engine.at, revision: session.revision + 1 });
-        if (engine.context.control.active_session_id === session.session_id) engine.context.control.active_session_id = null;
-        return {};
-      }
-      case 'read_complete': return markReadingComplete(engine, command.reading_id);
-      case 'review_add': await validateReviewOrigin(engine, command); return engine.reviewAdd(command);
-      case 'settings': return settingsCommand(engine, command);
-      case 'bookmark': return bookmarkCommand(engine, command);
-      case 'position': return positionCommand(engine, command);
-      case 'review_suspend': {
-        const card = await engine.tx.get('review_cards', command.question_id);
-        if (!card) throw new Error('unknown_review_card');
-        if (card.status === 'active') await engine.context.put('review_cards', { ...card, status: 'suspended', revision: card.revision + 1, updated_at: engine.at });
-        return {};
-      }
-    }
   }
   close() { this.closed = true; this.channel?.close(); this.channel = null; this.listeners.clear(); this.backend.close(); }
 }

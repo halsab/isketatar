@@ -5,7 +5,7 @@ import { Dialog } from '../ui/Dialog';
 import { t } from '../ui/copy';
 import { StudyScope } from './StudyScope';
 import { AppRuntime, type AppState } from './runtime';
-import { replacementToken } from '../data/progress/transfer';
+import { replacementToken } from '../data/progress/model';
 import { expectedFrom } from '../data/progress/repository';
 import type { Command } from '../data/progress/commands';
 import { RELEASE_ID, releaseRoot } from '../data/pwa/manifest';
@@ -14,6 +14,8 @@ interface Confirmation { title: string; body: string; action: string; danger?: b
 interface AppContextValue { runtime: AppRuntime; state: AppState; confirm: (request: Confirmation) => Promise<boolean>; confirming: boolean }
 const Context = createContext<AppContextValue | null>(null);
 const application = new AppRuntime();
+let initialStart: Promise<void> | undefined;
+export const startApplication = () => initialStart ??= application.start();
 const UpdateStatus = lazy(() => import('../features/settings/UpdateStatus').then(module => ({ default: module.UpdateStatus })));
 
 export function AppProvider({ children }: { children: ReactNode }) {
@@ -23,7 +25,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
   const resolve = useCallback((confirmed: boolean) => { const pending = resolver.current; resolver.current = null; setQuestion(null); pending?.(confirmed); }, []);
   const confirm = useCallback((request: Confirmation) => new Promise<boolean>(done => { resolver.current?.(false); resolver.current = done; setQuestion(request); }), []);
-  useEffect(() => { void application.start(); }, []);
+  useEffect(() => { void startApplication(); }, []);
   useEffect(() => {
     const refresh = () => { if (document.visibilityState === 'visible' && application.getState().phase === 'ready') void application.refresh().catch(() => {}); };
     window.addEventListener('focus', refresh); document.addEventListener('visibilitychange', refresh);

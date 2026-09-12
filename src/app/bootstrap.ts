@@ -3,7 +3,7 @@ import { readUpdateState } from '../data/pwa/progress-state';
 import { bootPolicy } from '../data/pwa/boot-policy';
 import { offline } from '../data/pwa/client';
 import type { ProgressRepository } from '../data/progress/repository';
-import { replacementToken } from '../data/progress/transfer';
+import { replacementToken } from '../data/progress/model';
 
 const technicalRegistry = new IndexedRegistry();
 async function decision(own: string) {

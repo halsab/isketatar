@@ -27,6 +27,7 @@ test('removal preserves progress and shells, removes staged release, and fences 
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
   await page.getByRole('link', { name: 'Көйләүләр', exact: true }).click(); await save(page);
   const viewer = await context.newPage(); await viewer.goto(releases.url + '#/settings');
+  await expect(viewer.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true })).toBeEnabled();
   releases.publish(); await page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true }).click(); await expect(page.getByText(`Яңа басма бар: ${releases.next}.`, { exact: false })).toBeVisible();
   await page.evaluate(() => caches.open('another-application'));
   const before = await snapshot(page); const start = await viewer.evaluate(() => performance.timeOrigin);
@@ -40,6 +41,10 @@ test('removal preserves progress and shells, removes staged release, and fences 
   const stale = await page.evaluate(id => new Promise<string>(resolve => { const channel = new MessageChannel(); channel.port1.onmessage = event => { resolve(event.data.error); channel.port1.close(); }; navigator.serviceWorker.getRegistration().then(registration => registration!.active!.postMessage({ type: 'download', release_id: id, offline_epoch: 0 }, [channel.port2])); }), releases.original);
   expect(stale).toBe('offline_changed');
   releases.setOffline(true); await viewer.goto(releases.url + 'recovery.html'); await expect(viewer.getByRole('heading', { name: 'Курс ачылмады', exact: true })).toBeVisible();
+  const cold = await context.newPage(); await cold.setViewportSize({ width: 320, height: 844 }); await cold.goto(releases.url + '#/');
+  await expect(cold.locator('.home-continuation')).toBeVisible();
+  await expect(cold.locator('main h1')).toHaveCSS('font-size', '28px');
+  await expect(cold.locator('.boot-main')).toHaveCount(0); await cold.close();
   releases.setOffline(false); await viewer.close(); await save(page);
 });
 test('failed deletion keeps an incomplete marker and a different window can recover and retry', async ({ page, context, browserName }) => {

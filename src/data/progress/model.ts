@@ -63,3 +63,9 @@ export function exportedRecord(store: StoreName, record: StoreRecords[StoreName]
 export const recordBytes = (value: unknown) => value === null ? 0 : new TextEncoder().encode(JSON.stringify(value)).length;
 export const SOFT_BYTES = 16 * 1024 * 1024;
 export const SOFT_ATTEMPTS = 90_000;
+
+export const replacementToken = (snapshot: ProgressSnapshot): ReplacementToken => ({ data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch, state_revision: snapshot.control.state_revision });
+export function exportData(snapshot: ProgressSnapshot): ProgressData {
+  const { control: _control, ...data } = snapshot;
+  return data;
+}

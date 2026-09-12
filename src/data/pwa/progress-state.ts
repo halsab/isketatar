@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 import type { Control, ProgressDB } from '../progress/model';
-import { validateMeta, validateSession } from '../../generated/progress-validators';
+import { validateControl, validateSession } from '../../generated/progress-validators';
 import { assertStructure } from '../progress/structure';
 import type { UpdateState } from './coordination';
 
@@ -16,7 +16,7 @@ export async function readUpdateState(name = 'iske-imla-progress'): Promise<Upda
     if (rawControl === undefined && rawSessions.length === 0) return null;
     assertStructure(rawControl, 'storage_corrupt');
     if (rawControl?.key === 'control' && (rawControl.progress_schema !== 1 || rawControl.db_version !== 1)) throw new Error('unsupported_storage');
-    if (!validateMeta(rawControl) || rawControl?.key !== 'control') throw new Error('storage_corrupt');
+    if (!validateControl(rawControl) || rawControl?.key !== 'control') throw new Error('storage_corrupt');
     const control = rawControl as Control;
     const sessions = rawSessions.map(value => { assertStructure(value, 'storage_corrupt'); if (!validateSession(value)) throw new Error('storage_corrupt'); return value; });
     if (sessions.some(session => session.data_generation !== control.data_generation)) throw new Error('storage_corrupt');

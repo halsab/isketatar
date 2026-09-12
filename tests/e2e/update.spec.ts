@@ -100,6 +100,7 @@ test('memory work can be exported before an explicit per-window decision permits
   const stream = await download.createReadStream(); let text = ''; for await (const chunk of stream!) text += chunk.toString();
   expect(text).toContain('хәтердәге җавап');
   await consent.click(); await page.getByRole('dialog').getByRole('button', { name: 'Вакытлыча эшне калдырып яңартырга', exact: true }).click();
+  await expect(consent).toHaveCount(0);
   await writer.getByRole('button', { name: 'Тәрәзәләрне кабат тикшерергә', exact: true }).click();
   await expect.poll(async () => (await snapshot(writer)).control.accepted_release_id).toBe(releases.next);
   await expect(page.getByText('Бу юлы нәтиҗәләр вакытлыча гына саклана.', { exact: false })).toHaveCount(0);

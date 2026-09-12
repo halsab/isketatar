@@ -1,8 +1,10 @@
+import { offline } from '../data/pwa/client';
+import { prepareBoot, finishBoot } from './bootstrap';
 import { ContentRepository } from '../data/content/repository';
 import { ProgressRepository } from '../data/progress/repository';
 import type { Expected, ProgressSnapshot, ReplacementToken, UpdateGate } from '../data/progress/model';
 import { expectedFrom } from '../data/progress/repository';
-import { replacementToken } from '../data/progress/transfer';
+import { replacementToken } from '../data/progress/model';
 import type { Command } from '../data/progress/commands';
 import { applyPreferences } from '../ui/preferences';
 import { POLICIES } from '../domain/content/types';
@@ -64,13 +66,12 @@ export class AppRuntime {
       }
       if (!this.progress || !this.progress.acceptsCommands) {
         if (import.meta.env.PROD) {
-          const { offline } = await import('../data/pwa/client');
           offline.bind({ identify: () => this.updateIdentity(), prepare: (request, discard) => this.prepareUpdate(request, discard), commit: request => this.commitReleaseUpdate(request), cancel: request => this.cancelReleaseUpdate(request), cancelled: id => this.cancelPreparation(id), reconcile: () => this.reconcileUpdate() });
-          await (await import('./bootstrap')).prepareBoot(this.releaseId);
+          await prepareBoot(this.releaseId);
         }
         const progress = await ProgressRepository.open({ catalog: this.content.catalog, catalogs: this.catalogs, releaseId: this.releaseId, tabId: this.tabId });
         if (import.meta.env.PROD) {
-          try { const gate = await (await import('./bootstrap')).finishBoot(this.releaseId, progress); this.publish({ quiescing: gate?.update_id ?? null }); }
+          try { const gate = await finishBoot(this.releaseId, progress); this.publish({ quiescing: gate?.update_id ?? null }); }
           catch (error) { progress.close(); throw error; }
         }
         this.attach(progress);
@@ -182,7 +183,7 @@ export class AppRuntime {
     const existing = this.contents.get(id); if (existing) return Promise.resolve(existing);
     const pending = this.loadingReleases.get(id); if (pending) return pending;
     const task = (async () => {
-      const { offline } = await import('../data/pwa/client'); await offline.start(this.releaseId);
+      await offline.start(this.releaseId);
       const { manifest } = await offline.retainedManifest(id);
       if (manifest.content_schema !== 1 || manifest.progress_schema !== 1 || !readerSupported(manifest.min_reader_version) || Object.entries(POLICIES).some(([key, value]) => Reflect.get(manifest.policy_versions, key) !== value)) throw new Error('unsupported_release');
       const content = await ContentRepository.open(manifest);
@@ -195,7 +196,7 @@ export class AppRuntime {
     if (!this.content) throw new Error('content_unavailable');
     const sources = new Set([this.content]);
     if (import.meta.env.PROD) {
-      const { offline } = await import('../data/pwa/client'); await offline.start(this.releaseId);
+      await offline.start(this.releaseId);
       const previous = offline.getState().registry?.previous_release_id;
       if (previous && releaseIds.includes(previous)) {
         try { sources.add(await this.contentForRelease(previous)); }

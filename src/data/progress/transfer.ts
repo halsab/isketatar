@@ -1,13 +1,10 @@
 import { validateExport } from '../../generated/progress-validators';
-import type { ProgressData, ProgressExport, ProgressSnapshot, ReplacementToken } from './model';
+import type { ProgressExport, ProgressSnapshot } from './model';
 import { assertStructure } from './structure';
+import { exportData } from './model';
+export { replacementToken } from './model';
 
 export const MAX_EXPORT_BYTES = 20 * 1024 * 1024;
-export const replacementToken = (snapshot: ProgressSnapshot): ReplacementToken => ({ data_generation: snapshot.control.data_generation, writer_epoch: snapshot.control.writer_epoch, state_revision: snapshot.control.state_revision });
-export function exportData(snapshot: ProgressSnapshot): ProgressData {
-  const { control: _control, ...data } = snapshot;
-  return data;
-}
 export async function decodeImport(file: Blob): Promise<ProgressExport> {
   if (!Number.isSafeInteger(file.size) || file.size > MAX_EXPORT_BYTES) throw new Error('import_too_large');
   const bytes = await file.arrayBuffer();

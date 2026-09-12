@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useApp } from '../../app/AppProvider';
 import { offline } from '../../data/pwa/client';
 import { expectedFrom } from '../../data/progress/repository';
-import { replacementToken } from '../../data/progress/transfer';
+import { replacementToken } from '../../data/progress/model';
 import type { Session } from '../../domain/learning/types';
 import { Button, Status } from '../../ui/controls';
 import { t } from '../../ui/copy';

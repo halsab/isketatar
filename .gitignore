@@ -12,3 +12,4 @@ public/runtime/
 src/generated/*.js
 src/generated/*.json
 public/sources/
+quality-results/
