@@ -19,6 +19,7 @@
     "build": "npm run typecheck && vite build && node tools/build-worker.mjs && node tools/build-release.mjs && node tools/check-dist.mjs && npm run check:budgets",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test:e2e": "playwright test",
+    "test:smoke": "playwright test --project=chromium --grep @smoke",
     "generate": "node tools/build-content.mjs && node tools/build-progress.mjs && node tools/build-licenses.mjs",
     "schema:snapshot": "node tools/snapshot-content-schemas.mjs",
     "predev": "npm run generate",

@@ -24,7 +24,7 @@ test('a direct example anchor waits for the checked disclosure before restoring 
   await expect(page.locator('#EX-V04-03')).toBeInViewport();
 });
 
-test('direct practice keeps onboarding intent, flushes draft on exit and restores the exact session', async ({ page }) => {
+test('direct practice keeps onboarding intent, flushes draft on exit and restores the exact session @smoke', async ({ page }) => {
   await page.goto('./#/lessons/V04/practice');
   await chooseRoute(page);
   await expect(page).toHaveURL(/#\/lessons\/V04\/practice$/u);
@@ -64,7 +64,7 @@ test('failed draft stays visible and is copied only to an explicit memory branch
   expect((await snapshot(page)).presentations).not.toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'әңгәмә' } }));
 });
 
-test('wrong answer, retry and acknowledgement remain distinct', async ({ page }) => {
+test('wrong answer, retry and acknowledgement remain distinct @smoke', async ({ page }) => {
   await page.goto('./#/lessons/V04/practice'); await chooseRoute(page);
   await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('ялгыш');

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { test, expect } from '../helpers/pwa';
 test.use({ serviceWorkers: 'allow' });
-test('full package survives a cold offline window and opens unvisited course routes', async ({ context, page, network, browserName }) => {
+test('full package survives a cold offline window and opens unvisited course routes @smoke', async ({ context, page, network, browserName }) => {
   await page.goto('./#/settings');
   await expect(page.getByRole('button', {name:'Интернетсыз уку өчен сакларга',exact:true})).toBeEnabled();
   await expect(page.getByText('Тулы курс әлегә сакланмаган.',{exact:true})).toBeVisible();
@@ -24,7 +24,7 @@ test('full package survives a cold offline window and opens unvisited course rou
   const cached=await cold.evaluate(async({id,assets})=>{const all=[...await(await caches.open(`isketatar-shell-${id}`)).keys(),...await(await caches.open(`isketatar-course-${id}`)).keys()].map(request=>new URL(request.url).pathname);return assets.every((asset:{url:string})=>all.includes(asset.url));},{id:release.release_id,assets:release.assets});
   expect(cached).toBe(true);expect(errors).toEqual([]);
 });
-test('eviction changes readiness and retry repairs the exact resource', async ({ page }) => {
+test('eviction changes readiness and retry repairs the exact resource @smoke', async ({ page }) => {
   await page.goto('./#/settings');const save=page.getByRole('button',{name:'Интернетсыз уку өчен сакларга',exact:true});await save.click();
   await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   const release=await(await page.request.get('./release-manifest.json')).json();

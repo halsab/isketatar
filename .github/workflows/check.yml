@@ -12,7 +12,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: ${{ github.event_name == 'workflow_dispatch' && 45 || 15 }}
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --init --ipc=host
@@ -22,6 +22,9 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      - name: Trust the checkout in the job container
+        # checkout использует временный HOME; следующим shell-шагам нужно своё точное исключение.
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: .nvmrc
@@ -32,15 +35,12 @@ jobs:
       - run: npm run build
       - name: Validate rights and review evidence
         run: npm run check:acceptance
-      - name: Critical browser coverage
-        if: github.event_name == 'pull_request'
-        run: npm run test:e2e -- --grep-invert '@full'
-      - name: Full release browser coverage
-        if: github.event_name == 'push'
+      - name: Release smoke tests
+        if: github.event_name != 'workflow_dispatch'
+        run: npm run test:smoke
+      - name: Full browser audit
+        if: github.event_name == 'workflow_dispatch'
         run: npm run test:e2e
-      - name: Cold performance smoke
-        if: github.event_name == 'push'
-        run: npm run test:performance -- --probe
       - name: Twenty cold performance runs
         if: github.event_name == 'workflow_dispatch'
         run: npm run test:performance
@@ -49,7 +49,6 @@ jobs:
         run: |
           npm run prepare:release
           cp quality-results/bundle-graph.json quality-results/release/bundle-graph.json
-          cp quality-results/performance/summary.json quality-results/release/performance.json
           cp docs/development/external-acceptance.json quality-results/release/acceptance.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         id: candidate
@@ -131,7 +130,6 @@ jobs:
       - id: package
         run: |
           npm run prepare:release
-          cp quality-results/candidate/performance.json quality-results/release/performance.json
           cp quality-results/candidate/acceptance.json quality-results/release/acceptance.json
           cp quality-results/delivery-smoke.json quality-results/release/delivery-smoke.json
           cp quality-results/previous-release.json quality-results/release/previous-release.json

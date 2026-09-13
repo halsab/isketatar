@@ -33,7 +33,7 @@ test('settings persist independently and the neutral preview does not disclose a
   for (const href of ['licenses/Inter.txt', 'licenses/NotoNaskhArabic.txt', 'licenses/ThirdParty.txt']) expect((await page.request.get((await page.locator(`a[href$="${href}"]`).getAttribute('href'))!)).ok()).toBe(true);
 });
 
-test('download, cancel, reset and confirmed import restore exact attempts, bookmarks and draft', async ({ page }) => {
+test('download, cancel, reset and confirmed import restore exact attempts, bookmarks and draft @smoke', async ({ page }) => {
   await page.goto('./#/reading/READ-01/questions'); await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await page.getByRole('button', { name: 'Әлегә белмим', exact: true }).click(); await page.getByRole('button', { name: 'Алга', exact: true }).click();
   await page.locator('input[value="b"]').check(); await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
@@ -60,7 +60,7 @@ test('download, cancel, reset and confirmed import restore exact attempts, bookm
   await expect(page.locator('input[value="b"]')).toBeChecked();
 });
 
-test('malformed, unsupported and oversized imports have distinct errors and cancelled validation stays closed', async ({ page }) => {
+test('malformed, unsupported and oversized imports have distinct errors and cancelled validation stays closed @smoke', async ({ page }) => {
   await page.goto('./#/settings/backup'); const file = await exportFile(page);
   await importFile(page, Buffer.from('{')); await expect(page.getByText('Бу файлны укып булмады.', { exact: false })).toBeVisible();
   const unsupported = JSON.parse(file.toString()); unsupported.schema_version = 999;

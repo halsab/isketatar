@@ -41,7 +41,7 @@ async function practice(page: Page) {
   await page.getByRole('button', { name: 'Башларга', exact: true }).click();
   await expect(page.getByRole('textbox', { name: 'Җавабың', exact: true })).toBeVisible();
 }
-test('explicit update flushes a live draft, reloads both windows and resumes the pinned old lesson offline', async ({ page, context }) => {
+test('explicit update flushes a live draft, reloads both windows and resumes the pinned old lesson offline @smoke', async ({ page, context }) => {
   await practice(page);
   const second = await context.newPage(); await second.goto(releases.url + '#/settings');
   await check(second);
@@ -88,7 +88,7 @@ test('a blocked round can be recovered from a fresh window after the coordinator
   await accepted(fresh);
   expect((await snapshot(fresh)).control.writer_epoch).toBe(before.control.writer_epoch + 1);
 });
-test('memory work can be exported before an explicit per-window decision permits reload', async ({ page, context }) => {
+test('memory work can be exported before an explicit per-window decision permits reload @smoke', async ({ page, context }) => {
   await practice(page);
   await page.evaluate(() => {
     const put = IDBObjectStore.prototype.put;

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('entry and direct immutable shell use one complete release and stable installation identity', async ({ page }) => {
+test('entry and direct immutable shell use one complete release and stable installation identity @smoke', async ({ page }) => {
   const response = await page.request.get('./release-manifest.json'); const release = await response.json();
   const root = `/isketatar/releases/${release.release_id}/`;
   await page.goto('./#/reading/READ-03'); await expect(page.locator('.reading-line').first()).toBeVisible();

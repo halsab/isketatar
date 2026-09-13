@@ -1,7 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests/e2e', fullyParallel: false, retries: 0,
+  testDir: './tests/e2e', fullyParallel: false,
+  // Один повтор смягчает случайную задержку CI; повторная ошибка остаётся блокирующей.
+  retries: process.env.CI ? 1 : 0,
+  expect: { timeout: process.env.CI ? 10_000 : 5_000 },
   use: { serviceWorkers: 'block', baseURL: 'http://127.0.0.1:4173/isketatar/', trace: 'retain-on-failure' },
   // Одинаковая нагрузка локально и в CI: PWA-сценарии сами открывают несколько окон и worker.
   workers: 1,

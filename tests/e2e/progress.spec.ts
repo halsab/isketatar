@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('real browser IndexedDB preserves atomicity, idempotency, help and writer fencing', async ({ page }) => {
+test('real browser IndexedDB preserves atomicity, idempotency, help and writer fencing @smoke', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('http://127.0.0.1:5176/isketatar/tests/browser/progress.html');

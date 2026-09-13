@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Pages subpath, direct hash route and reload', async ({ page }) => {
+test('Pages subpath, direct hash route and reload @smoke', async ({ page }) => {
   const failures: string[] = [];
   page.on('pageerror', error => failures.push(error.message));
   page.on('console', message => { if (message.type() === 'error') failures.push(message.text()); });

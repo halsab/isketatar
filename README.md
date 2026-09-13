@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Открыть `/isketatar/` на адресе Vite. Для проверки production: `npm run check`, `npm run build`, затем `npm run preview`. `npm run test:e2e` использует Chromium/Firefox/WebKit; перед первым запуском выполнить `npx playwright install chromium firefox webkit` (Linux CI также устанавливает системные зависимости через `--with-deps`). Не пересобирать dist во время браузерных тестов. Все эти команды локальны и ничего не публикуют.
+Открыть `/isketatar/` на адресе Vite. Для проверки production: `npm run check`, `npm run build`, затем `npm run preview`. `npm run test:smoke` запускает15 ключевых Chromium-сценариев для PR/main. Полный `npm run test:e2e` использует Chromium/Firefox/WebKit и доступен в ручном аудите Actions; перед первым запуском выполнить `npx playwright install chromium firefox webkit` (Linux CI также устанавливает системные зависимости через `--with-deps`). Не пересобирать dist во время браузерных тестов. Все эти команды локальны и ничего не публикуют.
 
 - [Журнал реализации по шагам](docs/development/implementation.md) · [Результаты и границы проверок](docs/development/quality-report.md)
 - [Подготовка выпуска и CI/CD](docs/development/release-engineering.md) · [Условия выпуска](docs/development/release-conditions.md)

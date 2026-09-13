@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('route settings survive reload and duplicated tabs need explicit takeover', async ({ page }) => {
+test('route settings survive reload and duplicated tabs need explicit takeover @smoke', async ({ page }) => {
   await page.goto('./#/start');
   await page.getByRole('radio', { name: 'Гарәп хәрефләрен өйрәнәм', exact: false }).check();
   await page.getByRole('button', { name: 'Башларга', exact: true }).click();
@@ -22,7 +22,7 @@ test('route settings survive reload and duplicated tabs need explicit takeover',
   await popup.close();
 });
 
-test('storage denial offers an explicit temporary branch', async ({ page }) => {
+test('storage denial offers an explicit temporary branch @smoke', async ({ page }) => {
   await page.addInitScript(() => { indexedDB.open = () => { throw new DOMException('test denial', 'SecurityError'); }; });
   await page.goto('./#/start');
   await page.getByRole('button', { name: 'Вакытлыча саклап дәвам итәргә' }).click();
@@ -32,7 +32,7 @@ test('storage denial offers an explicit temporary branch', async ({ page }) => {
   await expect(page).toHaveURL(/#\/lessons\//u);
 });
 
-for (const incompatible of [{ progress_schema: 2 }, { min_reader_version: '99.0.0' }]) test(`incompatible release ${JSON.stringify(incompatible)} is rejected before creating progress storage`, async ({ page }) => {
+for (const incompatible of [{ progress_schema: 2 }, { min_reader_version: '99.0.0' }]) test(`incompatible release ${JSON.stringify(incompatible)} is rejected before creating progress storage @smoke`, async ({ page }) => {
   await page.route('**/release-manifest.json', async route => {
     const response = await route.fetch(); const manifest = await response.json();
     await route.fulfill({ response, json: { ...manifest, ...incompatible } });

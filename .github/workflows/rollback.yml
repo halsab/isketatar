@@ -81,7 +81,9 @@ jobs:
         run: |
           node tools/stage-rollback.mjs
           cp quality-results/rollback-target/acceptance.json quality-results/rollback-release/acceptance.json
-          cp quality-results/rollback-target/performance.json quality-results/rollback-release/performance.json
+          if [ -f quality-results/rollback-target/performance.json ]; then
+            cp quality-results/rollback-target/performance.json quality-results/rollback-release/performance.json
+          fi
           cp quality-results/delivery-smoke.json quality-results/rollback-release/delivery-smoke.json
           cp quality-results/rollback-selection.json quality-results/rollback-release/rollback-selection.json
           node --input-type=module -e "import {readFile,appendFile} from 'node:fs/promises';const e=JSON.parse(await readFile('quality-results/rollback-release/release-evidence.json'));await appendFile(process.env.GITHUB_OUTPUT,'archive_sha256='+e.archive_sha256+'\n');"
