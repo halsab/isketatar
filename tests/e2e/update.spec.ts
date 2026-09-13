@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { releaseServer } from '../helpers/releases';
 test.use({ serviceWorkers: 'allow' });
+test.setTimeout(60_000);
 let releases: Awaited<ReturnType<typeof releaseServer>>;
 test.beforeAll(async () => { releases = await releaseServer(); });
 test.afterAll(async () => { await releases?.close(); });
@@ -20,6 +21,17 @@ async function check(page: Page) {
 async function accept(page: Page) {
   await page.getByRole('button', { name: 'Саклап яңартырга', exact: true }).click();
   await page.getByRole('dialog').getByRole('button', { name: 'Саклап яңартырга', exact: true }).click();
+  // Скачивание двух пакетов предшествует протоколу согласования и не входит в ожидание UI-ответа окна.
+  const preparing = page.getByRole('heading', { name: 'Яңартуга әзерләнү', exact: true });
+  const nextShell = page.locator(`script[type="module"][src*="/releases/${releases.next}/"]`);
+  await expect(preparing.or(nextShell).first()).toBeAttached({ timeout: 45_000 });
+}
+
+async function accepted(page: Page) {
+  // DOM новой версии появляется после перезагрузки; чтение старого context в этот момент обрывается.
+  await expect(page.locator('script[type="module"][src]')).toHaveAttribute('src', new RegExp(`/releases/${releases.next}/`, 'u'), { timeout: 20_000 });
+  await expect(page.locator('.app-main')).toBeVisible({ timeout: 20_000 });
+  expect((await snapshot(page)).control.accepted_release_id).toBe(releases.next);
 }
 async function practice(page: Page) {
   await page.goto(releases.url + '#/lessons/V04/practice');
@@ -36,13 +48,13 @@ test('explicit update flushes a live draft, reloads both windows and resumes the
   await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('әңгәмә');
   const before = await snapshot(page);
   await accept(page);
-  await expect(page.locator('script[type="module"][src]')).toHaveAttribute('src', new RegExp(`/releases/${releases.next}/`, 'u'));
+  await accepted(page);
   await expect(page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true })).toBeVisible();
   await expect(second.getByText(`Басма: ${releases.next}.`, { exact: false })).toBeVisible();
   const after = await snapshot(page); expect(after.control.accepted_release_id).toBe(releases.next); expect(after.control.data_generation).toBe(before.control.data_generation); expect(after.control.update_gate).toBeNull();
   expect(after.sessions).toContainEqual(expect.objectContaining({ release_id: releases.original, status: 'paused' }));
   expect(after.presentations).toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'әңгәмә' } }));
-  releases.setOffline(true); await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();
+  releases.setUnavailable(true); await page.getByRole('button', { name: 'Сакланган эшне дәвам итәргә', exact: true }).click();
   await expect(page.getByRole('textbox', { name: 'Җавабың', exact: true })).toHaveValue('әңгәмә');
 });
 test('IME blocks acceptance, cancellation preserves the same input, and a later retry accepts', async ({ page, context }) => {
@@ -63,7 +75,7 @@ test('IME blocks acceptance, cancellation preserves the same input, and a later 
   await expect(page.getByRole('button', { name: 'Саклап яңартырга', exact: true })).toBeEnabled();
   await input.fill('яңа сүз'); await input.dispatchEvent('compositionend', { data: 'яңа сүз' });
   await expect.poll(async () => (await snapshot(page)).presentations).toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'яңа сүз' } }));
-  await accept(page); await expect.poll(async () => (await snapshot(page)).control.accepted_release_id).toBe(releases.next);
+  await accept(page); await accepted(page);
 });
 test('a blocked round can be recovered from a fresh window after the coordinator disappears', async ({ page, context }) => {
   await practice(page); const second = await context.newPage(); await second.goto(releases.url + '#/settings'); await check(second);
@@ -73,7 +85,7 @@ test('a blocked round can be recovered from a fresh window after the coordinator
   const fresh = await context.newPage(); await fresh.goto(releases.url + '#/settings');
   await fresh.getByRole('button', { name: 'Яңартуны бу тәрәзәдән дәвам итәргә', exact: true }).click();
   await fresh.getByRole('dialog').getByRole('button', { name: 'Яңартуны бу тәрәзәдән дәвам итәргә', exact: true }).click();
-  await expect.poll(async () => (await snapshot(fresh)).control.accepted_release_id).toBe(releases.next);
+  await accepted(fresh);
   expect((await snapshot(fresh)).control.writer_epoch).toBe(before.control.writer_epoch + 1);
 });
 test('memory work can be exported before an explicit per-window decision permits reload', async ({ page, context }) => {
@@ -102,19 +114,18 @@ test('memory work can be exported before an explicit per-window decision permits
   await consent.click(); await page.getByRole('dialog').getByRole('button', { name: 'Вакытлыча эшне калдырып яңартырга', exact: true }).click();
   await expect(consent).toHaveCount(0);
   await writer.getByRole('button', { name: 'Тәрәзәләрне кабат тикшерергә', exact: true }).click();
-  await expect.poll(async () => (await snapshot(writer)).control.accepted_release_id).toBe(releases.next);
+  await accepted(writer);
   await expect(page.getByText('Бу юлы нәтиҗәләр вакытлыча гына саклана.', { exact: false })).toHaveCount(0);
   expect((await snapshot(writer)).presentations).not.toContainEqual(expect.objectContaining({ draft_answer: { kind: 'text', text: 'хәтердәге җавап' } }));
 });
 test('a nonresponding window blocks acceptance until its closure is observed', async ({ page, context }) => {
-  test.setTimeout(60_000);
   await page.goto(releases.url + '#/settings'); await check(page);
   const unknown = await context.newPage(); await unknown.goto(releases.url + `releases/${releases.original}/recovery.html`);
   await accept(page);
   await expect(page.getByText('Кайбер тәрәзәләр әзер түгел.', { exact: false }).first()).toBeVisible({ timeout: 20_000 });
   expect((await snapshot(page)).control.accepted_release_id).toBe(releases.original);
   await unknown.close(); await page.getByRole('button', { name: 'Тәрәзәләрне кабат тикшерергә', exact: true }).click();
-  await expect.poll(async () => (await snapshot(page)).control.accepted_release_id).toBe(releases.next);
+  await accepted(page);
 });
 test('a fresh coordinator recovers commit phase, repairs an evicted candidate and finishes the same update', async ({ page, context, browserName }) => {
   test.skip(browserName !== 'chromium', 'Playwright exposes service-worker fault injection only in Chromium.');
@@ -138,7 +149,7 @@ test('a fresh coordinator recovers commit phase, repairs an evicted candidate an
   await fresh.getByRole('dialog').getByRole('button', { name: 'Яңартуны бу тәрәзәдән дәвам итәргә', exact: true }).click();
   await expect(fresh.getByText('Яңарту өчен кирәкле пакет тулы түгел.', { exact: false })).toBeVisible();
   await fresh.getByRole('button', { name: 'Материалларны төзәтеп яңартырга', exact: true }).click();
-  await expect.poll(async () => (await snapshot(fresh)).control.accepted_release_id).toBe(releases.next);
+  await accepted(fresh);
   expect((await snapshot(fresh)).control).toMatchObject({ update_gate: null, data_generation: before.control.data_generation, writer_epoch: before.control.writer_epoch + 1 });
 });
 test('a window booted during a blocked round resumes when the writer defers that round', async ({ page, context }) => {

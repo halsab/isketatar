@@ -1,14 +1,19 @@
 import { createHash } from 'node:crypto';
 import { test, expect } from '../helpers/pwa';
 test.use({ serviceWorkers: 'allow' });
-test('full package survives a cold offline window and opens unvisited course routes', async ({ context, page, network }) => {
+test('full package survives a cold offline window and opens unvisited course routes', async ({ context, page, network, browserName }) => {
   await page.goto('./#/settings');
   await expect(page.getByRole('button', {name:'Интернетсыз уку өчен сакларга',exact:true})).toBeEnabled();
   await expect(page.getByText('Тулы курс әлегә сакланмаган.',{exact:true})).toBeVisible();
   await page.getByRole('button', {name:'Интернетсыз уку өчен сакларга',exact:true}).click();
   await expect(page.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   const release=await (await page.request.get('./release-manifest.json')).json();
-  network.setOffline(true);await page.close();const cold=await context.newPage();
+  network.setUnavailable(true);
+  const unavailable = await page.request.get('./release-manifest.json');
+  expect(unavailable.status()).toBe(503); expect((await unavailable.body()).length).toBe(0);
+  // Дополнительно проверяем настоящий запрет сети, включая запросы service worker.
+  if (browserName === 'chromium') await context.setOffline(true);
+  await page.close();const cold=await context.newPage();
   const errors:string[]=[];cold.on('pageerror',error=>errors.push(error.message));
   await cold.goto('./#/settings');await expect(cold.getByText('Курс интернетсыз уку өчен әзер.',{exact:true})).toBeVisible();
   for(const route of ['lessons/B01','lessons/C01','lessons/V04','lessons/K01','lessons/G01','lessons/A01','lessons/L01','lessons/H01']) {await cold.goto(`./#/${route}`);await expect(cold.locator('.lesson-example').first()).toBeVisible();}

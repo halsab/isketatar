@@ -24,27 +24,28 @@ export async function releaseServer() {
   const next = JSON.parse(await readFile(join(directory, 'dist/release-manifest.json'), 'utf8'));
   let published = false;
   const server = await serveArtifact(path => path.startsWith(`releases/${next.release_id}/`) || published && !path.startsWith('releases/') ? join(directory, 'dist') : resolve('dist'));
-  return { ...server, original: original.release_id as string, next: next.release_id as string, publish: () => { published = true; }, reset: () => { published = false; server.setOffline(false); }, close: async () => { await server.close(); await rm(directory, { recursive: true }); } };
+  return { ...server, original: original.release_id as string, next: next.release_id as string, publish: () => { published = true; }, reset: () => { published = false; server.setUnavailable(false); }, close: async () => { await server.close(); await rm(directory, { recursive: true }); } };
 }
 
 async function serveArtifact(rootFor: (path: string) => string) {
-  let offline = false;
+  let unavailable = false;
   const requests: string[] = [];
   const held = new Map<string, { waiting: Promise<void>; release: () => void }>();
   const types: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.css': 'text/css', '.woff2': 'font/woff2', '.png': 'image/png', '.txt': 'text/plain' };
+  // Обрыв сокета повреждает сетевую сессию libsoup в Linux WebKit; 503 не отдаёт ни одного байта ресурса.
   const server = createServer(async (request, response) => {
-    if (offline) { request.socket.destroy(); return; }
+    if (unavailable) { response.writeHead(503, { 'Cache-Control': 'no-store', 'Content-Type': 'text/plain' }).end(); return; }
     const url = new URL(request.url!, 'http://localhost'); const path = url.pathname.slice('/isketatar/'.length) || 'index.html';
     if (!url.pathname.startsWith('/isketatar/') || path.includes('..')) { response.writeHead(404).end(); return; }
     requests.push(path);
     const root = rootFor(path);
     await held.get(path)?.waiting;
-    try { const body = await readFile(join(root, path)); if (offline) { request.socket.destroy(); return; } response.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' }).end(body); }
+    try { const body = await readFile(join(root, path)); if (unavailable) { response.writeHead(503, { 'Cache-Control': 'no-store', 'Content-Type': 'text/plain' }).end(); return; } response.writeHead(200, { 'Content-Type': types[extname(path)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' }).end(body); }
     catch { response.writeHead(404).end(); }
   });
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
   const address = server.address(); if (!address || typeof address === 'string') throw new Error('missing_test_server');
-  return { url: `http://127.0.0.1:${address.port}/isketatar/`, requests, setOffline: (value: boolean) => { offline = value; },
+  return { url: `http://127.0.0.1:${address.port}/isketatar/`, requests, setUnavailable: (value: boolean) => { unavailable = value; },
     hold: (path: string) => { let release!: () => void; const waiting = new Promise<void>(resolve => { release = resolve; }); held.set(path, { waiting, release }); return () => { held.delete(path); release(); }; },
     close: () => { for (const item of held.values()) item.release(); return new Promise<void>(resolve => server.close(() => resolve())); } };
 }

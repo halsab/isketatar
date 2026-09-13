@@ -11,7 +11,10 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --init --ipc=host
     outputs:
       candidate_id: ${{ steps.candidate.outputs.artifact-id }}
     steps:
@@ -28,7 +31,6 @@ jobs:
       - run: npm run build
       - name: Validate rights and review evidence
         run: npm run check:acceptance
-      - run: npx playwright install --with-deps chromium firefox webkit
       - name: Critical browser coverage
         if: github.event_name == 'pull_request'
         run: npm run test:e2e -- --grep-invert '@full'

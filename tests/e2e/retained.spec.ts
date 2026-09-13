@@ -18,6 +18,8 @@ async function pinnedFixture(page: Page, retained: boolean) {
   await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('элек');
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
   await expect(page).toHaveURL(/#\/lessons\/V04$/u);
+  // Наблюдения урока должны завершиться до подмены закреплённого выпуска.
+  await expect(page.locator('.lesson-example').first()).toBeVisible();
   const manifest = await (await page.request.get('./release-manifest.json')).json() as PackageManifest;
   return page.evaluate(async ({ manifest, retained }) => {
     const oldId = '1.0.0-1111111111111111'; const revision = 'b'.repeat(64);
@@ -45,13 +47,13 @@ async function pinnedFixture(page: Page, retained: boolean) {
       tx.objectStore('registry').put(state, 'state'); await done(tx); db.close();
     }
     const db = await open('iske-imla-progress'); const tx = db.transaction(['sessions', 'presentations'], 'readwrite');
-    const request = tx.objectStore('sessions').getAll(); const sessions = await new Promise<Session[]>(resolve => { request.onsuccess = () => resolve(request.result); });
+    const request = tx.objectStore('sessions').getAll(); const sessions = await new Promise<Session[]>((resolve, reject) => { request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
     const session = sessions[0]!; session.release_id = oldId; session.question_plan[0]!.grading_revision = revision; tx.objectStore('sessions').put(session);
     const presentation = await read<Presentation>(tx.objectStore('presentations'), session.active_presentation_id!); presentation.grading_revision = revision; tx.objectStore('presentations').put(presentation); await done(tx); db.close(); return oldId;
   }, { manifest, retained });
 }
 for (const loseRegistry of [false, true]) test(`new shell resumes cached previous content offline and grades against its old answer (lost registry=${loseRegistry})`, async ({ page, network }) => {
-  const oldId = await pinnedFixture(page, true); network.setOffline(true);
+  const oldId = await pinnedFixture(page, true); network.setUnavailable(true);
   if (loseRegistry) await page.evaluate(() => new Promise<void>(resolve => { const open = indexedDB.open('isketatar-pwa', 1); open.onsuccess = () => { const db = open.result; const tx = db.transaction('registry', 'readwrite'); tx.objectStore('registry').delete('state'); tx.oncomplete = () => { db.close(); resolve(); }; }; }));
   await page.goto('./#/lessons/V04/practice'); await page.reload();
   await expect(page.getByText('Бу дәрес сакланган элекке басма буенча дәвам итә:', { exact: false })).toBeVisible();
@@ -61,15 +63,17 @@ for (const loseRegistry of [false, true]) test(`new shell resumes cached previou
   await page.getByRole('button', { name: 'Тикшерергә', exact: true }).click();
   await expect(page.locator('.feedback-title')).toBeVisible();
   const records = await page.evaluate(async () => {
-    const db = await new Promise<IDBDatabase>(resolve => { const request = indexedDB.open('iske-imla-progress'); request.onsuccess = () => resolve(request.result); });
-    const tx = db.transaction(['attempts', 'review_cards']);
-    const all = (store: string) => new Promise<unknown[]>(resolve => { const request = tx.objectStore(store).getAll(); request.onsuccess = () => resolve(request.result); });
-    const [attempts, cards] = await Promise.all([all('attempts'), all('review_cards')]); db.close(); return { attempts, cards };
+    const db = await new Promise<IDBDatabase>((resolve, reject) => { const request = indexedDB.open('iske-imla-progress'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+    try {
+      const tx = db.transaction(['attempts', 'review_cards']);
+      const all = (store: string) => new Promise<unknown[]>((resolve, reject) => { const request = tx.objectStore(store).getAll(); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+      const [attempts, cards] = await Promise.all([all('attempts'), all('review_cards')]); return { attempts, cards };
+    } finally { db.close(); }
   });
   expect(records.attempts).toContainEqual(expect.objectContaining({ grade: 'correct', release_id: oldId, answer_raw: { kind: 'text', text: 'элек' } })); expect(records.cards).toEqual([]);
 });
 test('missing old package preserves raw input and explicit release of the pin starts current content', async ({ page, network }) => {
-  await pinnedFixture(page, false); network.setOffline(true); await page.goto('./#/lessons/V04/practice'); await page.reload();
+  await pinnedFixture(page, false); network.setUnavailable(true); await page.goto('./#/lessons/V04/practice'); await page.reload();
   await expect(page.getByRole('heading', { name: 'Сакланган җаваплар', exact: true })).toBeVisible();
   await expect(page.locator('textarea').first()).toHaveValue('элек');
   await page.getByRole('button', { name: 'Дәресне тарихта калдырырга', exact: true }).click();

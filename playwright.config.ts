@@ -3,7 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/e2e', fullyParallel: false, retries: 0,
   use: { serviceWorkers: 'block', baseURL: 'http://127.0.0.1:4173/isketatar/', trace: 'retain-on-failure' },
-  workers: process.env.CI ? 2 : 1,
+  // Одинаковая нагрузка локально и в CI: PWA-сценарии сами открывают несколько окон и worker.
+  workers: 1,
   reporter: [['list'], ['json', { outputFile: 'test-results/results.json' }]],
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },

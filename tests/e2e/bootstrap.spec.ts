@@ -45,6 +45,7 @@ for (const [offline, immutable] of [[false, false], [true, false], [true, true]]
   await page.goto('./#/settings'); await page.getByRole('button', { name: 'Интернетсыз уку өчен сакларга', exact: true }).click(); await expect(page.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible();
   const before = await control(page);
   await page.evaluate(() => new Promise<void>(resolve => { const open = indexedDB.open('isketatar-pwa', 1); open.onsuccess = () => { const db = open.result; const tx = db.transaction('registry', 'readwrite'); tx.objectStore('registry').delete('state'); tx.oncomplete = () => { db.close(); resolve(); }; }; }));
-  network.setOffline(offline); await page.close(); const cold = await context.newPage(); await cold.goto(immutable ? `./releases/${before.accepted_release_id}/index.html#/settings` : './#/settings');
-  await expect(cold.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible(); expect(await control(cold)).toMatchObject({ accepted_release_id: before.accepted_release_id, data_generation: before.data_generation, state_revision: before.state_revision });
+  network.setUnavailable(offline); await page.close(); const cold = await context.newPage(); await cold.goto(immutable ? `./releases/${before.accepted_release_id}/index.html#/settings` : './#/settings');
+  // После потери реестра холодный запуск заново проверяет каждый файл сохранённого пакета.
+  await expect(cold.getByText('Курс интернетсыз уку өчен әзер.', { exact: true })).toBeVisible({ timeout: 15_000 }); expect(await control(cold)).toMatchObject({ accepted_release_id: before.accepted_release_id, data_generation: before.data_generation, state_revision: before.state_revision });
 });
