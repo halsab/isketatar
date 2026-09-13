@@ -80,10 +80,10 @@ jobs:
       contents: read
       actions: read
     outputs:
-      pages_id: ${{ steps.pages.outputs.artifact-id }}
+      pages_id: ${{ steps.pages.outputs.artifact_id }}
       bundle_id: ${{ steps.bundle.outputs.artifact-id }}
       profile_id: ${{ steps.profile.outputs.artifact-id }}
-      archive_sha256: ${{ steps.package.outputs.archive_sha256 }}
+      archive_sha256: ${{ steps.pages_digest.outputs.sha256 }}
     steps:
       - name: Require protected main
         env:
@@ -127,21 +127,22 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:delivery
       - run: node tools/published-smoke.mjs seed
-      - id: package
+      - name: Package release evidence
         run: |
           npm run prepare:release
           cp quality-results/candidate/acceptance.json quality-results/release/acceptance.json
           cp quality-results/delivery-smoke.json quality-results/release/delivery-smoke.json
           cp quality-results/previous-release.json quality-results/release/previous-release.json
-          node --input-type=module -e "import {readFile,appendFile} from 'node:fs/promises';const e=JSON.parse(await readFile('quality-results/release/release-evidence.json'));await appendFile(process.env.GITHUB_OUTPUT,'archive_sha256='+e.archive_sha256+'\n');"
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         id: pages
         with:
           name: github-pages
-          path: quality-results/release/artifact.tar
-          if-no-files-found: error
+          path: quality-results/pages
           retention-days: 90
-          overwrite: true
+      - name: Record Pages archive checksum
+        id: pages_digest
+        # SHA относится к tar официального action, а не к отдельному архиву для восстановления.
+        run: echo "sha256=$(sha256sum "$RUNNER_TEMP/artifact.tar" | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         id: bundle
         with:

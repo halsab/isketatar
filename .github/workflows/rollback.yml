@@ -24,10 +24,10 @@ jobs:
       contents: read
       actions: read
     outputs:
-      pages_id: ${{ steps.pages.outputs.artifact-id }}
+      pages_id: ${{ steps.pages.outputs.artifact_id }}
       bundle_id: ${{ steps.bundle.outputs.artifact-id }}
       profile_id: ${{ steps.profile.outputs.artifact-id }}
-      archive_sha256: ${{ steps.package.outputs.archive_sha256 }}
+      archive_sha256: ${{ steps.pages_digest.outputs.sha256 }}
     steps:
       - name: Require protected main
         env:
@@ -74,7 +74,7 @@ jobs:
         env:
           PREVIOUS_DIST: quality-results/rollback-current/dist
         run: node tools/published-smoke.mjs seed
-      - id: package
+      - name: Package rollback evidence
         env:
           ROLLBACK_BUNDLE: quality-results/rollback-target
           CURRENT_BUNDLE: quality-results/rollback-current
@@ -86,15 +86,15 @@ jobs:
           fi
           cp quality-results/delivery-smoke.json quality-results/rollback-release/delivery-smoke.json
           cp quality-results/rollback-selection.json quality-results/rollback-release/rollback-selection.json
-          node --input-type=module -e "import {readFile,appendFile} from 'node:fs/promises';const e=JSON.parse(await readFile('quality-results/rollback-release/release-evidence.json'));await appendFile(process.env.GITHUB_OUTPUT,'archive_sha256='+e.archive_sha256+'\n');"
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         id: pages
         with:
           name: github-pages
-          path: quality-results/rollback-release/artifact.tar
-          if-no-files-found: error
+          path: quality-results/rollback-pages
           retention-days: 90
-          overwrite: true
+      - name: Record Pages archive checksum
+        id: pages_digest
+        run: echo "sha256=$(sha256sum "$RUNNER_TEMP/artifact.tar" | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         id: bundle
         with:

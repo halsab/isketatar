@@ -29,7 +29,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
       - name: Confirm selected main commit and artifact ownership
         env:
@@ -53,6 +53,14 @@ jobs:
           echo "$ARCHIVE_SHA256  $RUNNER_TEMP/pages-check/artifact.tar" | sha256sum --check --status
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
         id: deployment
+        # Сбой сервиса допускает один повтор; ошибка второй попытки остаётся блокирующей.
+        continue-on-error: true
+        with:
+          artifact_name: github-pages
+      - name: Retry Pages deployment once
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        id: deployment_retry
         with:
           artifact_name: github-pages
 
