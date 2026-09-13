@@ -36,6 +36,8 @@ export async function seedDraft(page, url) {
   await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('әңгәмә');
   await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
   await expect(page).toHaveURL(/#\/lessons\/V04$/u);
+  // Примеры появляются только после записи всей группы наблюдений; URL меняется раньше.
+  await expect(page.locator('.lesson-example').first()).toBeVisible();
   await page.goto(url + '#/settings');
   await expect(page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true })).toBeVisible();
   const saved = await progressSnapshot(page);
@@ -99,6 +101,7 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename
     await page.getByRole('textbox', { name: 'Җавабың', exact: true }).fill('яңа язма');
     await page.getByRole('button', { name: 'Саклап чыгарга', exact: true }).click();
     await expect(page).toHaveURL(/#\/lessons\/V04$/u);
+    await expect(page.locator('.lesson-example').first()).toBeVisible();
     await page.goto(server.url + '#/settings');
     await expect(page.getByRole('button', { name: 'Яңа басманы тикшерергә', exact: true })).toBeVisible();
     const updated = await progressSnapshot(page);
