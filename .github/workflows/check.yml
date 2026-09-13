@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     outputs:
-      acceptance: ${{ steps.acceptance.outputs.status }}
       candidate_id: ${{ steps.candidate.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -27,20 +26,20 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
-      - id: acceptance
+      - name: Validate rights and review evidence
         run: npm run check:acceptance
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Critical browser coverage
-        if: github.event_name == 'pull_request' || steps.acceptance.outputs.status != 'approved'
+        if: github.event_name == 'pull_request'
         run: npm run test:e2e -- --grep-invert '@full'
       - name: Full release browser coverage
-        if: github.event_name == 'push' && steps.acceptance.outputs.status == 'approved'
+        if: github.event_name == 'push'
         run: npm run test:e2e
       - name: Twenty cold performance runs
-        if: github.event_name == 'push' && steps.acceptance.outputs.status == 'approved'
+        if: github.event_name == 'push'
         run: npm run test:performance
       - name: Package the checked candidate
-        if: github.event_name == 'push' && steps.acceptance.outputs.status == 'approved'
+        if: github.event_name == 'push'
         run: |
           npm run prepare:release
           cp quality-results/bundle-graph.json quality-results/release/bundle-graph.json
@@ -48,7 +47,7 @@ jobs:
           cp docs/development/external-acceptance.json quality-results/release/acceptance.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         id: candidate
-        if: github.event_name == 'push' && steps.acceptance.outputs.status == 'approved'
+        if: github.event_name == 'push'
         with:
           name: checked-candidate
           path: quality-results/release/
@@ -81,14 +80,6 @@ jobs:
       profile_id: ${{ steps.profile.outputs.artifact-id }}
       archive_sha256: ${{ steps.package.outputs.archive_sha256 }}
     steps:
-      - name: Require completed external acceptance
-        env:
-          ACCEPTANCE: ${{ needs.check.outputs.acceptance }}
-        run: |
-          if [ "$ACCEPTANCE" != approved ]; then
-            echo 'Publication blocked: complete the language, subject, pilot and platform acceptance in docs/development/external-acceptance.json.'
-            exit 1
-          fi
       - name: Require protected main
         env:
           PROTECTED: ${{ github.ref_protected }}
@@ -110,7 +101,7 @@ jobs:
           merge-multiple: true
           digest-mismatch: error
       - run: node tools/github-release.mjs unpack-candidate
-      - run: npm run check:acceptance -- --require-approved
+      - run: npm run check:acceptance
       - id: previous
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { checkAcceptance } from './check-acceptance.mjs';
+import { checkAcceptance, checkAcceptanceMetadata } from './check-acceptance.mjs';
 import { sha256 } from './product-scope.mjs';
 
-test('release gate refuses pending, stale artifacts and altered evidence', async () => {
+test('optional completed-review gate refuses pending, stale artifacts and altered evidence', async () => {
   const root = await mkdtemp(join(tmpdir(), 'iske-acceptance-'));
   const scope = 'a'.repeat(64); const artifact = 'b'.repeat(64);
   const options = { root, scope, artifact, requireApproved: true };
@@ -30,4 +30,19 @@ test('release gate refuses pending, stale artifacts and altered evidence', async
     await assert.rejects(checkAcceptance(value, options), /Changed language report/u);
     value.language.report = '../outside.md'; await assert.rejects(checkAcceptance(value, options), /Invalid language report path/u);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+
+test('published review metadata permits honest pending but rejects missing rights and stale approvals', async () => {
+  const value = JSON.parse(await readFile('docs/development/external-acceptance.json', 'utf8'));
+  const options = { scope: 'a'.repeat(64), artifact: 'b'.repeat(64) };
+  for (const role of ['language', 'subject', 'pilot', 'platforms']) value[role] = { status: 'pending', reviewer: null, reviewed_at: null, product_scope_sha256: null, product_artifact_sha256: null, report: null, report_sha256: null };
+  assert.equal(checkAcceptanceMetadata(value, options).status, 'pending');
+  const missingRights = structuredClone(value); missingRights.rights.status = 'pending';
+  assert.throws(() => checkAcceptanceMetadata(missingRights, options), /rights/u);
+  value.language = { status: 'approved', reviewer: 'Test fixture', reviewed_at: '2001-01-01', product_scope_sha256: options.scope, product_artifact_sha256: options.artifact, report: 'docs/development/acceptance-reports/language.md', report_sha256: 'c'.repeat(64) };
+  assert.equal(checkAcceptanceMetadata(value, options).status, 'pending');
+  assert.throws(() => checkAcceptanceMetadata(value, { ...options, artifact: 'd'.repeat(64) }), /Stale language product/u);
+  value.language.report_sha256 = null;
+  assert.throws(() => checkAcceptanceMetadata(value, options), /Invalid language report digest/u);
 });

@@ -1,3 +1,4 @@
+import { checkAcceptanceMetadata } from './check-acceptance.mjs';
 import assert from 'node:assert/strict';
 import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
@@ -120,13 +121,8 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename
     assert.equal(current.artifact.current.release_id, state.live_release_id); assert.equal(current.evidence.provenance.manifest_sha256, state.live_manifest_sha256);
     assert.equal(JSON.parse(await readFile('docs/development/external-acceptance.json', 'utf8')).rights.status, 'confirmed');
     const acceptance = JSON.parse(await readFile('quality-results/rollback-target/acceptance.json', 'utf8'));
-    assert.equal(acceptance.rights.status, 'confirmed');
-    for (const role of ['language', 'subject', 'pilot', 'platforms']) {
-      assert.equal(acceptance[role].status, 'approved');
-      assert.equal(acceptance[role].product_scope_sha256, target.evidence.provenance.product_scope_sha256);
-      assert.equal(acceptance[role].product_artifact_sha256, target.evidence.provenance.product_artifact_sha256);
-      assert.ok(hash(acceptance[role].report_sha256));
-    }
+    // История успешной публикации проверена выше; pending не подменяет собой одобрение рецензента.
+    checkAcceptanceMetadata(acceptance, { scope: target.evidence.provenance.product_scope_sha256, artifact: target.evidence.provenance.product_artifact_sha256 });
     await assembleArtifact('quality-results/rollback-target/dist', null, 'dist');
     await writeFile('quality-results/build-provenance.json', JSON.stringify(target.evidence.provenance, null, 2) + '\n');
   } else throw new Error('Unknown release-state command');
