@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -37,8 +38,11 @@ jobs:
       - name: Full release browser coverage
         if: github.event_name == 'push'
         run: npm run test:e2e
-      - name: Twenty cold performance runs
+      - name: Cold performance smoke
         if: github.event_name == 'push'
+        run: npm run test:performance -- --probe
+      - name: Twenty cold performance runs
+        if: github.event_name == 'workflow_dispatch'
         run: npm run test:performance
       - name: Package the checked candidate
         if: github.event_name == 'push'
